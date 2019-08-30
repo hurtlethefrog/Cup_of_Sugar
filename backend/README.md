@@ -30,3 +30,4 @@ Things you may want to cover:
 * Run `bin/rails s -b 0.0.0.0` to start the backend server
 * `bin/rails db:create`
 * `bin/rails db:migrate`
+* `bin/rake routes`
