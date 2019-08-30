@@ -22,3 +22,5 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+8. Run `bin/rails s -b 0.0.0.0` to start the server
