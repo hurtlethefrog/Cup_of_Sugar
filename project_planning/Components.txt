@@ -1,0 +1,58 @@
+#Components
+
+Nav 
+
+##Login/Register
+Register Household
+  * Household Name
+  * Address
+  * Postcode
+  * Admin Email
+  
+Register admin user
+  * Household Code
+  * Name
+  * Surname 
+  * Email
+  * Password
+  * Profile Photo
+  * Invite household members
+
+Register new user
+  * Name
+  * Surname
+  * Email
+  * Password
+  * Profile Photo
+
+Login
+  * Email
+  * Password
+
+##Create New 
+Event
+  * Title
+  * Description
+  * Location
+  * Start Date/Time
+  * End Date/Time
+
+Notice
+  * Title
+  * Description
+
+Offer/Wanted
+  * Title
+  * Description
+
+##Show 
+  * Events
+  * Notice
+  * Offer
+  * Wanted
+  * Flagged
+  * My View
+
+Users
+ * Profile Picture
+ * Name
