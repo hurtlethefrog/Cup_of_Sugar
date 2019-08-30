@@ -1,0 +1,2 @@
+class Flagged < ApplicationRecord
+end
