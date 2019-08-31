@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import Axios from 'axios';
 
 function useFormInput(initialValue) {
@@ -13,7 +12,7 @@ function useFormInput(initialValue) {
   };
 }
 
-function RegistrationInvitation(props) {
+export default function Registration(props) {
   const firstName = useFormInput("");
   const lastName = useFormInput("");
   const email = useFormInput("");
@@ -27,7 +26,7 @@ function RegistrationInvitation(props) {
   return (
     <main className="">
       <section className="">
-        <form>
+        <form className="registration_fields">
           <input
             placeholder="First Name"
             {...firstName}
@@ -80,3 +79,26 @@ function RegistrationInvitation(props) {
     </main>
   );
 }
+
+// communities=
+// :name
+// :postal_code
+
+// households=
+// :address
+// :postal_code
+// :province
+// :city
+
+// users=
+// :households
+// :first_name
+// :last_name
+// :email
+// :password
+// :password_confirmation
+// :profile_pic
+// :phone_number
+// :bio
+// :private
+// :is_admin

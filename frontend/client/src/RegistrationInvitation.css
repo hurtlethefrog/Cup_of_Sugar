@@ -1,8 +1,0 @@
-form.registration_fields {
-  display: flex;
-  flex-direction: column;
-}
-
-form.registration_fields input {
-  margin: 0.5em;
-}

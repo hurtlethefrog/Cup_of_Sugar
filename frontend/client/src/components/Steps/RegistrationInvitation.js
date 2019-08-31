@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import Axios from 'axios';
 
 function useFormInput(initialValue) {
@@ -13,7 +12,7 @@ function useFormInput(initialValue) {
   };
 }
 
-function Registration(props) {
+export default function RegistrationInvitation(props) {
   const firstName = useFormInput("");
   const lastName = useFormInput("");
   const email = useFormInput("");
@@ -27,14 +26,12 @@ function Registration(props) {
   return (
     <main className="">
       <section className="">
-        <form>
-          <label>Name
-            <input
-              placeholder="First Name"
-              {...firstName}
-              required
-            />
-          </label>
+        <form className="registration_fields">
+          <input
+            placeholder="First Name"
+            {...firstName}
+            required
+          />
           <input
             placeholder="Last Name"
             {...lastName}
@@ -49,11 +46,13 @@ function Registration(props) {
             placeholder="Password"
             {...password}
             required
+            type="password"
           />
           <input
             placeholder="Confirm Password"
             {...passwordConfirmation}
             required
+            type="password"
           />
           <input
             placeholder="Address"
@@ -80,25 +79,3 @@ function Registration(props) {
     </main>
   );
 }
-
-// create_table :communities do |t|
-// t.string :name
-// t.string :postal_code
-
-// t.references :communities, index: true, foreign_key: true, on_delete: :cascade
-// t.string :address
-// t.string :postal_code
-// t.string :province
-// t.string :city
-
-// t.references :households, index: true, foreign_key: true
-// t.string :first_name
-// t.string :last_name
-// t.string :email
-// t.string :password
-// t.string :password_confirmation
-// t.string :profile_pic
-// t.string :phone_number
-// t.string :bio
-// t.string :private
-// t.boolean :is_admin

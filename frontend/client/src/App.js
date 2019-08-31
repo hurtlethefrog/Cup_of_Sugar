@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Axios from 'axios';
 import FilterBar from './components/Filters/FilterBar';
+
+import Registration from './components/Steps/Registration';
+
 // import filterSelector from './helpers/filter_selector';
 
 const db = {
@@ -83,6 +86,7 @@ function App() {
 
   return (
     <div className="App">
+      <Registration></Registration>
       <header className="App-header">
         <div>Your community: {state.community.name}, found at: {state.community.location} </div>
         <button onClick={event => console.log(filter)}>Filter</button>
