@@ -7,20 +7,22 @@ import Want from "./Want";
 
 export default function Article(props) {
   const type = Object.keys(props.article)[0]
-  console.log("inside article comp. \n" + JSON.stringify(props.article))
+  // console.log("inside article comp. \n" + JSON.stringify(props.article))
+  for(let key in props.article[type]) {
 switch (type) {
   case "events":
     return (
       <section className="box">
         <Event 
-          title={props.article[type][0].title}
-          description={props.article[type][0].description}/>  
+          title={props.article[type][key].title}
+          description={props.article[type][key].description}/>  
         </section>)
   case "notices":
     return (
       <section className="box">
         <Notice
-          title={props.article[type][0].title} 
-          description={props.article[type][0].description}/>
+          title={props.article[type][key].title} 
+          description={props.article[type][key].description}/>
         </section>)
   }}
+}
