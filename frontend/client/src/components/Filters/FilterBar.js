@@ -7,7 +7,7 @@ import Notices from "./Notices";
 import Offers from "./Offers";
 import Wanted from "./Wanted";
 
-export default function Filter_bar(props) {
+export default function FilterBar(props) {
 
   return (
     <section className="filter--bar container">
