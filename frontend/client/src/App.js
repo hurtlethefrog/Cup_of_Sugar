@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Axios from 'axios';
+import Filter_bar from './components/Filters/Filter_bar';
+// import filterSelector from './helpers/filter_selector';
 
 const db = {
   community: {
@@ -66,6 +68,8 @@ const db = {
 
 function App() {
   const [state, setState] = useState(db)
+  const [filter, setFilter] = useState()
+
 
   // useEffect(() => {
   //   axios.get("/test")
@@ -77,6 +81,7 @@ function App() {
   //     })
   // })
 
+
   return (
     <div className="App">
       <header className="App-header">
@@ -85,7 +90,12 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <div>Your community: {state.community.name}, found at: {state.community.location} </div>
+        <button onClick={event => console.log(filter)}>Filter</button>
         <div>Hello {state.user[0].first_name} </div>
+        {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so filter_bar knows which filter to highlight */}
+        <div className="container">
+        <Filter_bar onSelect={setFilter} filter={filter}></Filter_bar>
+        </div>
       </header>
     </div>
   );
