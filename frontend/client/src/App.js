@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Axios from 'axios';
 import FilterBar from './components/Filters/FilterBar';
-
-import Registration from './components/Steps/Registration';
-
 // import filterSelector from './helpers/filter_selector';
 
 const db = {
