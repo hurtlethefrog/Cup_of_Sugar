@@ -23,7 +23,7 @@ admin = User.create(
   password: '123',
   phone_number:Faker::PhoneNumber.cell_phone,
   is_admin: true, 
-  households_id: 5000
+  households_id: household.id
   )
 
 neighbour = User.create(
@@ -71,10 +71,52 @@ Household.create!([{
   )
 end
 
+User.create(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  profile_pic: Faker::Avatar.image,
+  email: Faker::Internet.email,
+  phone_number:Faker::PhoneNumber.cell_phone,
+  households_id: '1'
+  )
+
+  User.create(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  profile_pic: Faker::Avatar.image,
+  email: Faker::Internet.email,
+  phone_number:Faker::PhoneNumber.cell_phone,
+  households_id: '2'
+  )
+
+  User.create(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  profile_pic: Faker::Avatar.image,
+  email: Faker::Internet.email,
+  phone_number:Faker::PhoneNumber.cell_phone,
+  households_id: '3'
+  )
+
+  User.create(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  profile_pic: Faker::Avatar.image,
+  email: Faker::Internet.email,
+  phone_number:Faker::PhoneNumber.cell_phone,
+  households_id: '1'
+  )
+
+  User.create(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  profile_pic: Faker::Avatar.image,
+  email: Faker::Internet.email,
+  phone_number:Faker::PhoneNumber.cell_phone
+  )
 # Event.destroy_all
 
 Event.create(
-  users_id: admin.id, 
   title: 'Lunch in the park', 
   description:Faker::TvShows::Seinfeld.quote, 
   location: 'Greenfield Park by the pond',
@@ -83,7 +125,6 @@ Event.create(
   )
 
 Event.create(
-  users_id: neighbour.id,
   title: 'Barbeque at My Place', 
   location: 'TBA',
   description:Faker::TvShows::Seinfeld.quote, 
@@ -92,7 +133,6 @@ Event.create(
 )
 
 Event.create(
-  users_id: neighbour.id,
   title: 'Gaming Night and Pizza', 
   location: 'TBA',
   description:Faker::TvShows::Seinfeld.quote, 
@@ -109,27 +149,46 @@ Event.create(
 )
 
 OffersRequest.create(
-  users_id: admin.id, 
+  owner_id: admin.id, 
   title:Faker::Commerce.product_name, 
   description:'Available over the weekend',
-  active: true
+  active: true, 
+  offer: true
 )
 
 OffersRequest.create(
-  users_id: admin.id, 
+  owner_id: admin.id, 
   title:Faker::Commerce.product_name, 
   description:'Pop me a message to borrow it anytime!',
-  active: true
+  active: true,
+  offer: true
 )
 
 OffersRequest.create(
-  users_id: neighbour.id,
+  owner_id: neighbour.id,
   title:Faker::Commerce.product_name, 
   description:'It\'s really fun for the whole family, would love to share it around!',
-  active: true
+  active: true,
+  offer: true
 )
 
-Notice.destroy_all
+OffersRequest.create(
+  owner_id: neighbour.id,
+  title:Faker::Commerce.product_name, 
+  description:'I would really appreciate anyone letting me know!',
+  active: true,
+  offer: false
+)
+
+OffersRequest.create(
+  owner_id: neighbour.id,
+  title:Faker::Commerce.product_name, 
+  description:'Fingers crossed I find something before the winter is over!! TIA',
+  active: true,
+  offer: false
+)
+
+# Notice.destroy_all
 
 Notice.create(
   title: 'Interesting Note', 
@@ -145,4 +204,16 @@ Notice.create(
   title: 'Raccoons are out!', 
   description: 'Please remember to lock your bins or take them out in the morning. There are racoons around the area'
 )
+
+Comment.create(
+  comment: 'comment 1', 
+  events_id: '1'
+)
+
+Comment.create(
+  comment: 'another comment', 
+  events_id: '2'
+)
+
+
 
