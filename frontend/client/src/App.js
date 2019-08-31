@@ -83,7 +83,6 @@ function App() {
 
   return (
     <div className="App">
-      <Registration></Registration>
       <header className="App-header">
         <div>Your community: {state.community.name}, found at: {state.community.location} </div>
         <button onClick={event => console.log(filter)}>Filter</button>
