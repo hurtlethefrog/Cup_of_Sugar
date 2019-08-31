@@ -84,7 +84,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div>Your community: {state.community.name}, found at: {state.community.location} </div>
+        <div>Hypothetical navbar for: {state.community.name}, found at: {state.community.location} </div>
         <button onClick={event => console.log(filter)}>Filter</button>
         <div>Hello {state.user[0].first_name} </div>
         {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
