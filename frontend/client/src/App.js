@@ -4,6 +4,10 @@ import Axios from 'axios';
 import FilterBar from './components/Filters/FilterBar';
 // import filterSelector from './helpers/filter_selector';
 
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Login from './components/Steps/Login'
+import Registration from './components/Steps/Registration'
+
 const db = {
   community: {
     id: 1,
@@ -83,6 +87,24 @@ function App() {
 
   return (
     <div className="App">
+      <Router>
+        <div>
+          <ul>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/registration">Registration</Link>
+            </li>
+          </ul>
+
+          <hr />
+
+          <Route path="/login" component={Login} />
+          <Route path="/registration" component={Registration} />
+        </div>
+      </Router>
+
       <header className="App-header">
         <div>Your community: {state.community.name}, found at: {state.community.location} </div>
         <button onClick={event => console.log(filter)}>Filter</button>
