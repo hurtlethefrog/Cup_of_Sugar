@@ -19,16 +19,13 @@ export default function App() {
                 <Link to="/registration">Registration</Link>
               </li>
             </ul>
-
-            <hr />
-
+            
+            <Route exact path="/" component={Homepage}/>
             <Route path="/login" component={Login} />
             <Route path="/registration" component={Registration} />
           </div>
         </Switch>
       </BrowserRouter>
-      <Homepage></Homepage>
-
     </div>
   );
 }
