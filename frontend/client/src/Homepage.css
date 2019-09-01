@@ -1,18 +1,18 @@
-/* html, body {
+html, body {
   height: 100%;
 }
 
-.App {
+.Homepage {
   text-align: center;
 }
 
-.App-logo {
+.Homepage-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
 }
 
-.App-header {
+.Homepage-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -25,4 +25,4 @@
 
 .container {
   display: flex
-} */
+}
