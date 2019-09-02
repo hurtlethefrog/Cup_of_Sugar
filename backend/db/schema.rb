@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_31_212241) do
+ActiveRecord::Schema.define(version: 2019_09_02_142120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,9 @@ ActiveRecord::Schema.define(version: 2019_08_31_212241) do
     t.bigint "events_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "notice_id"
     t.index ["events_id"], name: "index_comments_on_events_id"
+    t.index ["notice_id"], name: "index_comments_on_notice_id"
     t.index ["offers_requests_id"], name: "index_comments_on_offers_requests_id"
     t.index ["users_id"], name: "index_comments_on_users_id"
   end
@@ -51,8 +53,8 @@ ActiveRecord::Schema.define(version: 2019_08_31_212241) do
     t.datetime "end"
     t.string "location"
     t.string "image"
-    t.boolean "cancelled"
-    t.boolean "archived"
+    t.boolean "cancelled", default: false
+    t.boolean "archived", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["owner_id"], name: "index_events_on_owner_id"
@@ -70,7 +72,7 @@ ActiveRecord::Schema.define(version: 2019_08_31_212241) do
   end
 
   create_table "households", force: :cascade do |t|
-    t.bigint "communities_id"
+    t.bigint "communities_id", default: 5000
     t.string "address"
     t.string "postal_code"
     t.string "province"
@@ -83,7 +85,7 @@ ActiveRecord::Schema.define(version: 2019_08_31_212241) do
   create_table "notices", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.boolean "archived"
+    t.boolean "archived", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
@@ -95,9 +97,9 @@ ActiveRecord::Schema.define(version: 2019_08_31_212241) do
     t.string "title"
     t.text "description"
     t.string "image"
-    t.boolean "active"
-    t.boolean "deleted"
-    t.boolean "archived"
+    t.boolean "active", default: true
+    t.boolean "deleted", default: false
+    t.boolean "archived", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "offer"
@@ -114,8 +116,8 @@ ActiveRecord::Schema.define(version: 2019_08_31_212241) do
     t.string "profile_pic"
     t.string "phone_number"
     t.string "bio"
-    t.string "private"
-    t.boolean "is_admin"
+    t.string "private", default: "f"
+    t.boolean "is_admin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["households_id"], name: "index_users_on_households_id"

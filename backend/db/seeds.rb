@@ -8,51 +8,47 @@
 
 require 'faker'
 
-puts "Seeding Data...."
-
+puts 'Seeding Data....'
 
 community = Community.create(id: 5000, name: 'Mile End', postal_code: 'H2T')
 household = Household.create(id: 5000, address: '8000 Honey Lane', postal_code: 'H2T 111', province: 'Quebec', city: 'Montreal')
 
 admin = User.create(
   id: 5000, 
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
+  first_name: 'AdminName',
+  last_name: 'AdminSurname',
   profile_pic: Faker::Avatar.image,
   email: 'email@me.com',
   password: '123',
-  phone_number:Faker::PhoneNumber.cell_phone,
+  phone_number:'11111111111',
   is_admin: true, 
-  households_id: household.id
+  households_id: 5000
   )
 
 neighbour = User.create(
-    id: 600,
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
+    id: 6000,
+    first_name: 'NeighbourName',
+    last_name: 'NeighbourSurname',
     profile_pic: Faker::Avatar.image,
-    email: Faker::Internet.email,
+    email: 'neighbour@email.com',
     phone_number:Faker::PhoneNumber.cell_phone
     )
 
 # Household.destroy_all
 
 Household.create!([{
-  communities_id: 5000,
   address: '5733 Esplande Avenue',
   postal_code: 'H2T 2Z9',
   province: 'Quebec',
   city: 'Montreal'
 },
 {
-  communities_id: 5000,
   address: '5731 Waverley Street',
   postal_code: 'H2T 2Y2',
   province: 'Quebec',
   city: 'Montreal'
 },
 {
-  communities_id: 5000,
   address: '5977 Park Avenue',
   postal_code: 'H2V 4H4',
   province: 'Quebec',
@@ -61,159 +57,218 @@ Household.create!([{
 
 # User.destroy_all
 
-10.times do 
+5.times do 
   User.create(
+  households_id: '1',
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
-  phone_number:Faker::PhoneNumber.cell_phone
+  phone_number:Faker::PhoneNumber.cell_phone, 
+  password: "fjdlkfjlsdkf"
   )
 end
 
-User.create(
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
-  profile_pic: Faker::Avatar.image,
-  email: Faker::Internet.email,
-  phone_number:Faker::PhoneNumber.cell_phone,
-  households_id: '1'
-  )
-
+3.times do 
   User.create(
+  households_id: '2',
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
-  phone_number:Faker::PhoneNumber.cell_phone,
-  households_id: '2'
+  phone_number:Faker::PhoneNumber.cell_phone, 
+  password: "fjdlkfjlsdkf"
   )
+end
 
+2.times do 
   User.create(
+  households_id: '3',
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
-  phone_number:Faker::PhoneNumber.cell_phone,
-  households_id: '3'
+  phone_number:Faker::PhoneNumber.cell_phone, 
+  password: "fjdlkfjlsdkf"
   )
+end
 
-  User.create(
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
-  profile_pic: Faker::Avatar.image,
-  email: Faker::Internet.email,
-  phone_number:Faker::PhoneNumber.cell_phone,
-  households_id: '1'
-  )
-
-  User.create(
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
-  profile_pic: Faker::Avatar.image,
-  email: Faker::Internet.email,
-  phone_number:Faker::PhoneNumber.cell_phone
-  )
 # Event.destroy_all
 
 Event.create(
-  title: 'Lunch in the park', 
-  description:Faker::TvShows::Seinfeld.quote, 
-  location: 'Greenfield Park by the pond',
+  owner_id: '1',
+  title: 'Event Lunch in the park', 
+  location: 'Location for park',
+  description: 'Description for park lunch', 
   start:Faker::Time.forward(days: 23, period: :morning), 
   end:Faker::Time.forward(days: 23, period: :morning) 
   )
 
 Event.create(
+  owner_id: '2',
   title: 'Barbeque at My Place', 
-  location: 'TBA',
-  description:Faker::TvShows::Seinfeld.quote, 
+  location: 'Location for BBQ',
+  description:'Description for BBQ', 
   start:Faker::Time.forward(days: 5, period: :morning), 
-  end:Faker::Time.forward(days: 5, period: :morning) 
-)
+  end:Faker::Time.forward(days: 5, period: :morning 
+))
 
 Event.create(
+  owner_id: '3',
   title: 'Gaming Night and Pizza', 
-  location: 'TBA',
-  description:Faker::TvShows::Seinfeld.quote, 
+  location: 'Location for game',
+  description:'Description for game night',
   start:Faker::Time.forward(days: 10, period: :evening), 
   end:Faker::Time.forward(days: 10, period: :evening) 
 )
 
 Event.create(
+  owner_id: '4',
   title: 'Baby play date with my 3 year old', 
-  location: 'TBA',
-  description:Faker::TvShows::Seinfeld.quote, 
+  location: 'Location for playdate',
+  description:'Description for playdate', 
   start:Faker::Time.forward(days: 2, period: :morning), 
-  end:Faker::Time.forward(days: 2, period: :morning) 
+  end:Faker::Time.forward(days: 2, period: :morning 
+))
+
+EventUser.create(
+  events_id: '1', 
+  users_id: '1'
+)
+EventUser.create(
+  events_id: '1', 
+  users_id: '2'
+)
+EventUser.create(
+  events_id: '1', 
+  users_id: '2'
+)
+EventUser.create(
+  events_id: '2', 
+  users_id: '3'
+)
+EventUser.create(
+  events_id: '2', 
+  users_id: admin.id
+)
+EventUser.create(
+  events_id: '2', 
+  users_id: neighbour.id
 )
 
 OffersRequest.create(
   owner_id: admin.id, 
-  title:Faker::Commerce.product_name, 
-  description:'Available over the weekend',
+  title:'Offer title 1', 
+  description:'Offer 1 Description',
   active: true, 
   offer: true
 )
 
 OffersRequest.create(
   owner_id: admin.id, 
-  title:Faker::Commerce.product_name, 
-  description:'Pop me a message to borrow it anytime!',
+  title:'Offer title 2', 
+  description:'Offer 2 Description',
   active: true,
   offer: true
 )
 
 OffersRequest.create(
   owner_id: neighbour.id,
-  title:Faker::Commerce.product_name, 
-  description:'It\'s really fun for the whole family, would love to share it around!',
+  title:'Offer title 3', 
+  description:'Offer description 3',
   active: true,
   offer: true
 )
 
 OffersRequest.create(
   owner_id: neighbour.id,
-  title:Faker::Commerce.product_name, 
-  description:'I would really appreciate anyone letting me know!',
+  title:'Wanted title 1', 
+  description:'Wanted description 1',
   active: true,
   offer: false
 )
 
 OffersRequest.create(
   owner_id: neighbour.id,
-  title:Faker::Commerce.product_name, 
-  description:'Fingers crossed I find something before the winter is over!! TIA',
+  title:'Wanted title 2', 
+  description:'Wanted description 2',
   active: true,
   offer: false
 )
 
 # Notice.destroy_all
 
-Notice.create(
-  title: 'Interesting Note', 
-  description: 'Muffins are half price every Monday at Lazy Susan\'s Muffin Emporium! Best Muffins of my life!'
-)
+Notice.create([
+  { user_id: '1',
+  title: 'Notice title 1', 
+  description: 'Notice description 1'},
 
-Notice.create(
-  title: 'Missing Cat', 
-  description: 'Large grey tabby. Please look out for her around the parks. Has a bell and answers to the name Samantha'
-)
+  { user_id: '1',
+  title: 'Notice title 2', 
+  description: 'Notice description 2'},
 
-Notice.create(
-  title: 'Raccoons are out!', 
-  description: 'Please remember to lock your bins or take them out in the morning. There are racoons around the area'
-)
+  { user_id: '5000',
+  title: 'Notice title 3', 
+  description: 'Notice description 3'},
+])
 
-Comment.create(
-  comment: 'comment 1', 
-  events_id: '1'
-)
+Comment.create([
+  { comment: 'event comment 1 by user 1', 
+  events_id: '1',
+  users_id: '1' },
 
-Comment.create(
-  comment: 'another comment', 
-  events_id: '2'
-)
+  { comment: 'event comment 2 by user 2', 
+  events_id: '1',
+  users_id: '2' },
+
+  { comment: 'event comment 3 by user 2', 
+  events_id: '1',
+  users_id: '2' },
+
+  { comment: 'event comment 3 by user 2', 
+  events_id: '2',
+  users_id: '5' },
+
+  { comment: 'notice comment 1 by user 5', 
+  notice_id: '1',
+  users_id: '5' },
+
+  { comment: 'notice comment 1 by user 1', 
+  notice_id: '1',
+  users_id: '1' },
+
+  { comment: 'notice comment 2 by user 1', 
+  notice_id: '2',
+  users_id: '1' },
+
+  { comment: 'notice comment 3 by user 1', 
+  notice_id: '3',
+  users_id: '1' },
+
+  { comment: 'notice comment 3 by user 1', 
+  notice_id: '3',
+  users_id: '1' },
+
+  { comment: 'notice comment 3 by admin', 
+  notice_id: '3',
+  users_id: admin.id },
+
+  { comment: 'notice comment 3 by neighbour', 
+  notice_id: '3',
+  users_id: neighbour.id },
+
+  { comment: 'offer/request comment 1 by neighbour', 
+  offers_requests_id: '1',
+  users_id: neighbour.id },
+
+  { comment: 'offer/request comment 2 by neighbour', 
+  offers_requests_id: '1',
+  users_id: neighbour.id },
+
+  { comment: 'offer/request comment 3 by admin', 
+  offers_requests_id: '1',
+  users_id: admin.id },
+])
 
 
 
