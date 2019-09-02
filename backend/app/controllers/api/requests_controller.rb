@@ -1,5 +1,7 @@
 class Api::RequestsController < ApplicationController
 
+  before_action :set_request
+
   def index
 
     @requests = OffersRequest.all.where(offer: false)
@@ -24,6 +26,11 @@ class Api::RequestsController < ApplicationController
       hash_with_type = hash.merge(type_property)
   
       return hash_with_type
+    end
+
+    #GET requests/id
+    def show
+      render json: @request
     end
 
     #POST

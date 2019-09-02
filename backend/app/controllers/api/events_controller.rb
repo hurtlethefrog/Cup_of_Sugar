@@ -1,5 +1,7 @@
 class Api::EventsController < ApplicationController
 
+  before_action :set_event
+
   def index
 
   @events = Event.order(created_at: :desc)
@@ -31,6 +33,11 @@ class Api::EventsController < ApplicationController
     hash_with_type = hash.merge(type_property)
 
     return hash_with_type
+  end
+
+  #GET events/id
+  def show
+    render json: @event
   end
 
       #POST
