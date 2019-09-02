@@ -10,19 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_31_025744) do
+ActiveRecord::Schema.define(version: 2019_09_02_142120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
     t.bigint "users_id"
-    t.text "text"
+    t.text "comment"
     t.bigint "offers_requests_id"
     t.bigint "events_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "notice_id"
     t.index ["events_id"], name: "index_comments_on_events_id"
+    t.index ["notice_id"], name: "index_comments_on_notice_id"
     t.index ["offers_requests_id"], name: "index_comments_on_offers_requests_id"
     t.index ["users_id"], name: "index_comments_on_users_id"
   end
@@ -44,18 +46,18 @@ ActiveRecord::Schema.define(version: 2019_08_31_025744) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.bigint "users_id"
+    t.bigint "owner_id"
     t.string "title"
     t.text "description"
     t.datetime "start"
     t.datetime "end"
     t.string "location"
     t.string "image"
-    t.boolean "cancelled"
-    t.boolean "archived"
+    t.boolean "cancelled", default: false
+    t.boolean "archived", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["users_id"], name: "index_events_on_users_id"
+    t.index ["owner_id"], name: "index_events_on_owner_id"
   end
 
   create_table "flaggeds", force: :cascade do |t|
@@ -70,7 +72,7 @@ ActiveRecord::Schema.define(version: 2019_08_31_025744) do
   end
 
   create_table "households", force: :cascade do |t|
-    t.bigint "communities_id"
+    t.bigint "communities_id", default: 5000
     t.string "address"
     t.string "postal_code"
     t.string "province"
@@ -83,22 +85,25 @@ ActiveRecord::Schema.define(version: 2019_08_31_025744) do
   create_table "notices", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.boolean "archived"
+    t.boolean "archived", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_notices_on_user_id"
   end
 
   create_table "offers_requests", force: :cascade do |t|
-    t.bigint "users_id"
+    t.bigint "owner_id"
     t.string "title"
     t.text "description"
     t.string "image"
-    t.boolean "active"
-    t.boolean "deleted"
-    t.boolean "archived"
+    t.boolean "active", default: true
+    t.boolean "deleted", default: false
+    t.boolean "archived", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["users_id"], name: "index_offers_requests_on_users_id"
+    t.boolean "offer"
+    t.index ["owner_id"], name: "index_offers_requests_on_owner_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -111,8 +116,8 @@ ActiveRecord::Schema.define(version: 2019_08_31_025744) do
     t.string "profile_pic"
     t.string "phone_number"
     t.string "bio"
-    t.string "private"
-    t.boolean "is_admin"
+    t.string "private", default: "f"
+    t.boolean "is_admin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["households_id"], name: "index_users_on_households_id"
@@ -123,11 +128,12 @@ ActiveRecord::Schema.define(version: 2019_08_31_025744) do
   add_foreign_key "comments", "users", column: "users_id"
   add_foreign_key "event_users", "events", column: "events_id"
   add_foreign_key "event_users", "users", column: "users_id"
-  add_foreign_key "events", "users", column: "users_id", name: "owner_id"
+  add_foreign_key "events", "users", column: "owner_id", name: "owner_id"
   add_foreign_key "flaggeds", "events", column: "events_id"
   add_foreign_key "flaggeds", "offers_requests", column: "offers_requests_id"
   add_foreign_key "flaggeds", "users", column: "users_id"
   add_foreign_key "households", "communities", column: "communities_id"
-  add_foreign_key "offers_requests", "users", column: "users_id", name: "owner_id"
+  add_foreign_key "notices", "users"
+  add_foreign_key "offers_requests", "users", column: "owner_id", name: "owner_id"
   add_foreign_key "users", "households", column: "households_id"
 end

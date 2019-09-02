@@ -1,5 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import Axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+let currentLocation = selected => {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject, selected);
+  });
+};
+
+currentLocation()
+  .then(position => {
+    console.log(position);
+    console.log("position.coords:", position.coords);
+    console.log("position.coords.latitude:", position.coords.latitude);
+    console.log("position.coords.longitude:", position.coords.longitude);
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=YOUR_API_KEY`
+      )
+      .then(res => {
+        console.log(res);
+        console.log("res#################:", res);
+      });
+  })
+  .catch(err => {
+    console.log(err.message);
+  });
 
 function useFormInput(initialValue) {
   const [value, setValue] = useState(initialValue);
@@ -27,21 +52,9 @@ export default function Registration(props) {
     <main className="">
       <section className="">
         <form className="registration_fields">
-          <input
-            placeholder="First Name"
-            {...firstName}
-            required
-          />
-          <input
-            placeholder="Last Name"
-            {...lastName}
-            required
-          />
-          <input
-            placeholder="Email"
-            {...email}
-            required
-          />
+          <input placeholder="First Name" {...firstName} required />
+          <input placeholder="Last Name" {...lastName} required />
+          <input placeholder="Email" {...email} required />
           <input
             placeholder="Password"
             {...password}
@@ -54,51 +67,14 @@ export default function Registration(props) {
             required
             type="password"
           />
-          <input
-            placeholder="Address"
-            {...address}
-            required
-          />
-          <input
-            placeholder="Postal Code"
-            {...postalCode}
-            required
-          />
-          <input
-            placeholder="City"
-            {...city}
-            required />
-          <input
-            placeholder="Province"
-            {...province}
-            required
-          />
-        <input type="submit" value="Submit" />
+          <input placeholder="Address" {...address} required />
+          <input placeholder="Postal Code" {...postalCode} required />
+          <input placeholder="City" {...city} required />
+          <input placeholder="Province" {...province} required />
+          <input type="submit" value="Submit" />
         </form>
+        <input value="" onChange="" />
       </section>
     </main>
   );
 }
-
-// communities=
-// :name
-// :postal_code
-
-// households=
-// :address
-// :postal_code
-// :province
-// :city
-
-// users=
-// :households
-// :first_name
-// :last_name
-// :email
-// :password
-// :password_confirmation
-// :profile_pic
-// :phone_number
-// :bio
-// :private
-// :is_admin
