@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import './Homepage.scss';
 import Axios from 'axios';
+=======
+import './Homepage.css';
+import axios from 'axios';
+>>>>>>> master
 import FilterBar from './components/Filters/FilterBar';
 import Article from './components/Articles/Article';
-const uuidv4 = require('uuid/v4');
+// const uuidv4 = require('uuid/v4');
 // import filterSelector from './helpers/filter_selector';
 
 
@@ -171,43 +176,46 @@ const dummyArticles = [{
 ]
 
 export default function Homepage() {
-  const [articles, setArticles] = useState(dummyArticles)
+  const [articles, setArticles] = useState([])
   const [filter, setFilter] = useState()
   const [account, setAccount] = useState(dummyAcc)
 
-  // useEffect(() => {
-  //   axios.get("/test")
-  //     .then(testData => {
-  //       setArticles(testData.rows)
-  //     })
-  //     .catch(err => {
-  //       console.log(err)
-  //     })
-  // })
+  useEffect(() => {
+    Promise.all([
+      axios.get("/api/notices"),
+      // axios.get("/api/events"),
+      // axios.get("/api/wanted"),
+      // axios.get("/api/offers")
+    ])
+      .then(allArticles => {
+        const [notices] = allArticles
+        setArticles(notices.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
 
 
   return (
-    <div className="Homepage">
-      <header className="Homepage-header">
-        <div>Hypothetical navbar for: {account.community.name}, found at: {account.community.location} </div>
+    <div className="App">
+      <header className="App-header">
+        <div>
+          Hypothetical navbar for: {account.community.name}, found at:{" "}
+          {account.community.location}{" "}
+        </div>
         <button onClick={event => console.log(filter)}>Current Filter</button>
+        <button onClick={event => console.log(articles)}>Current Articles</button>
         <div>Hello {account.user[0].first_name} </div>
         {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
         <div>
-          <FilterBar onSelect={setFilter} filter={filter}/>
+          <FilterBar onSelect={setFilter} filter={filter} />
         </div>
         {/* map must be handed an array from articles hook, once recieved in Article it will be identified and the apropriate article component will be rendered */}
-        <div className="container--articles">{articles.map(article => {
-          console.log(article)
-          return (
-            <Article
-              key={uuidv4(6)}
-              article={article}
-            />
-          );
-        })}
+        <div>
+          {articles && <Article articles={articles} />}
         </div>
       </header>
-    </div>
+      </div>
   );
 }
