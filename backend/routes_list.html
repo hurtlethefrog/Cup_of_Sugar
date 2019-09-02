@@ -1,0 +1,889 @@
+## Routes
+
+Routes match in priority from top to bottom
+
+<table id="route_table" class="route_table">
+
+<thead>
+
+<tr>
+
+<th>Helper</th>
+
+<th>HTTP Verb</th>
+
+<th>Path</th>
+
+<th>Controller#Action</th>
+
+</tr>
+
+<tr class="bottom">
+
+<th>[Path](# "Returns a relative path (without the http or domain)") / [Url](# "Returns an absolute URL (with the http and domain)")</th>
+
+<th></th>
+
+<th><input id="search" placeholder="Path Match" type="search" name="path[]"></th>
+
+<th></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="api_articles">api_articles<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/api/articles(.:format)">/api/articles(.:format)</td>
+
+<td>
+
+api/articles#index
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="api_users">api_users<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/api/users(.:format)">/api/users(.:format)</td>
+
+<td>
+
+api/users#index
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>POST</td>
+
+<td data-route-path="/api/users(.:format)">/api/users(.:format)</td>
+
+<td>
+
+api/users#create
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="api_user">api_user<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/api/users/:id(.:format)">/api/users/:id(.:format)</td>
+
+<td>
+
+api/users#show
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>PATCH</td>
+
+<td data-route-path="/api/users/:id(.:format)">/api/users/:id(.:format)</td>
+
+<td>
+
+api/users#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>PUT</td>
+
+<td data-route-path="/api/users/:id(.:format)">/api/users/:id(.:format)</td>
+
+<td>
+
+api/users#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>DELETE</td>
+
+<td data-route-path="/api/users/:id(.:format)">/api/users/:id(.:format)</td>
+
+<td>
+
+api/users#destroy
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="api_events">api_events<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/api/events(.:format)">/api/events(.:format)</td>
+
+<td>
+
+api/events#index
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>POST</td>
+
+<td data-route-path="/api/events(.:format)">/api/events(.:format)</td>
+
+<td>
+
+api/events#create
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="api_event">api_event<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/api/events/:id(.:format)">/api/events/:id(.:format)</td>
+
+<td>
+
+api/events#show
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>PATCH</td>
+
+<td data-route-path="/api/events/:id(.:format)">/api/events/:id(.:format)</td>
+
+<td>
+
+api/events#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>PUT</td>
+
+<td data-route-path="/api/events/:id(.:format)">/api/events/:id(.:format)</td>
+
+<td>
+
+api/events#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>DELETE</td>
+
+<td data-route-path="/api/events/:id(.:format)">/api/events/:id(.:format)</td>
+
+<td>
+
+api/events#destroy
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="api_notices">api_notices<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/api/notices(.:format)">/api/notices(.:format)</td>
+
+<td>
+
+api/notices#index
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>POST</td>
+
+<td data-route-path="/api/notices(.:format)">/api/notices(.:format)</td>
+
+<td>
+
+api/notices#create
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="api_notice">api_notice<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/api/notices/:id(.:format)">/api/notices/:id(.:format)</td>
+
+<td>
+
+api/notices#show
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>PATCH</td>
+
+<td data-route-path="/api/notices/:id(.:format)">/api/notices/:id(.:format)</td>
+
+<td>
+
+api/notices#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>PUT</td>
+
+<td data-route-path="/api/notices/:id(.:format)">/api/notices/:id(.:format)</td>
+
+<td>
+
+api/notices#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="api_offers">api_offers<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/api/offers(.:format)">/api/offers(.:format)</td>
+
+<td>
+
+api/offers#index
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>POST</td>
+
+<td data-route-path="/api/offers(.:format)">/api/offers(.:format)</td>
+
+<td>
+
+api/offers#create
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="api_offer">api_offer<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/api/offers/:id(.:format)">/api/offers/:id(.:format)</td>
+
+<td>
+
+api/offers#show
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>PATCH</td>
+
+<td data-route-path="/api/offers/:id(.:format)">/api/offers/:id(.:format)</td>
+
+<td>
+
+api/offers#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>PUT</td>
+
+<td data-route-path="/api/offers/:id(.:format)">/api/offers/:id(.:format)</td>
+
+<td>
+
+api/offers#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>DELETE</td>
+
+<td data-route-path="/api/offers/:id(.:format)">/api/offers/:id(.:format)</td>
+
+<td>
+
+api/offers#destroy
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="api_requests">api_requests<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/api/requests(.:format)">/api/requests(.:format)</td>
+
+<td>
+
+api/requests#index
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>POST</td>
+
+<td data-route-path="/api/requests(.:format)">/api/requests(.:format)</td>
+
+<td>
+
+api/requests#create
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="api_request">api_request<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/api/requests/:id(.:format)">/api/requests/:id(.:format)</td>
+
+<td>
+
+api/requests#show
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>PATCH</td>
+
+<td data-route-path="/api/requests/:id(.:format)">/api/requests/:id(.:format)</td>
+
+<td>
+
+api/requests#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>PUT</td>
+
+<td data-route-path="/api/requests/:id(.:format)">/api/requests/:id(.:format)</td>
+
+<td>
+
+api/requests#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>DELETE</td>
+
+<td data-route-path="/api/requests/:id(.:format)">/api/requests/:id(.:format)</td>
+
+<td>
+
+api/requests#destroy
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="api_households">api_households<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/api/households(.:format)">/api/households(.:format)</td>
+
+<td>
+
+api/households#index
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>POST</td>
+
+<td data-route-path="/api/households(.:format)">/api/households(.:format)</td>
+
+<td>
+
+api/households#create
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="api_household">api_household<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/api/households/:id(.:format)">/api/households/:id(.:format)</td>
+
+<td>
+
+api/households#show
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>PATCH</td>
+
+<td data-route-path="/api/households/:id(.:format)">/api/households/:id(.:format)</td>
+
+<td>
+
+api/households#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>PUT</td>
+
+<td data-route-path="/api/households/:id(.:format)">/api/households/:id(.:format)</td>
+
+<td>
+
+api/households#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>DELETE</td>
+
+<td data-route-path="/api/households/:id(.:format)">/api/households/:id(.:format)</td>
+
+<td>
+
+api/households#destroy
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="rails_mandrill_inbound_emails">rails_mandrill_inbound_emails<span class="helper">_path</span></td>
+
+<td>POST</td>
+
+<td data-route-path="/rails/action_mailbox/mandrill/inbound_emails(.:format)">/rails/action_mailbox/mandrill/inbound_emails(.:format)</td>
+
+<td>
+
+action_mailbox/ingresses/mandrill/inbound_emails#create
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="rails_postmark_inbound_emails">rails_postmark_inbound_emails<span class="helper">_path</span></td>
+
+<td>POST</td>
+
+<td data-route-path="/rails/action_mailbox/postmark/inbound_emails(.:format)">/rails/action_mailbox/postmark/inbound_emails(.:format)</td>
+
+<td>
+
+action_mailbox/ingresses/postmark/inbound_emails#create
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="rails_relay_inbound_emails">rails_relay_inbound_emails<span class="helper">_path</span></td>
+
+<td>POST</td>
+
+<td data-route-path="/rails/action_mailbox/relay/inbound_emails(.:format)">/rails/action_mailbox/relay/inbound_emails(.:format)</td>
+
+<td>
+
+action_mailbox/ingresses/relay/inbound_emails#create
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="rails_sendgrid_inbound_emails">rails_sendgrid_inbound_emails<span class="helper">_path</span></td>
+
+<td>POST</td>
+
+<td data-route-path="/rails/action_mailbox/sendgrid/inbound_emails(.:format)">/rails/action_mailbox/sendgrid/inbound_emails(.:format)</td>
+
+<td>
+
+action_mailbox/ingresses/sendgrid/inbound_emails#create
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="rails_mailgun_inbound_emails">rails_mailgun_inbound_emails<span class="helper">_path</span></td>
+
+<td>POST</td>
+
+<td data-route-path="/rails/action_mailbox/mailgun/inbound_emails/mime(.:format)">/rails/action_mailbox/mailgun/inbound_emails/mime(.:format)</td>
+
+<td>
+
+action_mailbox/ingresses/mailgun/inbound_emails#create
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="rails_conductor_inbound_emails">rails_conductor_inbound_emails<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/rails/conductor/action_mailbox/inbound_emails(.:format)">/rails/conductor/action_mailbox/inbound_emails(.:format)</td>
+
+<td>
+
+rails/conductor/action_mailbox/inbound_emails#index
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>POST</td>
+
+<td data-route-path="/rails/conductor/action_mailbox/inbound_emails(.:format)">/rails/conductor/action_mailbox/inbound_emails(.:format)</td>
+
+<td>
+
+rails/conductor/action_mailbox/inbound_emails#create
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="rails_conductor_inbound_email">rails_conductor_inbound_email<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/rails/conductor/action_mailbox/inbound_emails/:id(.:format)">/rails/conductor/action_mailbox/inbound_emails/:id(.:format)</td>
+
+<td>
+
+rails/conductor/action_mailbox/inbound_emails#show
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>PATCH</td>
+
+<td data-route-path="/rails/conductor/action_mailbox/inbound_emails/:id(.:format)">/rails/conductor/action_mailbox/inbound_emails/:id(.:format)</td>
+
+<td>
+
+rails/conductor/action_mailbox/inbound_emails#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>PUT</td>
+
+<td data-route-path="/rails/conductor/action_mailbox/inbound_emails/:id(.:format)">/rails/conductor/action_mailbox/inbound_emails/:id(.:format)</td>
+
+<td>
+
+rails/conductor/action_mailbox/inbound_emails#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name=""></td>
+
+<td>DELETE</td>
+
+<td data-route-path="/rails/conductor/action_mailbox/inbound_emails/:id(.:format)">/rails/conductor/action_mailbox/inbound_emails/:id(.:format)</td>
+
+<td>
+
+rails/conductor/action_mailbox/inbound_emails#destroy
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="rails_conductor_inbound_email_reroute">rails_conductor_inbound_email_reroute<span class="helper">_path</span></td>
+
+<td>POST</td>
+
+<td data-route-path="/rails/conductor/action_mailbox/:inbound_email_id/reroute(.:format)">/rails/conductor/action_mailbox/:inbound_email_id/reroute(.:format)</td>
+
+<td>
+
+rails/conductor/action_mailbox/reroutes#create
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="rails_service_blob">rails_service_blob<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/rails/active_storage/blobs/:signed_id/*filename(.:format)">/rails/active_storage/blobs/:signed_id/*filename(.:format)</td>
+
+<td>
+
+active_storage/blobs#show
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="rails_blob_representation">rails_blob_representation<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format)">/rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format)</td>
+
+<td>
+
+active_storage/representations#show
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="rails_disk_service">rails_disk_service<span class="helper">_path</span></td>
+
+<td>GET</td>
+
+<td data-route-path="/rails/active_storage/disk/:encoded_key/*filename(.:format)">/rails/active_storage/disk/:encoded_key/*filename(.:format)</td>
+
+<td>
+
+active_storage/disk#show
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="update_rails_disk_service">update_rails_disk_service<span class="helper">_path</span></td>
+
+<td>PUT</td>
+
+<td data-route-path="/rails/active_storage/disk/:encoded_token(.:format)">/rails/active_storage/disk/:encoded_token(.:format)</td>
+
+<td>
+
+active_storage/disk#update
+
+</td>
+
+</tr>
+
+<tr class="route_row" data-helper="path">
+
+<td data-route-name="rails_direct_uploads">rails_direct_uploads<span class="helper">_path</span></td>
+
+<td>POST</td>
+
+<td data-route-path="/rails/active_storage/direct_uploads(.:format)">/rails/active_storage/direct_uploads(.:format)</td>
+
+<td>
+
+active_storage/direct_uploads#create
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<script type="text/javascript">// support forEarch iterator on NodeList NodeList.prototype.forEach = Array.prototype.forEach; // Enables path search functionality function setupMatchPaths() { // Check if there are any matched results in a section function checkNoMatch(section, noMatchText) { if (section.children.length <= 1) { section.innerHTML += noMatchText; } } // get JSON from URL and invoke callback with result function getJSON(url, success) { var xhr = new XMLHttpRequest(); xhr.open('GET', url); xhr.onload = function() { if (this.status == 200) success(JSON.parse(this.response)); }; xhr.send(); } function delayedKeyup(input, callback) { var timeout; input.onkeyup = function(){ if (timeout) clearTimeout(timeout); timeout = setTimeout(callback, 300); } } // remove params or fragments function sanitizePath(path) { return path.replace(/[#?].*/, ''); } var pathElements = document.querySelectorAll('#route_table [data-route-path]'), searchElem = document.querySelector('#search'), exactSection = document.querySelector('#exact_matches'), fuzzySection = document.querySelector('#fuzzy_matches'); // Remove matches when no search value is present searchElem.onblur = function(e) { if (searchElem.value === "") { exactSection.innerHTML = ""; fuzzySection.innerHTML = ""; } } // On key press perform a search for matching paths delayedKeyup(searchElem, function() { var path = sanitizePath(searchElem.value), defaultExactMatch = '<tr><th colspan="4">Paths Matching (' + path +'):</th></tr>', defaultFuzzyMatch = '<tr><th colspan="4">Paths Containing (' + path +'):</th></tr>', noExactMatch = '<tr><th colspan="4">No Exact Matches Found</th></tr>', noFuzzyMatch = '<tr><th colspan="4">No Fuzzy Matches Found</th></tr>'; if (!path) return searchElem.onblur(); getJSON('/rails/info/routes?path=' + path, function(matches){ // Clear out results section exactSection.innerHTML = defaultExactMatch; fuzzySection.innerHTML = defaultFuzzyMatch; // Display exact matches and fuzzy matches pathElements.forEach(function(elem) { var elemPath = elem.getAttribute('data-route-path'); if (matches['exact'].indexOf(elemPath) != -1) exactSection.appendChild(elem.parentNode.cloneNode(true)); if (matches['fuzzy'].indexOf(elemPath) != -1) fuzzySection.appendChild(elem.parentNode.cloneNode(true)); }) // Display 'No Matches' message when no matches are found checkNoMatch(exactSection, noExactMatch); checkNoMatch(fuzzySection, noFuzzyMatch); }) }) } // Enables functionality to toggle between `_path` and `_url` helper suffixes function setupRouteToggleHelperLinks() { // Sets content for each element function setValOn(elems, val) { elems.forEach(function(elem) { elem.innerHTML = val; }); } // Sets onClick event for each element function onClick(elems, func) { elems.forEach(function(elem) { elem.onclick = func; }); } var toggleLinks = document.querySelectorAll('#route_table [data-route-helper]'); onClick(toggleLinks, function(){ var helperTxt = this.getAttribute("data-route-helper"), helperElems = document.querySelectorAll('[data-route-name] span.helper'); setValOn(helperElems, helperTxt); }); } setupMatchPaths(); setupRouteToggleHelperLinks(); // Focus the search input after page has loaded document.getElementById('search').focus();</script>
