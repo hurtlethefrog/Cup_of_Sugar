@@ -1,3 +1,7 @@
+.Registration main {
+  height: 100%;
+}
+
 form.registration_fields {
   display: flex;
   flex-direction: column;
