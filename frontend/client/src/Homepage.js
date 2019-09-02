@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './Homepage.css';
 import axios from 'axios';
 import FilterBar from './components/Filters/FilterBar';
-import Article from './components/Articles/Article';
+import Articles from './components/Articles/Articles';
+import Wanted from './components/Articles/Want';
 // const uuidv4 = require('uuid/v4');
 // import filterSelector from './helpers/filter_selector';
 
@@ -178,13 +179,13 @@ export default function Homepage() {
   useEffect(() => {
     Promise.all([
       axios.get("/api/notices"),
-      // axios.get("/api/events"),
-      // axios.get("/api/wanted"),
-      // axios.get("/api/offers")
+      axios.get("/api/events"),
+      axios.get("/api/offers"),
+      axios.get("/api/requests")
     ])
       .then(allArticles => {
-        const [notices] = allArticles
-        setArticles(notices.data)
+        const [events, notices, offers, requests] = allArticles
+        setArticles([...events.data, ...notices.data, ...offers .data, ...requests.data])
       })
       .catch(err => {
         console.log(err)
@@ -208,7 +209,7 @@ export default function Homepage() {
         </div>
         {/* map must be handed an array from articles hook, once recieved in Article it will be identified and the apropriate article component will be rendered */}
         <div>
-          {articles && <Article articles={articles} />}
+          {articles && <Articles articles={articles} />}
         </div>
       </header>
       </div>
