@@ -14,13 +14,8 @@ class Api::NoticesController < ApplicationController
     notice_output = modified_notice.merge(comments_hash)
 
     notice_output
-  
-
-    
-
   }
     
-  
     render json: @noticesWithComments
 
   end
@@ -28,9 +23,9 @@ class Api::NoticesController < ApplicationController
   def generate_hash_with_type(object, type)
     hash = object.attributes
     type_property = {:type => type}
-    yas = hash.merge(type_property)
+    hash_with_type = hash.merge(type_property)
 
-    return yas
+    return hash_with_type
   end
 
   #GET notices/id
@@ -45,7 +40,7 @@ class Api::NoticesController < ApplicationController
     if @notice.save
       render json: @notice, status: :created
     else
-      render jsonL @notice.errors, status: :unprocessable_entity
+      render json: @notice.errors, status: :unprocessable_entity
     end
 
   end
@@ -65,7 +60,7 @@ class Api::NoticesController < ApplicationController
   end
 
   def notice_params 
-    params.require(:notice).permit(:title, :description, :archived, :users_id)
+    params.permit(:title, :description)
   end
 
 
