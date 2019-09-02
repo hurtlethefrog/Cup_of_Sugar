@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 require('dotenv').config();
 
-let G_API_KEY = process.env.G_API_KEY;
+let REACT_APP_G_API_KEY = process.env.REACT_APP_G_API_KEY;
 
 let currentLocation = selected => {
   return new Promise((resolve, reject) => {
@@ -16,10 +16,11 @@ currentLocation()
     console.log("position.coords.longitude:", position.coords.longitude);
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${G_API_KEY}`
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=KEY`
+        // `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${REACT_APP_G_API_KEY}`
       )
       .then(res => {
-        console.log("res", res);
+        console.log("res:", res);
       });
   })
   .catch(err => {
@@ -47,6 +48,7 @@ export default function Registration(props) {
   const postalCode = useFormInput("");
   const city = useFormInput("");
   const province = useFormInput("");
+  const [currentAddress, setCurrentAddress] = useState("");
 
   return (
     <main className="">
@@ -73,8 +75,8 @@ export default function Registration(props) {
           <input placeholder="Province" {...province} required />
           <input type="submit" value="Submit" />
         </form>
-        {/* <input value="" onChange="" /> */}
       </section>
+      <input placeholder="Auto-Generate Address" value={currentAddress} onChange={e => setCurrentAddress(e.target.value)} />
     </main>
   );
 }
