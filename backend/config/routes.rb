@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :events
     resources :notices, except: [:destroy]
     resources :offers_requests
+    resources :requests
     resources :households 
   end
   
