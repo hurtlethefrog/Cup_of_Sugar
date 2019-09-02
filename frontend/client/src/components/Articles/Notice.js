@@ -4,7 +4,7 @@ import "./styles.css";
 
 export default function Notice(props) {
   return (
-    <article>
+    <article className="box">
       <div>{props.title}</div>
       <div>{props.description}</div>
     </article>
