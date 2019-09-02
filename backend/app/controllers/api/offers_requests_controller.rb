@@ -5,9 +5,13 @@ class Api::OffersRequestsController < ApplicationController
   @offers = OffersRequest.all.where(offer: true)
   @requests = OffersRequest.all.where(offer: false)
 
-  # @useroffersrequests = User.find_by_sql("SELECT * FROM users RIGHT JOIN offers_requests ON users_id = users.id ORDER BY offers_requests.created_at DESC")
+  @offers = OffersRequest.find_by_sql("SELECT offers_requests.*, users.id as user_id,first_name, last_name, profile_pic FROM offers_requests JOIN users ON offers_requests.owner_id = users.id WHERE offer = true AND deleted IS NOT true ORDER BY offers_requests.created_at DESC")
 
-  render json: @offers
+  @requests = OffersRequest.find_by_sql("SELECT offers_requests.*, users.id as user_id,first_name, last_name, profile_pic FROM offers_requests JOIN users ON offers_requests.owner_id = users.id WHERE offer IS NOT true AND deleted IS NOT true ORDER BY offers_requests.created_at DESC")
+
+  @offerRequestComments = OffersRequest.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE offers_requests_id IS NOT NULL ORDER BY comments.created_at DESC")
+
+  render json: @offerRequestComments
 
   end
 
