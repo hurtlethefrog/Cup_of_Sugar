@@ -12,12 +12,25 @@ class Api::EventsController < ApplicationController
   @eventAttendees = EventUser.find_by_sql("SELECT users.id as user_id, first_name, last_name, profile_pic, events.* FROM event_users JOIN users ON event_users.users_id = users.id JOIN events ON event_users.events_id = events.id")
 
   @eventsWithCommentsAndAttendees = @events.map {|event|
+    modified_event = generate_hash_with_type(event, "event")
+    comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE events_id = #{event.id}")}
+    attendees_hash = {:attendees => EventUser.find_by_sql("SELECT users.id as user_id, first_name, last_name, profile_pic FROM event_users JOIN users ON event_users.users_id = users.id JOIN events ON event_users.events_id = events.id WHERE events_id = #{event.id}")}
 
-  [event, Comment.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE events_id = #{event.id}"), EventUser.find_by_sql("SELECT users.id as user_id, first_name, last_name, profile_pic, events.* FROM event_users JOIN users ON event_users.users_id = users.id JOIN events ON event_users.events_id = events.id WHERE events_id = #{event.id}")
-  ]} 
+    event_output = modified_event.merge(comments_hash).merge(attendees_hash)
+
+    event_output
+  } 
 
   render json: @eventsWithCommentsAndAttendees
 
+  end
+
+  def generate_hash_with_type(object, type)
+    hash = object.attributes
+    type_property = {:type => type}
+    hash_with_type = hash.merge(type_property)
+
+    return hash_with_type
   end
 
 end

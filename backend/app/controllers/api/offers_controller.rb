@@ -1,4 +1,4 @@
-class Api::OffersRequestsController < ApplicationController
+class Api::OffersController < ApplicationController
 
   def index
 

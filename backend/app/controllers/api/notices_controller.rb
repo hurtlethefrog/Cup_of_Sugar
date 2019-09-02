@@ -40,7 +40,7 @@ class Api::NoticesController < ApplicationController
     if @notice.save
       render json: @notice, status: :created
     else
-      render jsonL @notice.errors, status: :unprocessable_entity
+      render json: @notice.errors, status: :unprocessable_entity
     end
 
   end
@@ -60,7 +60,7 @@ class Api::NoticesController < ApplicationController
   end
 
   def notice_params 
-    params.require(:notice).permit(:title, :description, :archived, :users_id)
+    params.require(:notice).permit(:title, :description)
   end
 
 
