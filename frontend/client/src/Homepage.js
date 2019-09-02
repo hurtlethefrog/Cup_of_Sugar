@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Homepage.css';
+import './Homepage.scss';
 import Axios from 'axios';
 import FilterBar from './components/Filters/FilterBar';
 import Article from './components/Articles/Article';
