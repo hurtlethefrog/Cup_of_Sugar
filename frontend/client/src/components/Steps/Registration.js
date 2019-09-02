@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
+import Button from "../Button";
 require('dotenv').config();
 let REACT_APP_G_API_KEY = process.env.REACT_APP_G_API_KEY;
 
@@ -50,12 +51,25 @@ function useFormInput(initialValue) {
   const [value, setValue] = useState(initialValue);
   function handleChange(e) {
     setValue(e.target.value);
+    // axios
+      // .get(`/api//${setValue}`)
+      // .then()
   }
   return {
     value,
     onChange: handleChange
   };
 }
+
+// registerNewUser = (_firstName, _lastName, _email, _password, _passwordConfirmation) => {
+//   axios
+//     .get(
+//     )
+//     .then(res => {
+//     })
+//     .catch(err => {
+//     })
+// }
 
 export default function Registration(props) {
   const firstName = useFormInput("");
@@ -64,10 +78,26 @@ export default function Registration(props) {
   const password = useFormInput("");
   const passwordConfirmation = useFormInput("");
   const address = useFormInput("");
-  const postalCode = useFormInput("");
   const city = useFormInput("");
   const province = useFormInput("");
-  const [currentAddress, setCurrentAddress] = useState("");
+
+  let autoFirstName = 'Metro';
+  let autoLastName = 'Saint Hubert';
+  let autoEmail = 'test@gmail.com';
+  let autoPassword = '000';
+  let autoPasswordConfirmation = '000';
+  let autoAddress = '5300 St Hubert St';
+  let autoPostalCode = 'H2J 2Y5';
+  let autoCity = 'Montreal';
+  let autoProvince = 'Quebec';
+  // const [postalCode, setPostalCode] = useState("");
+  // function handlePostalCodeChange(e) {
+  //   setPostalCode(e.target.value);
+  // }
+
+  const handleSubmission = () => {
+
+  }
 
   return (
     <main className="">
@@ -89,13 +119,12 @@ export default function Registration(props) {
             type="password"
           />
           <input placeholder="Address" {...address} required />
-          <input placeholder="Postal Code" {...postalCode} required />
+          <input placeholder="Postal Code" value={autoPostalCode} required />
           <input placeholder="City" {...city} required />
           <input placeholder="Province" {...province} required />
-          <input type="submit" value="Submit" />
+          <Button type="submit" onSubmit={handleSubmission} >Submit</Button>
         </form>
       </section>
-      <input placeholder="Auto-Generate Address" value={currentAddress} onChange={e => setCurrentAddress(e.target.value)} />
     </main>
   );
 }
