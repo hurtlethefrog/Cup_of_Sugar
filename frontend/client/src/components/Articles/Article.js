@@ -5,28 +5,24 @@ import Offer from "./Offer";
 import Want from "./Want";
 
 export default function Article(props) {
-  props.articles.map(article => {
-    const parsedArticles = article[type].map(articleItem => {
-      // console.log("ARTICLE ITEM" + JSON.stringify(articleItem))
-      switch (articleItem.type) {
-        case "events":
-          return (
-            <Event
-              title={articleItem.title}
-              description={articleItem.description}
-            />
-          );
-        case "notices":
-          return (
-            <Notice
-              title={articleItem.title}
-              description={articleItem.description}
-            />
-          );
+
+  const parsedArticles = props.articles.map(article => {
+    switch (article.type) {
+      case "event":
+        return(
+          <Event title={article.title} description={article.description} />
+        );
+      case "notice":
+        return(
+          <Notice article={article} />
+        );
+      case "wanted":
+        return(<Want />);
+      case "offer":
+        return(<Offer />);
         default:
-          return null;
-      }
-    });
-    return <div>{parsedArticles}</div>;
+          return(<div className="box">Why you no type ?</div>)
+    }
   });
+  return <div>{parsedArticles}</div>;
 }
