@@ -26,4 +26,27 @@ class Api::OffersController < ApplicationController
     return hash_with_type
   end
 
+    #POST
+    def create
+
+      @offer = OffersRequest.new(offer_params)
+      if @offer.save
+        render json: @offer, status: :created
+      else
+        render json: @offer.errors, status: :unprocessable_entity
+      end
+  
+    end
+
+  private 
+
+  def set_offer
+    @offer = OffersRequest.find_by(id: params[:id])
+  end
+
+  def offer_params 
+    params.permit(:title, :description, :image, :offer)
+  end
+
+
 end

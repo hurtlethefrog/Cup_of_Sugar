@@ -33,5 +33,27 @@ class Api::EventsController < ApplicationController
     return hash_with_type
   end
 
+      #POST
+  def create
+
+    @event = Event.new(event_params)
+      if @event.save
+        render json: @event, status: :created
+      else
+        render json: @event.errors, status: :unprocessable_entity
+      end
+    
+  end
+  
+  private 
+  
+    def set_event
+      @event = Event.find_by(id: params[:id])
+    end
+  
+    def event_params 
+      params.permit(:title, :description, :start, :end, :location, :image)
+    end
+
 end
 

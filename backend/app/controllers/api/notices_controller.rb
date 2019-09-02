@@ -60,7 +60,7 @@ class Api::NoticesController < ApplicationController
   end
 
   def notice_params 
-    params.require(:notice).permit(:title, :description)
+    params.permit(:title, :description)
   end
 
 
