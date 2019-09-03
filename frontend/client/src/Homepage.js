@@ -5,6 +5,7 @@ import FilterBar from './components/Filters/FilterBar';
 import Articles from './components/Articles/Articles';
 import Wanted from './components/Articles/Want';
 import New from './components/Articles/New';
+import Nav from './components/Nav';
 
 // const uuidv4 = require('uuid/v4');
 // import filterSelector from './helpers/filter_selector';
@@ -78,6 +79,8 @@ export default function Homepage() {
 
   return (
     <div className="App">
+        <Nav>NAVBAR</Nav>
+
         <button onClick={event => console.log(filter)}>Current Filter</button>
         <button onClick={event => console.log(articles)}>Current Articles</button>
         <div>Hello {account.user[0].first_name} </div>
