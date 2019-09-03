@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Dropzone from "react-dropzone";
 import { useVisualMode } from "../../hooks/useVisualMode";
 import validateNewArticle from "../../helpers/validateNewArticle";
 
@@ -14,7 +15,10 @@ export default function New(props) {
     type: null
   });
   const [error, setError] = useState();
-  useEffect(()=> {setText({ ...text, type: mode })}, [mode]);  
+
+  useEffect(() => {
+    setText({ ...text, type: mode });
+  }, [mode]);
 
   const newArticleMode = mode => {
     switch (mode) {
@@ -69,95 +73,107 @@ export default function New(props) {
           </div>
         );
       case "event":
-          return (
-            <div>
-              {" "}
-              {error}
-              <form onSubmit={event => event.preventDefault()}>
-                <input name="title"></input>
-                <input name="description"></input>
-                <button
-                  onClick={event => {
-                    const isValid = validateNewArticle(text);
-                    if (isValid === true) {
-                      props.onSubmit(text);
-                    }
-                    return setError(isValid);
-                  }}
-                >
-                  Confirm
-                </button>
-              </form>
+        return (
+          <div>
+            {" "}
+            {error}
+            <form onSubmit={event => event.preventDefault()}>
+              <input name="title"></input>
+              <input name="description"></input>
+              <Dropzone onDrop={acceptedFiles => setText({...text, image: acceptedFiles})}>
+                {({ getRootProps, getInputProps }) => (
+                  <section className="box">
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      <p>
+                        Drag 'n' drop some files here, or click to select files
+                      </p>
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
               <button
                 onClick={event => {
-                  setError("")
-                  back();
+                  const isValid = validateNewArticle(text);
+                  if (isValid === true) {
+                    props.onSubmit(text);
+                  }
+                  return setError(isValid);
                 }}
               >
-                Back
+                Confirm
               </button>
-            </div>
+            </form>
+            <button
+              onClick={event => {
+                setError("");
+                back();
+              }}
+            >
+              Back
+            </button>
+          </div>
         );
       case "notice":
-          return (
-            <div>
-              {" "}
-              {error}
-              <form onSubmit={event => event.preventDefault()}>
-                <input name="title"></input>
-                <input name="description"></input>
-                <button
-                  onClick={event => {
-                    const isValid = validateNewArticle(text);
-                    if (isValid === true) {
-                      props.onSubmit(text);
-                    }
-                    return setError(isValid);
-                  }}
-                >
-                  Confirm
-                </button>
-              </form>
+        return (
+          <div>
+            {" "}
+            {error}
+            <form onSubmit={event => event.preventDefault()}>
+              <input name="title"></input>
+              <input name="description"></input>
               <button
                 onClick={event => {
-                  setError("")
-                  back();
+                  const isValid = validateNewArticle(text);
+                  if (isValid === true) {
+                    props.onSubmit(text);
+                  }
+                  return setError(isValid);
                 }}
               >
-                Back
+                Confirm
               </button>
-            </div>
+            </form>
+            <button
+              onClick={event => {
+                setError("");
+                back();
+              }}
+            >
+              Back
+            </button>
+          </div>
         );
       case "request":
-          return (
-            <div>
-              {" "}
-              {error}
-              <form onSubmit={event => event.preventDefault()}>
-                <input name="title"></input>
-                <input name="description"></input>
-                <button
-                  onClick={event => {
-                    const isValid = validateNewArticle(text);
-                    if (isValid === true) {
-                      props.onSubmit(text);
-                    }
-                    return setError(isValid);
-                  }}
-                >
-                  Confirm
-                </button>
-              </form>
+        return (
+          <div>
+            {" "}
+            {error}
+            <form onSubmit={event => event.preventDefault()}>
+              <input name="title"></input>
+              <input name="description"></input>
               <button
                 onClick={event => {
-                  setError("")
-                  back();
+                  const isValid = validateNewArticle(text);
+                  if (isValid === true) {
+                    props.onSubmit(text);
+                  }
+                  return setError(isValid);
                 }}
               >
-                Back
+                Confirm
               </button>
-            </div>
-          );
+            </form>
+            <button
+              onClick={event => {
+                setError("");
+                back();
+              }}
+            >
+              Back
+            </button>
+          </div>
+        );
       case "offer":
         return (
           <div>
@@ -180,7 +196,7 @@ export default function New(props) {
             </form>
             <button
               onClick={event => {
-                setError("")
+                setError("");
                 back();
               }}
             >
@@ -196,7 +212,7 @@ export default function New(props) {
 
   return (
     <div className="new--article--box box">
-      <button onClick={event => console.log(mode)}>state?</button>
+      <button onClick={event => console.log("---mode---", mode, "---text---", text)}>state?</button>
       {newArticleMode(mode)}
     </div>
   );

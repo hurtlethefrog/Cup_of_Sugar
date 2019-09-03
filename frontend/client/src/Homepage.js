@@ -3,14 +3,9 @@ import './Homepage.scss';
 import axios from 'axios';
 import FilterBar from './components/Filters/FilterBar';
 import Articles from './components/Articles/Articles';
-import Wanted from './components/Articles/Want';
 import New from './components/Articles/New';
 
-// const uuidv4 = require('uuid/v4');
-// import filterSelector from './helpers/filter_selector';
 
-
-// const db = {
 const dummyAcc = {
   community: {
     id: 1,
