@@ -1,0 +1,67 @@
+$article-background:white;
+$comment-box: white;
+
+.box {
+  background-color: $article-background;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .article--userinfo {
+    
+    img {
+      width: 35px;
+    }
+  }
+
+  .article--title {
+    font-size: 1.2rem;
+  }
+
+  .article-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-weight: bold;
+    size: 1.5rem;
+  }
+
+  .article--date {
+    font-size: 0.8rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 4px;
+  }
+
+  .comment--box{ 
+    background-color: $comment-box;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin-bottom: 2px;
+    align-items: center;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    position: relative;
+  
+  img {
+    width: 35px;
+  }
+
+  .hideable--date {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 4px;
+    align-self: flex-end;
+
+    // display: none;
+
+    &:hover {
+      display: block;
+    }
+  }
+
+}
+}

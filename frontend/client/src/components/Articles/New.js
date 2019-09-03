@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
 import { useVisualMode } from "../../hooks/useVisualMode";
-import validateNewArticle from "../../helpers/validateNewArticle";
+import validateNewArticle from '../../helpers/validateNewArticle';
+import "./styles.scss";
 
 export default function New(props) {
   const { mode, transition, back } = useVisualMode("new");

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import "./Homepage.scss";
-import axios from "axios";
-import FilterBar from "./components/Filters/FilterBar";
-import Articles from "./components/Articles/Articles";
-import New from "./components/Articles/New";
+import React, { useState, useEffect } from 'react';
+import './Homepage.scss';
+import axios from 'axios';
+import FilterBar from './components/Filters/FilterBar';
+import Articles from './components/Articles/Articles';
+import New from './components/Articles/New';
+import Nav from './components/Nav';
 
 const dummyAcc = {
   community: {
@@ -78,21 +79,23 @@ export default function Homepage() {
 
   return (
     <div className="App">
-      <button onClick={event => console.log(filter)}>Current Filter</button>
-      <button onClick={event => console.log(articles)}>Current Articles</button>
-      <div>Hello {account.user[0].first_name} </div>
-      {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
-      <div>
-        <FilterBar onSelect={setFilter} filter={filter} />
+        <Nav>NAVBAR</Nav>
+
+        <button onClick={event => console.log(filter)}>Current Filter</button>
+        <button onClick={event => console.log(articles)}>Current Articles</button>
+        <div>Hello {account.user[0].first_name} </div>
+        {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
+        <div>
+          <FilterBar onSelect={setFilter} filter={filter} />
+        </div>
+        {/* onSubmit function will need to ensure title description, everything else is optional */}
+        <div>
+          <New onSubmit={setNewArticle}/>
+        </div>
+        {/* map must be handed an array from articles hook, once recieved in Article it will be identified and the apropriate article component will be rendered */}
+        <div className="article-container">
+          {articles && <Articles articles={articles} />}
+        </div>
       </div>
-      {/* onSubmit function will need to ensure title description, everything else is optional */}
-      <div>
-        <New onSubmit={setNewArticle} />
-      </div>
-      {/* map must be handed an array from articles hook, once recieved in Article it will be identified and the apropriate article component will be rendered */}
-      <div className="article-container">
-        {articles && <Articles articles={articles} />}
-      </div>
-    </div>
   );
 }
