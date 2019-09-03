@@ -55,6 +55,7 @@ export default function Registration(props) {
     password: "",
     passwordConfirmation: "",
     address: "",
+    postalCode: "",
     city: "",
     province: ""
   };
@@ -64,6 +65,15 @@ export default function Registration(props) {
   const handleSubmission = function(event) {
     event.preventDefault();
     console.log(userForm);
+
+    axios
+      .post("/api/users", { userForm })
+      .then(function(res) {
+        console.log(res);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   };
 
   return (
