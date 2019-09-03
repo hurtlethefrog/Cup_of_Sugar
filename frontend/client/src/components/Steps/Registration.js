@@ -111,6 +111,7 @@ export default function Registration(props) {
               updateForm({ ...userForm, password: event.target.value })
             }
             required
+            type="password"
           />
           <input
             placeholder="Confirm Password"
@@ -122,6 +123,7 @@ export default function Registration(props) {
               })
             }
             required
+            type="password"
           />
           <input
             placeholder="Address"
