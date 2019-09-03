@@ -27,7 +27,7 @@ Things you may want to cover:
 * `gem install bundler:2.0.2`
 * `bundle install`
 * `gem install pg`
-* Run `bin/rails s -b 0.0.0.0` to start the backend server
+* Run `bin/rails s -p 3001 -b 0.0.0.0` to start the backend server
 * `bin/rails db:create`
 * `bin/rails db:migrate`
 * `bin/rake routes`
