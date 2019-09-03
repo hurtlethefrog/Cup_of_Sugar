@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import Button from "../Button";
-require('dotenv').config();
+require("dotenv").config();
 let REACT_APP_G_API_KEY = process.env.REACT_APP_G_API_KEY;
 
 // Verifies the geolocation (user's current location)
@@ -25,7 +25,7 @@ currentLocation()
         // `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${REACT_APP_G_API_KEY}`
       )
       .then(res => {
-        console.log("res:", res)
+        console.log("res:", res);
 
         // // This formatted address isn't always ideal data. Perhaps it's better to concatenate pieces of data below (Street Number, Address, etc.)
         // console.log("Formatted Address:", res.data.results[0].formatted_address);
@@ -47,32 +47,7 @@ currentLocation()
     console.log(err.message);
   });
 
-// function useFormInput(initialValue) {
-//   const [value, setValue] = useState(initialValue);
-//   function handleChange(e) {
-//     setValue(e.target.value);
-//     // axios
-//       // .get(`/api//${setValue}`)
-//       // .then()
-//   }
-//   return {
-//     value,
-//     onChange: handleChange
-//   };
-// }
-
-// registerNewUser = (_firstName, _lastName, _email, _password, _passwordConfirmation) => {
-//   axios
-//     .get(
-//     )
-//     .then(res => {
-//     })
-//     .catch(err => {
-//     })
-// }
-
 export default function Registration(props) {
-
   let userEntry = {
     firstName: "",
     lastName: "",
@@ -82,62 +57,95 @@ export default function Registration(props) {
     address: "",
     city: "",
     province: ""
-  }
+  };
 
-  const [userForm, updateForm] = useState(userEntry)
-
-  // const firstName = useFormInput("");
-  // const lastName = useFormInput("");
-  // const email = useFormInput("");
-  // const password = useFormInput("");
-  // const passwordConfirmation = useFormInput("");
-  // const address = useFormInput("");
-  // const city = useFormInput("");
-  // const province = useFormInput("");
-
-  // let autoFirstName = 'Metro';
-  // let autoLastName = 'Saint Hubert';
-  // let autoEmail = 'test@gmail.com';
-  // let autoPassword = '000';
-  // let autoPasswordConfirmation = '000';
-  // let autoAddress = '5300 St Hubert St';
-  // let autoPostalCode = 'H2J 2Y5';
-  // let autoCity = 'Montreal';
-  // let autoProvince = 'Quebec';
-  // const [postalCode, setPostalCode] = useState("");
-  // function handlePostalCodeChange(e) {
-  //   setPostalCode(e.target.value);
-  // }
+  const [userForm, updateForm] = useState(userEntry);
 
   const handleSubmission = function(event) {
-    event.preventDefault()
-    console.log(userForm)
-  }
+    event.preventDefault();
+    console.log(userForm);
+  };
 
   return (
     <main className="">
       <section className="">
         <form className="registration_fields" onSubmit={handleSubmission}>
-          <input placeholder="First Name" value={userForm.firstName} onChange={(event) => updateForm({...userForm, firstName: event.target.value})} required />
-          {/* <input placeholder="Last Name" {...lastName} required />
-          <input placeholder="Email" {...email} required />
+          <input
+            placeholder="First Name"
+            value={userForm.firstName}
+            onChange={event =>
+              updateForm({ ...userForm, firstName: event.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Last Name"
+            value={userForm.lastName}
+            onChange={event =>
+              updateForm({ ...userForm, lastName: event.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Email"
+            value={userForm.email}
+            onChange={event =>
+              updateForm({ ...userForm, email: event.target.value })
+            }
+            required
+          />
           <input
             placeholder="Password"
-            {...password}
+            value={userForm.password}
+            onChange={event =>
+              updateForm({ ...userForm, password: event.target.value })
+            }
             required
-            type="password"
           />
           <input
             placeholder="Confirm Password"
-            {...passwordConfirmation}
+            value={userForm.passwordConfirmation}
+            onChange={event =>
+              updateForm({
+                ...userForm,
+                passwordConfirmation: event.target.value
+              })
+            }
             required
-            type="password"
           />
-          <input placeholder="Address" {...address} required />
-          <input placeholder="Postal Code" value={autoPostalCode} required />
-          <input placeholder="City" {...city} required />
-          <input placeholder="Province" {...province} required /> */}
-          <button type="submit" >Submit</button>
+          <input
+            placeholder="Address"
+            value={userForm.address}
+            onChange={event =>
+              updateForm({ ...userForm, address: event.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Postal Code"
+            value={userForm.postalCode}
+            onChange={event =>
+              updateForm({ ...userForm, postalCode: event.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="City"
+            value={userForm.city}
+            onChange={event =>
+              updateForm({ ...userForm, city: event.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Province"
+            value={userForm.province}
+            onChange={event =>
+              updateForm({ ...userForm, province: event.target.value })
+            }
+            required
+          />
+          <button type="submit">Submit</button>
         </form>
       </section>
     </main>
