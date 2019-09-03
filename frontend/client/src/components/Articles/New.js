@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { useVisualMode } from "../../hooks/useVisualMode";
+import validateNewArticle from '../../helpers/validateNewArticle';
 
 export default function New(props) {
-  const [text, setText] = useState();
+  const [text, setText] = useState({
+    title: null,
+    description: null,
+    start: null,
+    end: null,
+    location: null,
+    image: null
+  });
   const {mode, transition, back } = useVisualMode("new")
 
   const newArticleMode = (mode) => {
@@ -89,6 +97,16 @@ export default function New(props) {
         );
       case "offer":
         return (
+          <div>
+            <form>
+
+              
+            <button onClick={event => {
+              if (validateNewArticle(text)) {
+                props.onSubmit(text)
+              } return validateNewArticle(text)
+            }}>Confirm</button>
+            </form>
           <button
             onClick={event => {
               back();
@@ -96,6 +114,8 @@ export default function New(props) {
           >
             Back
           </button>
+            
+          </div>
         );
 
       default:

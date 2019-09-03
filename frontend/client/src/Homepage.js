@@ -5,6 +5,7 @@ import FilterBar from './components/Filters/FilterBar';
 import Articles from './components/Articles/Articles';
 import Wanted from './components/Articles/Want';
 import New from './components/Articles/New';
+
 // const uuidv4 = require('uuid/v4');
 // import filterSelector from './helpers/filter_selector';
 
@@ -89,6 +90,7 @@ export default function Homepage() {
         <div>
           <FilterBar onSelect={setFilter} filter={filter} />
         </div>
+        {/* onSubmit function will need to ensure title description, everything else is optional */}
         <div>
           <New onSubmit={setNewArticle}/>
         </div>
