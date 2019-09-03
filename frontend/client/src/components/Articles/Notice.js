@@ -17,7 +17,7 @@ export default function Notice(props) {
   })
 
   return (
-    <article className="box" onClick={event => setState(!state)}>
+    <article className="box">
       <div className="article-icon">N</div>
       <div className="article--userinfo" >
       <img src={props.article.profile_pic}/>
@@ -26,6 +26,7 @@ export default function Notice(props) {
       <div className="article--title">{props.article.title}</div>
       <div className="article--description">{props.article.description}</div>
       <div className="article--date">{dateFormatter(props.article.created_at)}</div>
+      <div onClick={event => setState(!state)}>***</div>
       {state && parsedComments}
     </article>
   );
