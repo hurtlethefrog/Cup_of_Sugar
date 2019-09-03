@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useVisualMode } from "../../hooks/useVisualMode";
 import validateNewArticle from '../../helpers/validateNewArticle';
+import "./styles.scss";
 
 export default function New(props) {
   const [text, setText] = useState({
