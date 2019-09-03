@@ -17,20 +17,19 @@ export default function Notice(props) {
   })
 
   return (
-    <article className="box" onClick={event => setState(!state)}>
-      <img
-        src={props.article.profile_pic}
-        alt={props.article.first_name + "'s profile_pic"}
-        onClick={event => setState(!state)}
-      />
+    <article className="box">
       <div className="article-icon">N</div>
       <div className="article--userinfo" >
-      <img src={props.article.profile_pic}/>
+      <img 
+        src={props.article.profile_pic}
+        alt={props.article.first_name + "'s profile_pic"}
+      />
         {props.article.first_name +" "+ props.article.last_name[0].toUpperCase() + "."}
       </div>
       <div className="article--title">{props.article.title}</div>
       <div className="article--description">{props.article.description}</div>
       <div className="article--date">{dateFormatter(props.article.created_at)}</div>
+      <div onClick={event => setState(!state)}>***</div>
       {state && parsedComments}
     </article>
   );
