@@ -47,19 +47,19 @@ currentLocation()
     console.log(err.message);
   });
 
-function useFormInput(initialValue) {
-  const [value, setValue] = useState(initialValue);
-  function handleChange(e) {
-    setValue(e.target.value);
-    // axios
-      // .get(`/api//${setValue}`)
-      // .then()
-  }
-  return {
-    value,
-    onChange: handleChange
-  };
-}
+// function useFormInput(initialValue) {
+//   const [value, setValue] = useState(initialValue);
+//   function handleChange(e) {
+//     setValue(e.target.value);
+//     // axios
+//       // .get(`/api//${setValue}`)
+//       // .then()
+//   }
+//   return {
+//     value,
+//     onChange: handleChange
+//   };
+// }
 
 // registerNewUser = (_firstName, _lastName, _email, _password, _passwordConfirmation) => {
 //   axios
@@ -72,39 +72,54 @@ function useFormInput(initialValue) {
 // }
 
 export default function Registration(props) {
-  const firstName = useFormInput("");
-  const lastName = useFormInput("");
-  const email = useFormInput("");
-  const password = useFormInput("");
-  const passwordConfirmation = useFormInput("");
-  const address = useFormInput("");
-  const city = useFormInput("");
-  const province = useFormInput("");
 
-  let autoFirstName = 'Metro';
-  let autoLastName = 'Saint Hubert';
-  let autoEmail = 'test@gmail.com';
-  let autoPassword = '000';
-  let autoPasswordConfirmation = '000';
-  let autoAddress = '5300 St Hubert St';
-  let autoPostalCode = 'H2J 2Y5';
-  let autoCity = 'Montreal';
-  let autoProvince = 'Quebec';
+  let userEntry = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+    address: "",
+    city: "",
+    province: ""
+  }
+
+  const [userForm, updateForm] = useState(userEntry)
+
+  // const firstName = useFormInput("");
+  // const lastName = useFormInput("");
+  // const email = useFormInput("");
+  // const password = useFormInput("");
+  // const passwordConfirmation = useFormInput("");
+  // const address = useFormInput("");
+  // const city = useFormInput("");
+  // const province = useFormInput("");
+
+  // let autoFirstName = 'Metro';
+  // let autoLastName = 'Saint Hubert';
+  // let autoEmail = 'test@gmail.com';
+  // let autoPassword = '000';
+  // let autoPasswordConfirmation = '000';
+  // let autoAddress = '5300 St Hubert St';
+  // let autoPostalCode = 'H2J 2Y5';
+  // let autoCity = 'Montreal';
+  // let autoProvince = 'Quebec';
   // const [postalCode, setPostalCode] = useState("");
   // function handlePostalCodeChange(e) {
   //   setPostalCode(e.target.value);
   // }
 
-  const handleSubmission = () => {
-
+  const handleSubmission = function(event) {
+    event.preventDefault()
+    console.log(userForm)
   }
 
   return (
     <main className="">
       <section className="">
-        <form className="registration_fields">
-          <input placeholder="First Name" {...firstName} required />
-          <input placeholder="Last Name" {...lastName} required />
+        <form className="registration_fields" onSubmit={handleSubmission}>
+          <input placeholder="First Name" value={userForm.firstName} onChange={(event) => updateForm({...userForm, firstName: event.target.value})} required />
+          {/* <input placeholder="Last Name" {...lastName} required />
           <input placeholder="Email" {...email} required />
           <input
             placeholder="Password"
@@ -121,8 +136,8 @@ export default function Registration(props) {
           <input placeholder="Address" {...address} required />
           <input placeholder="Postal Code" value={autoPostalCode} required />
           <input placeholder="City" {...city} required />
-          <input placeholder="Province" {...province} required />
-          <Button type="submit" onSubmit={handleSubmission} >Submit</Button>
+          <input placeholder="Province" {...province} required /> */}
+          <button type="submit" >Submit</button>
         </form>
       </section>
     </main>
