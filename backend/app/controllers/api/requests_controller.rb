@@ -1,5 +1,7 @@
 class Api::RequestsController < ApplicationController
 
+  before_action :set_request
+
   def index
 
     @requests = OffersRequest.all.where(offer: false)
@@ -25,5 +27,33 @@ class Api::RequestsController < ApplicationController
   
       return hash_with_type
     end
+
+    #GET requests/id
+    def show
+      render json: @request
+    end
+
+    #POST
+    def create
+
+      @request = OffersRequest.new(request_params)
+       puts request_params
+        if @request.save
+          render json: @request, status: :created
+        else
+          render json: @request.errors, status: :unprocessable_entity
+        end
+      
+      end
+    
+    private 
+    
+      def set_request
+        @request = OffersRequest.find_by(id: params[:id])
+      end
+    
+      def request_params 
+        params.permit(:title, :description, :image, :offer)
+      end
 
 end

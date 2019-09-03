@@ -1,9 +1,28 @@
+$break-small: 320px;
+$break-large: 1000px;
+$article-background:white;
+$comment-box: white;
+
 html, body {
   height: 100%;
 }
 
-.Homepage {
-  text-align: center;
+.article-container {
+  display: flex;
+  flex-direction: column;
+
+  .articles {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 90%;
+
+    @media screen and (min-width: $break-large){
+      width: 60%;
+    }
+
+  }
+
 }
 
 .Homepage-logo {
@@ -24,5 +43,5 @@ html, body {
 }
 
 .container {
-  display: flex
+  display: flex; 
 }
