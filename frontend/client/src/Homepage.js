@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
-<<<<<<< HEAD
 import './Homepage.scss';
-import Axios from 'axios';
-=======
-import './Homepage.css';
 import axios from 'axios';
->>>>>>> master
 import FilterBar from './components/Filters/FilterBar';
 import Article from './components/Articles/Article';
 // const uuidv4 = require('uuid/v4');
@@ -199,11 +194,6 @@ export default function Homepage() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <div>
-          Hypothetical navbar for: {account.community.name}, found at:{" "}
-          {account.community.location}{" "}
-        </div>
         <button onClick={event => console.log(filter)}>Current Filter</button>
         <button onClick={event => console.log(articles)}>Current Articles</button>
         <div>Hello {account.user[0].first_name} </div>
@@ -212,10 +202,9 @@ export default function Homepage() {
           <FilterBar onSelect={setFilter} filter={filter} />
         </div>
         {/* map must be handed an array from articles hook, once recieved in Article it will be identified and the apropriate article component will be rendered */}
-        <div>
+        <div className="article-container">
           {articles && <Article articles={articles} />}
         </div>
-      </header>
       </div>
   );
 }

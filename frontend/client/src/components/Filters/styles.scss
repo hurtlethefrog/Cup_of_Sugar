@@ -1,0 +1,33 @@
+$selected-color: black; 
+$filterbar-color: gray;
+
+.filter--bar.container {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+
+
+  .button {
+    background-color: $filterbar-color;
+    outline: none;
+    border: none;
+    padding: 0, 5px, 0, 5px;
+    &:focus:not(:active){
+        box-shadow: none !important;
+        background-color: $selected-color;
+      }
+  }
+
+  .filter--selected {
+    background-color: $selected-color;
+    outline: none;
+    border: none;
+    padding: 0, 5px, 0, 5px;
+    
+      .button {
+      background-color: $selected-color;
+      }
+  }
+
+}
+

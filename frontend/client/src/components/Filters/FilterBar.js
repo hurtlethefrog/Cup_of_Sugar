@@ -7,6 +7,8 @@ import Notices from "./Notices";
 import Offers from "./Offers";
 import Wanted from "./Wanted";
 
+import "./styles.scss";
+
 export default function FilterBar(props) {
 
   return (

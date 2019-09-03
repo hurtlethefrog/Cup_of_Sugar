@@ -24,5 +24,5 @@ export default function Article(props) {
           return(<div className="box">Why you no type ?</div>)
     }
   });
-  return <div>{parsedArticles}</div>;
+  return <div className="articles">{parsedArticles}</div>;
 }

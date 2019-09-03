@@ -19,6 +19,7 @@ export default function Notice(props) {
 
   return (
     <article className="box" onClick={event => setState(!state)}>
+      <div className="article-icon">N</div>
       <div className="article--title">{props.article.title}</div>
       <div className="article--description">{props.article.description}</div>
       {state && parsedComments}
