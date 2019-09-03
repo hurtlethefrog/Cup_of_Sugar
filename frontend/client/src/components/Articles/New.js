@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
 import { useVisualMode } from "../../hooks/useVisualMode";
-import validateNewArticle from '../../helpers/validateNewArticle';
+import validateNewArticle from "../../helpers/validateNewArticle";
 import "./styles.scss";
 
 export default function New(props) {
@@ -16,6 +16,7 @@ export default function New(props) {
     type: null
   });
   const [error, setError] = useState();
+  const [imagebox, setImagebox] = useState(false);
 
   useEffect(() => {
     setText({ ...text, type: mode });
@@ -35,42 +36,19 @@ export default function New(props) {
         );
       case "choose":
         return (
-          <div>
-            <button
-              onClick={event => {
-                transition("event");
-              }}
-            >
-              Event
-            </button>
-            <button
-              onClick={event => {
-                transition("notice");
-              }}
-            >
-              Notice
-            </button>
-            <button
-              onClick={event => {
-                transition("request");
-              }}
-            >
-              Request
-            </button>
-            <button
-              onClick={event => {
-                transition("offer");
-              }}
-            >
-              Offer
-            </button>
-            <button
-              onClick={event => {
-                back();
-              }}
-            >
-              Back
-            </button>
+          <div className="field">
+            <div className="control">
+              <div className="select is-primary">
+                <select onChange={event => transition(event.target.value)}>
+                  <option value="choose">What would you like to create?</option>
+                  <option value="event">Event</option>
+                  <option value="notice">Notice</option>
+                  <option value="request">Request</option>
+                  <option value="offer">Offer</option>
+                  <option value="new">Back</option>
+                </select>
+              </div>
+            </div>
           </div>
         );
       case "event":
@@ -79,20 +57,41 @@ export default function New(props) {
             {" "}
             {error}
             <form onSubmit={event => event.preventDefault()}>
-              <input name="title"></input>
-              <input name="description"></input>
-              <Dropzone onDrop={acceptedFiles => setText({...text, image: acceptedFiles})}>
-                {({ getRootProps, getInputProps }) => (
+              <input name="title" placeholder="enter your event title"></input>
+              <input name="description" placeholder="enter your event description"></input>
+              {imagebox === false && <button onClick={event => setImagebox(!imagebox)}>Upload an image</button>}
+              {imagebox && 
+              <Dropzone
+                onDrop={acceptedFiles =>
+                  setText({ ...text, image: acceptedFiles })
+                }
+                accept="image/png, image/jpeg"
+              >
+                {({
+                  getRootProps,
+                  getInputProps,
+                  isDragActive,
+                  isDragReject,
+                  acceptedFiles
+                }) => (
                   <section className="box">
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
-                      <p>
-                        Drag 'n' drop some files here, or click to select files
-                      </p>
+                      {!isDragActive && "Click here or drop a file to upload!"}
+                      {isDragActive && !isDragReject && "Right there!"}
+                      {isDragReject &&
+                        "File type not accepted, please choose a png or jpeg!"}
+                      <ul className="list-group mt-2">
+                        {acceptedFiles.length > 0 &&
+                          acceptedFiles.map(acceptedFile => (
+                            <li className="box">{acceptedFile.name}</li>
+                          ))}
+                      </ul>
                     </div>
                   </section>
                 )}
               </Dropzone>
+              }
               <button
                 onClick={event => {
                   const isValid = validateNewArticle(text);
@@ -107,6 +106,7 @@ export default function New(props) {
             </form>
             <button
               onClick={event => {
+                setImagebox(false)
                 setError("");
                 back();
               }}
@@ -146,65 +146,99 @@ export default function New(props) {
           </div>
         );
       case "request":
-        return (
-          <div>
-            {" "}
-            {error}
-            <form onSubmit={event => event.preventDefault()}>
-              <input name="title"></input>
-              <input name="description"></input>
+          return (
+            <div>
+              {" "}
+              {error}
+              <form onSubmit={event => event.preventDefault()}>
+                <input name="title" placeholder="enter your request title"></input>
+                <input name="description" placeholder="enter your request description"></input>
+                <button
+                  onClick={event => {
+                    const isValid = validateNewArticle(text);
+                    if (isValid === true) {
+                      props.onSubmit(text);
+                    }
+                    return setError(isValid);
+                  }}
+                >
+                  Confirm
+                </button>
+              </form>
               <button
                 onClick={event => {
-                  const isValid = validateNewArticle(text);
-                  if (isValid === true) {
-                    props.onSubmit(text);
-                  }
-                  return setError(isValid);
+                  setError("");
+                  back();
                 }}
               >
-                Confirm
+                Back
               </button>
-            </form>
-            <button
-              onClick={event => {
-                setError("");
-                back();
-              }}
-            >
-              Back
-            </button>
-          </div>
-        );
+            </div>
+          );
       case "offer":
-        return (
-          <div>
-            {" "}
-            {error}
-            <form onSubmit={event => event.preventDefault()}>
-              <input name="title"></input>
-              <input name="description"></input>
+          return (
+            <div>
+              {" "}
+              {error}
+              <form onSubmit={event => event.preventDefault()}>
+                <input name="title" placeholder="enter your request title"></input>
+                <input name="description" placeholder="enter your request description"></input>
+                {!imagebox && <button onClick={event => setImagebox(!imagebox)}>Upload an image</button>}
+              {imagebox && 
+              <Dropzone
+                onDrop={acceptedFiles =>
+                  setText({ ...text, image: acceptedFiles })
+                }
+                accept="image/png, image/jpeg"
+              >
+                {({
+                  getRootProps,
+                  getInputProps,
+                  isDragActive,
+                  isDragReject,
+                  acceptedFiles
+                }) => (
+                  <section className="box">
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      {!isDragActive && "Click here or drop a file to upload!"}
+                      {isDragActive && !isDragReject && "Right there!"}
+                      {isDragReject &&
+                        "File type not accepted, please choose a png or jpeg!"}
+                      <ul className="list-group mt-2">
+                        {acceptedFiles.length > 0 &&
+                          acceptedFiles.map(acceptedFile => (
+                            <li className="box">{acceptedFile.name}</li>
+                          ))}
+                      </ul>
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
+              }
+                <button
+                  onClick={event => {
+                    const isValid = validateNewArticle(text);
+                    if (isValid === true) {
+                      props.onSubmit(text);
+                    }
+                    return setError(isValid);
+                  }}
+                >
+                  Confirm
+                </button>
+              </form>
               <button
                 onClick={event => {
-                  const isValid = validateNewArticle(text);
-                  if (isValid === true) {
-                    props.onSubmit(text);
-                  }
-                  return setError(isValid);
+                  setImagebox(false)
+                  setError("");
+                  back();
                 }}
               >
-                Confirm
+                Back
               </button>
-            </form>
-            <button
-              onClick={event => {
-                setError("");
-                back();
-              }}
-            >
-              Back
-            </button>
-          </div>
-        );
+            </div>
+          );
 
       default:
         break;
@@ -213,7 +247,11 @@ export default function New(props) {
 
   return (
     <div className="new--article--box box">
-      <button onClick={event => console.log("---mode---", mode, "---text---", text)}>state?</button>
+      <button
+        onClick={event => console.log("---mode---", mode, "---text---", text, "---imagebox---", imagebox)}
+      >
+        state?
+      </button>
       {newArticleMode(mode)}
     </div>
   );
