@@ -2,7 +2,7 @@ import React from "react";
 
 import Button from "../Button";
 
-import "./styles.css";
+import "./styles.scss";
 
 let classnames = require("classnames");
 

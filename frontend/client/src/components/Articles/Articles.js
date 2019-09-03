@@ -30,7 +30,7 @@ export default function Articles(props) {
   });
 // sorting the components by date created then placing on page
   return (
-    <div>
+    <div className="articles">
       {parsedArticles
         .sort((a, b) => {
           const date1 = new Date(a.created_at);

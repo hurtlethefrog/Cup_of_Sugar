@@ -1,0 +1,97 @@
+$break-small: 320px;
+$break-large: 1000px;
+$article-background:white;
+$comment-box: white;
+
+html, body {
+  height: 100%;
+}
+
+.article-container {
+  display: flex;
+  flex-direction: column;
+
+  .articles {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 90%;
+
+    @media screen and (min-width: $break-large){
+      width: 60%;
+    }
+
+    .box {
+      background-color: $article-background;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+
+      .article--title {
+        font-size: 1.2rem;
+      }
+
+      .article-icon{
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-weight: bold;
+        size: 1.5rem;
+      }
+
+      .comment--box{ 
+        background-color: $comment-box;
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        margin-bottom: 2px;
+        align-items: center;
+        font-size: 0.8rem;
+        margin-top: 10px;
+        position: relative;
+      
+      img {
+        width: 35px;
+      }
+
+      .hideable--date {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin-right: 4px;
+        align-self: flex-end;
+
+        display: none;
+
+        &:hover {
+          display: block;
+        }
+      }
+
+    }
+    }
+
+  }
+
+}
+
+.Homepage-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.Homepage-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.container {
+  display: flex; 
+}

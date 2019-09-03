@@ -18,8 +18,7 @@ export default function Notice(props) {
 
   return (
     <article className="box" onClick={event => setState(!state)}>
-      <img src={props.article.profile_pic}/>
-      <div className="article--userinfo">{props.article.first_name} {props.article.last_name[0].toUpperCase()+ "." }</div>
+      <div className="article-icon">N</div>
       <div className="article--title">{props.article.title}</div>
       <div className="article--description">{props.article.description}</div>
       <div className="hideable--date">{props.article.created_at}</div>

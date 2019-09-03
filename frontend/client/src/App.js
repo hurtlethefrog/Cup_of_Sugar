@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import Login from './components/Steps/Login'
 import Registration from './components/Steps/Registration'
