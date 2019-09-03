@@ -24,10 +24,10 @@ include Pagy::Backend
     event_output
   } 
 
-  @pagy_a, @items = pagy_array(@eventsWithCommentsAndAttendees)
+  # @pagy_a, @items = pagy_array(@eventsWithCommentsAndAttendees)
 
 
-  # render json: @eventsWithCommentsAndAttendees
+  render json: @eventsWithCommentsAndAttendees
 
   end
 
