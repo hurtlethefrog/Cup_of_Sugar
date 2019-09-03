@@ -5,7 +5,6 @@ const moment = require('moment')
 
 export default function Notice(props) {
   const [state, setState] = useState(false)
-  console.log(props)
 
   const parsedComments = props.article.comments.map(comment => {
     return(
