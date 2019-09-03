@@ -4,6 +4,7 @@ import axios from 'axios';
 import FilterBar from './components/Filters/FilterBar';
 import Articles from './components/Articles/Articles';
 import Wanted from './components/Articles/Want';
+import New from './components/Articles/New';
 // const uuidv4 = require('uuid/v4');
 // import filterSelector from './helpers/filter_selector';
 
@@ -51,130 +52,11 @@ const dummyAcc = {
 ]
 }
 
-const dummyArticles = [{
-  events:[{
-    id: 1,
-    owner:{
-      id: 3,
-      first_name:"jess"
-    },
-    description: "this is probably a birthday party or somehting",
-    location: "here's where we are",
-    title: "my 35th",
-    cancelled: false,
-    archive: true,
-    comments:[{
-    id: 1,
-    owner:{
-      id:1,
-      first_name: "duncan"
-    },
-    text: "I would love to go to your birthday",
-    notice_id: null,
-    offer_request_id: null, 
-    event_id: 1
-    }]
-  },
-  {
-    id: 2,
-    owner:{
-      id: 1,
-      first_name:"duncan"
-    },
-    description: "I'm hosting game night",
-    location: "here's where we are",
-    title: "games and beer",
-    cancelled: false,
-    archive: true,
-    comments:[{
-    id: 2,
-    owner:{
-      id: 2,
-      first_name: "nelly"
-    },
-    text: "can I bring wine instead?",
-    notice_id: null,
-    offer_request_id: null, 
-    event_id: 2
-    }, 
-    {
-    id:3, 
-    owner: {
-      id: 3,
-      first_name: "jess"
-    },
-    text: "don't think I can make it :(",
-    notice_id: null,
-    offer_request_id: null, 
-    event_id: 2
-    }]
-  }]
-},
-{
-    // ////
-  notices:[{
-    id: 1,
-    owner:{
-      id: 3,
-      first_name:"jess"
-    },
-    description: "This is the body of the notice",
-    title: "I lost my dog",
-    cancelled: false,
-    archive: true,
-    comments:[{
-    id: 1,
-    owner:{
-      id:1,
-      first_name: "duncan"
-    },
-    text: "I saw him on 5th!",
-    notice_id: null,
-    offer_request_id: null, 
-    event_id: 1
-    }]
-  },
-  {
-    id: 2,
-    owner:{
-      id: 1,
-      first_name:"duncan"
-    },
-    description: "I'm hosting game night",
-    location: "here's where we are",
-    title: "games and beer",
-    cancelled: false,
-    archive: true,
-    comments:[{
-    id: 2,
-    owner:{
-      id: 2,
-      first_name: "nelly"
-    },
-    text: "can I bring wine instead?",
-    notice_id: null,
-    offer_request_id: null, 
-    event_id: 2
-    }, 
-    {
-    id:3, 
-    owner: {
-      id: 3,
-      first_name: "jess"
-    },
-    text: "don't think I can make it :(",
-    notice_id: null,
-    offer_request_id: null, 
-    event_id: 2
-    }]
-  }]
-}
-]
-
 export default function Homepage() {
   const [articles, setArticles] = useState([])
   const [filter, setFilter] = useState()
   const [account, setAccount] = useState(dummyAcc)
+  const [newArticle, setNewArticle] = useState()
 
   useEffect(() => {
     Promise.all([
@@ -206,6 +88,9 @@ export default function Homepage() {
         {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
         <div>
           <FilterBar onSelect={setFilter} filter={filter} />
+        </div>
+        <div>
+          <New onSubmit={setNewArticle}/>
         </div>
         {/* map must be handed an array from articles hook, once recieved in Article it will be identified and the apropriate article component will be rendered */}
         <div>
