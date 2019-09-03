@@ -217,14 +217,3 @@ export default function New(props) {
     </div>
   );
 }
-{
-  /* <section className="new--button">
-  <button onClick={event => {setState(!state)}}>
-    New
-  </button>
-</section> : <section className="new--article">
-  <textarea onChange={event => {setText(event.target.value)}} className="textarea" placeholder="description"></textarea>
-  <button onClick={event => {setState(!state)}}>Cancel</button>
-  <button onClick={event => {props.onSubmit(text)}}>Submit</button>
-</section> */
-}
