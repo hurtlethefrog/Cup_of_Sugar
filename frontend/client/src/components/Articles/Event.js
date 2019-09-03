@@ -1,3 +1,4 @@
+
 import React, { state, useState } from "react";
 import { dateFormatter, timeAgo, eventDate } from "../../helper"
 
@@ -10,7 +11,7 @@ export default function Event(props) {
   const parsedComments = props.article.comments.map(comment => {
     return (
       <div className="comment--box box">
-        <img src={comment.profile_pic} />
+        <img src={comment.profile_pic} alt={comment.first_name + "'s profile_pic"}/>
         <div className="article--userinfo">
           {comment.first_name} {comment.last_name[0].toUpperCase() + "."}
         </div>
@@ -24,7 +25,7 @@ export default function Event(props) {
     return (
       <div onClick={event => setAttendees(!attendees)}>
         <div className="comment--box box">
-        <img src={attendee.profile_pic} />
+        <img src={attendee.profile_pic} alt={attendee.first_name + "'s profile_pic"}/>
         <div className="article--userinfo">
           {attendee.first_name} {attendee.last_name[0].toUpperCase() + "."}
         </div>

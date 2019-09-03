@@ -10,16 +10,7 @@ export default function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <div>
-            <ul>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link to="/registration">Registration</Link>
-              </li>
-            </ul>
-            
+          <div>            
             <Route exact path="/" component={Homepage}/>
             <Route path="/login" component={Login} />
             <Route path="/registration" component={Registration} />
