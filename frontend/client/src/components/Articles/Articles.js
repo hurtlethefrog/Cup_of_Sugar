@@ -5,7 +5,6 @@ import Offer from "./Offer";
 import Wanted from "./Want";
 
 export default function Articles(props) {
-  console.log("HERE", props.articles);
   const parsedArticles = props.articles.map(article => {
     switch (article.type) {
       case "event":
