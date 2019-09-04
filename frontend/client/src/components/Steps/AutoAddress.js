@@ -49,14 +49,12 @@ currentLocation()
 export default function AutoAddress(props) {
 
   return (
-    <main className="">
-      <section className="">
-        <h1>AutoAddress</h1>
-        <input placeholder="Address" disabled="disabled"/>
-        <button onClick={props.onEdit}>Edit</button>
-        <button onClick={props.onBack}>Back</button>
-        <button onClick={props.onNext}>Next</button>
-      </section>
-    </main>
+    <section className="">
+      <h1>AutoAddress</h1>
+      <input placeholder="Address" disabled="disabled"/>
+      <button onClick={props.onEdit}>Edit</button>
+      <button onClick={props.onBack}>Back</button>
+      <button onClick={props.onNext}>Next</button>
+    </section>
   );
 }

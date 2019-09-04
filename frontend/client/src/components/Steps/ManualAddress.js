@@ -27,8 +27,7 @@ export default function ManualAddress(props) {
   };
 
   return (
-    <main className="">
-      <section className="">
+    <section className="">
       <h1>ManualAddress</h1>
 
       <form className="registration_fields" onSubmit={handleSubmission}>
@@ -69,7 +68,6 @@ export default function ManualAddress(props) {
 
       <button onClick={props.onBack}>Back</button>
       <button onClick={props.onNext}>Next</button>
-      </section>
-    </main>
+    </section>
   );
 }

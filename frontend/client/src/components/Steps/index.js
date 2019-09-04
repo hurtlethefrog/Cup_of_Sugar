@@ -1,4 +1,5 @@
 import React from "react";
+import "./index.scss";
 
 import LoginRegOption from "./LoginRegOption";
 import CurrentLocation from "./CurrentLocation";
@@ -22,48 +23,42 @@ export default function UserProcedure(props) {
   const { mode, transition, back } = useVisualMode(LOGINREGOPTION);
 
   return (
-    <main className="">
-      <header className=""></header>
-      <section>
-        {mode === LOGINREGOPTION && (
-          <LoginRegOption
-            onLogin=""
-            onRegister={() => transition(CURRENTLOCATION)}
-          />
-        )}
-        {mode === CURRENTLOCATION && (
-          <CurrentLocation
-            onBack={() => back()}
-            onConfirm={() => {
-              transition(AUTOADDRESS);
-            }}
-            onCancel={() => transition(MANUALADDRESS)}
-          />
-        )}
-        {mode === AUTOADDRESS && (
-          <AutoAddress
-            onEdit={() => transition(MANUALADDRESS)}
-            onBack={() => back()}
-            onNext={() => transition(COMMUNITY)}
-          />
-        )}
-        {mode === MANUALADDRESS && (
-          <ManualAddress
-            onBack={() => back()}
-            onNext={() => transition(COMMUNITY)}
-          />
-        )}
-        {mode === COMMUNITY && (
-          <Community
-            onBack={() => back()}
-            onNext={() => transition(USERENTRY)}
-          />
-        )}
-        {mode === USERENTRY && (
-          <UserEntry onBack={() => back()} onNext={() => transition(READY)} />
-        )}
-        {mode === READY && <Ready onBack={() => back()} onNext="Homepage" />}
-      </section>
+    <main className="UserProcedure">
+      {mode === LOGINREGOPTION && (
+        <LoginRegOption
+          onLogin=""
+          onRegister={() => transition(CURRENTLOCATION)}
+        />
+      )}
+      {mode === CURRENTLOCATION && (
+        <CurrentLocation
+          onBack={() => back()}
+          onConfirm={() => {
+            transition(AUTOADDRESS);
+          }}
+          onCancel={() => transition(MANUALADDRESS)}
+        />
+      )}
+      {mode === AUTOADDRESS && (
+        <AutoAddress
+          onEdit={() => transition(MANUALADDRESS)}
+          onBack={() => back()}
+          onNext={() => transition(COMMUNITY)}
+        />
+      )}
+      {mode === MANUALADDRESS && (
+        <ManualAddress
+          onBack={() => back()}
+          onNext={() => transition(COMMUNITY)}
+        />
+      )}
+      {mode === COMMUNITY && (
+        <Community onBack={() => back()} onNext={() => transition(USERENTRY)} />
+      )}
+      {mode === USERENTRY && (
+        <UserEntry onBack={() => back()} onNext={() => transition(READY)} />
+      )}
+      {mode === READY && <Ready onBack={() => back()} onNext="Homepage" />}
     </main>
   );
 }
