@@ -81,8 +81,8 @@ export default function UserEntry(props) {
         </form>
       </section>
       <footer>
-        <button onClick={props.onBack}>Back</button>
-        <button onClick={props.onNext}>Next</button>
+        <button onClick={props.onBack} className="back-btn">Back</button>
+        <button onClick={props.onNext} className="next-btn">Next</button>
       </footer>
     </main>
   );
