@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
-require('dotenv').config();
+import Button from "../Button";
+require("dotenv").config();
 let REACT_APP_G_API_KEY = process.env.REACT_APP_G_API_KEY;
 
 // Verifies the geolocation (user's current location)
@@ -24,7 +25,7 @@ currentLocation()
         // `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${REACT_APP_G_API_KEY}`
       )
       .then(res => {
-        console.log("res:", res)
+        console.log("res:", res);
 
         // // This formatted address isn't always ideal data. Perhaps it's better to concatenate pieces of data below (Street Number, Address, etc.)
         // console.log("Formatted Address:", res.data.results[0].formatted_address);
@@ -46,56 +47,119 @@ currentLocation()
     console.log(err.message);
   });
 
-function useFormInput(initialValue) {
-  const [value, setValue] = useState(initialValue);
-  function handleChange(e) {
-    setValue(e.target.value);
-  }
-  return {
-    value,
-    onChange: handleChange
-  };
-}
-
 export default function Registration(props) {
-  const firstName = useFormInput("");
-  const lastName = useFormInput("");
-  const email = useFormInput("");
-  const password = useFormInput("");
-  const passwordConfirmation = useFormInput("");
-  const address = useFormInput("");
-  const postalCode = useFormInput("");
-  const city = useFormInput("");
-  const province = useFormInput("");
-  const [currentAddress, setCurrentAddress] = useState("");
+  let userEntry = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+    address: "",
+    postalCode: "",
+    city: "",
+    province: ""
+  };
+
+  const [userForm, updateForm] = useState(userEntry);
+
+  const handleSubmission = function(event) {
+    event.preventDefault();
+    console.log(userForm);
+
+    axios
+      .post("/api/users", { userForm })
+      .then(function(res) {
+        console.log(res);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  };
 
   return (
     <main className="">
       <section className="">
-        <form className="registration_fields">
-          <input placeholder="First Name" {...firstName} required />
-          <input placeholder="Last Name" {...lastName} required />
-          <input placeholder="Email" {...email} required />
+        <form className="registration_fields" onSubmit={handleSubmission}>
+          <input
+            placeholder="First Name"
+            value={userForm.firstName}
+            onChange={event =>
+              updateForm({ ...userForm, firstName: event.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Last Name"
+            value={userForm.lastName}
+            onChange={event =>
+              updateForm({ ...userForm, lastName: event.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Email"
+            value={userForm.email}
+            onChange={event =>
+              updateForm({ ...userForm, email: event.target.value })
+            }
+            required
+          />
           <input
             placeholder="Password"
-            {...password}
+            value={userForm.password}
+            onChange={event =>
+              updateForm({ ...userForm, password: event.target.value })
+            }
             required
             type="password"
           />
           <input
             placeholder="Confirm Password"
-            {...passwordConfirmation}
+            value={userForm.passwordConfirmation}
+            onChange={event =>
+              updateForm({
+                ...userForm,
+                passwordConfirmation: event.target.value
+              })
+            }
             required
             type="password"
           />
-          <input placeholder="Address" {...address} required />
-          <input placeholder="Postal Code" {...postalCode} required />
-          <input placeholder="City" {...city} required />
-          <input placeholder="Province" {...province} required />
-          <input type="submit" value="Submit" />
+          <input
+            placeholder="Address"
+            value={userForm.address}
+            onChange={event =>
+              updateForm({ ...userForm, address: event.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Postal Code"
+            value={userForm.postalCode}
+            onChange={event =>
+              updateForm({ ...userForm, postalCode: event.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="City"
+            value={userForm.city}
+            onChange={event =>
+              updateForm({ ...userForm, city: event.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Province"
+            value={userForm.province}
+            onChange={event =>
+              updateForm({ ...userForm, province: event.target.value })
+            }
+            required
+          />
+          <button type="submit">Submit</button>
         </form>
       </section>
-      <input placeholder="Auto-Generate Address" value={currentAddress} onChange={e => setCurrentAddress(e.target.value)} />
     </main>
   );
 }

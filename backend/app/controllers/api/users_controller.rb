@@ -2,11 +2,11 @@ class Api::UsersController < ApplicationController
   before_action :set_user
 
   def index
-
     @users = User.all 
-
     render json: @users
+  end
 
+  def create
   end
 
   # get user/id
@@ -71,6 +71,10 @@ class Api::UsersController < ApplicationController
 
   def set_user
     @user = User.find_by(id: params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end
 
 end
