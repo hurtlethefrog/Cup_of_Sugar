@@ -52,30 +52,17 @@ const dummyAcc = {
 
 export default function Homepage() {
   const [articles, setArticles] = useState([]);
-  const [filter, setFilter] = useState();
+  const [filter, setFilter] = useState("articles");
   const [account, setAccount] = useState(dummyAcc);
   const [newArticle, setNewArticle] = useState();
 
   useEffect(() => {
-    Promise.all([
-      axios.get("/api/notices"),
-      axios.get("/api/events"),
-      axios.get("/api/offers"),
-      axios.get("/api/requests")
-    ])
-      .then(allArticles => {
-        const [events, notices, offers, requests] = allArticles;
-        setArticles([
-          ...events.data,
-          ...notices.data,
-          ...offers.data,
-          ...requests.data
-        ]);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
+    axios.get(`/api/${filter}`)
+    .then((articles) => {
+      setArticles(articles.data)
+    })
+    .catch((err) => console.log(err))
+  }, [filter])
 
   return (
     <div className="App">
@@ -86,7 +73,7 @@ export default function Homepage() {
         <div>Hello {account.user[0].first_name} </div>
         {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
         <div>
-          <FilterBar onSelect={setFilter} filter={filter} />
+          <FilterBar onSelect={(a)=>{setFilter(a)}} filter={filter} />
         </div>
         {/* onSubmit function will need to ensure title description, everything else is optional */}
         <div>
