@@ -35,8 +35,7 @@ export default function Articles(props) {
           const date1 = new Date(a.created_at);
           const date2 = new Date(b.created_at);
           return date1 - date2;
-        })
-        .reverse()}
+        })}
     </div>
   );
 }
