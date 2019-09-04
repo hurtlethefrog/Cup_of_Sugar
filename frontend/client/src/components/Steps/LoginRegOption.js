@@ -2,13 +2,12 @@ import React from "react";
 import Axios from "axios";
 
 export default function LoginRegOption(props) {
+  console.log("props:", props)
   return (
     <main className="">
       <section className="">
-        <h1>LoginRegOption</h1>
-        <button onClick={() => props.onRegister} type="submit">
-          Next
-        </button>
+        <button onClick={props.onLogin}>Login</button>
+        <button onClick={props.onRegister}>Register</button>
       </section>
     </main>
   );

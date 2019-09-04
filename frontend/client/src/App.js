@@ -1,10 +1,9 @@
-import React from 'react';
-import './App.scss';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Login from './components/Steps/Login'
-import Registration from './components/Steps/Registration'
-import Homepage from './Homepage'
-import LoginRegOption from './components/Steps/LoginRegOption';
+import React from "react";
+import "./App.scss";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Login from "./components/Steps/Login";
+import Homepage from "./Homepage";
+import UserProcedure from "./components/Steps/index";
 
 export default function App() {
   return (
@@ -12,9 +11,9 @@ export default function App() {
       <BrowserRouter>
         <Switch>
           <div>
-            <Route exact path="/" component={Homepage}/>
+            <Route exact path="/" component={Homepage} />
             <Route path="/login" component={Login} />
-            <Route path="/registration" component={LoginRegOption} />
+            <Route path="/registration" component={UserProcedure} />
           </div>
         </Switch>
       </BrowserRouter>

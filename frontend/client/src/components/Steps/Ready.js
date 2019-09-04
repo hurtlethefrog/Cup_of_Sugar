@@ -6,7 +6,9 @@ export default function Ready(props) {
   return (
     <main className="">
       <section className="">
-      <h1>Ready</h1>
+      <h1>All ready!</h1>
+      <button onClick={props.onBack}>Back</button>
+      <button onClick={props.onNext}>Go to homepage</button>
       </section>
     </main>
   );
