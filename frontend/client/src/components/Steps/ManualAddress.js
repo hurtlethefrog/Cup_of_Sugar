@@ -27,47 +27,51 @@ export default function ManualAddress(props) {
   };
 
   return (
-    <section className="">
-      <h1>ManualAddress</h1>
+    <main>
+      <section className="">
+        <h1>ManualAddress</h1>
 
-      <form className="registration_fields" onSubmit={handleSubmission}>
-        <input
-          placeholder="Address"
-          value={addressForm.address}
-          onChange={event =>
-            updateAddressForm({ ...addressForm, address: event.target.value })
-          }
-          required
-        />
-        <input
-          placeholder="Postal Code"
-          value={addressForm.postalCode}
-          onChange={event =>
-            updateAddressForm({ ...addressForm, postalCode: event.target.value })
-          }
-          required
-        />
-        <input
-          placeholder="City"
-          value={addressForm.city}
-          onChange={event =>
-            updateAddressForm({ ...addressForm, city: event.target.value })
-          }
-          required
-        />
-        <input
-          placeholder="Province"
-          value={addressForm.province}
-          onChange={event =>
-            updateAddressForm({ ...addressForm, province: event.target.value })
-          }
-          required
-        />
-        <button type="submit">Submit</button>
-      </form>
+        <form className="registration_fields" onSubmit={handleSubmission}>
+          <input
+            placeholder="Address"
+            value={addressForm.address}
+            onChange={event =>
+              updateAddressForm({ ...addressForm, address: event.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Postal Code"
+            value={addressForm.postalCode}
+            onChange={event =>
+              updateAddressForm({ ...addressForm, postalCode: event.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="City"
+            value={addressForm.city}
+            onChange={event =>
+              updateAddressForm({ ...addressForm, city: event.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Province"
+            value={addressForm.province}
+            onChange={event =>
+              updateAddressForm({ ...addressForm, province: event.target.value })
+            }
+            required
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </section>
 
-      <button onClick={props.onBack}>Back</button>
-      <button onClick={props.onNext}>Next</button>
-    </section>
+      <footer>
+      <button onClick={props.onBack} className="back-btn">Back</button>
+      <button onClick={props.onNext} className="next-btn">Next</button>
+      </footer>
+    </main>
   );
 }

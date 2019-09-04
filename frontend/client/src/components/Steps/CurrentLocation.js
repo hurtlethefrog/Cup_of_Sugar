@@ -4,14 +4,15 @@ import Axios from 'axios';
 export default function CurrentLocation(props) {
 
   return (
-    <section className="">
-      <h1>CurrentLocation</h1>
-      <p>Verify your address based on your current location?</p>
-      <footer>
+    <main>
+      <section className="">
+        <h1>Verify your address based on your current location?</h1>
         <button onClick={props.onConfirm}>Yes</button>
         <button onClick={props.onCancel}>No</button>
-        <button onClick={props.onBack}>Back</button>
+      </section>
+      <footer>
+        <button onClick={props.onBack} className="back-btn">Back</button>
       </footer>
-    </section>
+    </main>
   );
 }

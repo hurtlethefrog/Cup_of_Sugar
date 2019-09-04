@@ -9,6 +9,7 @@ import Community from "./Community";
 import UserEntry from "./UserEntry";
 import Ready from "./Ready";
 
+// import { Transition } from 'react-transition-group'
 import { useVisualMode } from "../../hooks/useVisualMode";
 
 const LOGINREGOPTION = "LOGINREGOPTION";
@@ -23,7 +24,7 @@ export default function UserProcedure(props) {
   const { mode, transition, back } = useVisualMode(LOGINREGOPTION);
 
   return (
-    <main className="UserProcedure">
+    <div className="UserProcedure">
       {mode === LOGINREGOPTION && (
         <LoginRegOption
           onLogin=""
@@ -58,7 +59,7 @@ export default function UserProcedure(props) {
       {mode === USERENTRY && (
         <UserEntry onBack={() => back()} onNext={() => transition(READY)} />
       )}
-      {mode === READY && <Ready onBack={() => back()} onNext="Homepage" />}
-    </main>
+      {mode === READY && <Ready onNext="Homepage" />}
+    </div>
   );
 }
