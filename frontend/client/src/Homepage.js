@@ -55,6 +55,8 @@ export default function Homepage() {
   const [filter, setFilter] = useState("articles");
   const [account, setAccount] = useState(dummyAcc);
   const [newArticle, setNewArticle] = useState();
+  // toggles to trigger articles refresh after sucessful post
+  const [post, setPost] = useState(true);
 
   useEffect(() => {
     console.log(`/api/${filter}`);
@@ -64,7 +66,7 @@ export default function Homepage() {
         setArticles(articles.data);
       })
       .catch(err => console.log(err));
-  }, [filter]);
+  }, [filter, post]);
 
   // switch case that posts to relevant route after removing unneeded keys
   useEffect(() => {
@@ -80,7 +82,7 @@ export default function Homepage() {
             })
             .then(res => {
               console.log(res.data);
-              setFilter(filter);
+              setPost(!post);
             })
             .catch(err => console.log(err));
           break;
@@ -98,7 +100,7 @@ export default function Homepage() {
             })
             .then(res => {
               console.log(res.data);
-              setFilter(filter);
+              setPost(!post);
             })
             .catch(err => console.log(err));
           break;
@@ -116,7 +118,7 @@ export default function Homepage() {
             })
             .then(res => {
               console.log(res.data);
-              setFilter(filter);
+              setPost(!post);
             })
             .catch(err => console.log(err));
           break;
@@ -135,7 +137,7 @@ export default function Homepage() {
             })
             .then(res => {
               console.log(res.data);
-              setFilter(filter);
+              setPost(!post);
             })
             .catch(err => console.log(err));
           break;

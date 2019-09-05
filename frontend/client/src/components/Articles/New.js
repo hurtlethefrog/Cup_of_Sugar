@@ -20,6 +20,7 @@ export default function New(props) {
   const [imagebox, setImagebox] = useState(false);
   const [calender, setCalender] = useState(false);
 
+  // resetting text after backing out of entries
   const defaultState = () => {
     return {
       title: null,
@@ -30,6 +31,27 @@ export default function New(props) {
       image: null,
       type: null
     };
+  };
+
+  const sendArticle = () => {
+    const isValid = validateNewArticle(text);
+    if (isValid === true) {
+      setText({ ...text, type: mode });
+      props.onSubmit(text);
+      setText(defaultState());
+      setImagebox(false);
+      setCalender(false);
+      setError("");
+      transition("new");
+    }
+    return setError(isValid);
+  };
+  const backButton = () => {
+    setText(defaultState());
+    setImagebox(false);
+    setCalender(false);
+    setError("");
+    back();
   };
 
   // will be receiving start and end date from calender onChange
@@ -101,6 +123,7 @@ export default function New(props) {
                     setText({ ...text, image: acceptedFiles })
                   }
                   accept="image/png, image/jpeg"
+                  key={mode + "_dropbox"}
                 >
                   {({
                     getRootProps,
@@ -113,14 +136,19 @@ export default function New(props) {
                       <div {...getRootProps()}>
                         <input {...getInputProps()} />
                         {!isDragActive &&
-                          "Click here or drop a file to upload!"}
+                          "Click here or drop a png/jpeg to upload!"}
                         {isDragActive && !isDragReject && "Right there!"}
                         {isDragReject &&
                           "File type not accepted, please choose a png or jpeg!"}
                         <ul className="list-group mt-2">
                           {acceptedFiles.length > 0 &&
                             acceptedFiles.map(acceptedFile => (
-                              <li className="box">{acceptedFile.name}</li>
+                              <li
+                                key={acceptedFile.name + "key"}
+                                className="box"
+                              >
+                                {acceptedFile.name}
+                              </li>
                             ))}
                         </ul>
                       </div>
@@ -134,26 +162,11 @@ export default function New(props) {
                 </button>
               )}
               {calender && <Calendar setDates={setDates}></Calendar>}
-              <button
-                onClick={event => {
-                  const isValid = validateNewArticle(text);
-                  if (isValid === true) {
-                    setText({ ...text, type: mode });
-                    props.onSubmit(text);
-                  }
-                  return setError(isValid);
-                }}
-              >
-                Confirm
-              </button>
+              <button onClick={event => sendArticle()}>Confirm</button>
             </form>
             <button
               onClick={event => {
-                setText(defaultState());
-                setImagebox(false);
-                setCalender(false);
-                setError("");
-                back();
+                backButton();
               }}
             >
               Back
@@ -191,6 +204,7 @@ export default function New(props) {
                     setText({ ...text, image: acceptedFiles })
                   }
                   accept="image/png, image/jpeg"
+                  key={mode + "_dropbox"}
                 >
                   {({
                     getRootProps,
@@ -203,7 +217,7 @@ export default function New(props) {
                       <div {...getRootProps()}>
                         <input {...getInputProps()} />
                         {!isDragActive &&
-                          "Click here or drop a file to upload!"}
+                          "Click here or drop a png/jpeg to upload!"}
                         {isDragActive && !isDragReject && "Right there!"}
                         {isDragReject &&
                           "File type not accepted, please choose a png or jpeg!"}
@@ -218,24 +232,11 @@ export default function New(props) {
                   )}
                 </Dropzone>
               )}
-              <button
-                onClick={event => {
-                  const isValid = validateNewArticle(text);
-                  if (isValid === true) {
-                    props.onSubmit(text);
-                  }
-                  return setError(isValid);
-                }}
-              >
-                Confirm
-              </button>
+              <button onClick={event => sendArticle()}>Confirm</button>
             </form>
             <button
               onClick={event => {
-                setText(defaultState());
-                setImagebox(false);
-                setError("");
-                back();
+                backButton();
               }}
             >
               Back
@@ -262,22 +263,11 @@ export default function New(props) {
                   setText({ ...text, description: event.target.value })
                 }
               ></input>
-              <button
-                onClick={event => {
-                  const isValid = validateNewArticle(text);
-                  if (isValid === true) {
-                    props.onSubmit(text);
-                  }
-                  return setError(isValid);
-                }}
-              >
-                Confirm
-              </button>
+              <button onClick={event => sendArticle()}>Confirm</button>
             </form>
             <button
               onClick={event => {
-                setError("");
-                back();
+                backButton();
               }}
             >
               Back
@@ -309,6 +299,7 @@ export default function New(props) {
                     setText({ ...text, image: acceptedFiles })
                   }
                   accept="image/png, image/jpeg"
+                  key={mode + "_dropbox"}
                 >
                   {({
                     getRootProps,
@@ -321,7 +312,7 @@ export default function New(props) {
                       <div {...getRootProps()}>
                         <input {...getInputProps()} />
                         {!isDragActive &&
-                          "Click here or drop a file to upload!"}
+                          "Click here or drop a png/jpeg to upload!"}
                         {isDragActive && !isDragReject && "Right there!"}
                         {isDragReject &&
                           "File type not accepted, please choose a png or jpeg!"}
@@ -336,23 +327,11 @@ export default function New(props) {
                   )}
                 </Dropzone>
               )}
-              <button
-                onClick={event => {
-                  const isValid = validateNewArticle(text);
-                  if (isValid === true) {
-                    props.onSubmit(text);
-                  }
-                  return setError(isValid);
-                }}
-              >
-                Confirm
-              </button>
+              <button onClick={event => sendArticle()}>Confirm</button>
             </form>
             <button
               onClick={event => {
-                setImagebox(false);
-                setError("");
-                back();
+                backButton();
               }}
             >
               Back
@@ -365,23 +344,5 @@ export default function New(props) {
     }
   };
 
-  return (
-    <div className="new--article--box box">
-      <button
-        onClick={event =>
-          console.log(
-            "---mode---",
-            mode,
-            "---text---",
-            text,
-            "---imagebox---",
-            imagebox
-          )
-        }
-      >
-        state?
-      </button>
-      {newArticleMode(mode)}
-    </div>
-  );
+  return <div className="new--article--box box">{newArticleMode(mode)}</div>;
 }
