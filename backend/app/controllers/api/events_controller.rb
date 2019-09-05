@@ -26,14 +26,6 @@ include Pagy::Backend
 
   end
 
-  # def generate_hash_with_type(object, type)
-  #   hash = object.attributes
-  #   type_property = {:type => type}
-  #   hash_with_type = hash.merge(type_property)
-
-  #   return hash_with_type
-  # end
-
   #GET events/id
   def show
     render json: @event
