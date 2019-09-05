@@ -52,11 +52,12 @@ const dummyAcc = {
 
 export default function Homepage() {
   const [articles, setArticles] = useState([]);
-  const [filter, setFilter] = useState("articles");
-  const [account, setAccount] = useState(dummyAcc);
+  const [filter, setFilter] = useState('articles');
+  const [user, setUser] = useState(dummyAcc);
   const [newArticle, setNewArticle] = useState();
 
   useEffect(() => {
+    console.log(`/api/${filter}`)
     axios.get(`/api/${filter}`)
     .then((articles) => {
       setArticles(articles.data)
@@ -70,10 +71,11 @@ export default function Homepage() {
 
         <button onClick={event => console.log(filter)}>Current Filter</button>
         <button onClick={event => console.log(articles)}>Current Articles</button>
-        <div>Hello {account.user[0].first_name} </div>
+        <div>Hello {user.user[0].first_name} </div>
         {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
         <div>
-          <FilterBar onSelect={(a)=>{setFilter(a)}} filter={filter} />
+          <FilterBar 
+            onSelect={setFilter} filter={filter} />
         </div>
         {/* onSubmit function will need to ensure title description, everything else is optional */}
         <div>
