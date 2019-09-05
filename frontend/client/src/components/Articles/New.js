@@ -68,23 +68,31 @@ export default function New(props) {
     switch (mode) {
       case "new":
         return (
-          <img onClick={event => {
-            transition("choose");
-          }} className="add" src="images/add.png" />
+          <img
+            onClick={event => {
+              transition("choose");
+            }}
+            className="add"
+            src="images/add.png"
+          />
         );
       case "choose":
         return (
-          <div className="field">
-            <div className="control">
-              <div className="select is-primary">
-                <select onChange={event => transition(event.target.value)}>
-                  <option value="choose">What would you like to create?</option>
-                  <option value="event">Event</option>
-                  <option value="notice">Notice</option>
-                  <option value="request">Request</option>
-                  <option value="offer">Offer</option>
-                  <option value="new">Back</option>
-                </select>
+          <div className="new--choose">
+            <img src="images/backspace-solid.svg" className="add backspace" onClick={event => backButton()}></img>
+            <div className="field">
+              <div className="control">
+                <div className="select is-primary">
+                  <select onChange={event => transition(event.target.value)}>
+                    <option value="choose">
+                      What would you like to create?
+                    </option>
+                    <option value="event">Event</option>
+                    <option value="notice">Notice</option>
+                    <option value="request">Request</option>
+                    <option value="offer">Offer</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
