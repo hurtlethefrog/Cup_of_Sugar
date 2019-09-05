@@ -11,61 +11,44 @@ class Api::UsersController < ApplicationController
 
   # get user/id
   def show
-    @events = Event.find_by_sql("SELECT events.*, users.id as user_id, first_name, last_name, profile_pic FROM events JOIN users ON events.owner_id = users.id WHERE owner_id = #{@user.id} ORDER BY events.created_at DESC")
-  
-    @eventsWithCommentsAndAttendees = @events.map {|event|
-      modified_event = generate_hash_with_type(event, "event")
-      comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE events_id = #{event.id}")}
-      attendees_hash = {:attendees => EventUser.find_by_sql("SELECT users.id as user_id, first_name, last_name, profile_pic FROM event_users JOIN users ON event_users.users_id = users.id JOIN events ON event_users.events_id = events.id WHERE events_id = #{event.id}")}
-  
-      event_output = modified_event.merge(comments_hash).merge(attendees_hash)
-  
-      event_output
-    } 
-
-    @notices = Notice.find_by_sql("SELECT notices.*, users.id as user_id, first_name, last_name, profile_pic FROM notices JOIN users ON notices.user_id = users.id WHERE user_id = #{@user.id} ORDER BY notices.created_at DESC")
-
-    @noticesWithComments = @notices.map {|notice|
-      modified_notice = generate_hash_with_type(notice, "notice")
-      comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE notice_id = #{notice.id}")}
-      notice_output = modified_notice.merge(comments_hash)
-
-      notice_output
-   }
- 
-    @requests = OffersRequest.find_by_sql("SELECT offers_requests.*, users.id as user_id,first_name, last_name,profile_pic FROM offers_requests JOIN users ON offers_requests.owner_id = users.id WHERE offer IS NOT true AND deleted IS NOT true AND owner_id = #{@user.id} ORDER BY offers_requests.created_at DESC")
     
-    @requestsWithComments = @requests.map {|request|
-      modified_request = generate_hash_with_type(request, "request")
-      comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE offers_requests_id = #{request.id} ORDER BY comments.created_at DESC")}
-      request_output = modified_request.merge(comments_hash)
-  
-      request_output
-      }
-
-    @offers = OffersRequest.find_by_sql("SELECT offers_requests.*, users.id as user_id,first_name, last_name, profile_pic FROM offers_requests JOIN users ON offers_requests.owner_id = users.id WHERE offer = true AND deleted IS NOT true AND owner_id = #{@user.id} ORDER BY offers_requests.created_at DESC")
-
-    @offersWithComments = @offers.map {|offer|
-      modified_offer = generate_hash_with_type(offer, "offer")
-      comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE offers_requests_id = #{offer.id} ORDER BY comments.created_at DESC")}
-      offer_output = modified_offer.merge(comments_hash)
-
-      offer_output
-    }
-
-    @userArticles = @eventsWithCommentsAndAttendees + @noticesWithComments + @requestsWithComments + @offersWithComments
+        @user_articles = Event.find_by_sql("SELECT events.id as event_id, -1 AS notice_id, -1 AS offer_request_id, owner_id, article_type, title, description, location, image, false AS offer, events.start, events.end, cancelled, archived, created_at, updated_at FROM events WHERE owner_id = #{@user.id} AND archived IS NOT TRUE UNION ALL SELECT -1 AS events_id, notices.id AS notice_id, -1 AS offer_request_id, user_id AS owner_id, article_type, title, description, null AS location, null AS image, false AS offer, null AS start, null AS end, null AS cancelled, archived, created_at, updated_at FROM notices WHERE user_id = #{@user.id} AND archived IS NOT true UNION ALL SELECT -1 AS event_id, -1 AS notice_id, offers_requests.id AS offer_request_id, owner_id, article_type, title, description, null AS location, image, offer, null AS start, null AS end, null AS cancelled, archived, created_at, updated_at FROM offers_requests WHERE owner_id = #{@user.id} AND archived IS NOT true AND active IS TRUE AND deleted IS NOT true ORDER BY created_at DESC")    
+          
+        @WithCommentsAndAttendees = @user_articles.map {|article|
+          modified_articles = generate_id(article)
+          owner_hash = {:owner => User.find_by_sql("SELECT id, first_name, last_name, profile_pic FROM users WHERE #{article.owner_id} = users.id")}
+          comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*,first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE events_id = #{article.event_id} OR notice_id = #{article.notice_id} OR offers_requests_id = #{article.offer_request_id} ORDER BY created_at")}
+          attendees_hash = {:attendees => EventUser.find_by_sql("SELECT users.id, first_name, last_name, profile_pic FROM event_users JOIN users ON event_users.users_id = users.id JOIN events ON event_users.events_id = events.id WHERE events_id = #{article.event_id}")}
+        
+          output = modified_articles.merge(owner_hash).merge(comments_hash).merge(attendees_hash)
+        
+          output
+        } 
+          
+        render json: @WithCommentsAndAttendees
+        
+        end
+        
+          def generate_id(object)
+            hash = object.attributes
+        
+            if object.event_id > 0
+              id = 10 * object.event_id
+            elsif object.notice_id > 0
+              id = 50000 * object.notice_id
+            elsif object.offer_request_id > 0 && object.offer = true
+              id = object.offer_request_id * 100
+            elsif object.offer_request_id >0 && object.offer = !true
+            end 
+        
+            id_property = {:id => id.to_i}
+            hash_with_id = hash.merge(id_property)
+        
+            return hash_with_id
+          end
     
-    render json: @userArticles
 
-  end
 
-  def generate_hash_with_type(object, type)
-    hash = object.attributes
-    type_property = {:type => type}
-    hash_with_type = hash.merge(type_property)
-
-    return hash_with_type
-  end
 
   private 
 
