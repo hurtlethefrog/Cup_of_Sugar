@@ -9,7 +9,7 @@ include Pagy::Backend
   @events = Event.order(created_at: :desc)
 
   @eventsWithCommentsAndAttendees = @events.map {|event|
-    modified_event = generate_hash_with_type(event, "event")
+    modified_event = event.attributes
     user_hash = {:owner => User.find_by_sql("SELECT users.id, first_name, last_name, profile_pic FROM users WHERE users.id = #{event.owner_id}")}
     comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE events_id = #{event.id}")}
     attendees_hash = {:attendees => EventUser.find_by_sql("SELECT users.id as user_id, first_name, last_name, profile_pic FROM event_users JOIN users ON event_users.users_id = users.id JOIN events ON event_users.events_id = events.id WHERE events_id = #{event.id}")}
@@ -26,13 +26,13 @@ include Pagy::Backend
 
   end
 
-  def generate_hash_with_type(object, type)
-    hash = object.attributes
-    type_property = {:type => type}
-    hash_with_type = hash.merge(type_property)
+  # def generate_hash_with_type(object, type)
+  #   hash = object.attributes
+  #   type_property = {:type => type}
+  #   hash_with_type = hash.merge(type_property)
 
-    return hash_with_type
-  end
+  #   return hash_with_type
+  # end
 
   #GET events/id
   def show

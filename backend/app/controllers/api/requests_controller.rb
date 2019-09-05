@@ -7,7 +7,7 @@ class Api::RequestsController < ApplicationController
     @requests = OffersRequest.all.where(offer: false)
   
     @requestsWithComments = @requests.map {|request|
-    modified_request = generate_hash_with_type(request, "request")
+    modified_request = request.attributes
     user_hash = {:owner => User.find_by_sql("SELECT users.id, first_name, last_name, profile_pic FROM users WHERE users.id = #{request.owner_id}")}
     comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE offers_requests_id = #{request.id} ORDER BY comments.created_at DESC")}
     request_output = modified_request.merge(user_hash).merge(comments_hash)
@@ -17,14 +17,6 @@ class Api::RequestsController < ApplicationController
   
     render json: @requestsWithComments
   
-    end
-
-    def generate_hash_with_type(object, type)
-      hash = object.attributes
-      type_property = {:type => type}
-      hash_with_type = hash.merge(type_property)
-  
-      return hash_with_type
     end
 
     #GET requests/id

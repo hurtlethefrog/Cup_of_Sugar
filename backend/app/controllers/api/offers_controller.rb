@@ -7,7 +7,7 @@ class Api::OffersController < ApplicationController
   @offers = OffersRequest.where(offer: true)
 
   @offersWithComments = @offers.map {|offer|
-  modified_offer = generate_hash_with_type(offer, "offer")
+  modified_offer = offer.attributes
   user_hash = {:owner => User.find_by_sql("SELECT users.id, first_name, last_name, profile_pic FROM users WHERE users.id = #{offer.owner_id}")}
   comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE offers_requests_id = #{offer.id} ORDER BY comments.created_at DESC")}
   offer_output = modified_offer.merge(user_hash).merge(comments_hash)
@@ -17,14 +17,6 @@ class Api::OffersController < ApplicationController
 
   render json: @offersWithComments
 
-  end
-
-  def generate_hash_with_type(object, type)
-    hash = object.attributes
-    type_property = {:type => type}
-    hash_with_type = hash.merge(type_property)
-
-    return hash_with_type
   end
 
   #GET offers/id

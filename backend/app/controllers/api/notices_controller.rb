@@ -9,7 +9,7 @@ class Api::NoticesController < ApplicationController
   # @noticeComments = Comment.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE notice_id IS NOT NULL ORDER BY comments.created_at DESC")
 
   @noticesWithComments = @notices.map {|notice|
-    modified_notice = generate_hash_with_type(notice, "notice")
+    modified_notice = notice.attributes
     user_hash = {:owner => User.find_by_sql("SELECT users.id, first_name, last_name, profile_pic FROM users WHERE users.id = #{notice.user_id}")}
     comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE notice_id = #{notice.id}")}
     notice_output = modified_notice.merge(user_hash).merge(comments_hash)
@@ -21,13 +21,13 @@ class Api::NoticesController < ApplicationController
 
   end
 
-  def generate_hash_with_type(object, type)
-    hash = object.attributes
-    type_property = {:type => type}
-    hash_with_type = hash.merge(type_property)
+  # def generate_hash_with_type(object, type)
+  #   hash = object.attributes
+  #   type_property = {:type => type}
+  #   hash_with_type = hash.merge(type_property)
 
-    return hash_with_type
-  end
+  #   return hash_with_type
+  # end
 
   #GET notices/id
   def show
