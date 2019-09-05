@@ -224,7 +224,12 @@ export default function New(props) {
                         <ul className="list-group mt-2">
                           {acceptedFiles.length > 0 &&
                             acceptedFiles.map(acceptedFile => (
-                              <li className="box">{acceptedFile.name}</li>
+                              <li
+                                key={acceptedFile.name + "key"}
+                                className="box"
+                              >
+                                {acceptedFile.name}
+                              </li>
                             ))}
                         </ul>
                       </div>
@@ -319,7 +324,12 @@ export default function New(props) {
                         <ul className="list-group mt-2">
                           {acceptedFiles.length > 0 &&
                             acceptedFiles.map(acceptedFile => (
-                              <li className="box">{acceptedFile.name}</li>
+                              <li
+                                key={acceptedFile.name + "key"}
+                                className="box"
+                              >
+                                {acceptedFile.name}
+                              </li>
                             ))}
                         </ul>
                       </div>
