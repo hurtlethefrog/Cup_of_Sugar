@@ -46,8 +46,8 @@ include Pagy::Backend
 
       #POST
   def create
-
     @event = Event.new(event_params)
+    
       if @event.save
         render json: @event, status: :created
       else
