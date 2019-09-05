@@ -6,22 +6,22 @@ import Wanted from "./Want";
 
 export default function Articles(props) {
   const parsedArticles = props.articles.map(article => {
-    switch (article.type) {
+    switch (article.article_type) {
       case "event":
         return (
-          <Event key={article.type + "_" + article.id} article={article} />
+          <Event key={article.article_type + "_" + article.id} article={article} />
         );
       case "notice":
         return (
-          <Notice key={article.type + "_" + article.id} article={article} />
+          <Notice key={article.article_type + "_" + article.id} article={article} />
         );
       case "request":
         return (
-          <Wanted key={article.type + "_" + article.id} article={article} />
+          <Wanted key={article.article_type + "_" + article.id} article={article} />
         );
       case "offer":
         return (
-          <Offer key={article.type + "_" + article.id} article={article} />
+          <Offer key={article.article_type + "_" + article.id} article={article} />
         );
       default:
         return <div className="box">No type here boss</div>;

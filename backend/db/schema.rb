@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_02_142120) do
+ActiveRecord::Schema.define(version: 2019_09_05_142032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2019_09_02_142120) do
     t.boolean "archived", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "article_type", default: "event"
     t.index ["owner_id"], name: "index_events_on_owner_id"
   end
 
@@ -89,6 +90,7 @@ ActiveRecord::Schema.define(version: 2019_09_02_142120) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
+    t.string "article_type", default: "notice"
     t.index ["user_id"], name: "index_notices_on_user_id"
   end
 
@@ -103,6 +105,7 @@ ActiveRecord::Schema.define(version: 2019_09_02_142120) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "offer"
+    t.string "article_type"
     t.index ["owner_id"], name: "index_offers_requests_on_owner_id"
   end
 
@@ -120,6 +123,7 @@ ActiveRecord::Schema.define(version: 2019_09_02_142120) do
     t.boolean "is_admin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "preferred_contact"
     t.index ["households_id"], name: "index_users_on_households_id"
   end
 

@@ -20,8 +20,8 @@ export default function Wanted(props) {
     <article className="box">
       <div className="article-icon">W</div>
       <div className="article--userinfo">
-      <img src={props.article.profile_pic} alt={props.article.first_name + "'s profile_pic"}/>
-      {props.article.first_name} {props.article.last_name[0].toUpperCase()+ "." }</div>
+      <img src={props.article.owner[0].profile_pic} alt={props.article.owner[0].first_name + "'s profile_pic"}/>
+      {props.article.owner[0].first_name} {props.article.owner[0].last_name[0].toUpperCase()+ "." }</div>
       <div className="article--title">{props.article.title}</div>
       <div className="article--description">{props.article.description}</div>
       {props.article.image ?

@@ -22,9 +22,9 @@ export default function Offer(props) {
     <article className="box">
       <div className="article-icon">O</div>
       <div className="article--userinfo">
-        <img src={props.article.profile_pic} />
-        {props.article.first_name}{" "}
-        {props.article.last_name[0].toUpperCase() + "."}
+        <img src={props.article.owner[0].profile_pic} />
+        {props.article.owner[0].first_name}{" "}
+        {props.article.owner[0].last_name[0].toUpperCase() + "."}
       </div>
       <div className="article--title">{props.article.title}</div>
       <div className="article--description">{props.article.description}</div>
@@ -32,7 +32,7 @@ export default function Offer(props) {
         <img
           className="item--image"
           src={props.article.image}
-          alt={props.article.first_name + "'s profile_pic"}
+          alt={props.article.owner[0].first_name + "'s profile_pic"}
         />
       ) : (
         <div>No image available</div>

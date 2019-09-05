@@ -165,6 +165,7 @@ OffersRequest.create(
   created_at: 15.days.ago,
   title:'Offer title 1', 
   description:'Offer 1 Description',
+  article_type:'offer',
   active: true, 
   offer: true
 )
@@ -174,6 +175,7 @@ OffersRequest.create(
   created_at: 10.days.ago,
   title:'Offer title 2', 
   description:'Offer 2 Description',
+  article_type:'offer',
   active: true,
   offer: true
 )
@@ -183,6 +185,7 @@ OffersRequest.create(
   created_at: 2.days.ago,
   title:'Offer title 3', 
   description:'Offer description 3',
+  article_type:'offer',
   active: true,
   offer: true
 )
@@ -192,6 +195,7 @@ OffersRequest.create(
   created_at: 5.days.ago,
   title:'Wanted title 1', 
   description:'Wanted description 1',
+  article_type:'request',
   active: true,
   offer: false
 )
@@ -201,6 +205,7 @@ OffersRequest.create(
   created_at: 15.days.ago,
   title:'Wanted title 2', 
   description:'Wanted description 2',
+  article_type:'request',
   active: true,
   offer: false
 )
