@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-  post 'user_token' => 'user_token#create'
   namespace :api do
     resources :articles, only: [:index]
     resources :events
@@ -8,8 +7,12 @@ Rails.application.routes.draw do
     resources :offers
     resources :requests
     resources :households
-
+    
     resources :registrations
+
+    resources :user_token do
+      post 'user_token' => 'user_token#create'
+    end
 
     resources :users do 
       resources :articles

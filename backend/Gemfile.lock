@@ -172,6 +172,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  zeitwerk
 
 RUBY VERSION
    ruby 2.6.3p62

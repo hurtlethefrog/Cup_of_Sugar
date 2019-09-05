@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import Axios from 'axios';
+import {useDispatch} from "react-redux"
+import axios from "axios";
+import { setUser } from "../../store/app"
 
 export default function ManualAddress(props) {
+  const dispatch = useDispatch()
 
   let manualAddressEntry = {
     address: "",
@@ -15,7 +18,7 @@ export default function ManualAddress(props) {
   const handleSubmission = function(event) {
     event.preventDefault();
     console.log(addressForm);
-
+    dispatch(setUser(addressForm))
     // axios
     //   .post("/api/households", { addressForm })
     //   .then(function(res) {

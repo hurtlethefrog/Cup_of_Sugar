@@ -1,7 +1,15 @@
 import React, { useState } from "react";
+import {useDispatch, useSelector} from "react-redux"
 import axios from "axios";
+import { setUser } from "../../store/app"
 
 export default function UserEntry(props) {
+
+  const user = useSelector(state => state.app.user)
+  console.log("user####################:", user)
+
+  const dispatch = useDispatch()
+
   let userEntry = {
     first_name: "",
     last_name: "",
@@ -15,6 +23,7 @@ export default function UserEntry(props) {
   const handleSubmission = function(event) {
     event.preventDefault();
     console.log(userForm);
+    // dispatch(setUser(userForm));
 
     axios
       .post("/api/users", { userForm })
