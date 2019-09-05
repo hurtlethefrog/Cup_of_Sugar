@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Axios from "axios";
+import axios from "axios";
 
 export default function UserEntry(props) {
   let userEntry = {
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
-    passwordConfirmation: ""
+    password_confirmation: ""
   };
 
   const [userForm, updateUserForm] = useState(userEntry);
@@ -16,14 +16,14 @@ export default function UserEntry(props) {
     event.preventDefault();
     console.log(userForm);
 
-    // axios
-    //   .post("/api/users", { userForm })
-    //   .then(function(res) {
-    //     console.log(res);
-    //   })
-    //   .catch(function(err) {
-    //     console.log(err);
-    //   });
+    axios
+      .post("/api/users", { userForm })
+      .then(function(res) {
+        console.log(res);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   };
 
   return (
@@ -34,17 +34,17 @@ export default function UserEntry(props) {
         <form className="registration_fields" onSubmit={handleSubmission}>
           <input
             placeholder="First Name"
-            value={userForm.firstName}
+            value={userForm.first_name}
             onChange={event =>
-              updateUserForm({ ...userForm, firstName: event.target.value })
+              updateUserForm({ ...userForm, first_name: event.target.value })
             }
             required
           />
           <input
             placeholder="Last Name"
-            value={userForm.lastName}
+            value={userForm.last_name}
             onChange={event =>
-              updateUserForm({ ...userForm, lastName: event.target.value })
+              updateUserForm({ ...userForm, last_name: event.target.value })
             }
             required
           />
@@ -67,11 +67,11 @@ export default function UserEntry(props) {
           />
           <input
             placeholder="Confirm Password"
-            value={userForm.passwordConfirmation}
+            value={userForm.password_confirmation}
             onChange={event =>
               updateUserForm({
                 ...userForm,
-                passwordConfirmation: event.target.value
+                password_confirmation: event.target.value
               })
             }
             required

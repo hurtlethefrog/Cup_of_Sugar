@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     resources :notices, except: [:destroy]
     resources :offers
     resources :requests
-    resources :households 
+    resources :households
+
+    resources :registrations
 
     resources :users do 
       resources :articles
