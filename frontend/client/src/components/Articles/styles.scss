@@ -74,15 +74,23 @@ $comment-box: white;
   align-items: center;
   margin: 2% 25%;
 
-  .new--choose {
-    display: contents
+  .calendar {
+    margin-left: -350%;
   }
-  
+
+  .new--choose {
+    display: contents;
+  }
+
   .add {
-  cursor: pointer;
+    cursor: pointer;
+  }
+  .button-bar {
+    position: relative;
+    width: 35px;
   }
   .backspace {
-    position:relative;
+    position: relative;
     width: 35px;
     margin-left: -6%;
     margin-right: 5%;
@@ -91,6 +99,6 @@ $comment-box: white;
   }
 
   .field {
-    // width: 
+    // width:
   }
 }
