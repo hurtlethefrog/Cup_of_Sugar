@@ -52,8 +52,8 @@ const dummyAcc = {
 
 export default function Homepage() {
   const [articles, setArticles] = useState([]);
-  const [filter, setFilter] = useState("articles");
-  const [account, setAccount] = useState(dummyAcc);
+  const [filter, setFilter] = useState('articles');
+  const [account, setUser] = useState(dummyAcc);
   const [newArticle, setNewArticle] = useState();
   // toggles to trigger articles refresh after sucessful post
   const [post, setPost] = useState(true);
@@ -73,7 +73,7 @@ export default function Homepage() {
     if (newArticle) {
       switch (newArticle.type) {
         case "event":
-          const eventArticle = { ...newArticle };
+          const eventArticle = { ...newArticle, article_type:newArticle.type };
           delete eventArticle.type;
           console.log(eventArticle);
           axios
@@ -87,7 +87,7 @@ export default function Homepage() {
             .catch(err => console.log(err));
           break;
         case "notice":
-          const noticeArticle = { ...newArticle };
+          const noticeArticle = { ...newArticle, article_type:newArticle.type };
           delete noticeArticle.type;
           delete noticeArticle.start;
           delete noticeArticle.end;
@@ -105,7 +105,7 @@ export default function Homepage() {
             .catch(err => console.log(err));
           break;
         case "offer":
-          const offerArticle = { ...newArticle };
+          const offerArticle = { ...newArticle, article_type:newArticle.type };
           delete offerArticle.type;
           delete offerArticle.start;
           delete offerArticle.end;
@@ -123,7 +123,7 @@ export default function Homepage() {
             .catch(err => console.log(err));
           break;
         case "request":
-          const requestArticle = { ...newArticle };
+          const requestArticle = { ...newArticle, article_type:newArticle.type };
           delete requestArticle.type;
           delete requestArticle.start;
           delete requestArticle.end;

@@ -4,9 +4,7 @@ class Api::NoticesController < ApplicationController
 
   def index
 
-  @notices = Notice.all
-
-  # @noticeComments = Comment.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE notice_id IS NOT NULL ORDER BY comments.created_at DESC")
+  @notices = Notice.order(created_at: :desc)
 
   @noticesWithComments = @notices.map {|notice|
     modified_notice = notice.attributes
@@ -20,14 +18,6 @@ class Api::NoticesController < ApplicationController
     render json: @noticesWithComments
 
   end
-
-  # def generate_hash_with_type(object, type)
-  #   hash = object.attributes
-  #   type_property = {:type => type}
-  #   hash_with_type = hash.merge(type_property)
-
-  #   return hash_with_type
-  # end
 
   #GET notices/id
   def show

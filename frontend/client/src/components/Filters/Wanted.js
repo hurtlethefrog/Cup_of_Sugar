@@ -7,24 +7,26 @@ import "./styles.scss";
 let classnames = require("classnames");
 
 export default function Wanted(props) {
-  const [state, setState] = useState(true)
+  // const [state, setState] = useState(true)
+
+  const toggleButton = event => {
+    console.log(props.categories)
+    if (props.categories["requests"] === true) {
+      props.toggleFilter("articles")
+      props.onSelect("articles")
+    } else {
+      props.toggleFilter("requests")
+      props.onSelect("requests")
+    }
+  }
+
   const buttonClass = classnames("button", {
     "filter--selected": props.selected
   });
 
   return (
       <section className={buttonClass}>
-        <Button onSelect={event => {
-          if(state)
-          {
-           setState(false);
-            props.onSelect("requests");
-          }else
-          {
-             setState(true);
-            props.onSelect("articles");
-          }
-        }} wanted>
+        <Button onSelect={toggleButton} wanted>
           Wanted
         </Button>
       </section>

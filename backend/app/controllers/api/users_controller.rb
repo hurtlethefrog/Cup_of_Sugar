@@ -47,9 +47,6 @@ class Api::UsersController < ApplicationController
             return hash_with_id
           end
     
-
-
-
   private 
 
   def set_user

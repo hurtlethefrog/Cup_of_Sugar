@@ -4,7 +4,7 @@ class Api::OffersController < ApplicationController
 
   def index
 
-  @offers = OffersRequest.where(offer: true)
+  @offers = OffersRequest.all.where(offer: true).order(created_at: :desc)
 
   @offersWithComments = @offers.map {|offer|
   modified_offer = offer.attributes
