@@ -6,7 +6,7 @@ export default function Preloader(props) {
   return (
     <main className="">
       <section className="">
-
+      <h1>Preloader</h1>
       </section>
     </main>
   );

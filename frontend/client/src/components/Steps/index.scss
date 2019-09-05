@@ -1,0 +1,66 @@
+// <main className="UserProcedure">
+// <section>
+
+.UserProcedure {
+  background-color: #EBEBEB;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 12px;
+  h1 {
+    font-size: 2em;
+  }
+  // input {
+  //   width: 30%;
+  //   padding: 1rem;
+  //   font-size: 1em;
+  // }
+  form.registration_fields {
+    display: grid;
+  }
+  input {
+    width: 30%;
+    padding: 1rem;
+    font-size: 1em;
+    border: 0;
+    border-bottom: 3px solid linen;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+  }
+  :focus {
+    outline: none;
+  }
+  section {
+    // background-color: #74876A;
+    // height: 300px;
+    // min-width: 50%;
+    button {
+      background: 
+      rgba(0,0,0,0);
+      border: none;
+      font-size: 4em;
+    }
+  }
+  footer {
+    position: absolute;
+    width: 100%;
+    bottom: 10%;
+    // display: flex;
+    // justify-content: space-between;
+    // height: 20%;
+    // background-color: green;
+    padding-right: 5em;
+    padding-left: 5em;
+    button {
+      text-transform: uppercase;
+      font-size: 2.5em;
+      background: rgba(0,0,0,0);
+      border: none;
+    }
+    button.back-btn {float: left;}
+    button.next-btn {float: right;}
+    button:hover {color: #74876A;}
+  }
+}

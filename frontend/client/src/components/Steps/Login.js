@@ -6,7 +6,7 @@ export default function Login(props) {
   return (
     <main className="">
       <section className="">
-
+      <h1>Login</h1>
       </section>
     </main>
   );
