@@ -1,4 +1,4 @@
-$article-background:white;
+$article-background: white;
 $comment-box: white;
 
 .box {
@@ -8,7 +8,6 @@ $comment-box: white;
   position: relative;
 
   .article--userinfo {
-    
     img {
       width: 35px;
     }
@@ -34,7 +33,7 @@ $comment-box: white;
     margin-left: 4px;
   }
 
-  .comment--box{ 
+  .comment--box {
     background-color: $comment-box;
     display: flex;
     flex-direction: row;
@@ -44,24 +43,32 @@ $comment-box: white;
     font-size: 0.8rem;
     margin-top: 10px;
     position: relative;
-  
-  img {
-    width: 35px;
-  }
 
-  .hideable--date {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin-right: 4px;
-    align-self: flex-end;
+    img {
+      width: 35px;
+    }
 
-    // display: none;
+    .hideable--date {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin-right: 4px;
+      align-self: flex-end;
 
-    &:hover {
-      display: block;
+      // display: none;
+
+      &:hover {
+        display: block;
+      }
     }
   }
-
 }
+
+.new--article--box {
+  background-color: aqua;
+  width: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
 }

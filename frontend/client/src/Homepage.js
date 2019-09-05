@@ -155,18 +155,17 @@ export default function Homepage() {
       {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
       <div>
         <FilterBar
-          onSelect={a => {
-            setFilter(a);
-          }}
+          onSelect={setFilter}
           filter={filter}
         />
       </div>
-      {/* onSubmit function will need to ensure title description, everything else is optional */}
-      <div>
-        <New onSubmit={setNewArticle} />
-      </div>
+      
       {/* map must be handed an array from articles hook, once recieved in Article it will be identified and the apropriate article component will be rendered */}
       <div className="article-container">
+      <div>
+      {/* onSubmit function will need to ensure title description, everything else is optional */}
+        <New onSubmit={setNewArticle} />
+      </div>
         {articles && <Articles articles={articles} />}
       </div>
     </div>

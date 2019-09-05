@@ -4,6 +4,7 @@ import { useVisualMode } from "../../hooks/useVisualMode";
 import validateNewArticle from "../../helpers/validateNewArticle";
 import Calendar from "../Calender";
 import "./styles.scss";
+// import "../../../public/images"
 
 export default function New(props) {
   const { mode, transition, back } = useVisualMode("new");
@@ -67,13 +68,9 @@ export default function New(props) {
     switch (mode) {
       case "new":
         return (
-          <button
-            onClick={event => {
-              transition("choose");
-            }}
-          >
-            Create
-          </button>
+          <img onClick={event => {
+            transition("choose");
+          }} className="add" src="images/add.png" />
         );
       case "choose":
         return (
@@ -354,5 +351,5 @@ export default function New(props) {
     }
   };
 
-  return <div className="new--article--box box">{newArticleMode(mode)}</div>;
+  return <div className="box new--article--box">{newArticleMode(mode)}</div>;
 }

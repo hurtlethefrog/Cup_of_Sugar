@@ -13,22 +13,22 @@ export default function FilterBar(props) {
 
   return (
     <section className="filter--bar container">
-      {props.filter === "EVENTS" ? 
+      {props.filter === "events" ? 
       <Events selected onSelect={props.onSelect}></Events>:
       <Events onSelect={props.onSelect}></Events>}
-      {props.filter === "FLAGGED" ? 
+      {props.filter === "flagged" ? 
       <Flagged selected onSelect={props.onSelect}></Flagged> :
       <Flagged onSelect={props.onSelect}></Flagged>}
-      {props.filter === "MINE" ? 
+      {props.filter === "mine" ? 
       <Mine selected onSelect={props.onSelect}></Mine> :
       <Mine onSelect={props.onSelect}></Mine>}
-      {props.filter === "NOTICES" ? 
+      {props.filter === "notices" ? 
       <Notices selected onSelect={props.onSelect}></Notices> :
       <Notices onSelect={props.onSelect}></Notices>}
-      {props.filter === "OFFERS" ? 
+      {props.filter === "offers" ? 
       <Offers selected onSelect={props.onSelect}></Offers> :
       <Offers onSelect={props.onSelect}></Offers>}
-      {props.filter === "WANTED" ? 
+      {props.filter === "requests" ? 
       <Wanted selected onSelect={props.onSelect}></Wanted> :
       <Wanted onSelect={props.onSelect}></Wanted>}
     </section>
