@@ -53,7 +53,7 @@ const dummyAcc = {
 export default function Homepage() {
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState('articles');
-  const [user, setUser] = useState(dummyAcc);
+  const [account, setUser] = useState(dummyAcc);
   const [newArticle, setNewArticle] = useState();
   // toggles to trigger articles refresh after sucessful post
   const [post, setPost] = useState(true);
