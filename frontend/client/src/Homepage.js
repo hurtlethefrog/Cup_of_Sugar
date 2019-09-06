@@ -77,12 +77,21 @@ export default function Homepage() {
 
   useEffect(() => {
     console.log(`/api/${filter}`);
-    axios
-      .get(`/api/${filter}`)
-      .then(articles => {
-        setArticles(articles.data);
-      })
-      .catch(err => console.log(err));
+    if (filter === "mine") {
+      axios
+        .get(`/api/${filter}`)
+        .then(articles => {
+          setArticles(articles.data);
+        })
+        .catch(err => console.log(err));
+    } else {
+      axios
+        .get(`/api/${filter}`)
+        .then(articles => {
+          setArticles(articles.data);
+        })
+        .catch(err => console.log(err));
+    }
   }, [filter, post]);
 
   // switch case that posts to relevant route after removing unneeded keys
@@ -90,7 +99,11 @@ export default function Homepage() {
     if (newArticle) {
       switch (newArticle.type) {
         case "event":
-          const eventArticle = { ...newArticle, article_type: newArticle.type };
+          const eventArticle = {
+            ...newArticle,
+            article_type: newArticle.type,
+            owner_id: account.user[0].id
+          };
           delete eventArticle.type;
           console.log(eventArticle);
           axios
@@ -169,19 +182,19 @@ export default function Homepage() {
   }, [newArticle]);
   // post request for new comments
   useEffect(() => {
-    if(comment) {
-    const userComment = {
-      ...comment,
-      users_id: account.user[0].id,
-      [tagGenerator(comment.type)]: comment.id
-    };
-    delete userComment.type;
-    delete comment.id;
-    axios
-      .post(`api/${comment.type}s/${comment.id}/comments`, { ...userComment })
-      .then(res => {
-        updateComments(articles, res.data, setArticles);
-      });
+    if (comment) {
+      const userComment = {
+        ...comment,
+        users_id: account.user[0].id,
+        [tagGenerator(comment.type)]: comment.id
+      };
+      delete userComment.type;
+      delete comment.id;
+      axios
+        .post(`api/${comment.type}s/${comment.id}/comments`, { ...userComment })
+        .then(res => {
+          updateComments(articles, res.data, setArticles);
+        });
     }
   }, [comment]);
 
