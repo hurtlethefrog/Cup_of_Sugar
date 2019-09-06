@@ -15,7 +15,7 @@ export default function FilterBar(props) {
     articles: true, 
     events: false, 
     notices: false, 
-    flagged: false, 
+    // flagged: false, 
     offers: false, 
     requests: false, 
     mine: false
@@ -36,9 +36,10 @@ export default function FilterBar(props) {
       {props.filter === "events" ? 
       <Events selected onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Events> :
       <Events onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Events>}
-      {props.filter === "flagged" ? 
+      {/* stretch goal for flagged articles */}
+      {/* {props.filter === "flagged" ? 
       <Flagged selected onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Flagged> :
-      <Flagged onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Flagged>}
+      <Flagged onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Flagged>} */}
       {props.filter === "mine" ? 
       <Mine selected onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Mine> :
       <Mine onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Mine>}
@@ -48,7 +49,7 @@ export default function FilterBar(props) {
       {props.filter === "offers" ? 
       <Offers selected onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Offers> :
       <Offers onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Offers>}
-      {props.filter === "wanted" ? 
+      {props.filter === "requests" ? 
       <Wanted selected onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Wanted> :
       <Wanted onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Wanted>}
     </section>

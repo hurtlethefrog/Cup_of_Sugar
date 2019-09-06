@@ -51,7 +51,6 @@ const dummyAcc = {
   ]
 };
 
-
 export default function Homepage() {
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("articles");
@@ -61,6 +60,7 @@ export default function Homepage() {
   // toggles to trigger articles refresh after sucessful post
   const [post, setPost] = useState(true);
   const [comment, makeComment] = useState();
+  const [attendee, addAttendee] = useState(false);
 
   const updateComments = (arr, payload, cb) => {
     for (let ele of arr) {
@@ -82,7 +82,7 @@ export default function Homepage() {
     axios
       .get(`/api/households/${1}`)
       .then(household => {
-        console.log("HOUSEHOLDDATA", household.data)
+        console.log("HOUSEHOLDDATA", household.data);
         setHousehold(household.data);
       })
       .catch(err => console.log(err));
@@ -92,7 +92,7 @@ export default function Homepage() {
     axios
       .get(`/api/users/${1}`)
       .then(account => {
-        console.log("ACCOUNTDATA", account.data)
+        console.log("ACCOUNTDATA", account.data);
         setUser(account.data);
       })
       .catch(err => console.log(err));
@@ -100,12 +100,21 @@ export default function Homepage() {
 
   useEffect(() => {
     console.log(`/api/${filter}`);
-    axios
-      .get(`/api/${filter}`)
-      .then(articles => {
-        setArticles(articles.data);
-      })
-      .catch(err => console.log(err));
+    if (filter === "mine") {
+      axios
+        .get(`/api/users/${account.id}/articles`)
+        .then(articles => {
+          setArticles(articles.data);
+        })
+        .catch(err => console.log(err));
+    } else {
+      axios
+        .get(`/api/${filter}`)
+        .then(articles => {
+          setArticles(articles.data);
+        })
+        .catch(err => console.log(err));
+    }
   }, [filter, post]);
 
   // switch case that posts to relevant route after removing unneeded keys
@@ -113,7 +122,11 @@ export default function Homepage() {
     if (newArticle) {
       switch (newArticle.type) {
         case "event":
-          const eventArticle = { ...newArticle, article_type: newArticle.type, owner_id: 1};
+          const eventArticle = {
+            ...newArticle,
+            article_type: newArticle.type,
+            owner_id: account.id
+          };
           delete eventArticle.type;
           console.log(eventArticle);
           axios
@@ -129,7 +142,8 @@ export default function Homepage() {
         case "notice":
           const noticeArticle = {
             ...newArticle,
-            article_type: newArticle.type
+            article_type: newArticle.type,
+            owner_id: account.id
           };
           delete noticeArticle.type;
           delete noticeArticle.start;
@@ -148,7 +162,11 @@ export default function Homepage() {
             .catch(err => console.log(err));
           break;
         case "offer":
-          const offerArticle = { ...newArticle, article_type: newArticle.type };
+          const offerArticle = {
+            ...newArticle,
+            article_type: newArticle.type,
+            owner_id: account.id
+          };
           delete offerArticle.type;
           delete offerArticle.start;
           delete offerArticle.end;
@@ -168,7 +186,8 @@ export default function Homepage() {
         case "request":
           const requestArticle = {
             ...newArticle,
-            article_type: newArticle.type
+            article_type: newArticle.type,
+            owner_id: account.id
           };
           delete requestArticle.type;
           delete requestArticle.start;
@@ -209,17 +228,31 @@ export default function Homepage() {
       .post(`api/${comment.type}s/${userComment.events_id}/comments`, { ...userComment })
       .then(res => {
         updateComments(articles, res.data, setArticles);
-      });
+      })
+      .catch(err => console.log(err));
     }
   }, [comment]);
 
+  useEffect(() => {
+    if (attendee.going === true) {
+      axios
+        .post(`api/events/${attendee.id}/attendees`, { user_id: account.id })
+        .then(res => {
+          
+        })
+        .catch(err => console.log(err));
+    }
+  }, [attendee]);
+
   return (
     <div className="App">
-      <Nav 
-        household={household} 
-        setHousehold={setHousehold} 
-        account={account} 
-        setAccount={setUser} >NAVBAR
+      <Nav
+        household={household}
+        setHousehold={setHousehold}
+        account={account}
+        setAccount={setUser}
+      >
+        NAVBAR
       </Nav>
 
       <button onClick={event => console.log(filter)}>Current Filter</button>
@@ -236,7 +269,13 @@ export default function Homepage() {
           {/* onSubmit function will need to ensure title description, everything else is optional */}
           <New onSubmit={setNewArticle} />
         </div>
-        {articles && <Articles makeComment={makeComment} articles={articles} />}
+        {articles && (
+          <Articles
+            makeComment={makeComment}
+            articles={articles}
+            addAttendee={addAttendee}
+          />
+        )}
       </div>
     </div>
   );

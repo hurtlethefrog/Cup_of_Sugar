@@ -93,7 +93,7 @@ export default function Notice(props) {
           ></input>
         </form>
       )}
-      {state && <div className="comments--box">{parsedComments}</div>}
+      {state && <div className="comments--box">{parsedComments.reverse()}</div>}
       {state && (
         <form
           onSubmit={event => {
