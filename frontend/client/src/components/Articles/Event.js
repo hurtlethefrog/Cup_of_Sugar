@@ -6,6 +6,7 @@ import "./styles.scss";
 export default function Event(props) {
   // if this state is true comments will be shown
   const [state, setState] = useState(false);
+  // if this state is true all attendee info will be shown
   const [attendees, setAttendees] = useState(false);
   const [comment, setComment] = useState({
     id: props.article.id,
@@ -72,7 +73,35 @@ export default function Event(props) {
       <div className="article--date">
         {dateFormatter(props.article.created_at)}
       </div>
-
+      <img
+        className="add--attendee"
+        src="images/user-plus-solid.svg"
+        onClick={event => props.addAttendee({going:true, id:props.article.id})}
+      ></img>
+      {props.article.attendees.length > 0 ? (
+        <div
+          className="attendees--summary"
+          onClick={event => setAttendees(!attendees)}
+        >
+          {!attendees ? (
+            <div>
+              <div className="attendees--icon">
+                <img src={props.article.attendees[0].profile_pic} />
+              </div>
+              <div className="attendees--icon">
+                <img src={props.article.attendees[1].profile_pic} />
+              </div>
+              <div className="attendees--icon">
+                <img src={props.article.attendees[2].profile_pic} />
+              </div>
+            </div>
+          ) : (
+            allAttendees
+          )}
+        </div>
+      ): (
+        <div>No one is attending yet, be the first.</div>
+      )}
       {props.article.comments.length > 0 && (
         <img
           className="expand-comments"
@@ -97,7 +126,7 @@ export default function Event(props) {
           ></input>
         </form>
       )}
-      {state && <div className="comments--box">{parsedComments}</div>}
+      {state && <div className="comments--box">{parsedComments.reverse()}</div>}
       {state && (
         <form
           onSubmit={event => {
@@ -115,16 +144,6 @@ export default function Event(props) {
           ></input>
         </form>
       )}
-      {/* {attendees ? (
-        allAttendees
-      ) : (
-        <div
-          className="attendees--summary"
-          onClick={event => setAttendees(!attendees)}
-        >
-          {props.article.attendees[0].profile_pic + props.article.attendees[1].profile_pic + props.article.attendees[2].profile_pic} here's the attendee pics
-        </div> */}
-      {/* )} */}
     </article>
   );
 }

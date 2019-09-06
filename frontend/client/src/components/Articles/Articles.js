@@ -13,6 +13,7 @@ export default function Articles(props) {
             key={article.article_type + "_" + article.id}
             article={article}
             makeComment={props.makeComment}
+            addAttendee={props.addAttendee}
           />
         );
       case "notice":

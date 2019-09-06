@@ -60,6 +60,7 @@ export default function Homepage() {
   // toggles to trigger articles refresh after sucessful post
   const [post, setPost] = useState(true);
   const [comment, makeComment] = useState();
+  const [attendee, addAttendee] = useState(false);
 
   const updateComments = (arr, payload, cb) => {
     for (let ele of arr) {
@@ -218,13 +219,26 @@ export default function Homepage() {
       };
       delete userComment.type;
       delete comment.id;
+
       axios
         .post(`api/${comment.type}s/${account.id}/comments`, { ...userComment })
         .then(res => {
           updateComments(articles, res.data, setArticles);
-        });
+        })
+        .catch(err => console.log(err));
     }
   }, [comment]);
+
+  useEffect(() => {
+    if (attendee.going === true) {
+      axios
+        .post(`api/events/${attendee.id}/attendees`, { user_id: account.id })
+        .then(res => {
+          
+        })
+        .catch(err => console.log(err));
+    }
+  }, [attendee]);
 
   return (
     <div className="App">
@@ -251,7 +265,13 @@ export default function Homepage() {
           {/* onSubmit function will need to ensure title description, everything else is optional */}
           <New onSubmit={setNewArticle} />
         </div>
-        {articles && <Articles makeComment={makeComment} articles={articles} />}
+        {articles && (
+          <Articles
+            makeComment={makeComment}
+            articles={articles}
+            addAttendee={addAttendee}
+          />
+        )}
       </div>
     </div>
   );
