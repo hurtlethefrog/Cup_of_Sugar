@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReactLightCalendar from "@lls/react-light-calendar";
 import "@lls/react-light-calendar/dist/index.css";
 import moment from "moment";
-import convertTime from "../helpers/convertTime"
+import convertTime from "../helpers/convertTime";
 
 export default function Calendar(props) {
   const [state, setState] = useState({
@@ -12,10 +12,10 @@ export default function Calendar(props) {
   });
 
   const onChange = (startDate, endDate) =>
-    setState({...state, startDate, endDate});
+    setState({ ...state, startDate, endDate });
 
   return (
-    <div>
+    <div className="calendar">
       <ReactLightCalendar
         startDate={state.startDate}
         endDate={state.endDate}
@@ -23,14 +23,14 @@ export default function Calendar(props) {
         range
         displayTime
       />
-      <button
-        onClick={event => {
-          console.log(state);
-          props.setDates(convertTime(state.startDate), convertTime(state.endDate));
-        }}
-      >
-        Confirm Your Event
-      </button>
+      <img
+        src="images/check-square-solid.svg"
+        className="add backspace"
+        onClick={event => props.setDates(
+          convertTime(state.startDate),
+          convertTime(state.endDate)
+        )}
+      ></img>
     </div>
   );
 }

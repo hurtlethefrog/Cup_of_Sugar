@@ -4,7 +4,6 @@ import { useVisualMode } from "../../hooks/useVisualMode";
 import validateNewArticle from "../../helpers/validateNewArticle";
 import Calendar from "../Calender";
 import "./styles.scss";
-// import "../../../public/images"
 
 export default function New(props) {
   const { mode, transition, back } = useVisualMode("new");
@@ -58,6 +57,7 @@ export default function New(props) {
   // will be receiving start and end date from calender onChange
   const setDates = (a, b) => {
     setText({ ...text, start: a, end: b });
+    setCalender(false);
   };
 
   useEffect(() => {
@@ -79,7 +79,11 @@ export default function New(props) {
       case "choose":
         return (
           <div className="new--choose">
-            <img src="images/backspace-solid.svg" className="add backspace" onClick={event => backButton()}></img>
+            <img
+              src="images/backspace-solid.svg"
+              className="add backspace"
+              onClick={event => backButton()}
+            ></img>
             <div className="field">
               <div className="control">
                 <div className="select is-primary">
@@ -102,80 +106,104 @@ export default function New(props) {
           <div>
             {" "}
             {error}
-            <form onSubmit={event => event.preventDefault()}>
-              <input
-                name="title"
-                placeholder="enter your event title"
-                onChange={event =>
-                  setText({ ...text, title: event.target.value })
-                }
-              ></input>
-              <input
-                name="description"
-                placeholder="enter your event description"
-                onChange={event =>
-                  setText({ ...text, description: event.target.value })
-                }
-              ></input>
-              {imagebox === false && (
-                <button onClick={event => setImagebox(!imagebox)}>
-                  Upload an image
-                </button>
-              )}
-              {imagebox && (
-                <Dropzone
-                  onDrop={acceptedFiles =>
-                    setText({ ...text, image: acceptedFiles })
+            {!calender && (
+              <form onSubmit={event => event.preventDefault()}>
+                <textarea
+                  className="textarea is-warning"
+                  rows="1"
+                  name="title"
+                  value={text.title}
+                  placeholder="enter your event title"
+                  onChange={event =>
+                    setText({ ...text, title: event.target.value })
                   }
-                  accept="image/png, image/jpeg"
-                  key={mode + "_dropbox"}
-                >
-                  {({
-                    getRootProps,
-                    getInputProps,
-                    isDragActive,
-                    isDragReject,
-                    acceptedFiles
-                  }) => (
-                    <section className="box">
-                      <div {...getRootProps()}>
-                        <input {...getInputProps()} />
-                        {!isDragActive &&
-                          "Click here or drop a png/jpeg to upload!"}
-                        {isDragActive && !isDragReject && "Right there!"}
-                        {isDragReject &&
-                          "File type not accepted, please choose a png or jpeg!"}
-                        <ul className="list-group mt-2">
-                          {acceptedFiles.length > 0 &&
-                            acceptedFiles.map(acceptedFile => (
-                              <li
-                                key={acceptedFile.name + "key"}
-                                className="box"
-                              >
-                                {acceptedFile.name}
-                              </li>
-                            ))}
-                        </ul>
-                      </div>
-                    </section>
-                  )}
-                </Dropzone>
-              )}
+                ></textarea>
+                <textarea
+                  className="textarea is-warning"
+                  rows="4"
+                  name="description"
+                  value={text.description}
+                  placeholder="enter your event description"
+                  onChange={event =>
+                    setText({ ...text, description: event.target.value })
+                  }
+                ></textarea>
+              </form>
+            )}
+            {imagebox && (
+              <Dropzone
+                onDrop={acceptedFiles =>
+                  setText({ ...text, image: acceptedFiles })
+                }
+                accept="image/png, image/jpeg"
+                key={mode + "_dropbox"}
+              >
+                {({
+                  getRootProps,
+                  getInputProps,
+                  isDragActive,
+                  isDragReject,
+                  acceptedFiles
+                }) => (
+                  <section className="box">
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      {!isDragActive &&
+                        "Click here or drop a png/jpeg to upload!"}
+                      {isDragActive && !isDragReject && "Right there!"}
+                      {isDragReject &&
+                        "File type not accepted, please choose a png or jpeg!"}
+                      <ul className="list-group mt-2">
+                        {acceptedFiles.length > 0 &&
+                          acceptedFiles.map(acceptedFile => (
+                            <li key={acceptedFile.name + "key"} className="box">
+                              {acceptedFile.name}
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
+            )}
+            <div className="add button-bar">
               {calender === false && (
-                <button onClick={event => setCalender(!calender)}>
-                  Set Your Date
-                </button>
+                <img
+                  src="images/calendar-times-solid.svg"
+                  className="add backspace"
+                  onClick={event => setCalender(!calender)}
+                ></img>
               )}
               {calender && <Calendar setDates={setDates}></Calendar>}
-              <button onClick={event => sendArticle()}>Confirm</button>
-            </form>
-            <button
-              onClick={event => {
-                backButton();
-              }}
-            >
-              Back
-            </button>
+              {!calender && (
+                <img
+                  src="images/check-square-solid.svg"
+                  className="add backspace"
+                  onClick={event => sendArticle()}
+                ></img>
+              )}
+
+              {!imagebox && (
+                <img
+                  src="images/images-regular.svg"
+                  className="add backspace"
+                  onClick={event => setImagebox(!imagebox)}
+                ></img>
+              )}
+              {calender ? (
+                <img
+                  src="images/backspace-solid.svg"
+                  className="add backspace"
+                  onClick={event => setCalender(false)}
+                ></img>
+              ) : (
+                <img
+                  src="images/backspace-solid.svg"
+                  className="add backspace"
+                  onClick={event => backButton()}
+                ></img>
+              )}
+            </div>
           </div>
         );
       case "notice":
@@ -184,25 +212,25 @@ export default function New(props) {
             {" "}
             {error}
             <form onSubmit={event => event.preventDefault()}>
-              <input
+              <textarea
+                className="textarea is-warning"
+                rows="1"
                 name="title"
-                placeholder="enter your nottice title"
+                placeholder="enter your notice title"
                 onChange={event =>
                   setText({ ...text, title: event.target.value })
                 }
-              ></input>
-              <input
+              ></textarea>
+              <textarea
+                className="textarea is-warning"
+                rows="4"
                 name="description"
                 placeholder="enter your event description"
                 onChange={event =>
                   setText({ ...text, description: event.target.value })
                 }
-              ></input>
-              {!imagebox && (
-                <button onClick={event => setImagebox(!imagebox)}>
-                  Upload an image
-                </button>
-              )}
+              ></textarea>
+
               {imagebox && (
                 <Dropzone
                   onDrop={acceptedFiles =>
@@ -242,15 +270,26 @@ export default function New(props) {
                   )}
                 </Dropzone>
               )}
-              <button onClick={event => sendArticle()}>Confirm</button>
             </form>
-            <button
-              onClick={event => {
-                backButton();
-              }}
-            >
-              Back
-            </button>
+            <div className="add button-bar">
+              <img
+                src="images/backspace-solid.svg"
+                className="backspace"
+                onClick={event => backButton()}
+              ></img>
+              <img
+                src="images/check-square-solid.svg"
+                className="check"
+                onClick={event => sendArticle()}
+              ></img>
+              {!imagebox && (
+                <img
+                  src="images/images-regular.svg"
+                  className="add backspace"
+                  onClick={event => setImagebox(!imagebox)}
+                ></img>
+              )}
+            </div>
           </div>
         );
       case "request":
@@ -259,29 +298,38 @@ export default function New(props) {
             {" "}
             {error}
             <form onSubmit={event => event.preventDefault()}>
-              <input
+              <textarea
+                className="textarea is-warning"
+                rows="1"
                 name="title"
                 placeholder="enter your request title"
                 onChange={event =>
                   setText({ ...text, title: event.target.value })
                 }
-              ></input>
-              <input
+              ></textarea>
+
+              <textarea
+                className="textarea is-warning"
+                rows="4"
                 name="description"
                 placeholder="enter your request description"
                 onChange={event =>
                   setText({ ...text, description: event.target.value })
                 }
-              ></input>
-              <button onClick={event => sendArticle()}>Confirm</button>
+              ></textarea>
             </form>
-            <button
-              onClick={event => {
-                backButton();
-              }}
-            >
-              Back
-            </button>
+            <div className="add button-bar">
+              <img
+                src="images/backspace-solid.svg"
+                className="backspace"
+                onClick={event => backButton()}
+              ></img>
+              <img
+                src="images/check-square-solid.svg"
+                className="check"
+                onClick={event => sendArticle()}
+              ></img>
+            </div>
           </div>
         );
       case "offer":
@@ -290,19 +338,24 @@ export default function New(props) {
             {" "}
             {error}
             <form onSubmit={event => event.preventDefault()}>
-              <input
+              <textarea
+                className="textarea is-warning"
+                rows="1"
                 name="title"
                 placeholder="enter your request title"
-              ></input>
-              <input
+                onChange={event =>
+                  setText({ ...text, description: event.target.value })
+                }
+              ></textarea>
+              <textarea
+                className="textarea is-warning"
+                rows="4"
                 name="description"
                 placeholder="enter your request description"
-              ></input>
-              {!imagebox && (
-                <button onClick={event => setImagebox(!imagebox)}>
-                  Upload an image
-                </button>
-              )}
+                onChange={event =>
+                  setText({ ...text, description: event.target.value })
+                }
+              ></textarea>
               {imagebox && (
                 <Dropzone
                   onDrop={acceptedFiles =>
@@ -342,15 +395,26 @@ export default function New(props) {
                   )}
                 </Dropzone>
               )}
-              <button onClick={event => sendArticle()}>Confirm</button>
             </form>
-            <button
-              onClick={event => {
-                backButton();
-              }}
-            >
-              Back
-            </button>
+            <div className="add button-bar">
+              <img
+                src="images/backspace-solid.svg"
+                className="backspace"
+                onClick={event => backButton()}
+              ></img>
+              <img
+                src="images/check-square-solid.svg"
+                className="check"
+                onClick={event => sendArticle()}
+              ></img>
+              {!imagebox && (
+                <img
+                  src="images/images-regular.svg"
+                  className="image-add"
+                  onClick={event => setImagebox(!imagebox)}
+                ></img>
+              )}
+            </div>
           </div>
         );
 
