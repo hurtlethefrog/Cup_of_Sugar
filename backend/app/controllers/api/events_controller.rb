@@ -2,7 +2,8 @@ class Api::EventsController < ApplicationController
 
 include Pagy::Backend
 
-  before_action :set_event
+  before_action :set_event, :authenticate_user
+
 
   def index
 
