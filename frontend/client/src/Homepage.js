@@ -50,13 +50,35 @@ const dummyAcc = {
   ]
 };
 
+
 export default function Homepage() {
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState('articles');
-  const [account, setUser] = useState(dummyAcc);
+  const [account, setAccount] = useState();
   const [newArticle, setNewArticle] = useState();
+  const [household, setHousehold] = useState();
   // toggles to trigger articles refresh after sucessful post
   const [post, setPost] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`/api/households/${1}`)
+      .then(household => {
+        console.log("HOUSEHOLDDATA", household.data)
+        setHousehold(household.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`/api/users/${1}`)
+      .then(account => {
+        console.log("ACCOUNTDATA", account.data)
+        setAccount(account.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   useEffect(() => {
     console.log(`/api/${filter}`);
@@ -147,11 +169,16 @@ export default function Homepage() {
 
   return (
     <div className="App">
-      <Nav>NAVBAR</Nav>
+      <Nav 
+        household={household} 
+        setHousehold={setHousehold} 
+        account={account} 
+        setAccount={setAccount} >NAVBAR
+      </Nav>
 
       <button onClick={event => console.log(filter)}>Current Filter</button>
       <button onClick={event => console.log(articles)}>Current Articles</button>
-      <div>Hello {account.user[0].first_name} </div>
+      <div>Hello</div>
       {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
       <div>
         <FilterBar
