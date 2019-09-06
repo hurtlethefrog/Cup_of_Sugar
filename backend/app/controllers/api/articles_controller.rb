@@ -3,7 +3,6 @@ class Api::ArticlesController < ApplicationController
     
   def index
 
-    puts params
     # api/users/:id/articles
     if @user
 
