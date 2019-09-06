@@ -5,6 +5,7 @@ import FilterBar from "./components/Filters/FilterBar";
 import Articles from "./components/Articles/Articles";
 import New from "./components/Articles/New";
 import Nav from "./components/Nav";
+import { defaultProps } from "@lls/react-light-calendar";
 
 const dummyAcc = {
   community: {
@@ -50,11 +51,13 @@ const dummyAcc = {
   ]
 };
 
+
 export default function Homepage() {
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("articles");
   const [account, setUser] = useState(dummyAcc);
   const [newArticle, setNewArticle] = useState();
+  const [household, setHousehold] = useState();
   // toggles to trigger articles refresh after sucessful post
   const [post, setPost] = useState(true);
   const [comment, makeComment] = useState();
@@ -74,6 +77,26 @@ export default function Homepage() {
       return `${type}s_id`;
     }
   };
+
+  useEffect(() => {
+    axios
+      .get(`/api/households/${1}`)
+      .then(household => {
+        console.log("HOUSEHOLDDATA", household.data)
+        setHousehold(household.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`/api/users/${1}`)
+      .then(account => {
+        console.log("ACCOUNTDATA", account.data)
+        setUser(account.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   useEffect(() => {
     console.log(`/api/${filter}`);
@@ -99,10 +122,7 @@ export default function Homepage() {
     if (newArticle) {
       switch (newArticle.type) {
         case "event":
-          const eventArticle = {
-            ...newArticle,
-            article_type: newArticle.type,
-          };
+          const eventArticle = { ...newArticle, article_type: newArticle.type, owner_id: 1};
           delete eventArticle.type;
           console.log(eventArticle);
           axios
@@ -199,11 +219,16 @@ export default function Homepage() {
 
   return (
     <div className="App">
-      <Nav>NAVBAR</Nav>
+      <Nav 
+        household={household} 
+        setHousehold={setHousehold} 
+        account={account} 
+        setAccount={setUser} >NAVBAR
+      </Nav>
 
       <button onClick={event => console.log(filter)}>Current Filter</button>
       <button onClick={event => console.log(articles)}>Current Articles</button>
-      <div>Hello {account.user[0].first_name} </div>
+      <div>Hello {account.first_name}</div>
       {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
       <div>
         <FilterBar onSelect={setFilter} filter={filter} />
