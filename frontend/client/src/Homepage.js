@@ -124,7 +124,7 @@ export default function Homepage() {
           const eventArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: 1
+            owner_id: account.id
           };
           delete eventArticle.type;
           console.log(eventArticle);
@@ -142,7 +142,7 @@ export default function Homepage() {
           const noticeArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: 1
+            owner_id: account.id
           };
           delete noticeArticle.type;
           delete noticeArticle.start;
@@ -164,7 +164,7 @@ export default function Homepage() {
           const offerArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: 1
+            owner_id: account.id
           };
           delete offerArticle.type;
           delete offerArticle.start;
@@ -186,7 +186,7 @@ export default function Homepage() {
           const requestArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: 1
+            owner_id: account.id
           };
           delete requestArticle.type;
           delete requestArticle.start;
@@ -213,7 +213,7 @@ export default function Homepage() {
     if (comment) {
       const userComment = {
         ...comment,
-        users_id: 1,
+        users_id: account.id,
         [tagGenerator(comment.type)]: comment.id
       };
       delete userComment.type;
