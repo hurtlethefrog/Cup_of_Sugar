@@ -34,23 +34,23 @@ class Api::UsersController < ApplicationController
         
         # end
         
-          def generate_id(object)
-            hash = object.attributes
+          # def generate_id(object)
+          #   hash = object.attributes
         
-            if object.event_id > 0
-              id = 10 * object.event_id
-            elsif object.notice_id > 0
-              id = 50000 * object.notice_id
-            elsif object.offer_request_id > 0 && object.offer = true
-              id = object.offer_request_id * 100
-            elsif object.offer_request_id >0 && object.offer = !true
-            end 
+          #   if object.event_id > 0
+          #     id = 10 * object.event_id
+          #   elsif object.notice_id > 0
+          #     id = 50000 * object.notice_id
+          #   elsif object.offer_request_id > 0 && object.offer = true
+          #     id = object.offer_request_id * 100
+          #   elsif object.offer_request_id >0 && object.offer = !true
+          #   end 
         
-            id_property = {:id => id.to_i}
-            hash_with_id = hash.merge(id_property)
+          #   id_property = {:id => id.to_i}
+          #   hash_with_id = hash.merge(id_property)
         
-            return hash_with_id
-          end
+          #   return hash_with_id
+          # end
     
   private 
 
