@@ -78,7 +78,7 @@ export default function Event(props) {
         src="images/user-plus-solid.svg"
         onClick={event => props.addAttendee({going:true, id:props.article.id})}
       ></img>
-      {props.article.attendees.length > 0 ? (
+      {props.article.attendees.length > 3 ? (
         <div
           className="attendees--summary"
           onClick={event => setAttendees(!attendees)}
