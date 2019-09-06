@@ -51,7 +51,6 @@ const dummyAcc = {
   ]
 };
 
-
 export default function Homepage() {
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("articles");
@@ -82,7 +81,7 @@ export default function Homepage() {
     axios
       .get(`/api/households/${1}`)
       .then(household => {
-        console.log("HOUSEHOLDDATA", household.data)
+        console.log("HOUSEHOLDDATA", household.data);
         setHousehold(household.data);
       })
       .catch(err => console.log(err));
@@ -92,7 +91,7 @@ export default function Homepage() {
     axios
       .get(`/api/users/${1}`)
       .then(account => {
-        console.log("ACCOUNTDATA", account.data)
+        console.log("ACCOUNTDATA", account.data);
         setUser(account.data);
       })
       .catch(err => console.log(err));
@@ -102,7 +101,7 @@ export default function Homepage() {
     console.log(`/api/${filter}`);
     if (filter === "mine") {
       axios
-        .get(`/api/${filter}`)
+        .get(`/api/users/${account.id}/articles`)
         .then(articles => {
           setArticles(articles.data);
         })
@@ -122,7 +121,11 @@ export default function Homepage() {
     if (newArticle) {
       switch (newArticle.type) {
         case "event":
-          const eventArticle = { ...newArticle, article_type: newArticle.type, owner_id: 1};
+          const eventArticle = {
+            ...newArticle,
+            article_type: newArticle.type,
+            owner_id: 1
+          };
           delete eventArticle.type;
           console.log(eventArticle);
           axios
@@ -138,7 +141,8 @@ export default function Homepage() {
         case "notice":
           const noticeArticle = {
             ...newArticle,
-            article_type: newArticle.type
+            article_type: newArticle.type,
+            owner_id: 1
           };
           delete noticeArticle.type;
           delete noticeArticle.start;
@@ -157,7 +161,11 @@ export default function Homepage() {
             .catch(err => console.log(err));
           break;
         case "offer":
-          const offerArticle = { ...newArticle, article_type: newArticle.type };
+          const offerArticle = {
+            ...newArticle,
+            article_type: newArticle.type,
+            owner_id: 1
+          };
           delete offerArticle.type;
           delete offerArticle.start;
           delete offerArticle.end;
@@ -177,7 +185,8 @@ export default function Homepage() {
         case "request":
           const requestArticle = {
             ...newArticle,
-            article_type: newArticle.type
+            article_type: newArticle.type,
+            owner_id: 1
           };
           delete requestArticle.type;
           delete requestArticle.start;
@@ -204,13 +213,13 @@ export default function Homepage() {
     if (comment) {
       const userComment = {
         ...comment,
-        users_id: account.user[0].id,
+        users_id: 1,
         [tagGenerator(comment.type)]: comment.id
       };
       delete userComment.type;
       delete comment.id;
       axios
-        .post(`api/${comment.type}s/${comment.id}/comments`, { ...userComment })
+        .post(`api/${comment.type}s/${account.id}/comments`, { ...userComment })
         .then(res => {
           updateComments(articles, res.data, setArticles);
         });
@@ -219,11 +228,13 @@ export default function Homepage() {
 
   return (
     <div className="App">
-      <Nav 
-        household={household} 
-        setHousehold={setHousehold} 
-        account={account} 
-        setAccount={setUser} >NAVBAR
+      <Nav
+        household={household}
+        setHousehold={setHousehold}
+        account={account}
+        setAccount={setUser}
+      >
+        NAVBAR
       </Nav>
 
       <button onClick={event => console.log(filter)}>Current Filter</button>

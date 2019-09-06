@@ -15,7 +15,7 @@ export default function FilterBar(props) {
     articles: true, 
     events: false, 
     notices: false, 
-    flagged: false, 
+    // flagged: false, 
     offers: false, 
     requests: false, 
     mine: false
