@@ -95,10 +95,18 @@ $comment-box: white;
     margin-left: -6%;
     margin-right: 5%;
   }
-  img {
-  }
 
-  .field {
-    // width:
-  }
+  // img {
+  // }
+
+  // .field {
+  //   // width:
+  // }
+}
+
+.expand-comments {
+  position: relative;
+  width: 0;
+  width: 35px;
+  cursor: pointer;
 }

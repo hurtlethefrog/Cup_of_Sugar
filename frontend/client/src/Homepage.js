@@ -52,11 +52,28 @@ const dummyAcc = {
 
 export default function Homepage() {
   const [articles, setArticles] = useState([]);
-  const [filter, setFilter] = useState('articles');
+  const [filter, setFilter] = useState("articles");
   const [account, setUser] = useState(dummyAcc);
   const [newArticle, setNewArticle] = useState();
   // toggles to trigger articles refresh after sucessful post
   const [post, setPost] = useState(true);
+  const [comment, makeComment] = useState();
+
+  const updateComments = (arr, payload, cb) => {
+    for (let ele of arr) {
+      if (ele.id === payload.id) {
+        ele.comments.push(payload);
+      }
+    }
+    cb(arr);
+  };
+  const tagGenerator = type => {
+    if (type === "offer" || type === "request") {
+      return "offers_requests_id";
+    } else {
+      return `${type}s_id`;
+    }
+  };
 
   useEffect(() => {
     console.log(`/api/${filter}`);
@@ -73,7 +90,7 @@ export default function Homepage() {
     if (newArticle) {
       switch (newArticle.type) {
         case "event":
-          const eventArticle = { ...newArticle, article_type:newArticle.type };
+          const eventArticle = { ...newArticle, article_type: newArticle.type };
           delete eventArticle.type;
           console.log(eventArticle);
           axios
@@ -87,7 +104,10 @@ export default function Homepage() {
             .catch(err => console.log(err));
           break;
         case "notice":
-          const noticeArticle = { ...newArticle, article_type:newArticle.type };
+          const noticeArticle = {
+            ...newArticle,
+            article_type: newArticle.type
+          };
           delete noticeArticle.type;
           delete noticeArticle.start;
           delete noticeArticle.end;
@@ -105,7 +125,7 @@ export default function Homepage() {
             .catch(err => console.log(err));
           break;
         case "offer":
-          const offerArticle = { ...newArticle, article_type:newArticle.type };
+          const offerArticle = { ...newArticle, article_type: newArticle.type };
           delete offerArticle.type;
           delete offerArticle.start;
           delete offerArticle.end;
@@ -123,7 +143,10 @@ export default function Homepage() {
             .catch(err => console.log(err));
           break;
         case "request":
-          const requestArticle = { ...newArticle, article_type:newArticle.type };
+          const requestArticle = {
+            ...newArticle,
+            article_type: newArticle.type
+          };
           delete requestArticle.type;
           delete requestArticle.start;
           delete requestArticle.end;
@@ -144,6 +167,23 @@ export default function Homepage() {
       }
     }
   }, [newArticle]);
+  // post request for new comments
+  useEffect(() => {
+    if(comment) {
+    const userComment = {
+      ...comment,
+      users_id: account.user[0].id,
+      [tagGenerator(comment.type)]: comment.id
+    };
+    delete userComment.type;
+    delete comment.id;
+    axios
+      .post(`api/${comment.type}s/${comment.id}/comments`, { ...userComment })
+      .then(res => {
+        updateComments(articles, res.data, setArticles);
+      });
+    }
+  }, [comment]);
 
   return (
     <div className="App">
@@ -154,19 +194,16 @@ export default function Homepage() {
       <div>Hello {account.user[0].first_name} </div>
       {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
       <div>
-        <FilterBar
-          onSelect={setFilter}
-          filter={filter}
-        />
+        <FilterBar onSelect={setFilter} filter={filter} />
       </div>
-      
+
       {/* map must be handed an array from articles hook, once recieved in Article it will be identified and the apropriate article component will be rendered */}
       <div className="article-container">
-      <div>
-      {/* onSubmit function will need to ensure title description, everything else is optional */}
-        <New onSubmit={setNewArticle} />
-      </div>
-        {articles && <Articles articles={articles} />}
+        <div>
+          {/* onSubmit function will need to ensure title description, everything else is optional */}
+          <New onSubmit={setNewArticle} />
+        </div>
+        {articles && <Articles makeComment={makeComment} articles={articles} />}
       </div>
     </div>
   );
