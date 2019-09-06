@@ -8,7 +8,7 @@ export default function Event(props) {
   const [state, setState] = useState(false);
   const [attendees, setAttendees] = useState(false);
   const [comment, setComment] = useState({
-    id: props.article.id,
+    id: props.article.event_id,
     type: "event"
   });
 

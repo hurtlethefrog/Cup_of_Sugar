@@ -195,13 +195,18 @@ export default function Homepage() {
     if(comment) {
     const userComment = {
       ...comment,
-      users_id: account.user[0].id,
+      users_id: account.id,
       [tagGenerator(comment.type)]: comment.id
     };
     delete userComment.type;
     delete comment.id;
+    delete comment.event_id;
+    delete userComment.event_id;
+    delete userComment.id
+
+    {console.log("LOGGIN USER COMMENT",userComment)}
     axios
-      .post(`api/${comment.type}s/${comment.id}/comments`, { ...userComment })
+      .post(`api/${comment.type}s/${userComment.events_id}/comments`, { ...userComment })
       .then(res => {
         updateComments(articles, res.data, setArticles);
       });
