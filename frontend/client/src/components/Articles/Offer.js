@@ -4,6 +4,19 @@ import "./styles.scss";
 
 export default function Offer(props) {
   const [state, setState] = useState(false);
+  const [comment, setComment] = useState({
+    id: props.article.id,
+    type: "offer"
+  });
+
+  const expandArrow = () => {
+    switch (state) {
+      case false:
+        return "images/arrow-circle-down-solid.svg";
+      case true:
+        return "images/arrow-circle-up-solid.svg";
+    }
+  };
 
   const parsedComments = props.article.comments.map(comment => {
     return (
@@ -40,8 +53,48 @@ export default function Offer(props) {
       <div className="article--date">
         {dateFormatter(props.article.created_at)}
       </div>
-      <div onClick={event => setState(!state)}>***</div>
-      {state && parsedComments}
+      {props.article.comments.length > 0 && (
+        <img
+          className="expand-comments"
+          onClick={event => setState(!state)}
+          src={expandArrow()}
+        ></img>
+      )}
+      {props.article.comments.length <= 0 && (
+        <form
+          onSubmit={event => {
+            event.preventDefault();
+            props.makeComment(comment);
+          }}
+        >
+          <input
+            className="input"
+            type="text"
+            placeholder="Add a comment"
+            onChange={event =>
+              setComment({ ...comment, comment: event.target.value })
+            }
+          ></input>
+        </form>
+      )}
+      {state && <div className="comments--box">{parsedComments}</div>}
+      {state && (
+        <form
+          onSubmit={event => {
+            event.preventDefault();
+            props.makeComment(comment);
+          }}
+        >
+          <input
+            className="input"
+            type="text"
+            placeholder="Add a comment"
+            onChange={event =>
+              setComment({ ...comment, comment: event.target.value })
+            }
+          ></input>
+        </form>
+      )}
     </article>
   );
 }

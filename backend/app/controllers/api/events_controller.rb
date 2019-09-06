@@ -1,9 +1,6 @@
 class Api::EventsController < ApplicationController
 
-include Pagy::Backend
-
-  before_action :set_event, :authenticate_user
-
+  before_action :set_event, :authenticate_user, :set_user
 
   def index
 
@@ -20,20 +17,9 @@ include Pagy::Backend
     event_output
   } 
 
-  # @pagy_a, @items = pagy_array(@eventsWithCommentsAndAttendees)
-
-
   render json: @eventsWithCommentsAndAttendees
 
   end
-
-  # def generate_hash_with_type(object, type)
-  #   hash = object.attributes
-  #   type_property = {:type => type}
-  #   hash_with_type = hash.merge(type_property)
-
-  #   return hash_with_type
-  # end
 
   #GET events/id
   def show
@@ -42,8 +28,8 @@ include Pagy::Backend
 
       #POST
   def create
-
     @event = Event.new(event_params)
+    
       if @event.save
         render json: @event, status: :created
       else
@@ -58,8 +44,12 @@ include Pagy::Backend
       @event = Event.find_by(id: params[:id])
     end
   
+    def set_user
+      @user = User.find_by(id: params[:id])
+    end
+
     def event_params 
-      params.permit(:title, :description, :start, :end, :location, :image)
+      params.permit(:title, :description, :owner_id, :start, :end, :location, :image)
     end
 
 end

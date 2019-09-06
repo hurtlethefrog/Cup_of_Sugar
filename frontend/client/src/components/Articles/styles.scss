@@ -1,4 +1,4 @@
-$article-background:white;
+$article-background: white;
 $comment-box: white;
 
 .box {
@@ -8,7 +8,6 @@ $comment-box: white;
   position: relative;
 
   .article--userinfo {
-    
     img {
       width: 35px;
     }
@@ -34,7 +33,7 @@ $comment-box: white;
     margin-left: 4px;
   }
 
-  .comment--box{ 
+  .comment--box {
     background-color: $comment-box;
     display: flex;
     flex-direction: row;
@@ -44,24 +43,70 @@ $comment-box: white;
     font-size: 0.8rem;
     margin-top: 10px;
     position: relative;
-  
-  img {
-    width: 35px;
-  }
 
-  .hideable--date {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin-right: 4px;
-    align-self: flex-end;
+    img {
+      width: 35px;
+    }
 
-    // display: none;
+    .hideable--date {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin-right: 4px;
+      align-self: flex-end;
 
-    &:hover {
-      display: block;
+      // display: none;
+
+      &:hover {
+        display: block;
+      }
     }
   }
-
 }
+
+.new--article--box {
+  display: flex;
+  background-color: aqua;
+  width: 50%;
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 2% 25%;
+
+  .calendar {
+    margin-left: -350%;
+  }
+
+  .new--choose {
+    display: contents;
+  }
+
+  .add {
+    cursor: pointer;
+  }
+  .button-bar {
+    position: relative;
+    width: 35px;
+  }
+  .backspace {
+    position: relative;
+    width: 35px;
+    margin-left: -6%;
+    margin-right: 5%;
+  }
+
+  // img {
+  // }
+
+  // .field {
+  //   // width:
+  // }
+}
+
+.expand-comments {
+  position: relative;
+  width: 0;
+  width: 35px;
+  cursor: pointer;
 }

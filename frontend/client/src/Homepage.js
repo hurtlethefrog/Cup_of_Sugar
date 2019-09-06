@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import './Homepage.scss';
-import axios from 'axios';
-import FilterBar from './components/Filters/FilterBar';
-import Articles from './components/Articles/Articles';
-import New from './components/Articles/New';
-import Nav from './components/Nav';
+import React, { useState, useEffect } from "react";
+import "./Homepage.scss";
+import axios from "axios";
+import FilterBar from "./components/Filters/FilterBar";
+import Articles from "./components/Articles/Articles";
+import New from "./components/Articles/New";
+import Nav from "./components/Nav";
+import { defaultProps } from "@lls/react-light-calendar";
 
 const dummyAcc = {
   community: {
@@ -53,36 +54,205 @@ const dummyAcc = {
 export default function Homepage() {
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("articles");
-  const [account, setAccount] = useState(dummyAcc);
+  const [account, setUser] = useState(dummyAcc);
   const [newArticle, setNewArticle] = useState();
+  const [household, setHousehold] = useState();
+  // toggles to trigger articles refresh after sucessful post
+  const [post, setPost] = useState(true);
+  const [comment, makeComment] = useState();
+
+  const updateComments = (arr, payload, cb) => {
+    for (let ele of arr) {
+      if (ele.id === payload.id) {
+        ele.comments.push(payload);
+      }
+    }
+    cb(arr);
+  };
+  const tagGenerator = type => {
+    if (type === "offer" || type === "request") {
+      return "offers_requests_id";
+    } else {
+      return `${type}s_id`;
+    }
+  };
 
   useEffect(() => {
-    axios.get(`/api/${filter}`)
-    .then((articles) => {
-      setArticles(articles.data)
-    })
-    .catch((err) => console.log(err))
-  }, [filter])
+    axios
+      .get(`/api/households/${1}`)
+      .then(household => {
+        console.log("HOUSEHOLDDATA", household.data);
+        setHousehold(household.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`/api/users/${1}`)
+      .then(account => {
+        console.log("ACCOUNTDATA", account.data);
+        setUser(account.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    console.log(`/api/${filter}`);
+    if (filter === "mine") {
+      axios
+        .get(`/api/users/${account.id}/articles`)
+        .then(articles => {
+          setArticles(articles.data);
+        })
+        .catch(err => console.log(err));
+    } else {
+      axios
+        .get(`/api/${filter}`)
+        .then(articles => {
+          setArticles(articles.data);
+        })
+        .catch(err => console.log(err));
+    }
+  }, [filter, post]);
+
+  // switch case that posts to relevant route after removing unneeded keys
+  useEffect(() => {
+    if (newArticle) {
+      switch (newArticle.type) {
+        case "event":
+          const eventArticle = {
+            ...newArticle,
+            article_type: newArticle.type,
+            owner_id: account.id
+          };
+          delete eventArticle.type;
+          console.log(eventArticle);
+          axios
+            .post(`/api/${newArticle.type}s`, {
+              ...eventArticle
+            })
+            .then(res => {
+              console.log(res.data);
+              setPost(!post);
+            })
+            .catch(err => console.log(err));
+          break;
+        case "notice":
+          const noticeArticle = {
+            ...newArticle,
+            article_type: newArticle.type,
+            owner_id: account.id
+          };
+          delete noticeArticle.type;
+          delete noticeArticle.start;
+          delete noticeArticle.end;
+          delete noticeArticle.location;
+
+          console.log(noticeArticle);
+          axios
+            .post(`/api/${newArticle.type}s`, {
+              ...noticeArticle
+            })
+            .then(res => {
+              console.log(res.data);
+              setPost(!post);
+            })
+            .catch(err => console.log(err));
+          break;
+        case "offer":
+          const offerArticle = {
+            ...newArticle,
+            article_type: newArticle.type,
+            owner_id: account.id
+          };
+          delete offerArticle.type;
+          delete offerArticle.start;
+          delete offerArticle.end;
+          delete offerArticle.location;
+
+          console.log(offerArticle);
+          axios
+            .post(`/api/${newArticle.type}s`, {
+              ...offerArticle
+            })
+            .then(res => {
+              console.log(res.data);
+              setPost(!post);
+            })
+            .catch(err => console.log(err));
+          break;
+        case "request":
+          const requestArticle = {
+            ...newArticle,
+            article_type: newArticle.type,
+            owner_id: account.id
+          };
+          delete requestArticle.type;
+          delete requestArticle.start;
+          delete requestArticle.end;
+          delete requestArticle.image;
+          delete requestArticle.location;
+
+          console.log(requestArticle);
+          axios
+            .post(`/api/${newArticle.type}s`, {
+              ...requestArticle
+            })
+            .then(res => {
+              console.log(res.data);
+              setPost(!post);
+            })
+            .catch(err => console.log(err));
+          break;
+      }
+    }
+  }, [newArticle]);
+  // post request for new comments
+  useEffect(() => {
+    if (comment) {
+      const userComment = {
+        ...comment,
+        users_id: account.id,
+        [tagGenerator(comment.type)]: comment.id
+      };
+      delete userComment.type;
+      delete comment.id;
+      axios
+        .post(`api/${comment.type}s/${account.id}/comments`, { ...userComment })
+        .then(res => {
+          updateComments(articles, res.data, setArticles);
+        });
+    }
+  }, [comment]);
 
   return (
     <div className="App">
-        <Nav>NAVBAR</Nav>
+      <Nav
+        household={household}
+        setHousehold={setHousehold}
+        account={account}
+        setAccount={setUser}
+      >
+        NAVBAR
+      </Nav>
 
-        <button onClick={event => console.log(filter)}>Current Filter</button>
-        <button onClick={event => console.log(articles)}>Current Articles</button>
-        <div>Hello {account.user[0].first_name} </div>
-        {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
-        <div>
-          <FilterBar onSelect={(a)=>{setFilter(a)}} filter={filter} />
-        </div>
-        {/* onSubmit function will need to ensure title description, everything else is optional */}
-        <div>
-          <New onSubmit={setNewArticle}/>
-        </div>
-        {/* map must be handed an array from articles hook, once recieved in Article it will be identified and the apropriate article component will be rendered */}
-        <div className="article-container">
-          {articles && <Articles articles={articles} />}
-        </div>
+      <button onClick={event => console.log(filter)}>Current Filter</button>
+      <button onClick={event => console.log(articles)}>Current Articles</button>
+      <div>Hello {account.first_name}</div>
+      {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
+      <div>
+        <FilterBar onSelect={setFilter} filter={filter} />
       </div>
+
+      {/* map must be handed an array from articles hook, once recieved in Article it will be identified and the apropriate article component will be rendered */}
+      <div className="article-container">
+        <div>
+          {/* onSubmit function will need to ensure title description, everything else is optional */}
+          <New onSubmit={setNewArticle} />
+        </div>
+        {articles && <Articles makeComment={makeComment} articles={articles} />}
+      </div>
+    </div>
   );
 }
