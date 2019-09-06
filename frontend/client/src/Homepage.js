@@ -93,7 +93,7 @@ export default function Homepage() {
       .get(`/api/users/${1}`)
       .then(account => {
         console.log("ACCOUNTDATA", account.data)
-        setAccount(account.data);
+        setUser(account.data);
       })
       .catch(err => console.log(err));
   }, []);
@@ -113,7 +113,7 @@ export default function Homepage() {
     if (newArticle) {
       switch (newArticle.type) {
         case "event":
-          const eventArticle = { ...newArticle, article_type: newArticle.type };
+          const eventArticle = { ...newArticle, article_type: newArticle.type, owner_id: 1};
           delete eventArticle.type;
           console.log(eventArticle);
           axios
@@ -214,7 +214,7 @@ export default function Homepage() {
         household={household} 
         setHousehold={setHousehold} 
         account={account} 
-        setAccount={setAccount} >NAVBAR
+        setAccount={setUser} >NAVBAR
       </Nav>
 
       <button onClick={event => console.log(filter)}>Current Filter</button>
