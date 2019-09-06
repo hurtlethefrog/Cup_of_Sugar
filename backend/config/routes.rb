@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     end
     resources :events do 
       resources :comments, except: [:update, :destroy]
+      resources :attendees, except: [:update]
     end
     resources :notices, except: [:destroy] do
       resources :comments, except: [:update, :destroy]

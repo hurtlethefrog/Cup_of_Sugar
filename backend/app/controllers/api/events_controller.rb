@@ -45,7 +45,7 @@ class Api::EventsController < ApplicationController
     end
   
     def set_user
-      @user = User.find_by(id: params[:id])
+      @user = User.find_by(id: params[:owner_id])
     end
 
     def event_params 

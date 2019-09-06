@@ -5,7 +5,7 @@ import "./styles.scss";
 export default function Notice(props) {
   const [state, setState] = useState(false);
   const [comment, setComment] = useState({
-    id: props.article.id,
+    id: props.article.notice_id,
     type: "notice"
   });
 
@@ -52,6 +52,7 @@ export default function Notice(props) {
 
   return (
     <article className="box">
+      <div>{console.log("PROPS",props.article)}</div>
       <div className="article-icon">N</div>
       <div className="article--userinfo">
         <img
@@ -92,7 +93,7 @@ export default function Notice(props) {
           ></input>
         </form>
       )}
-      {state && <div className="comments--box">{parsedComments}</div>}
+      {state && <div className="comments--box">{parsedComments.reverse()}</div>}
       {state && (
         <form
           onSubmit={event => {

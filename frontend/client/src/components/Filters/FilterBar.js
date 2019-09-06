@@ -49,7 +49,7 @@ export default function FilterBar(props) {
       {props.filter === "offers" ? 
       <Offers selected onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Offers> :
       <Offers onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Offers>}
-      {props.filter === "wanted" ? 
+      {props.filter === "requests" ? 
       <Wanted selected onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Wanted> :
       <Wanted onSelect={props.onSelect} toggleFilter={toggleFilter} categories={categories}></Wanted>}
     </section>

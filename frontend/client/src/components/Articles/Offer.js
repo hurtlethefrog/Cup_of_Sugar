@@ -5,7 +5,7 @@ import "./styles.scss";
 export default function Offer(props) {
   const [state, setState] = useState(false);
   const [comment, setComment] = useState({
-    id: props.article.id,
+    id: props.article.offer_request_id,
     type: "offer"
   });
 
@@ -77,7 +77,7 @@ export default function Offer(props) {
           ></input>
         </form>
       )}
-      {state && <div className="comments--box">{parsedComments}</div>}
+      {state && <div className="comments--box">{parsedComments.reverse()}</div>}
       {state && (
         <form
           onSubmit={event => {

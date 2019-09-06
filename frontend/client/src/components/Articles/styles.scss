@@ -64,9 +64,22 @@ $comment-box: white;
   }
 }
 
+.attendees--summary {
+  border: none;
+  cursor:pointer;
+  display:flex;
+  flex-direction: row;
+
+  .attendees--icon {
+    // display:flex;
+    // text-align: center;
+    // flex-direction: row;
+    width: 35px;
+  }
+}
+
 .new--article--box {
   display: flex;
-  background-color: aqua;
   width: 50%;
   position: relative;
   flex-direction: row;
@@ -95,13 +108,11 @@ $comment-box: white;
     margin-left: -6%;
     margin-right: 5%;
   }
+}
 
-  // img {
-  // }
-
-  // .field {
-  //   // width:
-  // }
+.add--attendee {
+  width: 35px;
+  cursor: pointer;
 }
 
 .expand-comments {
