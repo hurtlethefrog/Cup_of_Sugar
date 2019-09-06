@@ -5,6 +5,7 @@ import FilterBar from "./components/Filters/FilterBar";
 import Articles from "./components/Articles/Articles";
 import New from "./components/Articles/New";
 import Nav from "./components/Nav";
+import { defaultProps } from "@lls/react-light-calendar";
 
 const dummyAcc = {
   community: {
@@ -54,7 +55,7 @@ const dummyAcc = {
 export default function Homepage() {
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState('articles');
-  const [account, setAccount] = useState();
+  const [account, setAccount] = useState(dummyAcc);
   const [newArticle, setNewArticle] = useState();
   const [household, setHousehold] = useState();
   // toggles to trigger articles refresh after sucessful post
@@ -178,7 +179,7 @@ export default function Homepage() {
 
       <button onClick={event => console.log(filter)}>Current Filter</button>
       <button onClick={event => console.log(articles)}>Current Articles</button>
-      <div>Hello</div>
+      <div>Hello {account.first_name}</div>
       {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
       <div>
         <FilterBar

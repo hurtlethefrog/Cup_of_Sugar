@@ -18,9 +18,6 @@ export default function Household(props) {
 } else {
     return (
       <div>
-        <ul>
-          <li>{}</li>
-        </ul>
       </div>
     )
 
