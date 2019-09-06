@@ -102,7 +102,6 @@ export default function Homepage() {
           const eventArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: account.user[0].id
           };
           delete eventArticle.type;
           console.log(eventArticle);
