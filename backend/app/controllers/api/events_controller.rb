@@ -1,8 +1,6 @@
 class Api::EventsController < ApplicationController
 
-include Pagy::Backend
-
-  before_action :set_event
+  before_action :set_event, :set_user
 
   def index
 
@@ -18,9 +16,6 @@ include Pagy::Backend
 
     event_output
   } 
-
-  # @pagy_a, @items = pagy_array(@eventsWithCommentsAndAttendees)
-
 
   render json: @eventsWithCommentsAndAttendees
 
@@ -49,6 +44,10 @@ include Pagy::Backend
       @event = Event.find_by(id: params[:id])
     end
   
+    def set_user
+      @user = User.find_by(id: params[:id])
+    end
+
     def event_params 
       params.permit(:title, :description, :start, :end, :location, :image)
     end
