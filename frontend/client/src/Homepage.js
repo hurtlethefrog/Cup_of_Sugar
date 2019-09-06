@@ -211,21 +211,25 @@ export default function Homepage() {
   }, [newArticle]);
   // post request for new comments
   useEffect(() => {
-    if (comment) {
-      const userComment = {
-        ...comment,
-        users_id: account.id,
-        [tagGenerator(comment.type)]: comment.id
-      };
-      delete userComment.type;
-      delete comment.id;
+    if(comment) {
+    const userComment = {
+      ...comment,
+      users_id: account.id,
+      [tagGenerator(comment.type)]: comment.id
+    };
+    delete userComment.type;
+    delete comment.id;
+    delete comment.event_id;
+    delete userComment.event_id;
+    delete userComment.id
 
-      axios
-        .post(`api/${comment.type}s/${account.id}/comments`, { ...userComment })
-        .then(res => {
-          updateComments(articles, res.data, setArticles);
-        })
-        .catch(err => console.log(err));
+    {console.log("LOGGIN USER COMMENT",userComment)}
+    axios
+      .post(`api/${comment.type}s/${userComment.events_id}/comments`, { ...userComment })
+      .then(res => {
+        updateComments(articles, res.data, setArticles);
+      })
+      .catch(err => console.log(err));
     }
   }, [comment]);
 

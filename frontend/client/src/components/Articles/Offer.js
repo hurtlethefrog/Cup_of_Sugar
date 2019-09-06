@@ -5,7 +5,7 @@ import "./styles.scss";
 export default function Offer(props) {
   const [state, setState] = useState(false);
   const [comment, setComment] = useState({
-    id: props.article.id,
+    id: props.article.offer_request_id,
     type: "offer"
   });
 

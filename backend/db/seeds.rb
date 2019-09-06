@@ -10,11 +10,15 @@ require 'faker'
 
 puts 'Seeding Data....'
 
-community = Community.create(id: 5000, name: 'Mile End', postal_code: 'H2T')
-household = Household.create(id: 5000, address: '8000 Honey Lane', postal_code: 'H2T 111', province: 'Quebec', city: 'Montreal')
+community = Community.create(name: 'Mile End', postal_code: 'H2T')
+
+household1 = Household.create(address: '8000 Honeypot Avenue', postal_code: 'H2T 111', province: 'Quebec', city: 'Montreal', communities_id: community.id)
+household2 = Household.create(address: '1 Sugarpot Street', postal_code: 'H2T 112', province: 'Quebec', city: 'Montreal', communities_id: community.id)
+household3 = Household.create(address: '3 Lemondrop Lane', postal_code: 'H2T 123', province: 'Quebec', city: 'Montreal', communities_id: community.id)
+household4 = Household.create(address: '4 Candycane Street', postal_code: 'H2T 133', province: 'Quebec', city: 'Montreal', communities_id: community.id)
+
 
 admin = User.create(
-  id: 5000, 
   first_name: 'AdminName',
   last_name: 'AdminSurname',
   profile_pic: Faker::Avatar.image,
@@ -22,35 +26,39 @@ admin = User.create(
   password: '123',
   phone_number:'11111111111',
   is_admin: true, 
-  households_id: 5000
+  households_id: household1.id
   )
 
 neighbour = User.create(
-    id: 6000,
     first_name: 'NeighbourName',
     last_name: 'NeighbourSurname',
     profile_pic: Faker::Avatar.image,
     email: 'neighbour@email.com',
-    phone_number:Faker::PhoneNumber.cell_phone
+    phone_number:Faker::PhoneNumber.cell_phone, 
+    households_id: household2.id, 
+    is_admin: true
     )
 
 # Household.destroy_all
 
-Household.create!([{
+Household.create([{
+  communities_id: community.id,
   address: '5733 Esplande Avenue',
   postal_code: 'H2T 2Z9',
   province: 'Quebec',
   city: 'Montreal'
 },
 {
+  communities_id: community.id,
   address: '5731 Waverley Street',
   postal_code: 'H2T 2Y2',
   province: 'Quebec',
   city: 'Montreal'
 },
 {
+  communities_id: community.id,
   address: '5977 Park Avenue',
-  postal_code: 'H2V 4H4',
+  postal_code: 'H2T 4H4',
   province: 'Quebec',
   city: 'Montreal'
 }])
@@ -59,7 +67,7 @@ Household.create!([{
 
 5.times do 
   User.create(
-  households_id: '1',
+  households_id: household3.id,
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
   profile_pic: Faker::Avatar.image,
@@ -71,7 +79,7 @@ end
 
 3.times do 
   User.create(
-  households_id: '2',
+  households_id: household4.id,
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
   profile_pic: Faker::Avatar.image,
@@ -83,7 +91,7 @@ end
 
 2.times do 
   User.create(
-  households_id: '3',
+  households_id: household1.id,
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
   profile_pic: Faker::Avatar.image,
@@ -93,10 +101,37 @@ end
   )
 end
 
+user1 = User.create(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  profile_pic: Faker::Avatar.image,
+  email: Faker::Internet.email,
+  phone_number:Faker::PhoneNumber.cell_phone, 
+  password: "fjdlkfjlsdkf"
+  )
+
+user2 = User.create(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  profile_pic: Faker::Avatar.image,
+  email: Faker::Internet.email,
+  phone_number:Faker::PhoneNumber.cell_phone, 
+  password: "fjdlkfjlsdkf"
+  )
+
+user3 = User.create(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  profile_pic: Faker::Avatar.image,
+  email: Faker::Internet.email,
+  phone_number:Faker::PhoneNumber.cell_phone, 
+  password: "fjdlkfjlsdkf"
+  )
+
 # Event.destroy_all
 
-Event.create(
-  owner_id: '1',
+event1 = Event.create(
+  owner_id: admin.id,
   created_at: 10.days.ago,
   title: 'Event Lunch in the park', 
   location: 'Location for park',
@@ -105,8 +140,8 @@ Event.create(
   end:Faker::Time.forward(days: 23, period: :morning) 
   )
 
-Event.create(
-  owner_id: '2',
+event2 = Event.create(
+  owner_id: user1.id,
   created_at: 20.days.ago,
   title: 'Barbeque at My Place', 
   location: 'Location for BBQ',
@@ -115,8 +150,8 @@ Event.create(
   end:Faker::Time.forward(days: 5, period: :morning 
 ))
 
-Event.create(
-  owner_id: '3',
+event3 = Event.create(
+  owner_id: user2.id,
   created_at: 5.days.ago,
   title: 'Gaming Night and Pizza', 
   location: 'Location for game',
@@ -125,8 +160,8 @@ Event.create(
   end:Faker::Time.forward(days: 10, period: :evening) 
 )
 
-Event.create(
-  owner_id: '4',
+event4 = Event.create(
+  owner_id: user3.id,
   created_at: 1.days.ago,
   title: 'Baby play date with my 3 year old', 
   location: 'Location for playdate',
@@ -136,31 +171,31 @@ Event.create(
 ))
 
 EventUser.create(
-  events_id: '1', 
-  users_id: '1'
+  events_id: event1.id, 
+  users_id: user1.id
 )
 EventUser.create(
-  events_id: '1', 
-  users_id: '2'
+  events_id: event2.id, 
+  users_id: user2.id
 )
 EventUser.create(
-  events_id: '1', 
-  users_id: '2'
+  events_id: event2.id, 
+  users_id: user3.id
 )
 EventUser.create(
-  events_id: '2', 
-  users_id: '3'
-)
-EventUser.create(
-  events_id: '2', 
+  events_id: event2.id, 
   users_id: admin.id
 )
 EventUser.create(
-  events_id: '2', 
+  events_id: event1.id, 
+  users_id: admin.id
+)
+EventUser.create(
+  events_id: event4.id, 
   users_id: neighbour.id
 )
 
-OffersRequest.create(
+offer1 = OffersRequest.create(
   owner_id: admin.id, 
   created_at: 15.days.ago,
   title:'Offer title 1', 
@@ -170,7 +205,7 @@ OffersRequest.create(
   offer: true
 )
 
-OffersRequest.create(
+offer2 = OffersRequest.create(
   owner_id: admin.id, 
   created_at: 10.days.ago,
   title:'Offer title 2', 
@@ -180,7 +215,7 @@ OffersRequest.create(
   offer: true
 )
 
-OffersRequest.create(
+offer3 = OffersRequest.create(
   owner_id: neighbour.id,
   created_at: 2.days.ago,
   title:'Offer title 3', 
@@ -190,7 +225,7 @@ OffersRequest.create(
   offer: true
 )
 
-OffersRequest.create(
+request1 = OffersRequest.create(
   owner_id: neighbour.id,
   created_at: 5.days.ago,
   title:'Wanted title 1', 
@@ -200,8 +235,8 @@ OffersRequest.create(
   offer: false
 )
 
-OffersRequest.create(
-  owner_id: neighbour.id,
+request2 = OffersRequest.create(
+  owner_id: admin.id,
   created_at: 15.days.ago,
   title:'Wanted title 2', 
   description:'Wanted description 2',
@@ -212,92 +247,103 @@ OffersRequest.create(
 
 # Notice.destroy_all
 
-Notice.create([
-  { user_id: '1',
+notice1 = Notice.create(
+  user_id: admin.id,
   created_at: 10.days.ago,
   title: 'Notice title 1', 
-  description: 'Notice description 1'},
+  description: 'Notice description 1'
+)
 
-  { user_id: '1',
+notice2 = Notice.create(
+  user_id: admin.id,
+  created_at: 10.days.ago,
+  title: 'Notice title 1', 
+  description: 'Notice description 1'
+)
+
+notice3 = Notice.create( 
+  user_id: neighbour.id,
   created_at: 5.days.ago,
   title: 'Notice title 2', 
-  description: 'Notice description 2'},
+  description: 'Notice description 2'
+)
 
-  { user_id: '5000',
+notice4 = Notice.create(
+  user_id: user1.id,
   created_at: 20.days.ago,
   title: 'Notice title 3', 
-  description: 'Notice description 3'},
-])
+  description: 'Notice description 3'
+)
 
 Comment.create([
-  { comment: 'event comment 1 by user 1', 
+  { comment: 'event comment', 
   created_at: 1.days.ago,
-  events_id: '1',
-  users_id: '1' },
+  events_id: event1.id,
+  users_id: user1.id },
 
-  { comment: 'event comment 2 by user 2', 
+  { comment: 'event comment', 
   created_at: 2.days.ago,
-  events_id: '1',
-  users_id: '2' },
+  events_id: event2.id,
+  users_id: user2.id },
 
-  { comment: 'event comment 3 by user 2', 
+  { comment: 'event comment', 
   created_at: 3.days.ago,
-  events_id: '1',
-  users_id: '2' },
+  events_id: event2.id,
+  users_id: user3.id },
 
-  { comment: 'event comment 3 by user 2', 
+  { comment: 'event comment', 
   created_at: 2.days.ago,
-  events_id: '2',
-  users_id: '5' },
+  events_id: event2.id,
+  users_id: admin.id },
 
-  { comment: 'notice comment 1 by user 5', 
+  { comment: 'notice comment', 
   created_at: 4.days.ago,
-  notice_id: '1',
-  users_id: '5' },
+  notice_id: notice1.id,
+  users_id: admin.id },
 
-  { comment: 'notice comment 1 by user 1', 
+  { comment: 'notice comment', 
   created_at: 2.days.ago,
-  notice_id: '1',
-  users_id: '1' },
+  notice_id: notice3.id,
+  users_id: neighbour.id },
 
-  { comment: 'notice comment 2 by user 1', 
+  { comment: 'notice comment', 
   created_at: 2.days.ago,
-  notice_id: '2',
-  users_id: '1' },
+  notice_id: notice1.id,
+  users_id: user3.id },
 
-  { comment: 'notice comment 3 by user 1', 
+  { comment: 'notice comment', 
   created_at: 3.days.ago,
-  notice_id: '3',
-  users_id: '1' },
+  notice_id: notice1.id,
+  users_id: user1.id },
 
-  { comment: 'notice comment 3 by user 1', 
+  { comment: 'notice comment', 
   created_at: 4.days.ago,
-  notice_id: '3',
-  users_id: '1' },
+  notice_id: notice2.id,
+  users_id: admin.id},
 
   { comment: 'notice comment 3 by admin', 
   created_at: 6.days.ago,
-  notice_id: '3',
+  notice_id: notice3.id,
   users_id: admin.id },
 
   { comment: 'notice comment 3 by neighbour', 
   created_at: 2.days.ago,
-  notice_id: '3',
+  notice_id: notice4.id,
   users_id: neighbour.id },
 
-  { comment: 'offer/request comment 1 by neighbour', 
+  { comment: 'offer comment 1 by neighbour', 
   created_at: 2.days.ago,
-  offers_requests_id: '1',
+  offers_requests_id: offer1.id,
   users_id: neighbour.id },
 
-  { comment: 'offer/request comment 2 by neighbour', 
+  { comment: 'request comment 2 by neighbour', 
   created_at: 5.days.ago,
-  offers_requests_id: '1',
+  offers_requests_id: request1.id,
   users_id: neighbour.id },
 
-  { comment: 'offer/request comment 3 by admin', 
+  { comment: 'request comment 3 by admin', 
   created_at: 4.days.ago,
-  offers_requests_id: '1',
+  offers_requests_id: request2.id,
   users_id: admin.id },
 ])
 

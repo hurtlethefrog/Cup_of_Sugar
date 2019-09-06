@@ -9,7 +9,7 @@ export default function Event(props) {
   // if this state is true all attendee info will be shown
   const [attendees, setAttendees] = useState(false);
   const [comment, setComment] = useState({
-    id: props.article.id,
+    id: props.article.event_id,
     type: "event"
   });
 
