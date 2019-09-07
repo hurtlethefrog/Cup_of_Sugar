@@ -1,8 +1,10 @@
 class Api::NoticesController < ApplicationController
 
-  before_action :set_notice
+  before_action :set_notice, :set_user
 
   def index
+
+    puts params
 
   @notices = Notice.order(created_at: :desc)
 
@@ -48,6 +50,10 @@ class Api::NoticesController < ApplicationController
 
   def set_notice
     @notice = Notice.find_by(id: params[:id])
+  end
+
+  def set_user
+    @user = User.find_by(id: params[:user_id])
   end
 
   def notice_params 

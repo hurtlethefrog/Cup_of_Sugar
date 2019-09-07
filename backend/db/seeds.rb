@@ -23,7 +23,7 @@ admin = User.create(
   last_name: 'AdminSurname',
   profile_pic: Faker::Avatar.image,
   email: 'email@me.com',
-  # password: '123',
+  password_digest: '123',
   phone_number:'11111111111',
   is_admin: true, 
   households_id: household1.id
@@ -73,7 +73,7 @@ Household.create([{
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  # password: "fjdlkfjlsdkf"
+  password_digest: "fjdlkfjlsdkf"
   )
 end
 
@@ -85,7 +85,7 @@ end
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  # password: "fjdlkfjlsdkf"
+  password_digest: "fjdlkfjlsdkf"
   )
 end
 
@@ -97,7 +97,7 @@ end
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  # password: "fjdlkfjlsdkf"
+  password_digest: "fjdlkfjlsdkf"
   )
 end
 
@@ -107,7 +107,7 @@ user1 = User.create(
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  # password: "fjdlkfjlsdkf"
+  password_digest: "fjdlkfjlsdkf"
   )
 
 user2 = User.create(
@@ -116,7 +116,7 @@ user2 = User.create(
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  # password: "fjdlkfjlsdkf"
+  password_digest: "fjdlkfjlsdkf"
   )
 
 user3 = User.create(
@@ -125,7 +125,7 @@ user3 = User.create(
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  # password: "fjdlkfjlsdkf"
+  password_digest: "fjdlkfjlsdkf"
   )
 
 # Event.destroy_all
@@ -216,7 +216,7 @@ offer2 = OffersRequest.create(
 )
 
 offer3 = OffersRequest.create(
-  owner_id: neighbour.id,
+  owner_id: user3.id,
   created_at: 2.days.ago,
   title:'Offer title 3', 
   description:'Offer description 3',
@@ -226,7 +226,7 @@ offer3 = OffersRequest.create(
 )
 
 request1 = OffersRequest.create(
-  owner_id: neighbour.id,
+  owner_id: user2.id,
   created_at: 5.days.ago,
   title:'Wanted title 1', 
   description:'Wanted description 1',
@@ -257,21 +257,21 @@ notice1 = Notice.create(
 notice2 = Notice.create(
   user_id: admin.id,
   created_at: 10.days.ago,
-  title: 'Notice title 1', 
+  title: 'Notice title 2', 
   description: 'Notice description 1'
 )
 
 notice3 = Notice.create( 
-  user_id: neighbour.id,
+  user_id: user3.id,
   created_at: 5.days.ago,
-  title: 'Notice title 2', 
+  title: 'Notice title 3', 
   description: 'Notice description 2'
 )
 
 notice4 = Notice.create(
   user_id: user1.id,
   created_at: 20.days.ago,
-  title: 'Notice title 3', 
+  title: 'Notice title 4', 
   description: 'Notice description 3'
 )
 

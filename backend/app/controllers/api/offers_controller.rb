@@ -1,6 +1,6 @@
 class Api::OffersController < ApplicationController
 
-  before_action :set_offer
+  before_action :set_offer, :set_user, 
 
   def index
 
@@ -46,5 +46,8 @@ class Api::OffersController < ApplicationController
     params.permit(:title, :description, :image, :offer)
   end
 
+  def set_user
+    @user = User.find_by(id: params[:user_id])
+  end
 
 end
