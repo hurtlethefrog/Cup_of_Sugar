@@ -238,8 +238,9 @@ export default function Homepage() {
 
   useEffect(() => {
     if (attendee.going === true) {
+      {console.log("ATTENDEE", attendee)}
       axios
-        .post(`api/events/${attendee.id}/attendees`, { user_id: account.id })
+        .post(`api/events/${attendee.events_id}/attendees`, {users_id: account.id, events_id: attendee.events_id})
         .then(res => {
           
         })
