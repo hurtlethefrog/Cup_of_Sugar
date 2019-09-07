@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import {useDispatch, useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setUser } from "../../store/app"
+import { setUser } from "../../store/app";
 
 export default function UserEntry(props) {
+  const user = useSelector(state => state.app.user);
+  console.log("user####################:", user);
 
-  const user = useSelector(state => state.app.user)
-  console.log("user####################:", user)
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let userEntry = {
     first_name: "",
@@ -29,13 +28,15 @@ export default function UserEntry(props) {
       .post("/api/users", { userForm })
       .then(function(res) {
         console.log("user creation : ", res);
-        const user_auth = {auth:{email:userForm.email, password:userForm.password}}
-        console.log("user_auth:", user_auth)
-        return axios.post("/api/user_token", user_auth )
-      })      
-      .then(function(res){
-        console.log("res2:", res)
-        localStorage.setItem('jwt', res.data.jwt)
+        const user_auth = {
+          auth: { email: userForm.email, password: userForm.password }
+        };
+        console.log("user_auth:", user_auth);
+        return axios.post("/api/user_token", user_auth);
+      })
+      .then(function(res) {
+        console.log("res2:", res);
+        localStorage.setItem("jwt", res.data.jwt);
       })
       .catch(function(err) {
         console.log(err);
@@ -97,8 +98,12 @@ export default function UserEntry(props) {
         </form>
       </section>
       <footer>
-        <button onClick={props.onBack} className="back-btn">Back</button>
-        <button onClick={props.onNext} className="next-btn">Next</button>
+        <button onClick={props.onBack} className="back-btn">
+          Back
+        </button>
+        <button onClick={props.onNext} className="next-btn">
+          Next
+        </button>
       </footer>
     </main>
   );

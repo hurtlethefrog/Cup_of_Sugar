@@ -1,38 +1,37 @@
 import React, { useState, useEffect } from "react";
-import {useDispatch, useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setUser } from "../../store/app"
+import { setUser } from "../../store/app";
 
 export default function Login(props) {
+  const user = useSelector(state => state.app.user);
 
-  const user = useSelector(state => state.app.user)
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let userEntry = {
     email: "",
-    password: "",
+    password: ""
   };
 
   const [userForm, updateUserForm] = useState(userEntry);
+  const [error, setError] = useState(false);
 
   const handleSubmission = function(event) {
     event.preventDefault();
-    console.log(userForm);
     // dispatch(setUser(userForm));
 
     axios
-      .get(`/api/users/`, { userForm })
+      .post(`/api/user_token`, {
+        auth: { email: userForm.email, password: userForm.password }
+      })
       .then(function(res) {
-        console.log("user creation : ", res);
-      })      
-      .then(function(res){
-        console.log("res2:", res)
+        console.log("res1:: ", res.data);
+        window.location = "/";
       })
       .catch(function(err) {
-        console.log(err);
+        console.log("ERRRORORRR!:", err);
+        setError(true);
       });
-
   };
 
   return (
@@ -60,10 +59,21 @@ export default function Login(props) {
           />
           <button type="submit">Submit</button>
         </form>
+        <p>
+          {error && (
+            <div style={{ color: `red` }}>
+              Invalid email address or password.
+            </div>
+          )}
+        </p>
       </section>
       <footer>
-        <button onClick={props.onBack} className="back-btn">Back</button>
-        <button onClick={props.onNext} className="next-btn">Next</button>
+        <button onClick={props.onBack} className="back-btn">
+          Back
+        </button>
+        <button onClick={props.onNext} className="next-btn">
+          Next
+        </button>
       </footer>
     </main>
   );
