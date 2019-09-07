@@ -23,10 +23,12 @@ admin = User.create(
   last_name: 'AdminSurname',
   profile_pic: Faker::Avatar.image,
   email: 'email@me.com',
-  password_digest: '123',
+  # password_digest: '123',
   phone_number:'11111111111',
   is_admin: true, 
-  households_id: household1.id
+  households_id: household1.id,
+  password: '11111111', 
+  password_confirmation: '11111111'
   )
 
 neighbour = User.create(
@@ -37,7 +39,9 @@ neighbour = User.create(
     phone_number:Faker::PhoneNumber.cell_phone, 
     households_id: household2.id, 
     is_admin: true,
-    password_digest: '123',
+    # password_digest: '123',
+    password: '11111111', 
+    password_confirmation: '11111111'
     )
 
 # Household.destroy_all
@@ -74,7 +78,9 @@ Household.create([{
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  password_digest: "fjdlkfjlsdkf"
+  # password_digest: "fjdlkfjlsdkf"
+  password: '11111111', 
+  password_confirmation: '11111111'
   )
 end
 
@@ -86,7 +92,9 @@ end
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  password_digest: "fjdlkfjlsdkf"
+  # password_digest: "fjdlkfjlsdkf"
+  password: '11111111', 
+  password_confirmation: '11111111'
   )
 end
 
@@ -98,7 +106,9 @@ end
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  password_digest: "fjdlkfjlsdkf"
+  # password_digest: "fjdlkfjlsdkf"
+  password: '11111111', 
+  password_confirmation: '11111111'
   )
 end
 
@@ -108,7 +118,9 @@ user1 = User.create(
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  password_digest: "fjdlkfjlsdkf"
+  # password_digest: "fjdlkfjlsdkf"
+  password: '11111111', 
+  password_confirmation: '11111111'
   )
 
 user2 = User.create(
@@ -117,7 +129,9 @@ user2 = User.create(
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  password_digest: "fjdlkfjlsdkf"
+  # password_digest: "fjdlkfjlsdkf"
+  password: '11111111', 
+  password_confirmation: '11111111'
   )
 
 user3 = User.create(
@@ -126,7 +140,9 @@ user3 = User.create(
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  password_digest: "fjdlkfjlsdkf"
+  # password_digest: "fjdlkfjlsdkf"
+  password: '11111111', 
+  password_confirmation: '11111111'
   )
 
 # Event.destroy_all
