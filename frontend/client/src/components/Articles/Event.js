@@ -9,8 +9,9 @@ export default function Event(props) {
   // if this state is true all attendee info will be shown
   const [attendees, setAttendees] = useState(false);
   const [comment, setComment] = useState({
-    id: props.article.event_id,
-    type: "event"
+    id: props.article.events_id,
+    type: "event",
+    events_id: props.article.events_id 
   });
 
   const expandArrow = () => {
@@ -112,6 +113,7 @@ export default function Event(props) {
       {props.article.comments.length <= 0 && (
         <form
           onSubmit={event => {
+            console.log("COMMENT", comment)
             event.preventDefault();
             props.makeComment(comment);
           }}
