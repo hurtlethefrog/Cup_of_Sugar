@@ -1,6 +1,7 @@
 class Api::EventsController < ApplicationController
 
-  before_action :set_event, :set_user, :authenticate_user
+  before_action :set_event, :set_user
+  #  :authenticate_user
 
   def index
 
