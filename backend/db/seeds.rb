@@ -36,7 +36,8 @@ neighbour = User.create(
     email: 'neighbour@email.com',
     phone_number:Faker::PhoneNumber.cell_phone, 
     households_id: household2.id, 
-    is_admin: true
+    is_admin: true,
+    password_digest: '123',
     )
 
 # Household.destroy_all
@@ -304,7 +305,7 @@ Comment.create([
   { comment: 'notice comment', 
   created_at: 2.days.ago,
   notices_id: notice3.id,
-  users_id: neighbour.id },
+  users_id: user3.id },
 
   { comment: 'notice comment', 
   created_at: 2.days.ago,
@@ -329,17 +330,17 @@ Comment.create([
   { comment: 'notice comment 3 by neighbour', 
   created_at: 2.days.ago,
   notices_id: notice4.id,
-  users_id: neighbour.id },
+  users_id: user3.id },
 
   { comment: 'offer comment 1 by neighbour', 
   created_at: 2.days.ago,
   offers_requests_id: offer1.id,
-  users_id: neighbour.id },
+  users_id: user2.id },
 
   { comment: 'request comment 2 by neighbour', 
   created_at: 5.days.ago,
   offers_requests_id: request1.id,
-  users_id: neighbour.id },
+  users_id: user3.id },
 
   { comment: 'request comment 3 by admin', 
   created_at: 4.days.ago,

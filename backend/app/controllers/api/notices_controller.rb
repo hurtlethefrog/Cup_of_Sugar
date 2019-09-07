@@ -10,9 +10,10 @@ class Api::NoticesController < ApplicationController
 
   @noticesWithComments = @notices.map {|notice|
     modified_notice = notice.attributes
+    notices_id = {:notices_id => notice.id}
     user_hash = {:owner => User.find_by_sql("SELECT users.id, first_name, last_name, profile_pic FROM users WHERE users.id = #{notice.user_id}")}
     comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE notices_id = #{notice.id}")}
-    notice_output = modified_notice.merge(user_hash).merge(comments_hash)
+    notice_output = modified_notice.merge(notices_id).merge(user_hash).merge(comments_hash)
 
     notice_output
   }
@@ -23,7 +24,7 @@ class Api::NoticesController < ApplicationController
 
   #GET notices/id
   def show
-    render json: @notice
+    render json: @notice.as_json(methods:[:notices_id])
   end
 
   #POST

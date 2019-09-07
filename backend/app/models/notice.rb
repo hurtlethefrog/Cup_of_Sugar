@@ -4,4 +4,6 @@ class Notice < ApplicationRecord
   has_many :comments
   has_many :flaggeds
 
+  alias notices_id id 
+
 end
