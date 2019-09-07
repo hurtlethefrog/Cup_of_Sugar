@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_05_165236) do
+ActiveRecord::Schema.define(version: 2019_09_07_165017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 2019_09_05_165236) do
     t.bigint "events_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "notice_id"
+    t.bigint "notices_id"
     t.index ["events_id"], name: "index_comments_on_events_id"
-    t.index ["notice_id"], name: "index_comments_on_notice_id"
+    t.index ["notices_id"], name: "index_comments_on_notices_id"
     t.index ["offers_requests_id"], name: "index_comments_on_offers_requests_id"
     t.index ["users_id"], name: "index_comments_on_users_id"
   end
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2019_09_05_165236) do
   end
 
   create_table "households", force: :cascade do |t|
-    t.bigint "communities_id", default: 5000
+    t.bigint "communities_id"
     t.string "address"
     t.string "postal_code"
     t.string "province"

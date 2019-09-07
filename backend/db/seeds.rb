@@ -298,37 +298,37 @@ Comment.create([
 
   { comment: 'notice comment', 
   created_at: 4.days.ago,
-  notice_id: notice1.id,
+  notices_id: notice1.id,
   users_id: admin.id },
 
   { comment: 'notice comment', 
   created_at: 2.days.ago,
-  notice_id: notice3.id,
+  notices_id: notice3.id,
   users_id: neighbour.id },
 
   { comment: 'notice comment', 
   created_at: 2.days.ago,
-  notice_id: notice1.id,
+  notices_id: notice1.id,
   users_id: user3.id },
 
   { comment: 'notice comment', 
   created_at: 3.days.ago,
-  notice_id: notice1.id,
+  notices_id: notice1.id,
   users_id: user1.id },
 
   { comment: 'notice comment', 
   created_at: 4.days.ago,
-  notice_id: notice2.id,
+  notices_id: notice2.id,
   users_id: admin.id},
 
   { comment: 'notice comment 3 by admin', 
   created_at: 6.days.ago,
-  notice_id: notice3.id,
+  notices_id: notice3.id,
   users_id: admin.id },
 
   { comment: 'notice comment 3 by neighbour', 
   created_at: 2.days.ago,
-  notice_id: notice4.id,
+  notices_id: notice4.id,
   users_id: neighbour.id },
 
   { comment: 'offer comment 1 by neighbour', 

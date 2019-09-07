@@ -19,7 +19,7 @@ class Api::ArticlesController < ApplicationController
     @WithCommentsAndAttendees = @articles.map {|article|
       modified_articles = generate_id(article)
       owner_hash = {:owner => User.find_by_sql("SELECT id, first_name, last_name, profile_pic FROM users WHERE #{article.owner_id} = users.id")}
-      comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*,first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE events_id = #{article.event_id} OR notice_id = #{article.notice_id} OR offers_requests_id = #{article.offer_request_id} ORDER BY created_at")}
+      comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*,first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE events_id = #{article.event_id} OR notices_id = #{article.notice_id} OR offers_requests_id = #{article.offer_request_id} ORDER BY created_at")}
       attendees_hash = {:attendees => EventUser.find_by_sql("SELECT users.id, first_name, last_name, profile_pic FROM event_users JOIN users ON event_users.users_id = users.id JOIN events ON event_users.events_id = events.id WHERE events_id = #{article.event_id}")}
     
       output = modified_articles.merge(owner_hash).merge(comments_hash).merge(attendees_hash)
