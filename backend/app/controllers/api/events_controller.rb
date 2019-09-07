@@ -26,7 +26,7 @@ class Api::EventsController < ApplicationController
 
   #GET events/id
   def show
-    render json: @event.as_json(methods:[:events_id])
+    render json: @event
   end
 
       #POST
