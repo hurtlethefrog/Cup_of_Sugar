@@ -20,6 +20,9 @@ class Api::UsersController < ApplicationController
     render json: @user
   end
 
+  # def current_user_info
+  #   render status: :ok, json: current_user.as_json
+  # end
 
   # get user/id
   # def show
