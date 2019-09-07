@@ -51,8 +51,7 @@ export default function Notice(props) {
   });
 
   return (
-    <article className="box">
-      <div>{console.log("PROPS",props.article)}</div>
+    <article className="box notice">
       <div className="article-icon">N</div>
       <div className="article--userinfo">
         <img

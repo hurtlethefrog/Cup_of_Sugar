@@ -55,7 +55,7 @@ export default function Event(props) {
   });
 
   return (
-    <article className="box">
+    <article className="box event">
       <div className="article-icon">E</div>
       <div className="article--userinfo">
         <img src={props.article.owner[0].profile_pic} />

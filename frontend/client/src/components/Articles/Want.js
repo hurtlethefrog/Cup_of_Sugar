@@ -35,7 +35,7 @@ export default function Wanted(props) {
   });
 
   return (
-    <article className="box">
+    <article className="box request">
       <div className="article-icon">W</div>
       <div className="article--userinfo">
         <img

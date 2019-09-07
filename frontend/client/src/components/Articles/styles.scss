@@ -1,11 +1,14 @@
 $article-background: white;
 $comment-box: white;
 
+
 .box {
   background-color: $article-background;
   display: flex;
   flex-direction: column;
   position: relative;
+  
+  
 
   .article--userinfo {
     img {
@@ -120,4 +123,19 @@ $comment-box: white;
   width: 0;
   width: 35px;
   cursor: pointer;
+}
+
+.event {
+  background-color: rgb(240, 202, 191);
+}
+.notice {
+  background-color: rgb( 208 , 213 ,216)
+}
+
+.offer {
+  background-color: rgb(242, 204, 170)
+}
+
+.request {
+  background-color: rgb(226, 227, 161)
 }
