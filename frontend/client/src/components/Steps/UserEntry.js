@@ -30,9 +30,11 @@ export default function UserEntry(props) {
       .then(function(res) {
         console.log("user creation : ", res);
         const user_auth = {auth:{email:userForm.email, password:userForm.password}}
+        console.log("user_auth:", user_auth)
         return axios.post("/api/user_token", user_auth )
       })      
       .then(function(res){
+        console.log("res2:", res)
         localStorage.setItem('jwt', res.data.jwt)
       })
       .catch(function(err) {

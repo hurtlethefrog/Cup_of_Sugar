@@ -23,7 +23,7 @@ admin = User.create(
   last_name: 'AdminSurname',
   profile_pic: Faker::Avatar.image,
   email: 'email@me.com',
-  password: '123',
+  # password: '123',
   phone_number:'11111111111',
   is_admin: true, 
   households_id: household1.id
@@ -73,7 +73,7 @@ Household.create([{
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  password: "fjdlkfjlsdkf"
+  # password: "fjdlkfjlsdkf"
   )
 end
 
@@ -85,7 +85,7 @@ end
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  password: "fjdlkfjlsdkf"
+  # password: "fjdlkfjlsdkf"
   )
 end
 
@@ -97,7 +97,7 @@ end
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  password: "fjdlkfjlsdkf"
+  # password: "fjdlkfjlsdkf"
   )
 end
 
@@ -107,7 +107,7 @@ user1 = User.create(
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  password: "fjdlkfjlsdkf"
+  # password: "fjdlkfjlsdkf"
   )
 
 user2 = User.create(
@@ -116,7 +116,7 @@ user2 = User.create(
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  password: "fjdlkfjlsdkf"
+  # password: "fjdlkfjlsdkf"
   )
 
 user3 = User.create(
@@ -125,7 +125,7 @@ user3 = User.create(
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  password: "fjdlkfjlsdkf"
+  # password: "fjdlkfjlsdkf"
   )
 
 # Event.destroy_all

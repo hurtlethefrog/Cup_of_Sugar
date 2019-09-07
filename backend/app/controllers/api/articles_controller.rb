@@ -3,6 +3,9 @@ class Api::ArticlesController < ApplicationController
     
   def index
 
+    puts params
+    puts @user
+
     # api/users/:id/articles
     if @user
 
