@@ -13,12 +13,12 @@ class Api::AttendeesController < ApplicationController
 
   def create
     @addAttendee = EventUser.new(attendee_params)
-    @newAttendee = User.find_by(id:, @user.id)
+    @newAttendee = User.find_by(id: @user.id)
 
-    if @addttendee.save
+    if @addAttendee.save
       render json: @newAttendee, status: :created
     else
-      render json: newAttendee.errors, 
+      render json: @addAttendee.errors, 
       status: :unprocessable_entity
     end
   end
@@ -29,7 +29,7 @@ class Api::AttendeesController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by(id: params[:owner_id])
+    @user = User.find_by(id: params[:users_id])
   end
 
   def set_event
