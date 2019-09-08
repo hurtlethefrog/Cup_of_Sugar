@@ -12,7 +12,7 @@ export function timeAgo(datetime) {
 }
 
 export function eventDate(datetime) {
-  let date = moment(datetime).format("dddd, MMMM Do YYYY")
+  let date = moment(datetime).format("MMM Do")
   let time = moment(datetime).format("hh:mm a")
 
   return `${date}, ${time}`;

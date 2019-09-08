@@ -423,5 +423,5 @@ export default function New(props) {
     }
   };
 
-  return <div className="box new--article--box">{newArticleMode(mode)}</div>;
+  return <div className=" new--article--box">{newArticleMode(mode)}</div>;
 }

@@ -258,9 +258,6 @@ export default function Homepage() {
       >
         NAVBAR
       </Nav>
-
-      <button onClick={event => console.log(filter)}>Current Filter</button>
-      <button onClick={event => console.log(articles)}>Current Articles</button>
       {/* <div>Hello {account.first_name}</div> */}
       {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
       <div>
