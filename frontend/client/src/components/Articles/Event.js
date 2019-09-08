@@ -81,9 +81,7 @@ export default function Event(props) {
       <img
         className="add--attendee"
         src="images/user-plus-solid.svg"
-        onClick={event =>
-          props.addAttendee({ going: true, id: props.article.id })
-        }
+        onClick={event => props.addAttendee({going:true, events_id:props.article.events_id})}
       ></img>
       {props.article.attendees.length > 3 ? (
         <div
@@ -122,7 +120,6 @@ export default function Event(props) {
       {props.article.comments.length <= 0 && (
         <form
           onSubmit={event => {
-            console.log("COMMENT", comment);
             event.preventDefault();
             props.makeComment(comment);
           }}
