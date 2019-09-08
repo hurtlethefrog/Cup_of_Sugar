@@ -8,15 +8,13 @@ export default function Nav(props) {
   const [state, setState] = useState(false);
   
   return (
-  <nav>
+  <nav className="nav">
     <div className="brand">
-      <img className="logo" src={props.logo}/>  
-      <h1>Cup of Sugar</h1>
+      <img className="logo" src="images/CupOfSugar_Logo.svg"/>  
+      <h1></h1>
     </div>
 
     <ul>
-      <li><Link to="/login">Login</Link></li>
-      <li><Link to="/registration">Registration</Link> </li>
       <li>
         <img className="household" src="images/household.svg" onClick={event => setState(!state)} />
         <Household household={props.household} 

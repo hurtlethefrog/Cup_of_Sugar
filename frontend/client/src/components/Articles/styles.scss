@@ -6,8 +6,17 @@ $comment-box: white;
   display: flex;
   flex-direction: column;
   position: relative;
+  cursor: default;
+
 
   .article--userinfo {
+    text-align: left;
+    background: rgba(0, 0, 0, 0.16);
+    position: absolute;
+    width: 100%;
+    right: 0%;
+    top: 0%;
+    border-radius: 5px 5px 0px 0px;
     img {
       width: 35px;
     }
@@ -15,6 +24,14 @@ $comment-box: white;
 
   .article--title {
     font-size: 1.2rem;
+    position: relative;
+    font-weight: 600;
+    bottom: 10px;
+  }
+
+  .article--description {
+    text-align: left;
+    margin-top: 13px;
   }
 
   .article-icon {
@@ -25,13 +42,29 @@ $comment-box: white;
     size: 1.5rem;
   }
 
-  .article--date {
+  .event--dates {
+    display:none
+  }
+
+  &:hover .event--dates {
     font-size: 0.8rem;
     position: absolute;
-    top: 0;
-    left: 0;
-    margin-left: 4px;
+    top: 43px;
+    left: 6px;
+    display:block
   }
+
+  .article--date {
+    display:none
+  }
+
+  // &:hover .article--date {
+  //   font-size: 0.8rem;
+  //   position: absolute;
+  //   top: 43px;
+  //   left: 6px;
+  //   display:block
+  // }
 
   .comment--box {
     background-color: $comment-box;
@@ -48,26 +81,13 @@ $comment-box: white;
       width: 35px;
     }
 
-    .hideable--date {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      margin-right: 4px;
-      align-self: flex-end;
-
-      // display: none;
-
-      &:hover {
-        display: block;
-      }
-    }
   }
 }
 
 .attendees--summary {
   border: none;
-  cursor:pointer;
-  display:flex;
+  cursor: pointer;
+  display: flex;
   flex-direction: row;
 
   .attendees--icon {
@@ -111,13 +131,28 @@ $comment-box: white;
 }
 
 .add--attendee {
-  width: 35px;
+  width: 20px;
   cursor: pointer;
 }
 
 .expand-comments {
   position: relative;
   width: 0;
-  width: 35px;
+  width: 20px;
   cursor: pointer;
+}
+
+.event {
+  background-color: rgb(240, 202, 191);
+}
+.notice {
+  background-color: rgb(208, 213, 216);
+}
+
+.offer {
+  background-color: rgb(242, 204, 170);
+}
+
+.request {
+  background-color: rgb(226, 227, 161);
 }

@@ -1,6 +1,6 @@
-import React, { state, useState } from "react";
+import React, { useState } from "react";
 import { dateFormatter, timeAgo, eventDate } from "../../helper";
-
+import Popup from "reactjs-popup";
 import "./styles.scss";
 
 export default function Event(props) {
@@ -11,7 +11,8 @@ export default function Event(props) {
   const [comment, setComment] = useState({
     id: props.article.events_id,
     type: "event",
-    events_id: props.article.events_id 
+    events_id: props.article.events_id,
+    open: false
   });
 
   const expandArrow = () => {
@@ -56,7 +57,7 @@ export default function Event(props) {
   });
 
   return (
-    <article className="box">
+    <article className="box event">
       <div className="article-icon">E</div>
       <div className="article--userinfo">
         <img src={props.article.owner[0].profile_pic} />
@@ -67,12 +68,15 @@ export default function Event(props) {
       </div>
       <div className="article--title">{props.article.title}</div>
       <div className="article--description">{props.article.description}</div>
-      <div className="event--dates">
-        <p>Start: {eventDate(props.article.start)}</p>
-        <p>End: {eventDate(props.article.end)}</p>
-      </div>
-      <div className="article--date">
-        {dateFormatter(props.article.created_at)}
+      <div className="dates">
+        <div className="event--dates">
+          <p>
+            {eventDate(props.article.start)} - {eventDate(props.article.end)}
+          </p>
+        </div>
+        <div className="article--date">
+          {dateFormatter(props.article.created_at)}
+        </div>
       </div>
       <img
         className="add--attendee"
@@ -100,15 +104,18 @@ export default function Event(props) {
             allAttendees
           )}
         </div>
-      ): (
+      ) : (
         <div>No one is attending yet, be the first.</div>
       )}
       {props.article.comments.length > 0 && (
-        <img
-          className="expand-comments"
-          onClick={event => setState(!state)}
-          src={expandArrow()}
-        ></img>
+        <div>
+          <img
+            className="expand-comments"
+            onClick={event => setState(!state)}
+            src={expandArrow()}
+          ></img>
+          <Popup open={state} onClose={setState}><div>here's the text that will be shown</div></Popup>
+        </div>
       )}
       {props.article.comments.length <= 0 && (
         <form

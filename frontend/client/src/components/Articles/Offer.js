@@ -33,7 +33,7 @@ export default function Offer(props) {
   });
 
   return (
-    <article className="box">
+    <article className="box offer">
       <div className="article-icon">O</div>
       <div className="article--userinfo">
         <img src={props.article.owner[0].profile_pic} />
