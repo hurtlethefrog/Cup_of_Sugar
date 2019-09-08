@@ -248,6 +248,9 @@ export default function Homepage() {
     }
   }, [attendee]);
 
+  let userToken = localStorage.getItem('jwt')
+  
+
   return (
     <div className="App">
       <Nav
