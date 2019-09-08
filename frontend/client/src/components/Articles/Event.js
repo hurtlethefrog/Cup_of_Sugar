@@ -1,6 +1,6 @@
-import React, { state, useState } from "react";
+import React, { useState } from "react";
 import { dateFormatter, timeAgo, eventDate } from "../../helper";
-
+import Popup from "reactjs-popup";
 import "./styles.scss";
 
 export default function Event(props) {
@@ -11,7 +11,8 @@ export default function Event(props) {
   const [comment, setComment] = useState({
     id: props.article.events_id,
     type: "event",
-    events_id: props.article.events_id
+    events_id: props.article.events_id,
+    open: false
   });
 
   const expandArrow = () => {
@@ -109,11 +110,14 @@ export default function Event(props) {
         <div>No one is attending yet, be the first.</div>
       )}
       {props.article.comments.length > 0 && (
-        <img
-          className="expand-comments"
-          onClick={event => setState(!state)}
-          src={expandArrow()}
-        ></img>
+        <div>
+          <img
+            className="expand-comments"
+            onClick={event => setState(!state)}
+            src={expandArrow()}
+          ></img>
+          <Popup open={state} onClose={setState}><div>here's the text that will be shown</div></Popup>
+        </div>
       )}
       {props.article.comments.length <= 0 && (
         <form
