@@ -3,10 +3,12 @@ import { dateFormatter, timeAgo } from "../../helper";
 import "./styles.scss";
 
 export default function Offer(props) {
+  console.log("OFFER PROPS", props)
   const [state, setState] = useState(false);
   const [comment, setComment] = useState({
-    id: props.article.offer_request_id,
-    type: "offer"
+    // id: props.article.offer_request_id,
+    type: "offer",
+    offers_requests_id: props.article.offers_requests_id
   });
 
   const expandArrow = () => {

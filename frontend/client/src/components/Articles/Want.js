@@ -5,8 +5,9 @@ import "./styles.scss";
 export default function Wanted(props) {
   const [state, setState] = useState(false);
   const [comment, setComment] = useState({
-    id: props.article.offer_request_id,
-    type: "offer"
+    // id: props.article.offer_request_id,
+    type: "request", 
+    offers_requests_id: props.article.offers_requests_id
   });
 
   const expandArrow = () => {
