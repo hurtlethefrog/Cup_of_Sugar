@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Axios from "axios";
 import { setUser } from "../../store/app";
 let REACT_APP_G_API_KEY = process.env.REACT_APP_G_API_KEY;
@@ -11,14 +11,24 @@ let REACT_APP_G_API_KEY = process.env.REACT_APP_G_API_KEY;
 // export default function Community(props) {
 
 export default function Community(props) {
-  const { options, onMount, className } = props;
+    const { options, onMount, className } = props;
+    const user = useSelector(state => state.app.user);
+
+    let communityEntry = {
+        user,
+        name: 'Mile End', 
+        postal_code: 'H2T'
+    };
+
+    const dispatch = useDispatch();
+    // const [communityForm, updateCommunityForm] = useState(communityEntry);
+    
+    console.log("Object:", communityEntry);
 
 
   // const user = useSelector(state => state.app.user);
   // console.log("OBJECT###################:", user);
   // console.log("OBJECT###################:", user.user.postalCode);
-
-
 
 
   const propsRef = { ref: useRef(), className }
@@ -41,8 +51,8 @@ export default function Community(props) {
     });
 
     let citymap = {
-      newyork: {
-        center: {lat: 40.714, lng: -74.005},
+      montreal: {
+        center: {lat: 45.5250827, lng: -73.600208 },
         population: 1000000
       }
     };
@@ -77,7 +87,7 @@ export default function Community(props) {
     <main>
       <section className="">
         <h1>Community</h1>
-        <p>Great! You are part of neighbourhood Medieval!</p>
+        <p>Great! You are part of neighbourhood {communityEntry.name}!</p>
 
         <div
         {...propsRef}
@@ -88,7 +98,7 @@ export default function Community(props) {
         <button onClick={props.onBack} className="back-btn">
           Back
         </button>
-        <button onClick={props.onNext} className="next-btn">
+        <button onClick={props.onNext} value={() => dispatch(setUser(communityEntry))} className="next-btn">
           Next
         </button>
       </footer>
@@ -98,7 +108,7 @@ export default function Community(props) {
 
 Community.defaultProps = {
   options: {
-    center: {lat: 40.714, lng: -74.005},
+    center: {lat: 45.5250827, lng: -73.600208 },
     zoom: 16,
     types: ['address'],
     componentRestrictions: {

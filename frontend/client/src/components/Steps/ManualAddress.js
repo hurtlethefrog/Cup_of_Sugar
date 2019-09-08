@@ -15,27 +15,27 @@ export default function ManualAddress(props) {
 
   const [addressForm, updateAddressForm] = useState(manualAddressEntry);
 
-  const handleSubmission = function(event) {
-    // event.preventDefault();
-    console.log(addressForm);
-    dispatch(setUser(addressForm));
+  // const handleSubmission = function(event) {
+  //   // event.preventDefault();
+  //   console.log(addressForm);
+  //   dispatch(setUser(addressForm));
 
-    // axios
-    //   .post("/api/households", { addressForm })
-    //   .then(function(res) {
-    //     console.log(res);
-    //   })
-    //   .catch(function(err) {
-    //     console.log(err);
-    //   });
-  };
+  //   // axios
+  //   //   .post("/api/households", { addressForm })
+  //   //   .then(function(res) {
+  //   //     console.log(res);
+  //   //   })
+  //   //   .catch(function(err) {
+  //   //     console.log(err);
+  //   //   });
+  // };
 
   return (
     <main>
       <section className="">
         <h1>ManualAddress</h1>
 
-        <form className="registration_fields" onSubmit={handleSubmission}>
+        <form className="registration_fields">
           <input
             placeholder="Address"
             value={addressForm.address}

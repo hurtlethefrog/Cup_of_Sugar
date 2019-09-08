@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { useVisualMode } from "../../hooks/useVisualMode";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUser } from "../../store/app";
+import Ready from "./Ready";
+const READY = "READY";
 
 export default function UserEntry(props) {
+  const { mode, transition, back } = useVisualMode("new");
   const user = useSelector(state => state.app.user);
-  // console.log("OBJECT###################:", user);
 
   let userEntry = {
     user,
@@ -22,7 +25,8 @@ export default function UserEntry(props) {
   const [userForm, updateUserForm] = useState(userEntry);
 
   const handleSubmission = function(event) {
-    event.preventDefault();
+
+    // event.preventDefault();
     // console.log(userForm);
     dispatch(setUser(userForm));
     console.log("Object:", userEntry);
