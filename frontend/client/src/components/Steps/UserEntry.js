@@ -5,11 +5,10 @@ import { setUser } from "../../store/app";
 
 export default function UserEntry(props) {
   const user = useSelector(state => state.app.user);
-  console.log("user####################:", user);
-
-  const dispatch = useDispatch();
+  console.log("OBJECT###################:", user);
 
   let userEntry = {
+    ...user,
     first_name: "",
     last_name: "",
     email: "",
@@ -17,20 +16,24 @@ export default function UserEntry(props) {
     password_confirmation: ""
   };
 
+  const dispatch = useDispatch();
+  // console.log("DISPATCH:", dispatch)
+
   const [userForm, updateUserForm] = useState(userEntry);
 
   const handleSubmission = function(event) {
     event.preventDefault();
-    console.log(userForm);
-    // dispatch(setUser(userForm));
+    // console.log(userForm);
+    dispatch(setUser(userForm));
 
     axios
       .post("/api/users", { userForm })
       .then(function(res) {
-        console.log("user creation : ", res);
+        // console.log("user creation : ", res);
         const user_auth = {
           auth: { email: userForm.email, password: userForm.password }
         };
+        props.setUser(user_auth)
         console.log("user_auth:", user_auth);
         return axios.post("/api/user_token", user_auth);
       })

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./index.scss";
 
 import LoginRegOption from "./LoginRegOption";
@@ -57,7 +57,7 @@ export default function UserProcedure(props) {
         <Community onBack={() => back()} onNext={() => transition(USERENTRY)} />
       )}
       {mode === USERENTRY && (
-        <UserEntry onBack={() => back()} onNext={() => transition(READY)} />
+        <UserEntry onBack={() => back()} onNext={() => transition(READY)} setUser={props.setUser}/>
       )}
       {mode === READY && <Ready onNext="Homepage" />}
     </div>
