@@ -82,7 +82,7 @@ export default function Homepage() {
     axios
       .get(`/api/households/${1}`)
       .then(household => {
-        console.log("HOUSEHOLDDATA", household.data);
+        // console.log("HOUSEHOLDDATA", household.data);
         setHousehold(household.data);
       })
       .catch(err => console.log(err));
@@ -92,7 +92,7 @@ export default function Homepage() {
     axios
       .get(`/api/users/${1}`)
       .then(account => {
-        console.log("ACCOUNTDATA", account.data);
+        // console.log("ACCOUNTDATA", account.data);
         setUser(account.data);
       })
       .catch(err => console.log(err));
@@ -128,7 +128,7 @@ export default function Homepage() {
             owner_id: account.id
           };
           delete eventArticle.type;
-          console.log(eventArticle);
+          // console.log(eventArticle);
           axios
             .post(`/api/${newArticle.type}s`, {
               ...eventArticle
@@ -215,17 +215,20 @@ export default function Homepage() {
     const userComment = {
       ...comment,
       users_id: account.id,
-      [tagGenerator(comment.type)]: comment.id
+      // [tagGenerator(comment.type)]: comment.id
     };
-    delete userComment.type;
-    delete comment.id;
-    delete comment.event_id;
-    delete userComment.event_id;
-    delete userComment.id
+    // delete userComment.type;
+    // delete userComment.event_id;
+    // delete userComment.notice_id;
+    // delete userComment.offer_id;
+    // delete userComment.request_id;
+    // delete userComment.id;
+    // delete comment.offer_id;
+    // delete comment.notice_id;
 
     {console.log("LOGGIN USER COMMENT",userComment)}
     axios
-      .post(`api/${comment.type}s/${userComment.events_id}/comments`, { ...userComment })
+      .post(`api/${comment.type}s/${comment.id}/comments`, { ...userComment })
       .then(res => {
         updateComments(articles, res.data, setArticles);
       })
@@ -235,8 +238,9 @@ export default function Homepage() {
 
   useEffect(() => {
     if (attendee.going === true) {
+      {console.log("ATTENDEE", attendee)}
       axios
-        .post(`api/events/${attendee.id}/attendees`, { user_id: account.id })
+        .post(`api/events/${attendee.events_id}/attendees`, {users_id: account.id, events_id: attendee.events_id})
         .then(res => {
           
         })

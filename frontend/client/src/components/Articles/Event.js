@@ -9,8 +9,9 @@ export default function Event(props) {
   // if this state is true all attendee info will be shown
   const [attendees, setAttendees] = useState(false);
   const [comment, setComment] = useState({
-    id: props.article.event_id,
-    type: "event"
+    id: props.article.events_id,
+    type: "event",
+    events_id: props.article.events_id 
   });
 
   const expandArrow = () => {
@@ -76,7 +77,7 @@ export default function Event(props) {
       <img
         className="add--attendee"
         src="images/user-plus-solid.svg"
-        onClick={event => props.addAttendee({going:true, id:props.article.id})}
+        onClick={event => props.addAttendee({going:true, events_id:props.article.events_id})}
       ></img>
       {props.article.attendees.length > 3 ? (
         <div

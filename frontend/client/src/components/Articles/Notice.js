@@ -5,8 +5,9 @@ import "./styles.scss";
 export default function Notice(props) {
   const [state, setState] = useState(false);
   const [comment, setComment] = useState({
-    id: props.article.notice_id,
-    type: "notice"
+    // id: props.article.notices_id, 
+    type: "notice", 
+    notices_id: props.article.notices_id 
   });
 
   const expandArrow = () => {
@@ -20,7 +21,9 @@ export default function Notice(props) {
 
   const parsedComments = props.article.comments.map(comment => {
     return (
+    
       <div className="comment--box box">
+        {/* <div>{console.log("COMMENT PROPS", comment)}</div> */}
         <img
           src={comment.profile_pic}
           alt={comment.first_name + "'s profile_pic"}
@@ -52,7 +55,7 @@ export default function Notice(props) {
 
   return (
     <article className="box">
-      <div>{console.log("PROPS",props.article)}</div>
+      {/* <div>{console.log("PROPS",props.article)}</div> */}
       <div className="article-icon">N</div>
       <div className="article--userinfo">
         <img
