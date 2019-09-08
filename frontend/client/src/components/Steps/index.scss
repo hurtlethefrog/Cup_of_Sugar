@@ -1,31 +1,44 @@
-// <main className="UserProcedure">
-// <section>
-
 .UserProcedure {
-  background-color: #EBEBEB;
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
   font-size: 12px;
+  background-color: #E2E3A1;
+  header {
+    height: 15vh;
+    width: 100%;
+    background-color: #BDBF7F;
+  }
+  // header::after {
+  //   border: 2px solid 
+  //   black;
+  //   content: "";
+  //   width: 80%;
+  //   margin: 0 auto;
+  //   display: block;
+  // }
+  button:hover {cursor: pointer;}
+  main {
+    // background-color: #F7E5D5;
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
   h1 {
     font-size: 2em;
   }
-  // input {
-  //   width: 30%;
-  //   padding: 1rem;
-  //   font-size: 1em;
-  // }
   form.registration_fields {
     display: grid;
+  }
+  input:required, input:invalid {box-shadow: none;}
+  input:required:focus {
+    border-bottom: 4px solid rgb(248, 101, 101);
   }
   input {
     width: 30%;
     padding: 1rem;
     font-size: 1em;
     border: 0;
-    border-bottom: 3px solid linen;
+    border-bottom: 4px solid #BDBF7F;
     margin: 0 auto;
     margin-bottom: 1rem;
   }
@@ -33,9 +46,6 @@
     outline: none;
   }
   section {
-    // background-color: #74876A;
-    // height: 300px;
-    // min-width: 50%;
     button {
       background: 
       rgba(0,0,0,0);
@@ -47,10 +57,6 @@
     position: absolute;
     width: 100%;
     bottom: 10%;
-    // display: flex;
-    // justify-content: space-between;
-    // height: 20%;
-    // background-color: green;
     padding-right: 5em;
     padding-left: 5em;
     button {
@@ -61,6 +67,5 @@
     }
     button.back-btn {float: left;}
     button.next-btn {float: right;}
-    button:hover {color: #74876A;}
   }
 }

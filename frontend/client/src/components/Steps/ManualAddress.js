@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux";
 import axios from "axios";
-import { setUser } from "../../store/app"
+import { setUser } from "../../store/app";
 
 export default function ManualAddress(props) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let manualAddressEntry = {
     address: "",
@@ -16,9 +16,10 @@ export default function ManualAddress(props) {
   const [addressForm, updateAddressForm] = useState(manualAddressEntry);
 
   const handleSubmission = function(event) {
-    event.preventDefault();
+    // event.preventDefault();
     console.log(addressForm);
-    dispatch(setUser(addressForm))
+    dispatch(setUser(addressForm));
+
     // axios
     //   .post("/api/households", { addressForm })
     //   .then(function(res) {
@@ -47,7 +48,10 @@ export default function ManualAddress(props) {
             placeholder="Postal Code"
             value={addressForm.postalCode}
             onChange={event =>
-              updateAddressForm({ ...addressForm, postalCode: event.target.value })
+              updateAddressForm({
+                ...addressForm,
+                postalCode: event.target.value
+              })
             }
             required
           />
@@ -63,18 +67,23 @@ export default function ManualAddress(props) {
             placeholder="Province"
             value={addressForm.province}
             onChange={event =>
-              updateAddressForm({ ...addressForm, province: event.target.value })
+              updateAddressForm({
+                ...addressForm,
+                province: event.target.value
+              })
             }
             required
           />
-          <button type="submit">Submit</button>
+          <footer>
+            <button type="submit" onClick={props.onNext} value={dispatch(setUser(addressForm))} className="next-btn">
+              Next
+            </button>
+            <button onClick={props.onBack} className="back-btn">
+              Back
+            </button>
+          </footer>
         </form>
       </section>
-
-      <footer>
-      <button onClick={props.onBack} className="back-btn">Back</button>
-      <button onClick={props.onNext} className="next-btn">Next</button>
-      </footer>
     </main>
   );
 }

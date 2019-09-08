@@ -5,10 +5,10 @@ import { setUser } from "../../store/app";
 
 export default function UserEntry(props) {
   const user = useSelector(state => state.app.user);
-  console.log("OBJECT###################:", user);
+  // console.log("OBJECT###################:", user);
 
   let userEntry = {
-    ...user,
+    user,
     first_name: "",
     last_name: "",
     email: "",
@@ -25,6 +25,7 @@ export default function UserEntry(props) {
     event.preventDefault();
     // console.log(userForm);
     dispatch(setUser(userForm));
+    console.log("Object:", userEntry);
 
     axios
       .post("/api/users", { userForm })
@@ -33,7 +34,7 @@ export default function UserEntry(props) {
         const user_auth = {
           auth: { email: userForm.email, password: userForm.password }
         };
-        props.setUser(user_auth)
+        props.setUser(user_auth);
         console.log("user_auth:", user_auth);
         return axios.post("/api/user_token", user_auth);
       })
@@ -97,17 +98,16 @@ export default function UserEntry(props) {
             required
             type="password"
           />
-          <button type="submit">Submit</button>
+          <footer>
+            <button type="submit" className="next-btn">
+              Next
+            </button>
+            <button onClick={props.onBack} className="back-btn">
+              Back
+            </button>
+          </footer>
         </form>
       </section>
-      <footer>
-        <button onClick={props.onBack} className="back-btn">
-          Back
-        </button>
-        <button onClick={props.onNext} className="next-btn">
-          Next
-        </button>
-      </footer>
     </main>
   );
 }
