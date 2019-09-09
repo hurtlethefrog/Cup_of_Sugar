@@ -9,7 +9,7 @@ class Api::CommentsController < ApplicationController
 
     @comment = Comment.new(comment_params)
       if @comment.save
-        @comment_to_render = @comment.attributes.merge({"profile_pic" => @user_pic})
+        @comment_to_render = {"comments" => @comment.attributes.merge({"profile_pic" => @user_pic})}
         render json: @comment_to_render, status: :created
       else
         render json: @ecomment.errors, status: :unprocessable_entity
