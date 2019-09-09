@@ -1,5 +1,6 @@
 class Api::UsersController < ApplicationController
   before_action :set_user
+  before_action :user_params_hash, :set_community, only: [:create]
 
   def index
     @users = User.all 
@@ -7,8 +8,14 @@ class Api::UsersController < ApplicationController
   end
 
   def create
-    puts user_params
+    puts "**************"
+    # puts @community
+    puts "**************"
     @user = User.new(user_params)
+    @household = Household.create()
+    @household.update(address: @user_hash["first_name"])
+    # @household.update(address: @user_hash["address"], postal_code: @user_hash["postal_code"], city: @user_hash["city"], province: @user_hash["province"], communities_id: @community[:id])
+    @user.update(households_id: @household[:id])
     if @user.save
       render json: @user, status: :created
     else
@@ -19,48 +26,6 @@ class Api::UsersController < ApplicationController
   def show
     render json: @user
   end
-
-  # def current_user_info
-  #   render status: :ok, json: current_user.as_json
-  # end
-
-  # get user/id
-  # def show
-    
-  #       @user_articles = Event.find_by_sql("SELECT events.id as event_id, -1 AS notice_id, -1 AS offer_request_id, owner_id, article_type, title, description, location, image, false AS offer, events.start, events.end, cancelled, archived, created_at, updated_at FROM events WHERE owner_id = #{@user.id} AND archived IS NOT TRUE UNION ALL SELECT -1 AS events_id, notices.id AS notice_id, -1 AS offer_request_id, user_id AS owner_id, article_type, title, description, null AS location, null AS image, false AS offer, null AS start, null AS end, null AS cancelled, archived, created_at, updated_at FROM notices WHERE user_id = #{@user.id} AND archived IS NOT true UNION ALL SELECT -1 AS event_id, -1 AS notice_id, offers_requests.id AS offer_request_id, owner_id, article_type, title, description, null AS location, image, offer, null AS start, null AS end, null AS cancelled, archived, created_at, updated_at FROM offers_requests WHERE owner_id = #{@user.id} AND archived IS NOT true AND active IS TRUE AND deleted IS NOT true ORDER BY created_at DESC")    
-          
-        # @WithCommentsAndAttendees = @user_articles.map {|article|
-        #   modified_articles = generate_id(article)
-        #   owner_hash = {:owner => User.find_by_sql("SELECT id, first_name, last_name, profile_pic FROM users WHERE #{article.owner_id} = users.id")}
-        #   comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*,first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE events_id = #{article.event_id} OR notice_id = #{article.notice_id} OR offers_requests_id = #{article.offer_request_id} ORDER BY created_at")}
-        #   attendees_hash = {:attendees => EventUser.find_by_sql("SELECT users.id, first_name, last_name, profile_pic FROM event_users JOIN users ON event_users.users_id = users.id JOIN events ON event_users.events_id = events.id WHERE events_id = #{article.event_id}")}
-        
-        #   output = modified_articles.merge(owner_hash).merge(comments_hash).merge(attendees_hash)
-        
-        #   output
-        # } 
-          
-        # render json: @WithCommentsAndAttendees
-        
-        # end
-        
-          # def generate_id(object)
-          #   hash = object.attributes
-        
-          #   if object.event_id > 0
-          #     id = 10 * object.event_id
-          #   elsif object.notice_id > 0
-          #     id = 50000 * object.notice_id
-          #   elsif object.offer_request_id > 0 && object.offer = true
-          #     id = object.offer_request_id * 100
-          #   elsif object.offer_request_id >0 && object.offer = !true
-          #   end 
-        
-          #   id_property = {:id => id.to_i}
-          #   hash_with_id = hash.merge(id_property)
-        
-          #   return hash_with_id
-          # end
     
   private 
 
@@ -68,8 +33,22 @@ class Api::UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
+  def set_community
+    # # @first_3_postal_code = "H2"
+    # # @community = Community.where("postal_code LIKE (?)", "%#{@first_3_postal_code}%")
+    # @community = {:id => Community.find_by_sql("SELECT * FROM communities WHERE postal_code = 'H2T'")}
+  end
+
+  # def user_params
+  #   params.require(:userForm).permit(:first_name, :last_name, :email, :password, :password_confirmation, :address, :postal_code, :city, :province)
+  # end
+
   def user_params
     params.require(:userForm).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  end
+
+  def user_params_hash
+    @user_hash = params.require(:userForm).permit(:first_name, :last_name, :email, :password, :password_confirmation, :address, :postal_code, :city, :province).to_hash
   end
 
 end

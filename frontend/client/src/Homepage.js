@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Homepage.scss";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import FilterBar from "./components/Filters/FilterBar";
 import Articles from "./components/Articles/Articles";
 import New from "./components/Articles/New";
@@ -52,6 +53,10 @@ const dummyAcc = {
 };
 
 export default function Homepage() {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.app.user);
+  console.log("USER:", user)
+
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("articles");
   const [account, setUser] = useState(dummyAcc);
@@ -137,7 +142,7 @@ export default function Homepage() {
           const eventArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: account.id
+            owner_id: account.id, 
           };
           delete eventArticle.type;
           // console.log(eventArticle);
@@ -184,7 +189,7 @@ export default function Homepage() {
           delete offerArticle.end;
           delete offerArticle.location;
 
-          console.log(offerArticle);
+          console.log("OFFER TYPE", newArticle.type);
           axios
             .post(`/api/${newArticle.type}s`, {
               ...offerArticle
@@ -239,6 +244,7 @@ export default function Homepage() {
   useEffect(() => {
     if (attendee.going === true) {
       {console.log("ATTENDEE", attendee)}
+      console.log("ACCOUNT", account)
       axios
         .post(`api/events/${attendee.events_id}/attendees`, {users_id: account.id, events_id: attendee.events_id})
         .then(res => {
@@ -247,6 +253,9 @@ export default function Homepage() {
         .catch(err => console.log(err));
     }
   }, [attendee]);
+
+  let userToken = localStorage.getItem('jwt')
+  
 
   return (
     <div className="App">

@@ -1,40 +1,41 @@
 import React, { useState } from "react";
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux";
 import axios from "axios";
-import { setUser } from "../../store/app"
+import { setUser } from "../../store/app";
 
 export default function ManualAddress(props) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let manualAddressEntry = {
     address: "",
-    postalCode: "",
+    postal_code: "",
     city: "",
     province: ""
   };
 
   const [addressForm, updateAddressForm] = useState(manualAddressEntry);
 
-  const handleSubmission = function(event) {
-    event.preventDefault();
-    console.log(addressForm);
-    dispatch(setUser(addressForm))
-    // axios
-    //   .post("/api/households", { addressForm })
-    //   .then(function(res) {
-    //     console.log(res);
-    //   })
-    //   .catch(function(err) {
-    //     console.log(err);
-    //   });
-  };
+  // const handleSubmission = function(event) {
+  //   // event.preventDefault();
+  //   console.log(addressForm);
+  //   dispatch(setUser(addressForm));
+
+  //   // axios
+  //   //   .post("/api/households", { addressForm })
+  //   //   .then(function(res) {
+  //   //     console.log(res);
+  //   //   })
+  //   //   .catch(function(err) {
+  //   //     console.log(err);
+  //   //   });
+  // };
 
   return (
     <main>
       <section className="">
         <h1>ManualAddress</h1>
 
-        <form className="registration_fields" onSubmit={handleSubmission}>
+        <form className="registration_fields">
           <input
             placeholder="Address"
             value={addressForm.address}
@@ -45,9 +46,12 @@ export default function ManualAddress(props) {
           />
           <input
             placeholder="Postal Code"
-            value={addressForm.postalCode}
+            value={addressForm.postal_code}
             onChange={event =>
-              updateAddressForm({ ...addressForm, postalCode: event.target.value })
+              updateAddressForm({
+                ...addressForm,
+                postal_code: event.target.value
+              })
             }
             required
           />
@@ -63,18 +67,23 @@ export default function ManualAddress(props) {
             placeholder="Province"
             value={addressForm.province}
             onChange={event =>
-              updateAddressForm({ ...addressForm, province: event.target.value })
+              updateAddressForm({
+                ...addressForm,
+                province: event.target.value
+              })
             }
             required
           />
-          <button type="submit">Submit</button>
+          <footer>
+            <button type="submit" onClick={props.onNext} value={dispatch(setUser(addressForm))} className="next-btn">
+              Next
+            </button>
+            <button onClick={props.onBack} className="back-btn">
+              Back
+            </button>
+          </footer>
         </form>
       </section>
-
-      <footer>
-      <button onClick={props.onBack} className="back-btn">Back</button>
-      <button onClick={props.onNext} className="next-btn">Next</button>
-      </footer>
     </main>
   );
 }

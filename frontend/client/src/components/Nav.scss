@@ -29,10 +29,23 @@ nav {
     }
     ul {display: flex;}
     ul > li a {display: none;}
-    ul > li img.household, ul > li img.neighbours {width: 2.8em; height: 2.8em;}
+    ul > li img.household, ul > li img.neighbours {
+      width: 2.8em; 
+      height: 2.8em;
+    }
     ul > li:last-child {padding-right: 1em;}
   }
 }
 .nav {
-  background-color: rgb(110, 141, 144)
+  background-color: rgb(110, 141, 144);
+    .household {
+      display: flex;
+      flex-direction: column;
+      color: rgb(247, 230, 214);
+
+        #household-list {
+          flex-direction: column;
+        }
+    } 
 }
+

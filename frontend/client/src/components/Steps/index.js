@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.scss";
 
 import LoginRegOption from "./LoginRegOption";
+import Login from "./Login";
 import CurrentLocation from "./CurrentLocation";
 import AutoAddress from "./AutoAddress";
 import ManualAddress from "./ManualAddress";
@@ -19,18 +20,21 @@ const MANUALADDRESS = "MANUALADDRESS";
 const COMMUNITY = "COMMUNITY";
 const USERENTRY = "USERENTRY";
 const READY = "READY";
+const LOGIN = "LOGIN";
 
 export default function UserProcedure(props) {
   const { mode, transition, back } = useVisualMode(LOGINREGOPTION);
 
   return (
     <div className="UserProcedure">
+      <header>Header</header>
       {mode === LOGINREGOPTION && (
         <LoginRegOption
-          onLogin=""
+          onLogin={() => transition(LOGIN)}
           onRegister={() => transition(CURRENTLOCATION)}
         />
       )}
+      {mode === LOGIN && <Login onBack={() => back()} />}
       {mode === CURRENTLOCATION && (
         <CurrentLocation
           onBack={() => back()}
@@ -57,9 +61,13 @@ export default function UserProcedure(props) {
         <Community onBack={() => back()} onNext={() => transition(USERENTRY)} />
       )}
       {mode === USERENTRY && (
-        <UserEntry onBack={() => back()} onNext={() => transition(READY)} />
+        <UserEntry
+          onBack={() => back()}
+          onNext={() => transition(READY)}
+          setUser={props.setUser}
+        />
       )}
-      {mode === READY && <Ready onNext="Homepage" />}
+      {mode === READY && <Ready onNext="/" />}
     </div>
   );
 }

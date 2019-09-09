@@ -1,4 +1,5 @@
 import React, {state, useState} from "react";
+import "../Nav.scss";
 
 export default function Household(props) {
   if(props.state) {
@@ -10,7 +11,7 @@ export default function Household(props) {
  
     return (
       <div className="household">
-        <ul>
+        <ul id="household-list">
           {householdMembers}
         </ul> 
       </div>

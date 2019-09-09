@@ -28,7 +28,7 @@ class Api::OffersController < ApplicationController
     #POST
     def create
 
-      @offer = OffersRequest.new(offer_params)
+      @offer = OffersRequest.new(offer_params, offer: true)
       if @offer.save
         render json: @offer, status: :created
       else
@@ -40,11 +40,11 @@ class Api::OffersController < ApplicationController
   private 
 
   def set_offer
-    @offer = OffersRequest.find_by(id: params[:id])
+    @offer = OffersRequest.find_by(id: params[:user_id])
   end
 
   def offer_params 
-    params.permit(:title, :description, :image, :offer)
+    params.permit(:title, :description, :image, :offer, :owner_id, :article_type)
   end
 
   def set_user
