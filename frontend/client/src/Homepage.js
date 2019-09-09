@@ -62,13 +62,25 @@ export default function Homepage() {
   const [comment, makeComment] = useState();
   const [attendee, addAttendee] = useState(false);
 
-  const updateComments = (arr, payload, cb) => {
-    for (let ele of arr) {
-      if (ele.id === payload.id) {
-        ele.comments.push(payload);
-      }
-    }
-    cb(arr);
+  const updateComments = (arr, payload, cb, type) => {
+    console.log("Heeyyyyy",arr, payload, type)
+    
+    // for (let ele of arr) {
+    //   if (ele[`${type}s_id`] === payload[`${type}s_id`]) {
+    //     console.log("update comment called ?!")
+    //     ele.comments.push(payload);
+    //   }
+    // }
+
+    cb(prev => {
+      for (let ele of prev) {
+          if (ele[`${type}s_id`] === payload[`${type}s_id`]) {
+            console.log("update comment called ?!")
+            ele.comments.push(payload);
+          }
+        }
+        return [...prev]
+    });
   };
   const tagGenerator = type => {
     if (type === "offer" || type === "request") {
@@ -209,33 +221,21 @@ export default function Homepage() {
       }
     }
   }, [newArticle]);
-  // post request for new comments
-  useEffect(() => {
-    if(comment) {
+
+  const appendComment = comment => {
     const userComment = {
       ...comment,
       users_id: account.id,
       // [tagGenerator(comment.type)]: comment.id
     };
-    // delete userComment.type;
-    // delete userComment.event_id;
-    // delete userComment.notice_id;
-    // delete userComment.offer_id;
-    // delete userComment.request_id;
-    // delete userComment.id;
-    // delete comment.offer_id;
-    // delete comment.notice_id;
-
-    {console.log("LOGGIN USER COMMENT",userComment)}
     axios
-      .post(`api/${comment.type}s/${comment.id}/comments`, { ...userComment })
+      .post(`api/${userComment.type}s/${userComment.id}/comments`, { ...userComment })
       .then(res => {
-        updateComments(articles, res.data, setArticles);
+        updateComments(articles, res.data, setArticles, userComment.type);
+        console.log(res)
       })
       .catch(err => console.log(err));
-    }
-  }, [comment]);
-
+  }
   useEffect(() => {
     if (attendee.going === true) {
       {console.log("ATTENDEE", attendee)}
@@ -270,13 +270,13 @@ export default function Homepage() {
           {/* onSubmit function will need to ensure title description, everything else is optional */}
           <New onSubmit={setNewArticle} />
         </div>
-        {articles && (
+        {/* {articles && ( */}
           <Articles
-            makeComment={makeComment}
+            makeComment={appendComment}
             articles={articles}
             addAttendee={addAttendee}
           />
-        )}
+        {/* )} */}
       </div>
     </div>
   );

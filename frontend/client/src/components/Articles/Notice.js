@@ -55,7 +55,7 @@ export default function Notice(props) {
 
   return (
     <article className="box notice">
-      <div className="article-icon">N</div>
+      <img className="article-icon" src="images/sticky-note-regular.svg"/>
       <div className="article--userinfo">
         <img
           src={props.article.owner[0].profile_pic}
@@ -86,7 +86,7 @@ export default function Notice(props) {
           }}
         >
           <input
-            className="input"
+            className="comment--input"
             type="text"
             placeholder="Add a comment"
             onChange={event =>
@@ -104,7 +104,7 @@ export default function Notice(props) {
           }}
         >
           <input
-            className="input"
+            className="comment--input"
             type="text"
             placeholder="Add a comment"
             onChange={event =>

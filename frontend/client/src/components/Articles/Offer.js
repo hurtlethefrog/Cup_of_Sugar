@@ -3,7 +3,7 @@ import { dateFormatter, timeAgo } from "../../helper";
 import "./styles.scss";
 
 export default function Offer(props) {
-  console.log("OFFER PROPS", props)
+  console.log("OFFER PROPS", props);
   const [state, setState] = useState(false);
   const [comment, setComment] = useState({
     // id: props.article.offer_request_id,
@@ -35,7 +35,7 @@ export default function Offer(props) {
 
   return (
     <article className="box offer">
-      <div className="article-icon">O</div>
+      <img className="article-icon" src="images/hand-point-right-regular.svg" />
       <div className="article--userinfo">
         <img src={props.article.owner[0].profile_pic} />
         {props.article.owner[0].first_name}{" "}
@@ -70,7 +70,7 @@ export default function Offer(props) {
           }}
         >
           <input
-            className="input"
+            className="comment--input"
             type="text"
             placeholder="Add a comment"
             onChange={event =>
@@ -88,7 +88,7 @@ export default function Offer(props) {
           }}
         >
           <input
-            className="input"
+            className="comment--input"
             type="text"
             placeholder="Add a comment"
             onChange={event =>

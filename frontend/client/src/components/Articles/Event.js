@@ -32,9 +32,10 @@ export default function Event(props) {
           alt={comment.first_name + "'s profile_pic"}
         />
         <div className="article--userinfo">
-          {comment.first_name} {comment.last_name[0].toUpperCase() + "."}
+          {comment.first_name} {comment.last_name ? (comment.last_name[0].toUpperCase() + "."): ("")}
         </div>
-        <div className="comment--content">{comment.comment}</div>
+        <div className="comment--content">
+        <p>{comment.comment}</p></div>
         <div className="hideable--date">{timeAgo(comment.created_at)}</div>
       </div>
     );
@@ -49,7 +50,7 @@ export default function Event(props) {
             alt={attendee.first_name + "'s profile_pic"}
           />
           <div className="article--userinfo">
-            {attendee.first_name} {attendee.last_name[0].toUpperCase() + "."}
+            {attendee.first_name} {attendee.last_name ? (attendee.last_name[0].toUpperCase() + ".") : ("")}
           </div>
         </div>
       </div>
@@ -58,7 +59,7 @@ export default function Event(props) {
 
   return (
     <article className="box event">
-      <div className="article-icon">E</div>
+      <img className="article-icon" src="images/calendar-alt-regular.svg" />
       <div className="article--userinfo">
         <img src={props.article.owner[0].profile_pic} />
         {props.article.owner[0].first_name +
@@ -78,27 +79,38 @@ export default function Event(props) {
           {dateFormatter(props.article.created_at)}
         </div>
       </div>
-      <img
-        className="add--attendee"
-        src="images/user-plus-solid.svg"
-        onClick={event => props.addAttendee({going:true, events_id:props.article.events_id})}
-      ></img>
-      {props.article.attendees.length > 3 ? (
+
+      {props.article.attendees.length > 0 ? (
         <div
           className="attendees--summary"
           onClick={event => setAttendees(!attendees)}
         >
           {!attendees ? (
-            <div>
+            <div className="icon-box">
               <div className="attendees--icon">
                 <img src={props.article.attendees[0].profile_pic} />
               </div>
+              
+              {props.article.attendees[1] &&
               <div className="attendees--icon">
                 <img src={props.article.attendees[1].profile_pic} />
               </div>
+              }
+              {props.article.attendees[2] &&
               <div className="attendees--icon">
                 <img src={props.article.attendees[2].profile_pic} />
               </div>
+              }
+              <img
+                className="add--attendee"
+                src="images/user-plus-solid.svg"
+                onClick={event =>
+                  props.addAttendee({
+                    going: true,
+                    events_id: props.article.events_id
+                  })
+                }
+              ></img>
             </div>
           ) : (
             allAttendees
@@ -114,8 +126,22 @@ export default function Event(props) {
             onClick={event => setState(!state)}
             src={expandArrow()}
           ></img>
-          <Popup open={state} onClose={setState}><div>here's the text that will be shown</div></Popup>
+          {/* <Popup open={state} onClose={setState}>
+            <div>here's the text that will be shown</div>
+          </Popup> */}
         </div>
+      )}
+      {props.article.attendees.length === 0 && (
+        <img
+          className="add--attendee"
+          src="images/user-plus-solid.svg"
+          onClick={event =>
+            props.addAttendee({
+              going: true,
+              events_id: props.article.events_id
+            })
+          }
+        ></img>
       )}
       {props.article.comments.length <= 0 && (
         <form
@@ -125,7 +151,7 @@ export default function Event(props) {
           }}
         >
           <input
-            className="input"
+            className="comment--input"
             type="text"
             placeholder="Add a comment"
             onChange={event =>
@@ -143,7 +169,7 @@ export default function Event(props) {
           }}
         >
           <input
-            className="input"
+            className="comment--input"
             type="text"
             placeholder="Add a comment"
             onChange={event =>
