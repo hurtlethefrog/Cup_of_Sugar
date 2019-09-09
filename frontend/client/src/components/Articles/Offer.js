@@ -3,7 +3,6 @@ import { dateFormatter, timeAgo } from "../../helper";
 import "./styles.scss";
 
 export default function Offer(props) {
-  console.log("OFFER PROPS", props)
   const [state, setState] = useState(false);
   const [comment, setComment] = useState({
     // id: props.article.offer_request_id,
@@ -34,7 +33,7 @@ export default function Offer(props) {
   });
 
   return (
-    <article className="box">
+    <article className="box offer">
       <div className="article-icon">O</div>
       <div className="article--userinfo">
         <img src={props.article.owner[0].profile_pic} />

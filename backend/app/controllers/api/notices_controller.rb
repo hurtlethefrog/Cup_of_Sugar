@@ -11,7 +11,7 @@ class Api::NoticesController < ApplicationController
   @noticesWithComments = @notices.map {|notice|
     modified_notice = notice.attributes
     notices_id = {:notices_id => notice.id}
-    user_hash = {:owner => User.find_by_sql("SELECT users.id, first_name, last_name, profile_pic FROM users WHERE users.id = #{notice.user_id}")}
+    user_hash = {:owner => User.find_by_sql("SELECT users.id, first_name, last_name, profile_pic FROM users WHERE users.id = #{notice.owner_id}")}
     comments_hash = {:comments => Comment.find_by_sql("SELECT comments.*, users.id as user_id, first_name, last_name, profile_pic FROM comments JOIN users on comments.users_id = users.id WHERE notices_id = #{notice.id}")}
     notice_output = modified_notice.merge(notices_id).merge(user_hash).merge(comments_hash)
 
@@ -58,7 +58,7 @@ class Api::NoticesController < ApplicationController
   end
 
   def notice_params 
-    params.permit(:title, :description)
+    params.permit(:title, :description, :owner_id)
   end
 
 

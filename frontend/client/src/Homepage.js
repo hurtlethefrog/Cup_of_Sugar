@@ -130,7 +130,7 @@ export default function Homepage() {
           const eventArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: account.id
+            owner_id: account.id, 
           };
           delete eventArticle.type;
           // console.log(eventArticle);
@@ -177,7 +177,7 @@ export default function Homepage() {
           delete offerArticle.end;
           delete offerArticle.location;
 
-          console.log(offerArticle);
+          console.log("OFFER TYPE", newArticle.type);
           axios
             .post(`/api/${newArticle.type}s`, {
               ...offerArticle
@@ -231,7 +231,6 @@ export default function Homepage() {
     // delete comment.offer_id;
     // delete comment.notice_id;
 
-    {console.log("LOGGIN USER COMMENT",userComment)}
     axios
       .post(`api/${comment.type}s/${comment.id}/comments`, { ...userComment })
       .then(res => {
@@ -244,6 +243,7 @@ export default function Homepage() {
   useEffect(() => {
     if (attendee.going === true) {
       {console.log("ATTENDEE", attendee)}
+      console.log("ACCOUNT", account)
       axios
         .post(`api/events/${attendee.events_id}/attendees`, {users_id: account.id, events_id: attendee.events_id})
         .then(res => {
@@ -252,6 +252,9 @@ export default function Homepage() {
         .catch(err => console.log(err));
     }
   }, [attendee]);
+
+  let userToken = localStorage.getItem('jwt')
+  
 
   return (
     <div className="App">
@@ -263,9 +266,6 @@ export default function Homepage() {
       >
         NAVBAR
       </Nav>
-
-      <button onClick={event => console.log(filter)}>Current Filter</button>
-      <button onClick={event => console.log(articles)}>Current Articles</button>
       {/* <div>Hello {account.first_name}</div> */}
       {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
       <div>
