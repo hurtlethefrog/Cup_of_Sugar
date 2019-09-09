@@ -14,8 +14,8 @@ class Api::HouseholdsController < ApplicationController
 
   private 
     
-    def set_user_household(@user.id)
-      @household_by_id = User.select(:households_id).where(id: @user.id)
+    def set_user_household(user)
+      @household_by_id = User.select(:households_id).where(id: user.id)
       @id = @household_by_id[0][:households_id]
       @household_members = User.where(households_id: @id)
 
