@@ -6,61 +6,66 @@ import Articles from "./components/Articles/Articles";
 import New from "./components/Articles/New";
 import Nav from "./components/Nav";
 import { defaultProps } from "@lls/react-light-calendar";
+import { useSelector } from "react-redux";
 
-const dummyAcc = {
-  community: {
-    id: 1,
-    name: "coolest beehive",
-    location: "h3h"
-  },
-  household: [
-    {
-      id: 1,
-      community_id: 1,
-      address: "1489 Norton crt",
-      city: "Vancouver",
-      province: "BC",
-      postal_code: "h3h 1p2"
-    }
-  ],
-  user: [
-    {
-      id: 2,
-      household_id: 1,
-      first_name: "Nelly",
-      last_name: "Main",
-      password: "Password",
-      password_confirmation: "Password",
-      profile_pic: "url to a pic",
-      phone_number: "1234567890",
-      bio: "short description of who I am",
-      private: true
-    },
-    {
-      id: 3,
-      household_id: 1,
-      first_name: "Jess",
-      last_name: "N-L",
-      password: "Password",
-      password_confirmation: "Password",
-      profile_pic: "url to a pic",
-      phone_number: "1234567890",
-      bio: "short description of who I am",
-      private: true
-    }
-  ]
-};
+// const dummyAcc = {
+//   community: {
+//     id: 1,
+//     name: "coolest beehive",
+//     location: "h3h"
+//   },
+//   household: [
+//     {
+//       id: 1,
+//       community_id: 1,
+//       address: "1489 Norton crt",
+//       city: "Vancouver",
+//       province: "BC",
+//       postal_code: "h3h 1p2"
+//     }
+//   ],
+//   user: [
+//     {
+//       id: 2,
+//       household_id: 1,
+//       first_name: "Nelly",
+//       last_name: "Main",
+//       password: "Password",
+//       password_confirmation: "Password",
+//       profile_pic: "url to a pic",
+//       phone_number: "1234567890",
+//       bio: "short description of who I am",
+//       private: true
+//     },
+//     {
+//       id: 3,
+//       household_id: 1,
+//       first_name: "Jess",
+//       last_name: "N-L",
+//       password: "Password",
+//       password_confirmation: "Password",
+//       profile_pic: "url to a pic",
+//       phone_number: "1234567890",
+//       bio: "short description of who I am",
+//       private: true
+//     }
+//   ]
+// };
 
 export default function Homepage() {
+  const user = useSelector(state => state)
+  console.log("USER", user)
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("articles");
-  const [account, setUser] = useState(dummyAcc);
+  const [account, setUser] = useState(user);
   const [newArticle, setNewArticle] = useState();
   const [household, setHousehold] = useState();
   // toggles to trigger articles refresh after sucessful post
   const [post, setPost] = useState(true);
   const [comment, makeComment] = useState();
   const [attendee, addAttendee] = useState(false);
+
+  console.log("ACCOUNT", account)
 
   const updateComments = (arr, payload, cb) => {
     for (let ele of arr) {
