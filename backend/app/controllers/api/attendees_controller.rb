@@ -14,7 +14,7 @@ class Api::AttendeesController < ApplicationController
   def create
     @addAttendee = EventUser.new(attendee_params)
 
-    @new_attendee_with_events_id = {"attendees" => @user.attributes}.merge({"events_id" => @events_id})
+    @new_attendee_with_events_id = @user.attributes.merge({"events_id" => @events_id})
 
     if @addAttendee.save
       render json: @new_attendee_with_events_id, status: :created
