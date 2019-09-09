@@ -26,7 +26,7 @@ const dummyAcc = {
   ],
   user: [
     {
-      id: 2,
+      id: 1,
       household_id: 1,
       first_name: "Nelly",
       last_name: "Main",
@@ -264,7 +264,6 @@ export default function Homepage() {
       >
         NAVBAR
       </Nav>
-      {/* <div>Hello {account.first_name}</div> */}
       {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
       <div>
         <FilterBar onSelect={setFilter} filter={filter} />
@@ -276,13 +275,15 @@ export default function Homepage() {
           {/* onSubmit function will need to ensure title description, everything else is optional */}
           <New onSubmit={setNewArticle} />
         </div>
-        {/* {articles && ( */}
+        {articles && (
         <Articles
           makeComment={appendComment}
           articles={articles}
           addAttendee={addAttendee}
+          // current user will need ot be set with user from useSelector
+          currentUser={dummyAcc.user[0]}
         />
-        {/* )} */}
+         )} 
       </div>
     </div>
   );

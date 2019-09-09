@@ -66,11 +66,13 @@ export default function Offer(props) {
           onSubmit={event => {
             event.preventDefault();
             props.makeComment(comment);
+            setComment({ ...comment, comment: "" });
           }}
         >
           <input
             className="comment--input"
             type="text"
+            value={comment.comment}
             placeholder="Add a comment"
             onChange={event =>
               setComment({ ...comment, comment: event.target.value })
@@ -84,11 +86,13 @@ export default function Offer(props) {
           onSubmit={event => {
             event.preventDefault();
             props.makeComment(comment);
+            setComment({...comment, comment:''})
           }}
         >
           <input
             className="comment--input"
             type="text"
+            value={comment.comment}
             placeholder="Add a comment"
             onChange={event =>
               setComment({ ...comment, comment: event.target.value })

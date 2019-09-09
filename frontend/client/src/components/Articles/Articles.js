@@ -14,6 +14,7 @@ export default function Articles(props) {
             article={article}
             makeComment={props.makeComment}
             addAttendee={props.addAttendee}
+            currentUser={props.currentUser}
           />
         );
       case "notice":
