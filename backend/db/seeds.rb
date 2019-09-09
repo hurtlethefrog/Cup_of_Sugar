@@ -74,7 +74,6 @@ Household.create([{
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  # password_digest: "fjdlkfjlsdkf"
   password: '11111111', 
   password_confirmation: '11111111'
   )
@@ -88,7 +87,6 @@ end
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  # password_digest: "fjdlkfjlsdkf"
   password: '11111111', 
   password_confirmation: '11111111'
   )
@@ -140,9 +138,9 @@ user3 = User.create(
 event1 = Event.create(
   owner_id: admin.id,
   created_at: 10.days.ago,
-  title: 'Event Lunch in the park', 
-  location: 'Location for park',
-  description: 'Description for park lunch', 
+  title: 'Lunch in the Park', 
+  location: 'TBC',
+  description: 'The days are getting cooler, lets meet up in the park for lunch. BYO drinks and a plate to share', 
   start:Faker::Time.forward(days: 23, period: :morning), 
   end:Faker::Time.forward(days: 23, period: :morning) 
   )
@@ -151,18 +149,18 @@ event2 = Event.create(
   owner_id: user1.id,
   created_at: 20.days.ago,
   title: 'Barbeque at My Place', 
-  location: 'Location for BBQ',
-  description:'Description for BBQ', 
-  start:Faker::Time.forward(days: 5, period: :morning), 
-  end:Faker::Time.forward(days: 5, period: :morning 
+  location: 'My house!',
+  description:'We have a new BBQ! Let\'s fire it up!', 
+  start:Faker::Time.forward(days: 5, period: :evening), 
+  end:Faker::Time.forward(days: 5, period: :evening 
 ))
 
 event3 = Event.create(
   owner_id: user2.id,
   created_at: 5.days.ago,
   title: 'Gaming Night and Pizza', 
-  location: 'Location for game',
-  description:'Description for game night',
+  location: 'TBC',
+  description:'Let\'s play some games and get to know each other.',
   start:Faker::Time.forward(days: 10, period: :evening), 
   end:Faker::Time.forward(days: 10, period: :evening) 
 )
@@ -171,8 +169,8 @@ event4 = Event.create(
   owner_id: user3.id,
   created_at: 1.days.ago,
   title: 'Baby play date with my 3 year old', 
-  location: 'Location for playdate',
-  description:'Description for playdate', 
+  location: 'TBC, depending on the weather',
+  description:'A morning catch up for the babies to play and the parents to chat!', 
   start:Faker::Time.forward(days: 2, period: :morning), 
   end:Faker::Time.forward(days: 2, period: :morning 
 ))
@@ -205,8 +203,8 @@ EventUser.create(
 offer1 = OffersRequest.create(
   owner_id: admin.id, 
   created_at: 15.days.ago,
-  title:'Offer title 1', 
-  description:'Offer 1 Description',
+  title:'Lawn Mower', 
+  description:'Available most weekends just contact me',
   article_type:'offer',
   active: true, 
   offer: true
@@ -215,8 +213,8 @@ offer1 = OffersRequest.create(
 offer2 = OffersRequest.create(
   owner_id: admin.id, 
   created_at: 10.days.ago,
-  title:'Offer title 2', 
-  description:'Offer 2 Description',
+  title:'Chocolate Fountain', 
+  description:'A hit at any event, contact me for info',
   article_type:'offer',
   active: true,
   offer: true
@@ -225,8 +223,8 @@ offer2 = OffersRequest.create(
 offer3 = OffersRequest.create(
   owner_id: user3.id,
   created_at: 2.days.ago,
-  title:'Offer title 3', 
-  description:'Offer description 3',
+  title:'Ladder', 
+  description:'Great for reaching high places!',
   article_type:'offer',
   active: true,
   offer: true
@@ -235,8 +233,8 @@ offer3 = OffersRequest.create(
 request1 = OffersRequest.create(
   owner_id: user2.id,
   created_at: 5.days.ago,
-  title:'Wanted title 1', 
-  description:'Wanted description 1',
+  title:'Ski Gear', 
+  description:'First time skiing anything we could borrow would be great!',
   article_type:'request',
   active: true,
   offer: false
@@ -245,8 +243,8 @@ request1 = OffersRequest.create(
 request2 = OffersRequest.create(
   owner_id: admin.id,
   created_at: 15.days.ago,
-  title:'Wanted title 2', 
-  description:'Wanted description 2',
+  title:'Old Tape Deck', 
+  description:'Found some old casettes, does anyone have a tape player?',
   article_type:'request',
   active: true,
   offer: false
@@ -257,101 +255,101 @@ request2 = OffersRequest.create(
 notice1 = Notice.create(
   owner_id: admin.id,
   created_at: 10.days.ago,
-  title: 'Notice title 1', 
-  description: 'Notice description 1'
+  title: 'Raccoons spotted in the neighbourhood!', 
+  description: 'Don\'t forget to lock your bins'
 )
 
 notice2 = Notice.create(
   owner_id: admin.id,
   created_at: 10.days.ago,
-  title: 'Notice title 2', 
-  description: 'Notice description 1'
+  title: 'Lost cat', 
+  description: 'Black and White, answers to Pudding, last seen on the weekend near the park.'
 )
 
 notice3 = Notice.create( 
   owner_id: user3.id,
   created_at: 5.days.ago,
-  title: 'Notice title 3', 
-  description: 'Notice description 2'
+  title: 'Just moved to the neighbourhood', 
+  description: 'Looking forward to being a part of the community'
 )
 
 notice4 = Notice.create(
   owner_id: user1.id,
   created_at: 20.days.ago,
-  title: 'Notice title 4', 
-  description: 'Notice description 3'
+  title: 'Half price coffee', 
+  description: 'Tim\'s coffee bar has half priced coffee on Wednesday afternoon'
 )
 
 Comment.create([
-  { comment: 'event comment', 
+  { comment: 'I\'ll be there!', 
   created_at: 1.days.ago,
   events_id: event1.id,
   users_id: user1.id },
 
-  { comment: 'event comment', 
+  { comment: 'Looking forward to it', 
   created_at: 2.days.ago,
   events_id: event2.id,
   users_id: user2.id },
 
-  { comment: 'event comment', 
+  { comment: 'Will hopefully make it to the next event!', 
   created_at: 3.days.ago,
   events_id: event2.id,
   users_id: user3.id },
 
-  { comment: 'event comment', 
+  { comment: 'I\'m away! Next time for sure!', 
   created_at: 2.days.ago,
   events_id: event2.id,
   users_id: admin.id },
 
-  { comment: 'notice comment', 
+  { comment: 'Thanks for the tip', 
   created_at: 4.days.ago,
   notices_id: notice1.id,
   users_id: admin.id },
 
-  { comment: 'notice comment', 
+  { comment: 'Good to know, Thank you.', 
   created_at: 2.days.ago,
   notices_id: notice3.id,
   users_id: user3.id },
 
-  { comment: 'notice comment', 
+  { comment: 'Darn Trash Pandas!', 
   created_at: 2.days.ago,
   notices_id: notice1.id,
   users_id: user3.id },
 
-  { comment: 'notice comment', 
+  { comment: 'Thanks for letting us know', 
   created_at: 3.days.ago,
   notices_id: notice1.id,
   users_id: user1.id },
 
-  { comment: 'notice comment', 
+  { comment: 'Will keep an eye out!', 
   created_at: 4.days.ago,
   notices_id: notice2.id,
   users_id: admin.id},
 
-  { comment: 'notice comment 3 by admin', 
+  { comment: 'Welcome!', 
   created_at: 6.days.ago,
   notices_id: notice3.id,
   users_id: admin.id },
 
-  { comment: 'notice comment 3 by neighbour', 
+  { comment: 'Amazing! It\'s great coffee too!', 
   created_at: 2.days.ago,
   notices_id: notice4.id,
   users_id: user3.id },
 
-  { comment: 'offer comment 1 by neighbour', 
+  { comment: 'Thanks, We were just considering buying a new one', 
   created_at: 2.days.ago,
   offers_requests_id: offer1.id,
   users_id: user2.id },
 
-  { comment: 'request comment 2 by neighbour', 
+  { comment: 'We have some children\'s gear I\'ll give you a call!', 
   created_at: 5.days.ago,
   offers_requests_id: request1.id,
   users_id: user3.id },
 
-  { comment: 'request comment 3 by admin', 
+  { comment: 'I think I do! I\'ll take a look in the garage on the weekend', 
   created_at: 4.days.ago,
   offers_requests_id: request2.id,
-  users_id: admin.id },
+  users_id: user2.id },
 ])
 
 
