@@ -23,7 +23,7 @@ household5 = Household.create(address: '4 Sweet Melon Street', postal_code: 'H2T
 admin = User.create(
   first_name: 'Frankie',
   last_name: 'George',
-  profile_pic: Faker::Avatar.image,
+  profile_pic: 'https://i.imgur.com/twYrpay.jpg',
   email: 'Frankie@me.com',
   phone_number:'11111111111',
   is_admin: true, 
@@ -35,7 +35,7 @@ admin = User.create(
 neighbour = User.create(
     first_name: 'Louise',
     last_name: 'Smith',
-    profile_pic: Faker::Avatar.image,
+    profile_pic: 'https://i.imgur.com/LpaY82x.png',
     email: 'Louise@email.com',
     phone_number:Faker::PhoneNumber.cell_phone, 
     households_id: household2.id, 
@@ -71,7 +71,7 @@ Household.create([{
   households_id: household3.id,
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  profile_pic: Faker::Avatar.image,
+  profile_pic: 'https://i.imgur.com/Nmx0Qxo.png',
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
   password: '11111111', 
@@ -84,7 +84,7 @@ end
   households_id: household4.id,
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  profile_pic: Faker::Avatar.image,
+  profile_pic: 'Faker::Avatar.image',
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
   password: '11111111', 
@@ -108,7 +108,7 @@ end
 user1 = User.create(
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  profile_pic: Faker::Avatar.image,
+  profile_pic: 'https://i.imgur.com/T2WwVfS.png',
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
   password: '11111111', 
@@ -118,7 +118,7 @@ user1 = User.create(
 user2 = User.create(
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  profile_pic: Faker::Avatar.image,
+  profile_pic: 'https://i.imgur.com/FK8V841.jpg',
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
   password: '11111111', 
@@ -128,7 +128,7 @@ user2 = User.create(
 user3 = User.create(
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  profile_pic: Faker::Avatar.image,
+  profile_pic: 'https://i.imgur.com/TdOAdde.jpg',
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
   password: '11111111', 
