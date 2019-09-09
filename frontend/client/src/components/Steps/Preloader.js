@@ -3,6 +3,8 @@ import Axios from 'axios';
 
 export default function Preloader(props) {
 
+  const dispatch = useDispatch();
+
   return (
     <main className="">
       <section className="">

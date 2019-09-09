@@ -1,6 +1,6 @@
 $article-background: white;
 $comment-box: white;
-
+$font-color: #707070;
 .box {
   background-color: $article-background;
   display: flex;
@@ -8,6 +8,19 @@ $comment-box: white;
   position: relative;
   cursor: default;
   box-shadow: none;
+  color: $font-color;
+  box-shadow: none;
+  border-radius: 0;
+  .input, .select select, .textarea {
+    background-color: #fff;
+    color: $font-color;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 1.3rem;
+  }
 
   .article--userinfo {
     text-align: left;
@@ -16,7 +29,6 @@ $comment-box: white;
     width: 100%;
     right: 0%;
     top: 0%;
-    border-radius: 5px 5px 0px 0px;
     img {
       width: 35px;
       border-radius: 25%;
@@ -168,19 +180,27 @@ $comment-box: white;
   cursor: pointer;
 }
 
+.input:active, .input:hover, .input:focus {
+  border-color: #7AA0DC;
+}
+
 .event {
   background-color: rgb(240, 202, 191);
+  input {border-bottom: 4px solid #CAA8A0;}
 }
 .notice {
   background-color: rgb(208, 213, 216);
+  input {border-bottom: 4px solid #AEB2B5;}
 }
 
 .offer {
   background-color: rgb(242, 204, 170);
+  input {border-bottom: 4px solid #CAAC8D;}
 }
 
 .request {
   background-color: rgb(226, 227, 161);
+  input {border-bottom: 4px solid #BDBF7F;}
 }
 .new {
   width: 75%;

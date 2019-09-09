@@ -1,5 +1,8 @@
-import React from 'react';
-import Axios from 'axios';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { setUser } from "../../store/app";
 
 export default function Ready(props) {
 
@@ -9,7 +12,8 @@ export default function Ready(props) {
         <h1>All ready!</h1>
       </section>
       <footer>
-        <button onClick={props.onNext} className="next-btn">Go to homepage</button>
+        <Link to="/">Go to homepage</Link>
+        {/* <button onClick={props.onNext} className="next-btn">Go to homepage</button> */}
       </footer>
     </main>
   );

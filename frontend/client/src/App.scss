@@ -1,5 +1,6 @@
 $body-font: Arial, Helvetica, sans-serif; 
 $background-color-body: white; 
+$font-color: #707070;;
 
 
 html, body {
@@ -7,6 +8,7 @@ html, body {
   display: flex;
   flex-direction: column;
   font-family: $body-font;
+  color: $font-color;
   background-color: $background-color-body;
 }
 
