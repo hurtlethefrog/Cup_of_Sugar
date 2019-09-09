@@ -12,10 +12,12 @@ let REACT_APP_G_API_KEY = process.env.REACT_APP_G_API_KEY;
 
 export default function Community(props) {
     const { options, onMount, className } = props;
+    
     const user = useSelector(state => state.app.user);
+    console.log("USER IN COMMUNITY:", user)
 
     let communityEntry = {
-        user,
+        ...user,
         name: 'Mile End', 
         postal_code: 'H2T'
     };
@@ -75,7 +77,7 @@ export default function Community(props) {
     if (!window.google) {
       const script = document.createElement(`script`)
       script.type = `text/javascript`
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${REACT_APP_G_API_KEY}`
+      script.src = `https://maps.googleapis.com/maps/api/js?key=$BLAH`
       const headScript = document.getElementsByTagName(`script`)[0]
       headScript.parentNode.insertBefore(script, headScript)
       script.addEventListener(`load`, onLoad)

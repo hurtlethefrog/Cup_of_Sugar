@@ -8,7 +8,7 @@ export default function UserEntry(props) {
   console.log("OBJECT###################:", user);
 
   let userEntry = {
-    user,
+    ...user,
     first_name: "",
     last_name: "",
     email: "",
@@ -34,7 +34,7 @@ export default function UserEntry(props) {
         const user_auth = {
           auth: { email: userForm.email, password: userForm.password }
         };
-        props.setUser(user_auth);
+        // props.setUser(user_auth);
         console.log("user_auth:", user_auth);
         return axios.post("/api/user_token", user_auth);
       })
