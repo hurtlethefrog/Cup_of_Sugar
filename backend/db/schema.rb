@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_07_165017) do
+ActiveRecord::Schema.define(version: 2019_09_09_010429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,9 +89,9 @@ ActiveRecord::Schema.define(version: 2019_09_07_165017) do
     t.boolean "archived", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
+    t.bigint "owner_id"
     t.string "article_type", default: "notice"
-    t.index ["user_id"], name: "index_notices_on_user_id"
+    t.index ["owner_id"], name: "index_notices_on_owner_id"
   end
 
   create_table "offers_requests", force: :cascade do |t|
@@ -136,7 +136,7 @@ ActiveRecord::Schema.define(version: 2019_09_07_165017) do
   add_foreign_key "flaggeds", "offers_requests", column: "offers_requests_id"
   add_foreign_key "flaggeds", "users", column: "users_id"
   add_foreign_key "households", "communities", column: "communities_id"
-  add_foreign_key "notices", "users"
+  add_foreign_key "notices", "users", column: "owner_id"
   add_foreign_key "offers_requests", "users", column: "owner_id", name: "owner_id"
   add_foreign_key "users", "households", column: "households_id"
 end

@@ -11,19 +11,20 @@ require 'faker'
 puts 'Seeding Data....'
 
 community = Community.create(name: 'Mile End', postal_code: 'H2T')
+community1 = Community.create(name: 'Montreal-Nord', postal_code: 'H2V')
+community2 = Community.create(name: 'Saint-Laurent', postal_code: 'H4K')
 
 household1 = Household.create(address: '8000 Honeypot Avenue', postal_code: 'H2T 111', province: 'Quebec', city: 'Montreal', communities_id: community.id)
 household2 = Household.create(address: '1 Sugarpot Street', postal_code: 'H2T 112', province: 'Quebec', city: 'Montreal', communities_id: community.id)
 household3 = Household.create(address: '3 Lemondrop Lane', postal_code: 'H2T 123', province: 'Quebec', city: 'Montreal', communities_id: community.id)
 household4 = Household.create(address: '4 Candycane Street', postal_code: 'H2T 133', province: 'Quebec', city: 'Montreal', communities_id: community.id)
-
+household5 = Household.create(address: '4 Sweet Melon Street', postal_code: 'H2T 134', province: 'Quebec', city: 'Montreal', communities_id: community.id)
 
 admin = User.create(
-  first_name: 'AdminName',
-  last_name: 'AdminSurname',
+  first_name: 'Frankie',
+  last_name: 'George',
   profile_pic: Faker::Avatar.image,
-  email: 'email@me.com',
-  # password_digest: '123',
+  email: 'Frankie@me.com',
   phone_number:'11111111111',
   is_admin: true, 
   households_id: household1.id,
@@ -32,19 +33,16 @@ admin = User.create(
   )
 
 neighbour = User.create(
-    first_name: 'NeighbourName',
-    last_name: 'NeighbourSurname',
+    first_name: 'Louise',
+    last_name: 'Smith',
     profile_pic: Faker::Avatar.image,
-    email: 'neighbour@email.com',
+    email: 'Louise@email.com',
     phone_number:Faker::PhoneNumber.cell_phone, 
     households_id: household2.id, 
     is_admin: true,
-    # password_digest: '123',
     password: '11111111', 
     password_confirmation: '11111111'
     )
-
-# Household.destroy_all
 
 Household.create([{
   communities_id: community.id,
@@ -68,9 +66,7 @@ Household.create([{
   city: 'Montreal'
 }])
 
-# User.destroy_all
-
-5.times do 
+3.times do 
   User.create(
   households_id: household3.id,
   first_name: Faker::Name.first_name,
@@ -106,7 +102,6 @@ end
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  # password_digest: "fjdlkfjlsdkf"
   password: '11111111', 
   password_confirmation: '11111111'
   )
@@ -118,7 +113,6 @@ user1 = User.create(
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  # password_digest: "fjdlkfjlsdkf"
   password: '11111111', 
   password_confirmation: '11111111'
   )
@@ -129,7 +123,6 @@ user2 = User.create(
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  # password_digest: "fjdlkfjlsdkf"
   password: '11111111', 
   password_confirmation: '11111111'
   )
@@ -140,12 +133,9 @@ user3 = User.create(
   profile_pic: Faker::Avatar.image,
   email: Faker::Internet.email,
   phone_number:Faker::PhoneNumber.cell_phone, 
-  # password_digest: "fjdlkfjlsdkf"
   password: '11111111', 
   password_confirmation: '11111111'
   )
-
-# Event.destroy_all
 
 event1 = Event.create(
   owner_id: admin.id,
@@ -265,28 +255,28 @@ request2 = OffersRequest.create(
 # Notice.destroy_all
 
 notice1 = Notice.create(
-  user_id: admin.id,
+  owner_id: admin.id,
   created_at: 10.days.ago,
   title: 'Notice title 1', 
   description: 'Notice description 1'
 )
 
 notice2 = Notice.create(
-  user_id: admin.id,
+  owner_id: admin.id,
   created_at: 10.days.ago,
   title: 'Notice title 2', 
   description: 'Notice description 1'
 )
 
 notice3 = Notice.create( 
-  user_id: user3.id,
+  owner_id: user3.id,
   created_at: 5.days.ago,
   title: 'Notice title 3', 
   description: 'Notice description 2'
 )
 
 notice4 = Notice.create(
-  user_id: user1.id,
+  owner_id: user1.id,
   created_at: 20.days.ago,
   title: 'Notice title 4', 
   description: 'Notice description 3'
