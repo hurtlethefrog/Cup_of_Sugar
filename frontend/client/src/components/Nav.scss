@@ -34,5 +34,15 @@ nav {
   }
 }
 .nav {
-  background-color: rgb(110, 141, 144)
+  background-color: rgb(110, 141, 144);
+    .household {
+      display: flex;
+      flex-direction: column;
+      color: rgb(247, 230, 214);
+
+        #household-list {
+          flex-direction: column;
+        }
+    } 
 }
+

@@ -156,3 +156,8 @@ $comment-box: white;
 .request {
   background-color: rgb(226, 227, 161);
 }
+
+.household {
+  display: flex;
+  flex-direction: column;
+}
