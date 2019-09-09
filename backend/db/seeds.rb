@@ -66,46 +66,8 @@ Household.create([{
   city: 'Montreal'
 }])
 
-3.times do 
-  User.create(
-  households_id: household3.id,
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
-  profile_pic: 'https://i.imgur.com/Nmx0Qxo.png',
-  email: Faker::Internet.email,
-  phone_number:Faker::PhoneNumber.cell_phone, 
-  password: '11111111', 
-  password_confirmation: '11111111'
-  )
-end
-
-3.times do 
-  User.create(
-  households_id: household4.id,
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
-  profile_pic: 'Faker::Avatar.image',
-  email: Faker::Internet.email,
-  phone_number:Faker::PhoneNumber.cell_phone, 
-  password: '11111111', 
-  password_confirmation: '11111111'
-  )
-end
-
-2.times do 
-  User.create(
-  households_id: household1.id,
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
-  profile_pic: Faker::Avatar.image,
-  email: Faker::Internet.email,
-  phone_number:Faker::PhoneNumber.cell_phone, 
-  password: '11111111', 
-  password_confirmation: '11111111'
-  )
-end
-
 user1 = User.create(
+  households_id: household5.id,
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
   profile_pic: 'https://i.imgur.com/T2WwVfS.png',
@@ -116,6 +78,7 @@ user1 = User.create(
   )
 
 user2 = User.create(
+  households_id: household3.id,
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
   profile_pic: 'https://i.imgur.com/FK8V841.jpg',
@@ -126,6 +89,7 @@ user2 = User.create(
   )
 
 user3 = User.create(
+  households_id: household2.id,
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
   profile_pic: 'https://i.imgur.com/TdOAdde.jpg',
@@ -134,6 +98,39 @@ user3 = User.create(
   password: '11111111', 
   password_confirmation: '11111111'
   )
+
+  user4 = User.create(
+    households_id: household1.id,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    profile_pic: 'https://i.imgur.com/3tVgsra.jpg',
+    email: Faker::Internet.email,
+    phone_number:Faker::PhoneNumber.cell_phone, 
+    password: '11111111', 
+    password_confirmation: '11111111'
+    )
+
+  user5 = User.create(
+    households_id: household1.id,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    profile_pic: 'https://i.imgur.com/iHq8K8Z.jpg',
+    email: Faker::Internet.email,
+    phone_number:Faker::PhoneNumber.cell_phone, 
+    password: '11111111', 
+    password_confirmation: '11111111'
+    )
+
+  user6 = User.create(
+    households_id: household4.id,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    profile_pic: 'https://i.imgur.com/nPywAp1.jpg',
+    email: Faker::Internet.email,
+    phone_number:Faker::PhoneNumber.cell_phone, 
+    password: '11111111', 
+    password_confirmation: '11111111'
+    )
 
 event1 = Event.create(
   owner_id: admin.id,
@@ -241,7 +238,7 @@ request1 = OffersRequest.create(
 )
 
 request2 = OffersRequest.create(
-  owner_id: admin.id,
+  owner_id: user6.id,
   created_at: 15.days.ago,
   title:'Old Tape Deck', 
   description:'Found some old casettes, does anyone have a tape player?',
@@ -260,7 +257,7 @@ notice1 = Notice.create(
 )
 
 notice2 = Notice.create(
-  owner_id: admin.id,
+  owner_id: user5.id,
   created_at: 10.days.ago,
   title: 'Lost cat', 
   description: 'Black and White, answers to Pudding, last seen on the weekend near the park.'
@@ -329,7 +326,7 @@ Comment.create([
   { comment: 'Welcome!', 
   created_at: 6.days.ago,
   notices_id: notice3.id,
-  users_id: admin.id },
+  users_id: user5.id },
 
   { comment: 'Amazing! It\'s great coffee too!', 
   created_at: 2.days.ago,

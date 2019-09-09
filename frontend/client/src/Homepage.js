@@ -8,6 +8,7 @@ import New from "./components/Articles/New";
 import Nav from "./components/Nav";
 import { defaultProps } from "@lls/react-light-calendar";
 
+<<<<<<< HEAD
 const dummyAcc = {
   community: {
     id: 1,
@@ -51,15 +52,60 @@ const dummyAcc = {
     }
   ]
 };
+=======
+// const dummyAcc = {
+//   community: {
+//     id: 1,
+//     name: "coolest beehive",
+//     location: "h3h"
+//   },
+//   household: [
+//     {
+//       id: 1,
+//       community_id: 1,
+//       address: "1489 Norton crt",
+//       city: "Vancouver",
+//       province: "BC",
+//       postal_code: "h3h 1p2"
+//     }
+//   ],
+//   user: [
+//     {
+//       id: 2,
+//       household_id: 1,
+//       first_name: "Nelly",
+//       last_name: "Main",
+//       password: "Password",
+//       password_confirmation: "Password",
+//       profile_pic: "url to a pic",
+//       phone_number: "1234567890",
+//       bio: "short description of who I am",
+//       private: true
+//     },
+//     {
+//       id: 3,
+//       household_id: 1,
+//       first_name: "Jess",
+//       last_name: "N-L",
+//       password: "Password",
+//       password_confirmation: "Password",
+//       profile_pic: "url to a pic",
+//       phone_number: "1234567890",
+//       bio: "short description of who I am",
+//       private: true
+//     }
+//   ]
+// };
+>>>>>>> master
 
 export default function Homepage() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.app.user);
-  console.log("USER:", user);
+  console.log("USER:", user)
 
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("articles");
-  const [account, setUser] = useState(dummyAcc);
+  const [account, setUser] = useState(user);
   const [newArticle, setNewArticle] = useState();
   const [household, setHousehold] = useState();
   // toggles to trigger articles refresh after sucessful post
