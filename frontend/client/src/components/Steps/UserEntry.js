@@ -25,7 +25,6 @@ export default function UserEntry(props) {
     event.preventDefault();
     // console.log(userForm);
     dispatch(setUser(userForm));
-    console.log("Object:", userEntry);
 
     axios
       .post("/api/users", { userForm })

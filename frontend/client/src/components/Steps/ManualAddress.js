@@ -8,7 +8,7 @@ export default function ManualAddress(props) {
 
   let manualAddressEntry = {
     address: "",
-    postalCode: "",
+    postal_code: "",
     city: "",
     province: ""
   };
@@ -46,11 +46,11 @@ export default function ManualAddress(props) {
           />
           <input
             placeholder="Postal Code"
-            value={addressForm.postalCode}
+            value={addressForm.postal_code}
             onChange={event =>
               updateAddressForm({
                 ...addressForm,
-                postalCode: event.target.value
+                postal_code: event.target.value
               })
             }
             required

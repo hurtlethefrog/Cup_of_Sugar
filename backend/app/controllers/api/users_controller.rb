@@ -39,8 +39,12 @@ class Api::UsersController < ApplicationController
     # @community = {:id => Community.find_by_sql("SELECT * FROM communities WHERE postal_code = 'H2T'")}
   end
 
+  # def user_params
+  #   params.require(:userForm).permit(:first_name, :last_name, :email, :password, :password_confirmation, :address, :postal_code, :city, :province)
+  # end
+
   def user_params
-    params.require(:userForm).permit(:first_name, :last_name, :email, :password, :password_confirmation, :address, :postal_code, :city, :province)
+    params.require(:userForm).permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end
 
   def user_params_hash
