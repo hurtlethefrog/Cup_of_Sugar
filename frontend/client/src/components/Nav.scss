@@ -29,7 +29,10 @@ nav {
     }
     ul {display: flex;}
     ul > li a {display: none;}
-    ul > li img.household, ul > li img.neighbours {width: 2.8em; height: 2.8em;}
+    ul > li img.household, ul > li img.neighbours {
+      width: 2.8em; 
+      height: 2.8em;
+    }
     ul > li:last-child {padding-right: 1em;}
   }
 }

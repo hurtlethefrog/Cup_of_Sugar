@@ -344,7 +344,7 @@ export default function New(props) {
                 name="title"
                 placeholder="enter your request title"
                 onChange={event =>
-                  setText({ ...text, description: event.target.value })
+                  setText({ ...text, title: event.target.value })
                 }
               ></textarea>
               <textarea
