@@ -1,8 +1,11 @@
 import React, { state, useState } from "react";
+import { Link } from 'react-router-dom';
 import './Nav.scss';
 import Household from './Users/Household';
 
-import { Link } from 'react-router-dom';
+const handleSubmission = () => {
+  localStorage.removeItem('jwt');
+}
 
 export default function Nav(props) {
   const [state, setState] = useState(false);
@@ -10,11 +13,17 @@ export default function Nav(props) {
   return (
   <nav className="nav">
     <div className="brand">
-      <img className="logo" src="images/CupOfSugar_Logo.svg"/>  
-      <h1></h1>
+      <img className="logo" src="images/CupOfSugar_Logo_V2.svg"/>  
     </div>
 
-    <ul>
+    <div>
+    <Link to="/" onClick={handleSubmission}>Logout</Link> 
+    </div>
+
+    {/* <ul>
+      <li>
+
+      </li>
       <li>
         <img className="household" src="images/household.svg" onClick={event => setState(!state)} />
         <Household household={props.household} 
@@ -26,7 +35,7 @@ export default function Nav(props) {
         />
       </li>
       <li><img className="neighbours" src="images/neighbours.svg" /></li>
-    </ul>
+    </ul> */}
   </nav>
   );
 
