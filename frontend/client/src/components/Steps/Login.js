@@ -37,8 +37,6 @@ export default function Login(props) {
   return (
     <main>
       <section className="">
-        <h1>UserEntry</h1>
-
         <form className="registration_fields" onSubmit={handleSubmission}>
           <input
             placeholder="Email"
@@ -57,24 +55,21 @@ export default function Login(props) {
             required
             type="password"
           />
-          <button type="submit">Submit</button>
-        </form>
-        <p>
           {error && (
-            <div style={{ color: `red` }}>
+            <div>
               Invalid email address or password.
             </div>
           )}
-        </p>
+          <footer>
+            <button type="submit" className="next-btn">
+              Next
+            </button>
+            <button onClick={props.onBack} className="back-btn">
+              Back
+            </button>
+          </footer>
+        </form>
       </section>
-      <footer>
-        <button onClick={props.onBack} className="back-btn">
-          Back
-        </button>
-        <button onClick={props.onNext} className="next-btn">
-          Next
-        </button>
-      </footer>
     </main>
   );
 }

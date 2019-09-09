@@ -1,4 +1,4 @@
-// initial state
+// Initial state
 const initialState = {
   user: null
 }
@@ -13,10 +13,8 @@ export const setUser = (user) => ({
 export default (state = initialState, {type, user}) => {
   switch (type) {
     case SET_USER:
-      return { ...state, user: {...state.user, user} }
+      return { ...state, user }
     default:
       return state
   }
 }
-
-// Store index

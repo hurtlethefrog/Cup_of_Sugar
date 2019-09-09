@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../store/app";
+
 import axios from "axios";
 require("dotenv").config();
 let REACT_APP_G_API_KEY = process.env.REACT_APP_G_API_KEY;
@@ -9,6 +12,8 @@ let currentLocation = selected => {
     navigator.geolocation.getCurrentPosition(resolve, reject, selected);
   });
 };
+
+let autoAddressField = null;
 
 // Provide address (reverse geocoding) based on geolocation (user's current coordinates)
 currentLocation()
@@ -34,12 +39,14 @@ currentLocation()
         // console.log("Longitude:", res.data.results[0].geometry.location.lng);
 
         // // Pieces of data for various fields
-        // console.log("Street Number:", res.data.results[0].address_components[0].long_name);
-        // console.log("Address:",res.data.results[0].address_components[1].long_name);
-        // console.log("City:", res.data.results[0].address_components[2].long_name);
-        // console.log("Province/State:", res.data.results[0].address_components[3].long_name);
-        // console.log("Country:", res.data.results[0].address_components[4].long_name);
-        // console.log("Postal Code:", res.data.results[0].address_components[5].long_name);
+        // let streetNumber = res.data.results[0].address_components[0].long_name;
+        // let address = res.data.results[0].address_components[1].long_name;
+        // let city = res.data.results[0].address_components[2].long_name;
+        // let provinceState = res.data.results[0].address_components[3].long_name;
+        // let country = res.data.results[0].address_components[4].long_name;
+        // let postalCode = res.data.results[0].address_components[5].long_name;
+
+        // autoAddressField = `${streetNumber} ${address} ${city} ${provinceState} ${country} ${postalCode}`;
       });
   })
   .catch(err => {
@@ -47,12 +54,11 @@ currentLocation()
   });
 
 export default function AutoAddress(props) {
-
   return (
     <main>
       <section className="">
         <h1>AutoAddress</h1>
-        <input placeholder="Address" disabled="disabled"/>
+        <input placeholder="Address" value={useState(autoAddressField)} disabled="disabled" />
         <button onClick={props.onEdit}>Edit</button>
       </section>
 

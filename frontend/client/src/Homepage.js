@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Homepage.scss";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import FilterBar from "./components/Filters/FilterBar";
 import Articles from "./components/Articles/Articles";
 import New from "./components/Articles/New";
@@ -53,8 +54,10 @@ import { useSelector } from "react-redux";
 // };
 
 export default function Homepage() {
-  const user = useSelector(state => state)
-  console.log("USER", user)
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.app.user);
+  console.log("USER:", user)
+
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("articles");
   const [account, setUser] = useState(user);
