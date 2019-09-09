@@ -14,8 +14,6 @@ export default function Event(props) {
     open: false
   });
 
-  console.log("THE ARTICLE PROPS", props.article);
-
   const checkAttendees = () => {
     for (let attendee of props.article.attendees) {
       if (attendee.id === props.currentUser.id) {
