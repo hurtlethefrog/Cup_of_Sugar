@@ -13,7 +13,7 @@ class Api::AttendeesController < ApplicationController
 
   def create
     @addAttendee = EventUser.new(attendee_params)
-    @newAttendee = User.find_by(id: @user.id)
+    @newAttendee = User.find_by(id: @user[:id])
 
     if @addAttendee.save
       render json: @newAttendee, status: :created
