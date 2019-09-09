@@ -11,16 +11,16 @@ $font-color: #707070;
   color: $font-color;
   box-shadow: none;
   border-radius: 0;
-  .input, .select select, .textarea {
-    background-color: #fff;
-    color: $font-color;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 1.3rem;
-  }
+  // .input, .select select, .textarea {
+  //   background-color: #fff;
+  //   color: $font-color;
+  //   border-top: none;
+  //   border-right: none;
+  //   border-left: none;
+  //   border-radius: 0;
+  //   box-shadow: none;
+  //   padding: 1.3rem;
+  // }
 
   .article--userinfo {
     text-align: left;
@@ -180,9 +180,7 @@ $font-color: #707070;
   cursor: pointer;
 }
 
-.input:active, .input:hover, .input:focus {
-  border-color: #7AA0DC;
-}
+
 
 .event {
   background-color: rgb(240, 202, 191);
@@ -215,6 +213,11 @@ $font-color: #707070;
   float: left;
   margin-top: 13px;
 }
+
+.comment--input:hover, .comment--input:active, .comment--input:focus {
+  border-color: #7AA0DC;
+}
+
 .household {
   display: flex;
   flex-direction: column;
