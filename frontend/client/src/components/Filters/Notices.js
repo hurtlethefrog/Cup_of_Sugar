@@ -10,10 +10,6 @@ export default function Notices(props) {
   // const [state, setState] = useState(true)
 
   const toggleButton = event => {
-<<<<<<< HEAD
-=======
-    console.log(props.categories);
->>>>>>> master
     if (props.categories["notices"] === true) {
       props.toggleFilter("articles");
       props.onSelect("articles");
@@ -29,15 +25,9 @@ export default function Notices(props) {
 
   return (
     <section className={buttonClass}>
-<<<<<<< HEAD
-      <Button onSelect={toggleButton} notices>
-        Notices
-      </Button>
-=======
       <button className="btn-notices" onClick={toggleButton} notices>
         Notices
       </button>
->>>>>>> master
     </section>
   );
 }

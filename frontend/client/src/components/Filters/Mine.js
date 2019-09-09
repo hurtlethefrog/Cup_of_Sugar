@@ -24,13 +24,6 @@ export default function Mine(props) {
   });
 
   return (
-<<<<<<< HEAD
-    <section className={buttonClass}>
-      <Button onSelect={toggleButton} notices>
-        Mine
-      </Button>
-    </section>
-=======
       <section className={buttonClass}>
         <button 
           className="btn-mine"
@@ -39,6 +32,5 @@ export default function Mine(props) {
           Mine
         </button>
       </section>
->>>>>>> master
   );
 }
