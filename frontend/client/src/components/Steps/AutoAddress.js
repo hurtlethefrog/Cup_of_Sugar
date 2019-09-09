@@ -18,8 +18,6 @@ let autoAddressField = null;
 // Provide address (reverse geocoding) based on geolocation (user's current coordinates)
 currentLocation()
   .then(position => {
-    console.log("position.coords.latitude:", position.coords.latitude);
-    console.log("position.coords.longitude:", position.coords.longitude);
     axios
       .get(
         // Only for temporary use
@@ -29,15 +27,11 @@ currentLocation()
         // `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${REACT_APP_G_API_KEY}`
       )
       .then(res => {
-        console.log("res:", res);
-
         // // This formatted address isn't always ideal data. Perhaps it's better to concatenate pieces of data below (Street Number, Address, etc.)
         // console.log("Formatted Address:", res.data.results[0].formatted_address);
-
         // // Coordinates
         // console.log("Latitude:", res.data.results[0].geometry.location.lat);
         // console.log("Longitude:", res.data.results[0].geometry.location.lng);
-
         // // Pieces of data for various fields
         // let streetNumber = res.data.results[0].address_components[0].long_name;
         // let address = res.data.results[0].address_components[1].long_name;
@@ -45,7 +39,6 @@ currentLocation()
         // let provinceState = res.data.results[0].address_components[3].long_name;
         // let country = res.data.results[0].address_components[4].long_name;
         // let postalCode = res.data.results[0].address_components[5].long_name;
-
         // autoAddressField = `${streetNumber} ${address} ${city} ${provinceState} ${country} ${postalCode}`;
       });
   })
@@ -58,13 +51,21 @@ export default function AutoAddress(props) {
     <main>
       <section className="">
         <h1>AutoAddress</h1>
-        <input placeholder="Address" value={useState(autoAddressField)} disabled="disabled" />
+        <input
+          placeholder="Address"
+          value={useState(autoAddressField)}
+          disabled="disabled"
+        />
         <button onClick={props.onEdit}>Edit</button>
       </section>
 
       <footer>
-        <button onClick={props.onBack} className="back-btn">Back</button>
-        <button onClick={props.onNext} className="next-btn">Next</button>
+        <button onClick={props.onBack} className="back-btn">
+          Back
+        </button>
+        <button onClick={props.onNext} className="next-btn">
+          Next
+        </button>
       </footer>
     </main>
   );
