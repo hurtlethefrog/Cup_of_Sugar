@@ -7,7 +7,6 @@ import Articles from "./components/Articles/Articles";
 import New from "./components/Articles/New";
 import Nav from "./components/Nav";
 import { defaultProps } from "@lls/react-light-calendar";
-import { useSelector } from "react-redux";
 
 // const dummyAcc = {
 //   community: {
@@ -56,7 +55,7 @@ import { useSelector } from "react-redux";
 export default function Homepage() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.app.user);
-  console.log("USER:", user)
+  // console.log("USER:", user)
 
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("articles");
@@ -68,7 +67,7 @@ export default function Homepage() {
   const [comment, makeComment] = useState();
   const [attendee, addAttendee] = useState(false);
 
-  console.log("ACCOUNT", account)
+  // console.log("ACCOUNT", account)
 
   const updateComments = (arr, payload, cb) => {
     for (let ele of arr) {
