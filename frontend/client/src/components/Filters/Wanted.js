@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import Button from "../Button";
 
@@ -10,25 +10,25 @@ export default function Wanted(props) {
   // const [state, setState] = useState(true)
 
   const toggleButton = event => {
-    console.log(props.categories)
+    console.log(props.categories);
     if (props.categories["requests"] === true) {
-      props.toggleFilter("articles")
-      props.onSelect("articles")
+      props.toggleFilter("articles");
+      props.onSelect("articles");
     } else {
-      props.toggleFilter("requests")
-      props.onSelect("requests")
+      props.toggleFilter("requests");
+      props.onSelect("requests");
     }
-  }
+  };
 
   const buttonClass = classnames("button", {
     "filter--selected": props.selected
   });
 
   return (
-      <section className={buttonClass}>
-        <Button onSelect={toggleButton} wanted>
-          Wanted
-        </Button>
-      </section>
+    <section className={buttonClass}>
+      <button className="btn-wanted" onClick={toggleButton} wanted>
+        Wanted
+      </button>
+    </section>
   );
 }

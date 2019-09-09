@@ -28,11 +28,12 @@ export default function Mine(props) {
 
   return (
       <section className={buttonClass}>
-        <Button 
-          onSelect={toggleButton}
+        <button 
+          className="btn-mine"
+          onClick={toggleButton}
           notices >
           Mine
-        </Button>
+        </button>
       </section>
   );
 }
