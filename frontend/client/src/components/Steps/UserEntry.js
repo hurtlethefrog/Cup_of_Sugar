@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {Redirect} from "react-router-dom";
 import axios from "axios";
 import { setUser } from "../../store/app";
 
 export default function UserEntry(props) {
   const user = useSelector(state => state.app.user);
   console.log("OBJECT###################:", user);
+  const [redirect, setRedirect] = useState(false);
 
   let userEntry = {
     ...user,
@@ -34,19 +36,21 @@ export default function UserEntry(props) {
           auth: { email: userForm.email, password: userForm.password }
         };
         // props.setUser(user_auth);
+        
         console.log("user_auth:", user_auth);
         return axios.post("/api/user_token", user_auth);
       })
       .then(function(res) {
         console.log("res2:", res);
         localStorage.setItem("jwt", res.data.jwt);
+        setRedirect(true);
       })
       .catch(function(err) {
         console.log(err);
       });
   };
 
-  return (
+  return (redirect? <Redirect to='/' /> :
     <main>
       <section className="">
         <h1>UserEntry</h1>

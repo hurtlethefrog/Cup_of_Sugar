@@ -6,7 +6,7 @@ export default function Wanted(props) {
   const [state, setState] = useState(false);
   const [comment, setComment] = useState({
     // id: props.article.offer_request_id,
-    type: "request", 
+    type: "request",
     offers_requests_id: props.article.offers_requests_id
   });
 
@@ -37,7 +37,7 @@ export default function Wanted(props) {
 
   return (
     <article className="box request">
-      <div className="article-icon">W</div>
+      <img className="article-icon" src="images/hand-point-left-regular.svg" />
       <div className="article--userinfo">
         <img
           src={props.article.owner[0].profile_pic}
@@ -48,11 +48,6 @@ export default function Wanted(props) {
       </div>
       <div className="article--title">{props.article.title}</div>
       <div className="article--description">{props.article.description}</div>
-      {props.article.image ? (
-        <img className="item--image" src={props.article.image} />
-      ) : (
-        <div>No image available</div>
-      )}
       <div className="article--date">
         {dateFormatter(props.article.created_at)}
       </div>
@@ -71,7 +66,7 @@ export default function Wanted(props) {
           }}
         >
           <input
-            className="input"
+            className="comment--input"
             type="text"
             placeholder="Add a comment"
             onChange={event =>
@@ -89,7 +84,7 @@ export default function Wanted(props) {
           }}
         >
           <input
-            className="input"
+            className="comment--input"
             type="text"
             placeholder="Add a comment"
             onChange={event =>

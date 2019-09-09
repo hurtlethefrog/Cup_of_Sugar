@@ -5,16 +5,24 @@ nav {
   display: flex;
   justify-content: space-between;
   padding: 5em;
+  // color: #F7E5D5;
+
 
   div.brand {
     display: flex;
     align-items: center;
     img.logo {
-      height: 125px;
-      width: 125px;
+      height: 15rem;
     }
     h1 {font-size: 2em; padding-left: 1rem;}
   }
+  div a, div a:hover {
+    color: #F7E5D5;
+    font-size: 1.2em;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
   ul {display: flex; align-items: center;}
   ul > li {padding-left: 1rem;}
   ul > li img.household, ul > li img.neighbours {width: 3rem; height: 3rem;}

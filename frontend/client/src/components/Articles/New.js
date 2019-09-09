@@ -93,8 +93,8 @@ export default function New(props) {
                     </option>
                     <option value="event">Event</option>
                     <option value="notice">Notice</option>
-                    <option value="request">Request</option>
                     <option value="offer">Offer</option>
+                    <option value="request">Request</option>
                   </select>
                 </div>
               </div>
@@ -103,7 +103,7 @@ export default function New(props) {
         );
       case "event":
         return (
-          <div>
+          <div className="box event new">
             {" "}
             {error}
             {!calender && (
@@ -208,7 +208,7 @@ export default function New(props) {
         );
       case "notice":
         return (
-          <div>
+          <div className="box notice new">
             {" "}
             {error}
             <form onSubmit={event => event.preventDefault()}>
@@ -280,7 +280,10 @@ export default function New(props) {
               <img
                 src="images/check-square-solid.svg"
                 className="check"
-                onClick={event => sendArticle()}
+                onClick={event => {
+                  sendArticle();
+                  setText({ ...text, article_type: "offer" });
+                }}
               ></img>
               {!imagebox && (
                 <img
@@ -294,7 +297,7 @@ export default function New(props) {
         );
       case "request":
         return (
-          <div>
+          <div className="box request new">
             {" "}
             {error}
             <form onSubmit={event => event.preventDefault()}>
@@ -327,14 +330,17 @@ export default function New(props) {
               <img
                 src="images/check-square-solid.svg"
                 className="check"
-                onClick={event => sendArticle()}
+                onClick={event => {
+                  sendArticle();
+                  setText({ ...text, article_type: "request" });
+                }}
               ></img>
             </div>
           </div>
         );
       case "offer":
         return (
-          <div>
+          <div className="box offer new">
             {" "}
             {error}
             <form onSubmit={event => event.preventDefault()}>
@@ -342,7 +348,7 @@ export default function New(props) {
                 className="textarea is-warning"
                 rows="1"
                 name="title"
-                placeholder="enter your request title"
+                placeholder="enter your offer title"
                 onChange={event =>
                   setText({ ...text, title: event.target.value })
                 }
@@ -351,7 +357,7 @@ export default function New(props) {
                 className="textarea is-warning"
                 rows="4"
                 name="description"
-                placeholder="enter your request description"
+                placeholder="enter your offer description"
                 onChange={event =>
                   setText({ ...text, description: event.target.value })
                 }
@@ -405,7 +411,10 @@ export default function New(props) {
               <img
                 src="images/check-square-solid.svg"
                 className="check"
-                onClick={event => sendArticle()}
+                onClick={event => {
+                  sendArticle();
+                  console.log(text);
+                }}
               ></img>
               {!imagebox && (
                 <img
@@ -423,5 +432,5 @@ export default function New(props) {
     }
   };
 
-  return <div className=" new--article--box">{newArticleMode(mode)}</div>;
+  return <div className="new--article--box">{newArticleMode(mode)}</div>;
 }
