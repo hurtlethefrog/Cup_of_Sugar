@@ -14,9 +14,12 @@ class Api::AttendeesController < ApplicationController
   def create
     @addAttendee = EventUser.new(attendee_params)
     @newAttendee = User.find_by(id: @user[:id])
+    @newAttendee_with_events_id = @newAttendee.attributes.merge({"events_id" => @events_id})
+    puts "*********"
+    puts @newAttendee_with_events_id
 
     if @addAttendee.save
-      render json: @newAttendee, status: :created
+      render json: @newAttendee_with_events_id, status: :created
     else
       render json: @addAttendee.errors, 
       status: :unprocessable_entity
@@ -34,6 +37,7 @@ class Api::AttendeesController < ApplicationController
 
   def set_event
     @event = Event.find_by(id: params[:events_id])
+    @events_id = params[:events_id]
   end
 
 end
