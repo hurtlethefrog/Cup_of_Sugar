@@ -32,10 +32,12 @@ export default function Event(props) {
           alt={comment.first_name + "'s profile_pic"}
         />
         <div className="article--userinfo">
-          {comment.first_name} {comment.last_name ? (comment.last_name[0].toUpperCase() + "."): ("")}
+          {comment.first_name}{" "}
+          {comment.last_name ? comment.last_name[0].toUpperCase() + "." : ""}
         </div>
         <div className="comment--content">
-        <p>{comment.comment}</p></div>
+          <p>{comment.comment}</p>
+        </div>
         <div className="hideable--date">{timeAgo(comment.created_at)}</div>
       </div>
     );
@@ -50,7 +52,10 @@ export default function Event(props) {
             alt={attendee.first_name + "'s profile_pic"}
           />
           <div className="article--userinfo">
-            {attendee.first_name} {attendee.last_name ? (attendee.last_name[0].toUpperCase() + ".") : ("")}
+            {attendee.first_name}{" "}
+            {attendee.last_name
+              ? attendee.last_name[0].toUpperCase() + "."
+              : ""}
           </div>
         </div>
       </div>
@@ -86,21 +91,23 @@ export default function Event(props) {
           onClick={event => setAttendees(!attendees)}
         >
           {!attendees ? (
-            <div className="icon-box">
-              <div className="attendees--icon">
-                <img src={props.article.attendees[0].profile_pic} />
+            <div>
+              <div className="icon-box">
+                <div className="attendees--icon">
+                  <img src={props.article.attendees[0].profile_pic} />
+                </div>
+
+                {props.article.attendees[1] && (
+                  <div className="attendees--icon">
+                    <img src={props.article.attendees[1].profile_pic} />
+                  </div>
+                )}
+                {props.article.attendees[2] && (
+                  <div className="attendees--icon">
+                    <img src={props.article.attendees[2].profile_pic} />
+                  </div>
+                )}
               </div>
-              
-              {props.article.attendees[1] &&
-              <div className="attendees--icon">
-                <img src={props.article.attendees[1].profile_pic} />
-              </div>
-              }
-              {props.article.attendees[2] &&
-              <div className="attendees--icon">
-                <img src={props.article.attendees[2].profile_pic} />
-              </div>
-              }
               <img
                 className="add--attendee"
                 src="images/user-plus-solid.svg"
@@ -113,7 +120,19 @@ export default function Event(props) {
               ></img>
             </div>
           ) : (
-            allAttendees
+            <div>
+              {allAttendees}
+              <img
+                className="add--attendee"
+                src="images/user-plus-solid.svg"
+                onClick={event =>
+                  props.addAttendee({
+                    going: true,
+                    events_id: props.article.events_id
+                  })
+                }
+              ></img>
+            </div>
           )}
         </div>
       ) : (

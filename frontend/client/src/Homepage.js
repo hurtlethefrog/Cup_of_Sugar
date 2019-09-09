@@ -55,7 +55,7 @@ const dummyAcc = {
 export default function Homepage() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.app.user);
-  console.log("USER:", user)
+  console.log("USER:", user);
 
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("articles");
@@ -68,25 +68,27 @@ export default function Homepage() {
   const [attendee, addAttendee] = useState(false);
 
   const updateComments = (arr, payload, cb, type) => {
-    console.log("Heeyyyyy",arr, payload, type)
-    
-    // for (let ele of arr) {
-    //   if (ele[`${type}s_id`] === payload[`${type}s_id`]) {
-    //     console.log("update comment called ?!")
-    //     ele.comments.push(payload);
-    //   }
-    // }
-
     cb(prev => {
       for (let ele of prev) {
-          if (ele[`${type}s_id`] === payload[`${type}s_id`]) {
-            console.log("update comment called ?!")
-            ele.comments.push(payload);
-          }
+        if (ele[`${type}s_id`] === payload[`${type}s_id`]) {
+          ele.comments.push(payload);
         }
-        return [...prev]
+      }
+      return [...prev];
     });
   };
+
+  const updateAttendees = (payload, cb) => {
+    cb(prev => {
+      for (let ele of prev) {
+        if (ele[`events_id`] === payload[`events_id`]) {
+          ele.attendees.push(payload);
+        }
+      }
+      return [...prev];
+    });
+  };
+  
   const tagGenerator = type => {
     if (type === "offer" || type === "request") {
       return "offers_requests_id";
@@ -116,7 +118,6 @@ export default function Homepage() {
   }, []);
 
   useEffect(() => {
-    console.log(`/api/${filter}`);
     if (filter === "mine") {
       axios
         .get(`/api/users/${account.id}/articles`)
@@ -142,7 +143,7 @@ export default function Homepage() {
           const eventArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: account.id, 
+            owner_id: account.id
           };
           delete eventArticle.type;
           // console.log(eventArticle);
@@ -151,7 +152,6 @@ export default function Homepage() {
               ...eventArticle
             })
             .then(res => {
-              console.log(res.data);
               setPost(!post);
             })
             .catch(err => console.log(err));
@@ -167,13 +167,11 @@ export default function Homepage() {
           delete noticeArticle.end;
           delete noticeArticle.location;
 
-          console.log(noticeArticle);
           axios
             .post(`/api/${newArticle.type}s`, {
               ...noticeArticle
             })
             .then(res => {
-              console.log(res.data);
               setPost(!post);
             })
             .catch(err => console.log(err));
@@ -189,13 +187,11 @@ export default function Homepage() {
           delete offerArticle.end;
           delete offerArticle.location;
 
-          console.log("OFFER TYPE", newArticle.type);
           axios
             .post(`/api/${newArticle.type}s`, {
               ...offerArticle
             })
             .then(res => {
-              console.log(res.data);
               setPost(!post);
             })
             .catch(err => console.log(err));
@@ -230,32 +226,33 @@ export default function Homepage() {
   const appendComment = comment => {
     const userComment = {
       ...comment,
-      users_id: account.id,
+      users_id: account.id
       // [tagGenerator(comment.type)]: comment.id
     };
     axios
-      .post(`api/${userComment.type}s/${userComment.id}/comments`, { ...userComment })
+      .post(`api/${userComment.type}s/${userComment.id}/comments`, {
+        ...userComment
+      })
       .then(res => {
         updateComments(articles, res.data, setArticles, userComment.type);
-        console.log(res)
+        console.log(res);
       })
       .catch(err => console.log(err));
-  }
+  };
   useEffect(() => {
     if (attendee.going === true) {
-      {console.log("ATTENDEE", attendee)}
-      console.log("ACCOUNT", account)
       axios
-        .post(`api/events/${attendee.events_id}/attendees`, {users_id: account.id, events_id: attendee.events_id})
+        .post(`api/events/${attendee.events_id}/attendees`, {
+          users_id: account.id,
+          events_id: attendee.events_id
+        })
         .then(res => {
-          
+          console.log("attendee res:  ",res.data, attendee);
+          updateAttendees(res.data, setArticles)
         })
         .catch(err => console.log(err));
     }
   }, [attendee]);
-
-  let userToken = localStorage.getItem('jwt')
-  
 
   return (
     <div className="App">
@@ -280,11 +277,11 @@ export default function Homepage() {
           <New onSubmit={setNewArticle} />
         </div>
         {/* {articles && ( */}
-          <Articles
-            makeComment={appendComment}
-            articles={articles}
-            addAttendee={addAttendee}
-          />
+        <Articles
+          makeComment={appendComment}
+          articles={articles}
+          addAttendee={addAttendee}
+        />
         {/* )} */}
       </div>
     </div>

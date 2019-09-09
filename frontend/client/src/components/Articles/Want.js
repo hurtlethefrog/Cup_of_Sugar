@@ -48,11 +48,6 @@ export default function Wanted(props) {
       </div>
       <div className="article--title">{props.article.title}</div>
       <div className="article--description">{props.article.description}</div>
-      {props.article.image ? (
-        <img className="item--image" src={props.article.image} />
-      ) : (
-        <div>No image available</div>
-      )}
       <div className="article--date">
         {dateFormatter(props.article.created_at)}
       </div>
