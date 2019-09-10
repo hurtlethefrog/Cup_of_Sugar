@@ -104,21 +104,10 @@ export default function Homepage() {
     axios
       .get(`/api/households/${account.user_id}`)
       .then(household => {
-        // console.log("HOUSEHOLDDATA", household.data);
         setHousehold(household.data);
       })
       .catch(err => console.log(err));
   }, []);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`/api/users/${account.user_id}`)
-  //     .then(account => {
-  //       console.log("ACCOUNTDATA", account);
-  //       setUser(account.data);
-  //     })
-  //     .catch(err => console.log(err));
-  // }, []);
 
   useEffect(() => {
     if (filter === "mine") {
@@ -149,7 +138,6 @@ export default function Homepage() {
             owner_id: account.user_id
           };
           delete eventArticle.type;
-          // console.log(eventArticle);
           axios
             .post(`/api/${newArticle.type}s`, {
               ...eventArticle
@@ -211,7 +199,6 @@ export default function Homepage() {
           delete requestArticle.image;
           delete requestArticle.location;
 
-          console.log(requestArticle);
           axios
             .post(`/api/${newArticle.type}s`, {
               ...requestArticle
@@ -250,7 +237,6 @@ export default function Homepage() {
           events_id: attendee.events_id
         })
         .then(res => {
-          console.log("attendee res:  ",res.data, attendee);
           updateAttendees(res.data, setArticles)
         })
         .catch(err => console.log(err));

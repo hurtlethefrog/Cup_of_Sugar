@@ -16,6 +16,8 @@ export default function Wanted(props) {
         return "images/arrow-circle-down-solid.svg";
       case true:
         return "images/arrow-circle-up-solid.svg";
+      default:
+        return "";
     }
   };
 
@@ -24,7 +26,7 @@ export default function Wanted(props) {
       <div className="comment--box box">
          <img
           src={comment.profile_pic ? comment.profile_pic : "/images/user-circle-regular.svg"} 
-          alt={"profile-pic"}
+          alt="profile"
         />
         <div className="article--userinfo">
           {comment.first_name} {comment.last_name[0].toUpperCase() + "."}
@@ -37,9 +39,9 @@ export default function Wanted(props) {
 
   return (
     <article className="box request">
-      <img className="article-icon" src="images/hand-point-left-regular.svg" />
+      <img className="article-icon" src="images/hand-point-left-regular.svg" alt="hand"/>
       <div className="article--userinfo">
-        <img src={props.article.owner[0].profile_pic ? props.article.owner[0].profile_pic : "/images/user-circle-regular.svg"} alt={"profile-pic"} />
+        <img src={props.article.owner[0].profile_pic ? props.article.owner[0].profile_pic : "/images/user-circle-regular.svg"} alt="profile" />
         {props.article.owner[0].first_name}{" "}
         {props.article.owner[0].last_name[0].toUpperCase() + "."}
       </div>
@@ -53,7 +55,8 @@ export default function Wanted(props) {
           className="expand-comments"
           onClick={event => setState(!state)}
           src={expandArrow()}
-        ></img>
+          alt="arrow"
+        />
       )}
       {props.article.comments.length <= 0 && (
         <form
