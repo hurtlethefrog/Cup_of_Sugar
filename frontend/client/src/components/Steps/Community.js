@@ -4,12 +4,6 @@ import Axios from "axios";
 import { setUser } from "../../store/app";
 let REACT_APP_G_API_KEY = process.env.REACT_APP_G_API_KEY;
 
-// https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:${}&key=${REACT_APP_G_API_KEY}
-
-// https://maps.googleapis.com/maps/api/geocode/json?address=77379&sensor=true&key=${REACT_APP_G_API_KEY}
-
-// export default function Community(props) {
-
 export default function Community(props) {
   const { options, onMount, className } = props;
 
@@ -49,7 +43,6 @@ export default function Community(props) {
       }
     };
     for (let city in citymap) {
-      // Add the circle for this city to the map.
       let cityCircle = new window.google.maps.Circle({
         strokeColor: "#BDBE87",
         strokeOpacity: 0.8,
@@ -67,7 +60,8 @@ export default function Community(props) {
     if (!window.google) {
       const script = document.createElement(`script`);
       script.type = `text/javascript`;
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${REACT_APP_G_API_KEY}`;
+    //   script.src = `https://maps.googleapis.com/maps/api/js?key=${REACT_APP_G_API_KEY}`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=KEY`;
       const headScript = document.getElementsByTagName(`script`)[0];
       headScript.parentNode.insertBefore(script, headScript);
       script.addEventListener(`load`, onLoad);

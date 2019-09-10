@@ -45,10 +45,10 @@ export default function AutoAddress(props) {
     axios
       .get(
         // Only for temporary use
-        // `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=KEY`
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=KEY`
 
         // Enable the following and comment out the one above if you want to make request from Google API (results are displayed in the console):
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${REACT_APP_G_API_KEY}`
+        // `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${REACT_APP_G_API_KEY}`
       )
       .then(res => {
         // // This formatted address isn't always ideal data. Perhaps it's better to concatenate pieces of data below (Street Number, Address, etc.)
@@ -57,15 +57,15 @@ export default function AutoAddress(props) {
         // console.log("Latitude:", res.data.results[0].geometry.location.lat);
         // console.log("Longitude:", res.data.results[0].geometry.location.lng);
         // // Pieces of data for various fields
-        let address = `${res.data.results[0].address_components[0].long_name} ${res.data.results[0].address_components[1].long_name}`;
-        let city = res.data.results[0].address_components[2].long_name;
-        let province = res.data.results[0].address_components[3].long_name;
-        let country = res.data.results[0].address_components[4].long_name;
-        let postal_code = res.data.results[0].address_components[5].long_name;
+        // let address = `${res.data.results[0].address_components[0].long_name} ${res.data.results[0].address_components[1].long_name}`;
+        // let city = res.data.results[0].address_components[2].long_name;
+        // let province = res.data.results[0].address_components[3].long_name;
+        // let country = res.data.results[0].address_components[4].long_name;
+        // let postal_code = res.data.results[0].address_components[5].long_name;
 
 
-        autoAddressField = `${address} ${city} ${province} ${country} ${postal_code}`;
-        setAutoAddress(autoAddressField)
+        // autoAddressField = `${address} ${city} ${province} ${country} ${postal_code}`;
+        // setAutoAddress(autoAddressField)
 
         // reduxAutoAddressEntry = {
         //   address: address,

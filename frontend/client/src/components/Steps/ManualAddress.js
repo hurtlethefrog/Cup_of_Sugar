@@ -29,7 +29,7 @@ export default function ManualAddress(props) {
   return (
     <main>
       <section className="">
-        <p>Please provide your address.</p>
+        <p>Please provide your mailing address.</p>
 
         <form className="registration_fields">
           <input
