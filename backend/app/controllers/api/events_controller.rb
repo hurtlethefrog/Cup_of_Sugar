@@ -1,6 +1,6 @@
 class Api::EventsController < ApplicationController
 
-  before_action :set_event, :set_user
+  before_action :set_event
   #  :authenticate_user
 
   def index
@@ -20,6 +20,7 @@ class Api::EventsController < ApplicationController
   } 
 
   render json:
+# @eventsWithCommentsAndAttendees.with_attached_image
 @eventsWithCommentsAndAttendees
 
   end
@@ -32,12 +33,12 @@ class Api::EventsController < ApplicationController
       #POST
   def create
 
-    @event = Event.new(event_params)
+    @new_event = Event.new(event_params)
 
-      if @event.save
-        render json: @event, status: :created
+      if @new_event.save
+        render json: @new_event, status: :created
       else
-        render json: @event.errors, status: :unprocessable_entity
+        render json: @new_event.errors, status: :unprocessable_entity
       end
     
   end
@@ -48,9 +49,9 @@ class Api::EventsController < ApplicationController
       @event = Event.find_by(id: params[:id])
     end
   
-    def set_user
-      @user = User.find_by(id: params[:owner_id])
-    end
+    # def set_user
+    #   @user = User.find_by(id: params[:owner_id])
+    # end
 
     def event_params 
       params.permit(:title, :description, :owner_id, :start, :end, :location, :image)

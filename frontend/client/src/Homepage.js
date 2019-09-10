@@ -7,59 +7,64 @@ import Articles from "./components/Articles/Articles";
 import New from "./components/Articles/New";
 import Nav from "./components/Nav";
 import { defaultProps } from "@lls/react-light-calendar";
+import decode from "jwt-decode";
 
-const dummyAcc = {
-  community: {
-    id: 1,
-    name: "coolest beehive",
-    location: "h3h"
-  },
-  household: [
-    {
-      id: 1,
-      community_id: 1,
-      address: "1489 Norton crt",
-      city: "Vancouver",
-      province: "BC",
-      postal_code: "h3h 1p2"
-    }
-  ],
-  user: [
-    {
-      id: 1,
-      household_id: 1,
-      first_name: "Nelly",
-      last_name: "Main",
-      password: "Password",
-      password_confirmation: "Password",
-      profile_pic: "url to a pic",
-      phone_number: "1234567890",
-      bio: "short description of who I am",
-      private: true
-    },
-    {
-      id: 3,
-      household_id: 1,
-      first_name: "Jess",
-      last_name: "N-L",
-      password: "Password",
-      password_confirmation: "Password",
-      profile_pic: "url to a pic",
-      phone_number: "1234567890",
-      bio: "short description of who I am",
-      private: true
-    }
-  ]
-};
+// const dummyAcc = {
+//   community: {
+//     id: 1,
+//     name: "coolest beehive",
+//     location: "h3h"
+//   },
+//   household: [
+//     {
+//       id: 1,
+//       community_id: 1,
+//       address: "1489 Norton crt",
+//       city: "Vancouver",
+//       province: "BC",
+//       postal_code: "h3h 1p2"
+//     }
+//   ],
+//   user: [
+//     {
+//       id: 1,
+//       household_id: 1,
+//       first_name: "Nelly",
+//       last_name: "Main",
+//       password: "Password",
+//       password_confirmation: "Password",
+//       profile_pic: "url to a pic",
+//       phone_number: "1234567890",
+//       bio: "short description of who I am",
+//       private: true
+//     },
+//     {
+//       id: 3,
+//       household_id: 1,
+//       first_name: "Jess",
+//       last_name: "N-L",
+//       password: "Password",
+//       password_confirmation: "Password",
+//       profile_pic: "url to a pic",
+//       phone_number: "1234567890",
+//       bio: "short description of who I am",
+//       private: true
+//     }
+//   ]
+// };
 
 export default function Homepage() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.app.user);
-  console.log("USER:", user)
-
+  const jwt = localStorage.getItem("jwt")
+  const decoded_jwt = decode(jwt)
+  const jwt_user = decoded_jwt ? decoded_jwt : {user_id : -1}
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("articles");
-  const [account, setUser] = useState(user);
+  // const safeUser = user ? user : {user_id: -1}
+
+  const safeUser = user ? user : jwt_user
+  const [account, setUser] = useState(safeUser);
   const [newArticle, setNewArticle] = useState();
   const [household, setHousehold] = useState();
   // toggles to trigger articles refresh after sucessful post
@@ -96,10 +101,10 @@ export default function Homepage() {
       return `${type}s_id`;
     }
   };
-
+  
   useEffect(() => {
     axios
-      .get(`/api/households/${1}`)
+      .get(`/api/households/${account.user_id}`)
       .then(household => {
         // console.log("HOUSEHOLDDATA", household.data);
         setHousehold(household.data);
@@ -107,20 +112,20 @@ export default function Homepage() {
       .catch(err => console.log(err));
   }, []);
 
-  useEffect(() => {
-    axios
-      .get(`/api/users/${1}`)
-      .then(account => {
-        // console.log("ACCOUNTDATA", account.data);
-        setUser(account.data);
-      })
-      .catch(err => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`/api/users/${account.user_id}`)
+  //     .then(account => {
+  //       console.log("ACCOUNTDATA", account);
+  //       setUser(account.data);
+  //     })
+  //     .catch(err => console.log(err));
+  // }, []);
 
   useEffect(() => {
     if (filter === "mine") {
       axios
-        .get(`/api/users/${account.id}/articles`)
+        .get(`/api/users/${account.user_id}/articles`)
         .then(articles => {
           setArticles(articles.data);
         })
@@ -143,7 +148,7 @@ export default function Homepage() {
           const eventArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: account.id
+            owner_id: account.user_id
           };
           delete eventArticle.type;
           // console.log(eventArticle);
@@ -160,7 +165,7 @@ export default function Homepage() {
           const noticeArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: account.id
+            owner_id: account.user_id
           };
           delete noticeArticle.type;
           delete noticeArticle.start;
@@ -180,7 +185,7 @@ export default function Homepage() {
           const offerArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: account.id
+            owner_id: account.user_id
           };
           delete offerArticle.type;
           delete offerArticle.start;
@@ -200,7 +205,7 @@ export default function Homepage() {
           const requestArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: account.id
+            owner_id: account.user_id
           };
           delete requestArticle.type;
           delete requestArticle.start;
@@ -226,7 +231,7 @@ export default function Homepage() {
   const appendComment = comment => {
     const userComment = {
       ...comment,
-      users_id: account.id
+      users_id: account.user_id
       // [tagGenerator(comment.type)]: comment.id
     };
     axios
@@ -243,7 +248,7 @@ export default function Homepage() {
     if (attendee.going === true) {
       axios
         .post(`api/events/${attendee.events_id}/attendees`, {
-          users_id: account.id,
+          users_id: account.user_id,
           events_id: attendee.events_id
         })
         .then(res => {
@@ -275,15 +280,18 @@ export default function Homepage() {
           {/* onSubmit function will need to ensure title description, everything else is optional */}
           <New onSubmit={setNewArticle} />
         </div>
-        {articles && (
+        {(articles && account.user_id !== -1) ?  (
         <Articles
           makeComment={appendComment}
           articles={articles}
           addAttendee={addAttendee}
           // current user will need ot be set with user from useSelector
-          currentUser={dummyAcc.user[0]}
+          currentUser={account.user_id}
         />
-         )} 
+         ) :
+         (
+          <h1>Not logged in</h1>
+           )} 
       </div>
     </div>
   );

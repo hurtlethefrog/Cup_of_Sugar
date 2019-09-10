@@ -29,8 +29,10 @@ class Api::RequestsController < ApplicationController
     def create
 
       @request = OffersRequest.new(request_params)
-       puts request_params
+      @request.update(offer: false)
         if @request.save
+          puts "***************"
+          p @request
           render json: @request, status: :created
         else
           render json: @request.errors, status: :unprocessable_entity

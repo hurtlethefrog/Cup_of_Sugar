@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
 import { useVisualMode } from "../../hooks/useVisualMode";
-import { validateNewEvent } from "../../helpers/validateNewArticle";
+import { validateNewEvent, validateNewArticle } from "../../helpers/validateNewArticle";
 import Calendar from "../Calender";
 import "./styles.scss";
 
@@ -34,13 +34,13 @@ export default function New(props) {
   };
 
   const sendArticle = () => {
-    const isValid = validateNewEvent(text);
+    const isValid = validateNewArticle(text);
     if (isValid === true) {
       setText({ ...text, type: mode });
       props.onSubmit(text);
       setText(defaultState());
       setImagebox(false);
-      setCalender(false);
+      // setCalender(false);
       setError("");
       transition("new");
     }

@@ -7,7 +7,7 @@ import { setUser } from "../../store/app";
 
 export default function UserEntry(props) {
   const user = useSelector(state => state.app.user);
-  console.log("OBJECT###################:", user);
+  // const userId = useSelector(state => state.app.user.user_id);
   const [redirect, setRedirect] = useState(false);
   const [imagebox, setImagebox] = useState(false);
   const [error, setError] = useState(false);
@@ -35,7 +35,7 @@ export default function UserEntry(props) {
     axios
       .post("/api/users", { userForm })
       .then(function(res) {
-        // console.log("user creation : ", res);
+        dispatch(setUser({...user, user_id: res.data.user_id}))
         const user_auth = {
           auth: { email: userForm.email, password: userForm.password }
         };
