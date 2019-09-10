@@ -113,3 +113,14 @@
     button.next-btn {float: right;}
   }
 }
+
+@media only screen and (max-width: 1000px) {
+  .UserProcedure {
+    input {width: 80%;}
+    section.box {
+      width: 80%;
+      padding-top: 1em;
+      padding-bottom: 1em;
+    }
+  }
+}

@@ -60,8 +60,8 @@ export default function Community(props) {
     if (!window.google) {
       const script = document.createElement(`script`);
       script.type = `text/javascript`;
-    //   script.src = `https://maps.googleapis.com/maps/api/js?key=${REACT_APP_G_API_KEY}`;
-      script.src = `https://maps.googleapis.com/maps/api/js?key=KEY`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${REACT_APP_G_API_KEY}`;
+    //   script.src = `https://maps.googleapis.com/maps/api/js?key=KEY`;
       const headScript = document.getElementsByTagName(`script`)[0];
       headScript.parentNode.insertBefore(script, headScript);
       script.addEventListener(`load`, onLoad);
