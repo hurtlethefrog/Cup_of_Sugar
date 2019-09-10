@@ -13,7 +13,6 @@ export default function Event(props) {
     events_id: props.article.events_id,
     open: false
   });
-  const defaultImage = ""
   const checkAttendees = () => {
     console.log("ATTENDEEE", props.article.attendees, props.currentUser)
     for (let attendee of props.article.attendees) {
