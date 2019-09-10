@@ -17,9 +17,12 @@ export default function AutoAddress(props) {
     province: ""
   };
 
+  // string
+  const [autoAddress, setAutoAddress] = useState("");
+
+  // object for backend
   const [reduxAutoAddress, updateAutoAddress] = useState(reduxAutoAddressEntry);
 
-  const [autoAddress, setAutoAddress] = useState("");
 
   // Verifies the geolocation (user's current location)
   let currentLocation = function(selected) {
@@ -33,43 +36,47 @@ export default function AutoAddress(props) {
   let autoAddressField = null;
 
   // Provide address (reverse geocoding) based on geolocation (user's current coordinates)
-  currentLocation()
-    .then(position => {
+  useEffect(() => {
+    currentLocation()
+      .then(position => {
+        console.log("Current latitude:", position.coords.latitude);
+        console.log("Current longitude:", position.coords.longitude);
 
-      console.log("Current latitude:", position.coords.latitude);
-      console.log("Current longitude:", position.coords.longitude);
+        axios
+          .get(
+            // Only for temporary use
+            // `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=KEY`
 
-      axios
-        .get(
-          // Only for temporary use
-          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=KEY`
+            // Enable the following and comment out the one above if you want to make request from Google API (results are displayed in the console):
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${REACT_APP_G_API_KEY}`
+          )
+          .then(res => {
+            let address = `${res.data.results[0].address_components[0].long_name} ${res.data.results[0].address_components[1].long_name}`;
+            let city = res.data.results[0].address_components[2].long_name;
+            let province = res.data.results[0].address_components[3].long_name;
+            let postal_code =
+              res.data.results[0].address_components[5].long_name;
 
-          // Enable the following and comment out the one above if you want to make request from Google API (results are displayed in the console):
-          // `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${REACT_APP_G_API_KEY}`
-        )
-        .then(res => {
-          // let address = `${res.data.results[0].address_components[0].long_name} ${res.data.results[0].address_components[1].long_name}`;
-          // let city = res.data.results[0].address_components[2].long_name;
-          // let province = res.data.results[0].address_components[3].long_name;
-          // let postal_code = res.data.results[0].address_components[5].long_name;
+            autoAddressField = `${address} ${city} ${province} ${postal_code}`;
+            setAutoAddress(autoAddressField);
 
-          // autoAddressField = `${address} ${city} ${province} ${postal_code}`;
-          // setAutoAddress(autoAddressField);
+            updateAutoAddress({
+              address: address,
+              postal_code: postal_code,
+              city: city,
+              province: province
+            });
 
-
-
-          // updateAutoAddress({
-          //   address: address,
-          //   postal_code: postal_code,
-          //   city: city,
-          //   province: province
-          // });
-          // updateAutoAddress(reduxAutoAddressEntry)
-        });
-    })
-    .catch(err => {
-      console.log(err.message);
-    });
+            console.log("SEEE!")            
+          })
+          .then(() => {
+            dispatch(setUser(reduxAutoAddress));
+          })
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+  }, [autoAddressField, reduxAutoAddress]);
 
   return (
     <main>
@@ -91,7 +98,7 @@ export default function AutoAddress(props) {
       </section>
 
       <footer>
-        <button onClick={props.onBack} value="" className="back-btn">
+        <button onClick={props.onBack} className="back-btn">
           Back
         </button>
         <button onClick={props.onNext} className="next-btn">

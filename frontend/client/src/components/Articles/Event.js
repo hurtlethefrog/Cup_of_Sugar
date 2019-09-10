@@ -40,7 +40,7 @@ export default function Event(props) {
           alt={"profile-pic"}
         />
         <div className="article--userinfo">
-          {comment.first_name}{" "}
+          {comment.first_name}
           {comment.last_name ? comment.last_name[0].toUpperCase() + "." : ""}
         </div>
         <div className="comment--content">
