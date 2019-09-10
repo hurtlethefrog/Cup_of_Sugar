@@ -25,7 +25,7 @@ export default function Notice(props) {
       <div className="comment--box box">
         <img
           src={comment.profile_pic}
-          alt={comment.first_name + "'s profile_pic"}
+          alt={"profile-pic"}
         />
         <div className="article--userinfo">
           {comment.first_name} {comment.last_name[0].toUpperCase() + "."}
@@ -41,7 +41,7 @@ export default function Notice(props) {
       <div className="comment--box box">
         <img
           src={comment.profile_pic}
-          alt={comment.first_name + "'s profile_pic"}
+          alt={"profile-pic"}
         />
         <div className="article--userinfo">
           {comment.first_name} {comment.last_name[0].toUpperCase() + "."}
@@ -58,7 +58,7 @@ export default function Notice(props) {
       <div className="article--userinfo">
         <img
           src={props.article.owner[0].profile_pic}
-          alt={props.article.owner[0].first_name + "'s profile_pic"}
+          alt={"profile-pic"}
         />
         {props.article.owner[0].first_name +
           " " +

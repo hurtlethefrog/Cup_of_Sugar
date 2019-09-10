@@ -37,7 +37,7 @@ export default function Event(props) {
       <div className="comment--box box">
         <img
           src={comment.profile_pic}
-          alt={comment.first_name + "'s profile_pic"}
+          alt={"profile-pic"}
         />
         <div className="article--userinfo">
           {comment.first_name}{" "}
@@ -57,7 +57,7 @@ export default function Event(props) {
         <div className="comment--box box">
           <img
             src={attendee.profile_pic}
-            alt={attendee.first_name + "'s profile_pic"}
+            alt={"profile-pic"}
           />
           <div className="article--userinfo">
             {attendee.first_name}{" "}
