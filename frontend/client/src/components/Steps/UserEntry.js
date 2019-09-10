@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import Dropzone from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { setUser } from "../../store/app";
 
@@ -8,6 +9,8 @@ export default function UserEntry(props) {
   const user = useSelector(state => state.app.user);
   const userId = useSelector(state => state.app.user.user_id);
   const [redirect, setRedirect] = useState(false);
+  const [imagebox, setImagebox] = useState(false);
+  const [error, setError] = useState(false);
 
   let userEntry = {
     ...user,
@@ -15,7 +18,8 @@ export default function UserEntry(props) {
     last_name: "",
     email: "",
     password: "",
-    password_confirmation: ""
+    password_confirmation: "",
+    image: ""
   };
 
   const dispatch = useDispatch();
@@ -36,7 +40,7 @@ export default function UserEntry(props) {
           auth: { email: userForm.email, password: userForm.password }
         };
         // props.setUser(user_auth);
-        
+
         console.log("user_auth:", user_auth);
         return axios.post("/api/user_token", user_auth);
       })
@@ -47,13 +51,16 @@ export default function UserEntry(props) {
       })
       .catch(function(err) {
         console.log(err);
+        setError(true);
       });
   };
 
-  return (redirect? <Redirect to='/' /> :
+  return redirect ? (
+    <Redirect to="/" />
+  ) : (
     <main>
       <section className="">
-        <h1>UserEntry</h1>
+        <p>Please enter your credentials.</p>
 
         <form className="registration_fields" onSubmit={handleSubmission}>
           <input
@@ -101,6 +108,40 @@ export default function UserEntry(props) {
             required
             type="password"
           />
+                     <Dropzone
+              onDrop={acceptedFiles =>
+                updateUserForm({ ...userForm, image: acceptedFiles })
+              }
+              accept="image/png, image/jpeg"
+            >
+              {({
+                getRootProps,
+                getInputProps,
+                isDragActive,
+                isDragReject,
+                acceptedFiles
+              }) => (
+                <section className="box">
+                  <div {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    {!isDragActive &&
+                      "Click here or drop a png/jpeg to upload!"}
+                    {isDragActive && !isDragReject && "Right there!"}
+                    {isDragReject &&
+                      "File type not accepted, please choose a png or jpeg!"}
+                    <ul className="list-group mt-2">
+                      {acceptedFiles.length > 0 &&
+                        acceptedFiles.map(acceptedFile => (
+                          <li key={acceptedFile.name + "key"} className="box">
+                            {acceptedFile.name}
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                </section>
+              )}
+            </Dropzone>
+          {error && <sub>The email already exists. Please try again.</sub>}
           <footer>
             <button type="submit" className="next-btn">
               Next

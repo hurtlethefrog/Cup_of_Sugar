@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
 import Events from "./Events";
-import Flagged from "./Flagged";
+// import Flagged from "./Flagged";
 import Mine from "./Mine";
 import Notices from "./Notices";
 import Offers from "./Offers";

@@ -22,7 +22,7 @@ export default function Offer(props) {
   const parsedComments = props.article.comments.map(comment => {
     return (
       <div className="comment--box box">
-        <img src={comment.profile_pic} />
+        <img src={comment.profile_pic} alt="images/user-circle-regular.svg"/>
         <div className="article--userinfo">
           {comment.first_name} {comment.last_name[0].toUpperCase() + "."}
         </div>
@@ -34,7 +34,7 @@ export default function Offer(props) {
 
   return (
     <article className="box offer">
-      <img className="article-icon" src="images/hand-point-right-regular.svg" />
+      <img className="article-icon" src="images/hand-point-right-regular.svg" alt="offer icon"/>
       <div className="article--userinfo">
         <img src={props.article.owner[0].profile_pic} />
         {props.article.owner[0].first_name}{" "}
@@ -66,11 +66,13 @@ export default function Offer(props) {
           onSubmit={event => {
             event.preventDefault();
             props.makeComment(comment);
+            setComment({ ...comment, comment: "" });
           }}
         >
           <input
             className="comment--input"
             type="text"
+            value={comment.comment}
             placeholder="Add a comment"
             onChange={event =>
               setComment({ ...comment, comment: event.target.value })
@@ -84,11 +86,13 @@ export default function Offer(props) {
           onSubmit={event => {
             event.preventDefault();
             props.makeComment(comment);
+            setComment({ ...comment, comment: "" });
           }}
         >
           <input
             className="comment--input"
             type="text"
+            value={comment.comment}
             placeholder="Add a comment"
             onChange={event =>
               setComment({ ...comment, comment: event.target.value })

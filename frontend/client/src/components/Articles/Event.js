@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { dateFormatter, timeAgo, eventDate } from "../../helper";
-import Popup from "reactjs-popup";
 import "./styles.scss";
 
 export default function Event(props) {
@@ -14,6 +13,15 @@ export default function Event(props) {
     events_id: props.article.events_id,
     open: false
   });
+
+  const checkAttendees = () => {
+    for (let attendee of props.article.attendees) {
+      if (attendee.id === props.currentUser.id) {
+        return false;
+      }
+      return true;
+    }
+  };
 
   const expandArrow = () => {
     switch (state) {
@@ -108,7 +116,7 @@ export default function Event(props) {
                   </div>
                 )}
               </div>
-              <img
+              {checkAttendees() && <img
                 className="add--attendee"
                 src="images/user-plus-solid.svg"
                 onClick={event =>
@@ -117,12 +125,12 @@ export default function Event(props) {
                     events_id: props.article.events_id
                   })
                 }
-              ></img>
+              ></img>}
             </div>
           ) : (
             <div>
               {allAttendees}
-              <img
+              {checkAttendees() && <img
                 className="add--attendee"
                 src="images/user-plus-solid.svg"
                 onClick={event =>
@@ -131,7 +139,7 @@ export default function Event(props) {
                     events_id: props.article.events_id
                   })
                 }
-              ></img>
+              ></img>}
             </div>
           )}
         </div>
@@ -145,9 +153,6 @@ export default function Event(props) {
             onClick={event => setState(!state)}
             src={expandArrow()}
           ></img>
-          {/* <Popup open={state} onClose={setState}>
-            <div>here's the text that will be shown</div>
-          </Popup> */}
         </div>
       )}
       {props.article.attendees.length === 0 && (
@@ -167,11 +172,13 @@ export default function Event(props) {
           onSubmit={event => {
             event.preventDefault();
             props.makeComment(comment);
+            setComment({ ...comment, comment: "" });
           }}
         >
           <input
             className="comment--input"
             type="text"
+            value={comment.comment}
             placeholder="Add a comment"
             onChange={event =>
               setComment({ ...comment, comment: event.target.value })
@@ -185,11 +192,13 @@ export default function Event(props) {
           onSubmit={event => {
             event.preventDefault();
             props.makeComment(comment);
+            setComment({ ...comment, comment: "" });
           }}
         >
           <input
             className="comment--input"
             type="text"
+            value={comment.comment}
             placeholder="Add a comment"
             onChange={event =>
               setComment({ ...comment, comment: event.target.value })

@@ -23,7 +23,6 @@ export default function Notice(props) {
     return (
     
       <div className="comment--box box">
-        {/* <div>{console.log("COMMENT PROPS", comment)}</div> */}
         <img
           src={comment.profile_pic}
           alt={comment.first_name + "'s profile_pic"}
@@ -83,11 +82,13 @@ export default function Notice(props) {
           onSubmit={event => {
             event.preventDefault();
             props.makeComment(comment);
+            setComment({...comment, comment:''})
           }}
         >
           <input
             className="comment--input"
             type="text"
+            value={comment.comment}
             placeholder="Add a comment"
             onChange={event =>
               setComment({ ...comment, comment: event.target.value })
@@ -101,11 +102,13 @@ export default function Notice(props) {
           onSubmit={event => {
             event.preventDefault();
             props.makeComment(comment);
+            setComment({...comment, comment:''})
           }}
         >
           <input
             className="comment--input"
             type="text"
+            value={comment.comment}
             placeholder="Add a comment"
             onChange={event =>
               setComment({ ...comment, comment: event.target.value })

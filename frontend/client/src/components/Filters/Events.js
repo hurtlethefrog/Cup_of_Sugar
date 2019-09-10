@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-
-import Button from "../Button";
+import React from "react";
 
 import "./styles.scss";
 
@@ -11,13 +9,13 @@ export default function Events(props) {
 
   const toggleButton = event => {
     if (props.categories["events"] === true) {
-      props.toggleFilter("articles")
-      props.onSelect("articles")
+      props.toggleFilter("articles");
+      props.onSelect("articles");
     } else {
-      props.toggleFilter("events")
-      props.onSelect("events")
+      props.toggleFilter("events");
+      props.onSelect("events");
     }
-  }
+  };
 
   const buttonClass = classnames("button", {
     "filter--selected": props.selected
@@ -25,12 +23,9 @@ export default function Events(props) {
 
   return (
     <section className={buttonClass}>
-      <Button
-        onSelect={toggleButton}
-        events
-      >
+      <button className="btn-events" onClick={toggleButton} events>
         Events
-      </Button>
+      </button>
     </section>
   );
 }

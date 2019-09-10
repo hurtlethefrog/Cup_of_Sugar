@@ -5,10 +5,8 @@ export default function LoginRegOption(props) {
   return (
     <main>
       <section className="">
-        <ul>
-          <li><button onClick={props.onLogin}>Login</button></li>
-          <li><button onClick={props.onRegister}>Register</button></li>
-        </ul>
+        <button className="btn-login" onClick={props.onLogin}>Login</button>
+        <button className="btn-register" onClick={props.onRegister}>Register</button>
       </section>
       <footer>
       </footer>

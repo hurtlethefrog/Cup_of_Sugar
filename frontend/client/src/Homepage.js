@@ -8,49 +8,49 @@ import New from "./components/Articles/New";
 import Nav from "./components/Nav";
 import { defaultProps } from "@lls/react-light-calendar";
 
-// const dummyAcc = {
-//   community: {
-//     id: 1,
-//     name: "coolest beehive",
-//     location: "h3h"
-//   },
-//   household: [
-//     {
-//       id: 1,
-//       community_id: 1,
-//       address: "1489 Norton crt",
-//       city: "Vancouver",
-//       province: "BC",
-//       postal_code: "h3h 1p2"
-//     }
-//   ],
-//   user: [
-//     {
-//       id: 2,
-//       household_id: 1,
-//       first_name: "Nelly",
-//       last_name: "Main",
-//       password: "Password",
-//       password_confirmation: "Password",
-//       profile_pic: "url to a pic",
-//       phone_number: "1234567890",
-//       bio: "short description of who I am",
-//       private: true
-//     },
-//     {
-//       id: 3,
-//       household_id: 1,
-//       first_name: "Jess",
-//       last_name: "N-L",
-//       password: "Password",
-//       password_confirmation: "Password",
-//       profile_pic: "url to a pic",
-//       phone_number: "1234567890",
-//       bio: "short description of who I am",
-//       private: true
-//     }
-//   ]
-// };
+const dummyAcc = {
+  community: {
+    id: 1,
+    name: "coolest beehive",
+    location: "h3h"
+  },
+  household: [
+    {
+      id: 1,
+      community_id: 1,
+      address: "1489 Norton crt",
+      city: "Vancouver",
+      province: "BC",
+      postal_code: "h3h 1p2"
+    }
+  ],
+  user: [
+    {
+      id: 1,
+      household_id: 1,
+      first_name: "Nelly",
+      last_name: "Main",
+      password: "Password",
+      password_confirmation: "Password",
+      profile_pic: "url to a pic",
+      phone_number: "1234567890",
+      bio: "short description of who I am",
+      private: true
+    },
+    {
+      id: 3,
+      household_id: 1,
+      first_name: "Jess",
+      last_name: "N-L",
+      password: "Password",
+      password_confirmation: "Password",
+      profile_pic: "url to a pic",
+      phone_number: "1234567890",
+      bio: "short description of who I am",
+      private: true
+    }
+  ]
+};
 
 export default function Homepage() {
   const dispatch = useDispatch();
@@ -263,7 +263,6 @@ export default function Homepage() {
       >
         NAVBAR
       </Nav>
-      {/* <div>Hello {account.first_name}</div> */}
       {/* pass down the onSelect(setFilter) function which is handed to filters then button.js, and the current filter so FilterBar knows which filter to highlight */}
       <div>
         <FilterBar onSelect={setFilter} filter={filter} />
@@ -275,13 +274,15 @@ export default function Homepage() {
           {/* onSubmit function will need to ensure title description, everything else is optional */}
           <New onSubmit={setNewArticle} />
         </div>
-        {/* {articles && ( */}
+        {articles && (
         <Articles
           makeComment={appendComment}
           articles={articles}
           addAttendee={addAttendee}
+          // current user will need ot be set with user from useSelector
+          currentUser={dummyAcc.user[0]}
         />
-        {/* )} */}
+         )} 
       </div>
     </div>
   );

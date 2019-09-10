@@ -1,26 +1,21 @@
-import React, {useState} from "react";
-
-import Button from "../Button";
+import React from "react";
 
 import "./styles.scss";
 
 let classnames = require("classnames");
 
-
-
 export default function Mine(props) {
   // const [state, setState] = useState(true)
 
   const toggleButton = event => {
-    console.log(props.categories)
     if (props.categories["mine"] === true) {
-      props.toggleFilter("articles")
-      props.onSelect("articles")
+      props.toggleFilter("articles");
+      props.onSelect("articles");
     } else {
-      props.toggleFilter("mine")
-      props.onSelect("mine")
+      props.toggleFilter("mine");
+      props.onSelect("mine");
     }
-  }
+  };
 
   const buttonClass = classnames("button", {
     "filter--selected": props.selected
@@ -28,12 +23,12 @@ export default function Mine(props) {
 
   return (
       <section className={buttonClass}>
-        <Button 
-          onSelect={toggleButton}
+        <button 
+          className="btn-mine"
+          onClick={toggleButton}
           notices >
           Mine
-        </Button>
+        </button>
       </section>
   );
 }
-

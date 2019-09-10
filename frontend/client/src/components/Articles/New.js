@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
 import { useVisualMode } from "../../hooks/useVisualMode";
-import validateNewArticle from "../../helpers/validateNewArticle";
+import { validateNewEvent } from "../../helpers/validateNewArticle";
 import Calendar from "../Calender";
 import "./styles.scss";
 
@@ -34,7 +34,7 @@ export default function New(props) {
   };
 
   const sendArticle = () => {
-    const isValid = validateNewArticle(text);
+    const isValid = validateNewEvent(text);
     if (isValid === true) {
       setText({ ...text, type: mode });
       props.onSubmit(text);
@@ -114,9 +114,10 @@ export default function New(props) {
                   name="title"
                   value={text.title}
                   placeholder="enter your event title"
-                  onChange={event =>
-                    setText({ ...text, title: event.target.value })
-                  }
+                  onChange={event => {
+                    setText({ ...text, title: event.target.value });
+                    setError("");
+                  }}
                 ></textarea>
                 <textarea
                   className="textarea is-warning"
@@ -124,9 +125,10 @@ export default function New(props) {
                   name="description"
                   value={text.description}
                   placeholder="enter your event description"
-                  onChange={event =>
-                    setText({ ...text, description: event.target.value })
-                  }
+                  onChange={event => {
+                    setText({ ...text, description: event.target.value });
+                    setError("");
+                  }}
                 ></textarea>
               </form>
             )}
@@ -182,7 +184,6 @@ export default function New(props) {
                   onClick={event => sendArticle()}
                 ></img>
               )}
-
               {!imagebox && (
                 <img
                   src="images/images-regular.svg"
@@ -413,7 +414,6 @@ export default function New(props) {
                 className="check"
                 onClick={event => {
                   sendArticle();
-                  console.log(text);
                 }}
               ></img>
               {!imagebox && (

@@ -4,44 +4,28 @@ import Axios from "axios";
 import { setUser } from "../../store/app";
 let REACT_APP_G_API_KEY = process.env.REACT_APP_G_API_KEY;
 
-// https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:${}&key=${REACT_APP_G_API_KEY}
-
-// https://maps.googleapis.com/maps/api/geocode/json?address=77379&sensor=true&key=${REACT_APP_G_API_KEY}
-
-// export default function Community(props) {
-
 export default function Community(props) {
-    const { options, onMount, className } = props;
-    
-    const user = useSelector(state => state.app.user);
-    console.log("USER IN COMMUNITY:", user)
+  const { options, onMount, className } = props;
 
-    let communityEntry = {
-        ...user,
-        name: 'Mile End', 
-        postal_code: 'H2T'
-    };
+  const user = useSelector(state => state.app.user);
 
-    const dispatch = useDispatch();
-    // const [communityForm, updateCommunityForm] = useState(communityEntry);
-    
-    console.log("Object:", communityEntry);
+  let communityEntry = {
+    ...user,
+    name: "Mile End",
+    postal_code: "H2T"
+  };
 
+  const dispatch = useDispatch();
 
-  // const user = useSelector(state => state.app.user);
-  // console.log("OBJECT###################:", user);
-  // console.log("OBJECT###################:", user.user.postalCode);
-
-
-  const propsRef = { ref: useRef(), className }
+  const propsRef = { ref: useRef(), className };
   const onLoad = () => {
-    const map = new window.google.maps.Map(propsRef.ref.current, options)
-    onMount && onMount(map)
+    const map = new window.google.maps.Map(propsRef.ref.current, options);
+    onMount && onMount(map);
     let rectangle = new window.google.maps.Rectangle({
-      strokeColor: '#FF0000',
+      strokeColor: "#BDBE87",
       strokeOpacity: 0.8,
       strokeWeight: 2,
-      fillColor: '#FF0000',
+      fillColor: "#E2E3A1",
       fillOpacity: 0.35,
       map: map,
       bounds: {
@@ -54,53 +38,56 @@ export default function Community(props) {
 
     let citymap = {
       montreal: {
-        center: {lat: 45.5250827, lng: -73.600208 },
+        center: { lat: 45.5250827, lng: -73.600208 },
         population: 1000000
       }
     };
     for (let city in citymap) {
-      // Add the circle for this city to the map.
       let cityCircle = new window.google.maps.Circle({
-        strokeColor: '#FF0000',
+        strokeColor: "#BDBE87",
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#FF0000',
+        fillColor: "#E2E3A1",
         fillOpacity: 0.35,
         map: map,
         center: citymap[city].center,
         radius: Math.sqrt(citymap[city].population) * 0.2
       });
     }
-  }
+  };
 
   useEffect(() => {
     if (!window.google) {
-      const script = document.createElement(`script`)
-      script.type = `text/javascript`
-      script.src = `https://maps.googleapis.com/maps/api/js?key=$BLAH`
-      const headScript = document.getElementsByTagName(`script`)[0]
-      headScript.parentNode.insertBefore(script, headScript)
-      script.addEventListener(`load`, onLoad)
-      return () => script.removeEventListener(`load`, onLoad)
-    } else onLoad()
-  })
+      const script = document.createElement(`script`);
+      script.type = `text/javascript`;
+    //   script.src = `https://maps.googleapis.com/maps/api/js?key=${REACT_APP_G_API_KEY}`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=KEY`;
+      const headScript = document.getElementsByTagName(`script`)[0];
+      headScript.parentNode.insertBefore(script, headScript);
+      script.addEventListener(`load`, onLoad);
+      return () => script.removeEventListener(`load`, onLoad);
+    } else onLoad();
+  });
 
   return (
     <main>
       <section className="">
-        <h1>Community</h1>
-        <p>Great! You are part of neighbourhood {communityEntry.name}!</p>
+        <p>Welcome to your neighbourhood, <strong>{communityEntry.name}</strong>!</p>
 
         <div
-        {...propsRef}
-        style={{ height: `300px`, margin: `1em 0`, borderRadius: `0.5em` }}
+          {...propsRef}
+          style={{ height: `300px`, margin: `1em 0`, borderRadius: `0.5em` }}
         />
       </section>
       <footer>
         <button onClick={props.onBack} className="back-btn">
           Back
         </button>
-        <button onClick={props.onNext} value={() => dispatch(setUser(communityEntry))} className="next-btn">
+        <button
+          onClick={props.onNext}
+          value={() => dispatch(setUser(communityEntry))}
+          className="next-btn"
+        >
           Next
         </button>
       </footer>
@@ -110,244 +97,149 @@ export default function Community(props) {
 
 Community.defaultProps = {
   options: {
-    center: {lat: 45.5250827, lng: -73.600208 },
+    center: { lat: 45.5250827, lng: -73.600208 },
     zoom: 16,
-    types: ['address'],
+    types: ["address"],
     componentRestrictions: {
-      country: 'montreal'
+      country: "montreal"
     },
     styles: [
       {
-          "featureType": "administrative",
-          "elementType": "labels.text.fill",
-          "stylers": [
-              {
-                  "color": "#6195a0"
-              }
-          ]
-      },
-      {
-          "featureType": "administrative.province",
-          "elementType": "geometry.stroke",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "landscape",
           "elementType": "geometry",
           "stylers": [
               {
-                  "lightness": "0"
+                  "hue": "#ff4400"
               },
               {
-                  "saturation": "0"
+                  "saturation": -68
               },
               {
-                  "color": "#f5f5f2"
+                  "lightness": -4
               },
               {
-                  "gamma": "1"
-              }
-          ]
-      },
-      {
-          "featureType": "landscape.man_made",
-          "elementType": "all",
-          "stylers": [
-              {
-                  "lightness": "-3"
-              },
-              {
-                  "gamma": "1.00"
-              }
-          ]
-      },
-      {
-          "featureType": "landscape.natural.terrain",
-          "elementType": "all",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "poi",
-          "elementType": "all",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "poi.park",
-          "elementType": "geometry.fill",
-          "stylers": [
-              {
-                  "color": "#bae5ce"
-              },
-              {
-                  "visibility": "on"
+                  "gamma": 0.72
               }
           ]
       },
       {
           "featureType": "road",
-          "elementType": "all",
+          "elementType": "labels.icon"
+      },
+      {
+          "featureType": "landscape.man_made",
+          "elementType": "geometry",
           "stylers": [
               {
-                  "saturation": -100
+                  "hue": "#0077ff"
               },
               {
-                  "lightness": 45
+                  "gamma": 3.1
+              }
+          ]
+      },
+      {
+          "featureType": "water",
+          "stylers": [
+              {
+                  "hue": "#00ccff"
               },
               {
-                  "visibility": "simplified"
-              }
-          ]
-      },
-      {
-          "featureType": "road.highway",
-          "elementType": "all",
-          "stylers": [
-              {
-                  "visibility": "simplified"
-              }
-          ]
-      },
-      {
-          "featureType": "road.highway",
-          "elementType": "geometry.fill",
-          "stylers": [
-              {
-                  "color": "#fac9a9"
+                  "gamma": 0.44
               },
               {
-                  "visibility": "simplified"
+                  "saturation": -33
               }
           ]
       },
       {
-          "featureType": "road.highway",
-          "elementType": "labels.text",
+          "featureType": "poi.park",
           "stylers": [
               {
-                  "color": "#4e4e4e"
+                  "hue": "#44ff00"
+              },
+              {
+                  "saturation": -23
               }
           ]
       },
       {
-          "featureType": "road.arterial",
+          "featureType": "water",
           "elementType": "labels.text.fill",
           "stylers": [
               {
-                  "color": "#787878"
+                  "hue": "#007fff"
+              },
+              {
+                  "gamma": 0.77
+              },
+              {
+                  "saturation": 65
+              },
+              {
+                  "lightness": 99
               }
           ]
       },
       {
-          "featureType": "road.arterial",
-          "elementType": "labels.icon",
+          "featureType": "water",
+          "elementType": "labels.text.stroke",
           "stylers": [
               {
-                  "visibility": "off"
+                  "gamma": 0.11
+              },
+              {
+                  "weight": 5.6
+              },
+              {
+                  "saturation": 99
+              },
+              {
+                  "hue": "#0091ff"
+              },
+              {
+                  "lightness": -86
+              }
+          ]
+      },
+      {
+          "featureType": "transit.line",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "lightness": -48
+              },
+              {
+                  "hue": "#ff5e00"
+              },
+              {
+                  "gamma": 1.2
+              },
+              {
+                  "saturation": -23
               }
           ]
       },
       {
           "featureType": "transit",
-          "elementType": "all",
+          "elementType": "labels.text.stroke",
           "stylers": [
               {
-                  "visibility": "simplified"
-              }
-          ]
-      },
-      {
-          "featureType": "transit.station.airport",
-          "elementType": "labels.icon",
-          "stylers": [
-              {
-                  "hue": "#0a00ff"
+                  "saturation": -64
               },
               {
-                  "saturation": "-77"
+                  "hue": "#ff9100"
               },
               {
-                  "gamma": "0.57"
+                  "lightness": 16
               },
               {
-                  "lightness": "0"
-              }
-          ]
-      },
-      {
-          "featureType": "transit.station.rail",
-          "elementType": "labels.text.fill",
-          "stylers": [
-              {
-                  "color": "#43321e"
-              }
-          ]
-      },
-      {
-          "featureType": "transit.station.rail",
-          "elementType": "labels.icon",
-          "stylers": [
-              {
-                  "hue": "#ff6c00"
+                  "gamma": 0.47
               },
               {
-                  "lightness": "4"
-              },
-              {
-                  "gamma": "0.75"
-              },
-              {
-                  "saturation": "-68"
-              }
-          ]
-      },
-      {
-          "featureType": "water",
-          "elementType": "all",
-          "stylers": [
-              {
-                  "color": "#eaf6f8"
-              },
-              {
-                  "visibility": "on"
-              }
-          ]
-      },
-      {
-          "featureType": "water",
-          "elementType": "geometry.fill",
-          "stylers": [
-              {
-                  "color": "#c7eced"
-              }
-          ]
-      },
-      {
-          "featureType": "water",
-          "elementType": "labels.text.fill",
-          "stylers": [
-              {
-                  "lightness": "-49"
-              },
-              {
-                  "saturation": "-53"
-              },
-              {
-                  "gamma": "0.79"
+                  "weight": 2.7
               }
           ]
       }
   ]
-  },
-}
+  }
+};
