@@ -22,9 +22,9 @@ export default function Wanted(props) {
   const parsedComments = props.article.comments.map(comment => {
     return (
       <div className="comment--box box">
-        <img
-          src={comment.profile_pic}
-          alt={comment.first_name + "'s profile_pic"}
+         <img
+          src={comment.profile_pic ? comment.profile_pic : "/images/user-circle-regular.svg"} 
+          alt={"profile-pic"}
         />
         <div className="article--userinfo">
           {comment.first_name} {comment.last_name[0].toUpperCase() + "."}
@@ -39,10 +39,7 @@ export default function Wanted(props) {
     <article className="box request">
       <img className="article-icon" src="images/hand-point-left-regular.svg" />
       <div className="article--userinfo">
-        <img
-          src={props.article.owner[0].profile_pic}
-          alt={props.article.owner[0].first_name + "'s profile_pic"}
-        />
+        <img src={props.article.owner[0].profile_pic ? props.article.owner[0].profile_pic : "/images/user-circle-regular.svg"} alt={"profile-pic"} />
         {props.article.owner[0].first_name}{" "}
         {props.article.owner[0].last_name[0].toUpperCase() + "."}
       </div>

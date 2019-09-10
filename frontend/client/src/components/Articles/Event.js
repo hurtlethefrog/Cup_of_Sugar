@@ -13,14 +13,15 @@ export default function Event(props) {
     events_id: props.article.events_id,
     open: false
   });
-
+  const defaultImage = ""
   const checkAttendees = () => {
+    console.log("ATTENDEEE", props.article.attendees, props.currentUser)
     for (let attendee of props.article.attendees) {
-      if (attendee.id === props.currentUser.id) {
+      if (attendee.id === props.currentUser) {
         return false;
       }
-      return true;
     }
+    return true;
   };
 
   const expandArrow = () => {
@@ -35,10 +36,8 @@ export default function Event(props) {
   const parsedComments = props.article.comments.map(comment => {
     return (
       <div className="comment--box box">
-        <img
-          src={comment.profile_pic}
-          alt={"x"}
-        />
+         <img src={comment.profile_pic ? comment.profile_pic : "/images/user-circle-regular.svg"} alt={"profile-pic"}
+          alt={"profile-pic"}/>
         <div className="article--userinfo">
           {comment.first_name}
           {comment.last_name ? comment.last_name[0].toUpperCase() + "." : ""}
@@ -55,9 +54,8 @@ export default function Event(props) {
     return (
       <div onClick={event => setAttendees(!attendees)}>
         <div className="comment--box box">
-          <img
-            src={attendee.profile_pic}
-            alt={attendee.first_name + "'s profile_pic"}
+          <img src={attendee.profile_pic ? attendee.profile_pic : "/images/user-circle-regular.svg"} 
+            alt={"profile-pic"}
           />
           <div className="article--userinfo">
             {attendee.first_name}{" "}
@@ -74,7 +72,8 @@ export default function Event(props) {
     <article className="box event">
       <img className="article-icon" src="images/calendar-alt-regular.svg" />
       <div className="article--userinfo">
-        <img src={props.article.owner[0].profile_pic} />
+        <img src={props.article.owner[0].profile_pic ? props.article.owner[0].profile_pic : "/images/user-circle-regular.svg"} 
+          alt={"profile-pic"} />
         {props.article.owner[0].first_name +
           " " +
           props.article.owner[0].last_name[0].toUpperCase() +
@@ -102,17 +101,17 @@ export default function Event(props) {
             <div>
               <div className="icon-box">
                 <div className="attendees--icon">
-                  <img src={props.article.attendees[0].profile_pic} />
+                  <img src={props.article.attendees[0].profile_pic ? props.article.attendees[0].profile_pic : "/images/user-circle-regular.svg"} alt={"profile-pic"} />
                 </div>
 
                 {props.article.attendees[1] && (
                   <div className="attendees--icon">
-                    <img src={props.article.attendees[1].profile_pic} />
+                    <img src={props.article.attendees[1].profile_pic ? props.article.attendees[1].profile_pic : "/images/user-circle-regular.svg"} alt={"profile-pic"} />
                   </div>
                 )}
                 {props.article.attendees[2] && (
                   <div className="attendees--icon">
-                    <img src={props.article.attendees[2].profile_pic} />
+                    <img src={props.article.attendees[2].profile_pic ? props.article.attendees[2].profile_pic : "/images/user-circle-regular.svg"} alt={"profile-pic"} />
                   </div>
                 )}
               </div>

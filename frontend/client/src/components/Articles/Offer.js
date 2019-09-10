@@ -22,7 +22,8 @@ export default function Offer(props) {
   const parsedComments = props.article.comments.map(comment => {
     return (
       <div className="comment--box box">
-        <img src={comment.profile_pic} alt="images/user-circle-regular.svg"/>
+        <img src={comment.profile_pic ? comment.profile_pic : "/images/user-circle-regular.svg"} 
+        alt="profile-pic"/>
         <div className="article--userinfo">
           {comment.first_name} {comment.last_name[0].toUpperCase() + "."}
         </div>
@@ -36,7 +37,8 @@ export default function Offer(props) {
     <article className="box offer">
       <img className="article-icon" src="images/hand-point-right-regular.svg" alt="offer icon"/>
       <div className="article--userinfo">
-        <img src={props.article.owner[0].profile_pic} />
+        <img src={props.article.owner[0].profile_pic ? props.article.owner[0].profile_pic : "/images/user-circle-regular.svg"} 
+          alt={"profile-pic"} />
         {props.article.owner[0].first_name}{" "}
         {props.article.owner[0].last_name[0].toUpperCase() + "."}
       </div>
@@ -46,7 +48,7 @@ export default function Offer(props) {
         <img
           className="item--image"
           src={props.article.image}
-          alt={props.article.owner[0].first_name + "'s profile_pic"}
+          alt={"image"}
         />
       ) : (
         <div>No image available</div>
