@@ -111,7 +111,7 @@ export default function Homepage() {
     axios
       .get(`/api/users/${1}`)
       .then(account => {
-        // console.log("ACCOUNTDATA", account.data);
+        console.log("ACCOUNTDATA", account);
         setUser(account.data);
       })
       .catch(err => console.log(err));
