@@ -55,7 +55,6 @@ import { defaultProps } from "@lls/react-light-calendar";
 export default function Homepage() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.app.user);
-  console.log("USER:", user)
 
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("articles");
@@ -99,7 +98,7 @@ export default function Homepage() {
 
   useEffect(() => {
     axios
-      .get(`/api/households/${1}`)
+      .get(`/api/households/${account.user_id}`)
       .then(household => {
         // console.log("HOUSEHOLDDATA", household.data);
         setHousehold(household.data);
@@ -107,20 +106,20 @@ export default function Homepage() {
       .catch(err => console.log(err));
   }, []);
 
-  useEffect(() => {
-    axios
-      .get(`/api/users/${1}`)
-      .then(account => {
-        console.log("ACCOUNTDATA", account);
-        setUser(account.data);
-      })
-      .catch(err => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`/api/users/${account.user_id}`)
+  //     .then(account => {
+  //       console.log("ACCOUNTDATA", account);
+  //       setUser(account.data);
+  //     })
+  //     .catch(err => console.log(err));
+  // }, []);
 
   useEffect(() => {
     if (filter === "mine") {
       axios
-        .get(`/api/users/${account.id}/articles`)
+        .get(`/api/users/${account.user_id}/articles`)
         .then(articles => {
           setArticles(articles.data);
         })
@@ -143,7 +142,7 @@ export default function Homepage() {
           const eventArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: account.id
+            owner_id: account.user_id
           };
           delete eventArticle.type;
           // console.log(eventArticle);
@@ -160,7 +159,7 @@ export default function Homepage() {
           const noticeArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: account.id
+            owner_id: account.user_id
           };
           delete noticeArticle.type;
           delete noticeArticle.start;
@@ -180,7 +179,7 @@ export default function Homepage() {
           const offerArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: account.id
+            owner_id: account.user_id
           };
           delete offerArticle.type;
           delete offerArticle.start;
@@ -200,7 +199,7 @@ export default function Homepage() {
           const requestArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: account.id
+            owner_id: account.user_id
           };
           delete requestArticle.type;
           delete requestArticle.start;
@@ -226,7 +225,7 @@ export default function Homepage() {
   const appendComment = comment => {
     const userComment = {
       ...comment,
-      users_id: account.id
+      users_id: account.user_id
       // [tagGenerator(comment.type)]: comment.id
     };
     axios
@@ -243,7 +242,7 @@ export default function Homepage() {
     if (attendee.going === true) {
       axios
         .post(`api/events/${attendee.events_id}/attendees`, {
-          users_id: account.id,
+          users_id: account.user_id,
           events_id: attendee.events_id
         })
         .then(res => {
