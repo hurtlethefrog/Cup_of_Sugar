@@ -13,7 +13,11 @@ class Api::UsersController < ApplicationController
     @household.update(communities_id: @community_id)
     @user.update(households_id: @household[:id])
     if @user.save
-      render json: @user, status: :created
+      @user_id = @user[:id]
+      @user_with_id = @user.attributes.merge({:user_id => @user_id})
+      puts "*******************"
+      puts @user_with_id
+      render json: @user_with_id, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
