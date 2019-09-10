@@ -7,7 +7,7 @@ import { setUser } from "../../store/app";
 
 export default function UserEntry(props) {
   const user = useSelector(state => state.app.user);
-  const userId = useSelector(state => state.app.user.user_id);
+  // const userId = useSelector(state => state.app.user.user_id);
   const [redirect, setRedirect] = useState(false);
   const [imagebox, setImagebox] = useState(false);
   const [error, setError] = useState(false);
