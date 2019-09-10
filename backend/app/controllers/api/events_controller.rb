@@ -19,7 +19,9 @@ class Api::EventsController < ApplicationController
     event_output
   } 
 
-  render json: @eventsWithCommentsAndAttendees
+  render json:
+# @eventsWithCommentsAndAttendees.with_attached_image
+@eventsWithCommentsAndAttendees
 
   end
 
