@@ -63,12 +63,13 @@ $font-color: #707070;
 
   .event--dates {
     display: none;
+
   }
 
   &:hover .event--dates {
     font-size: 0.8rem;
     position: absolute;
-    top: 43px;
+    top: 47px;
     left: 6px;
     display: block;
   }
@@ -98,6 +99,7 @@ $font-color: #707070;
 
     .comment--content {
       margin-top: auto;
+      margin-left: 5px;
     }
 
     .article--userinfo {
@@ -125,7 +127,8 @@ $font-color: #707070;
 .attendees--summary {
   cursor: pointer;
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
+
 
   .icon-box {
     display: flex;
