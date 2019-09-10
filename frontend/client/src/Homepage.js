@@ -7,7 +7,7 @@ import Articles from "./components/Articles/Articles";
 import New from "./components/Articles/New";
 import Nav from "./components/Nav";
 import { defaultProps } from "@lls/react-light-calendar";
-import decode from "jwt-decode"
+import decode from "jwt-decode";
 
 // const dummyAcc = {
 //   community: {
