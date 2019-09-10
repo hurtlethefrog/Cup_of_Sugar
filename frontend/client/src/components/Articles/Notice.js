@@ -24,7 +24,7 @@ export default function Notice(props) {
     
       <div className="comment--box box">
         <img
-          src={comment.profile_pic}
+          src={comment.profile_pic ? comment.profile_pic : "/images/user-circle-regular.svg"} 
           alt={"profile-pic"}
         />
         <div className="article--userinfo">
@@ -40,7 +40,7 @@ export default function Notice(props) {
     return (
       <div className="comment--box box">
         <img
-          src={comment.profile_pic}
+          src={comment.profile_pic ? comment.profile_pic : "/images/user-circle-regular.svg"}
           alt={"profile-pic"}
         />
         <div className="article--userinfo">
@@ -57,7 +57,7 @@ export default function Notice(props) {
       <img className="article-icon" src="images/sticky-note-regular.svg"/>
       <div className="article--userinfo">
         <img
-          src={props.article.owner[0].profile_pic}
+          src={props.article.owner[0].profile_pic ? props.article.owner[0].profile_pic : "/images/user-circle-regular.svg"} 
           alt={"profile-pic"}
         />
         {props.article.owner[0].first_name +

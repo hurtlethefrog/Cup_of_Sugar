@@ -35,10 +35,8 @@ export default function Event(props) {
   const parsedComments = props.article.comments.map(comment => {
     return (
       <div className="comment--box box">
-        <img
-          src={comment.profile_pic}
-          alt={"profile-pic"}
-        />
+         <img src={comment.profile_pic ? comment.profile_pic : "/images/user-circle-regular.svg"} alt={"profile-pic"}
+          alt={"profile-pic"}/>
         <div className="article--userinfo">
           {comment.first_name}
           {comment.last_name ? comment.last_name[0].toUpperCase() + "." : ""}
@@ -55,8 +53,7 @@ export default function Event(props) {
     return (
       <div onClick={event => setAttendees(!attendees)}>
         <div className="comment--box box">
-          <img
-            src={attendee.profile_pic}
+          <img src={attendee.profile_pic ? attendee.profile_pic : "/images/user-circle-regular.svg"} 
             alt={"profile-pic"}
           />
           <div className="article--userinfo">
@@ -74,7 +71,8 @@ export default function Event(props) {
     <article className="box event">
       <img className="article-icon" src="images/calendar-alt-regular.svg" />
       <div className="article--userinfo">
-        <img src={props.article.owner[0].profile_pic} />
+        <img src={props.article.owner[0].profile_pic ? props.article.owner[0].profile_pic : "/images/user-circle-regular.svg"} 
+          alt={"profile-pic"} />
         {props.article.owner[0].first_name +
           " " +
           props.article.owner[0].last_name[0].toUpperCase() +
