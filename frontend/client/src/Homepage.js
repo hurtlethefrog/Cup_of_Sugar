@@ -280,7 +280,7 @@ export default function Homepage() {
           articles={articles}
           addAttendee={addAttendee}
           // current user will need ot be set with user from useSelector
-          currentUser={dummyAcc.user[0]}
+          currentUser={account.user_id}
         />
          )} 
       </div>

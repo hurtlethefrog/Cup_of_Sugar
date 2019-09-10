@@ -40,7 +40,7 @@ export default function New(props) {
       props.onSubmit(text);
       setText(defaultState());
       setImagebox(false);
-      setCalender(false);
+      // setCalender(false);
       setError("");
       transition("new");
     }
