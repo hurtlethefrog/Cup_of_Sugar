@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {Redirect} from "react-router-dom";
 import axios from "axios";
 import { setUser } from "../../store/app";
 
@@ -13,6 +14,7 @@ export default function Login(props) {
     password: ""
   };
 
+  const [redirect, setRedirect] = useState(false);
   const [userForm, updateUserForm] = useState(userEntry);
   const [error, setError] = useState(false);
 
@@ -26,7 +28,8 @@ export default function Login(props) {
       })
       .then(function(res) {
         console.log("res1:: ", res.data);
-        window.location = "/";
+        localStorage.setItem("jwt", res.data.jwt);
+        setRedirect(true);
       })
       .catch(function(err) {
         console.log("ERRRORORRR!:", err);
@@ -34,7 +37,7 @@ export default function Login(props) {
       });
   };
 
-  return (
+  return (redirect? <Redirect to='/' /> :
     <main>
       <section className="">
         <form className="registration_fields" onSubmit={handleSubmission}>

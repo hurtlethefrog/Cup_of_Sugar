@@ -1,6 +1,7 @@
 class Api::UsersController < ApplicationController
   before_action :set_user
-  before_action :postal_code, :set_community, only: [:create]
+  # before_action :postal_code, :set_community, only: [:create]
+  before_action :postal_code, only: [:create]
 
   def index
     @users = User.all 
@@ -10,7 +11,7 @@ class Api::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @household = Household.create(address_params)
-    @household.update(communities_id: @community_id)
+    # @household.update(communities_id: @community_id)
     @user.update(households_id: @household[:id])
     if @user.save
       render json: @user, status: :created
@@ -29,10 +30,10 @@ class Api::UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
-  def set_community
-    @community = Community.find_by_sql("SELECT id FROM communities WHERE postal_code LIKE '#{@postal_code_3_digits}'")[0]
-    @community_id = @community[:id]
-  end
+  # def set_community
+  #   @community = Community.find_by_sql("SELECT id FROM communities WHERE postal_code LIKE '#{@postal_code_3_digits}'")[0]
+  #   @community_id = @community[:id]
+  # end
 
   def user_params
     params.require(:userForm).permit(:first_name, :last_name, :email, :password, :password_confirmation)
