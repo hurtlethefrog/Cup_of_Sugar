@@ -1,6 +1,6 @@
 class Api::OffersController < ApplicationController
 
-  before_action :set_offer, :set_user, 
+  before_action :set_offer
 
   def index
 
@@ -26,29 +26,29 @@ class Api::OffersController < ApplicationController
   end
 
     #POST
-    def create
+  def create
 
-      @offer = OffersRequest.new(offer_params, offer: true)
-      if @offer.save
-        render json: @offer, status: :created
-      else
-        render json: @offer.errors, status: :unprocessable_entity
-      end
-  
+    @offer = OffersRequest.new(offer_params)
+    @offer.update(offer: true)
+    puts "**************"
+    puts @offer
+
+    if @offer.save
+      render json: @offer, status: :created
+    else
+      render json: @offer.errors, status: :unprocessable_entity
     end
+  
+  end
 
   private 
 
   def set_offer
-    @offer = OffersRequest.find_by(id: params[:user_id])
+    @offer = OffersRequest.find_by(id: params[:id])
   end
 
   def offer_params 
     params.permit(:title, :description, :image, :offer, :owner_id, :article_type)
-  end
-
-  def set_user
-    @user = User.find_by(id: params[:user_id])
   end
 
 end
