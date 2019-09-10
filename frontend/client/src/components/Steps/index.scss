@@ -12,6 +12,19 @@
     color: #44718C;
   }
 
+  section.box {
+    color: #44718C;
+    font-size: 1.3em;
+    width: 35%;
+    margin: 0 auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: #E2E3A1;
+    border: 4px solid #BDBE87;
+    border-style: dashed;
+    li.box {background: rgba(0,0,0,0); color: #44718C; font-weight: bold;}
+  }
+
   sub {font-size: 1.3em;}
 
   .disabled-input {
@@ -65,7 +78,7 @@
     border-bottom: 4px solid rgb(248, 101, 101);
   }
   input {
-    width: 30%;
+    width: 35%;
     padding: 1rem;
     font-size: 1em;
     border: 0;
