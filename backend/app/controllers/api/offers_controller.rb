@@ -30,8 +30,6 @@ class Api::OffersController < ApplicationController
 
     @offer = OffersRequest.new(offer_params)
     @offer.update(offer: true)
-    puts "**************"
-    puts @offer
 
     if @offer.save
       render json: @offer, status: :created
