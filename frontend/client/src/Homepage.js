@@ -61,8 +61,6 @@ export default function Homepage() {
   const jwt_user = decoded_jwt ? decoded_jwt : {user_id : -1}
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("articles");
-  // const safeUser = user ? user : {user_id: -1}
-
   const safeUser = user ? user : jwt_user
   const [account, setUser] = useState(safeUser);
   const [newArticle, setNewArticle] = useState();

@@ -13,14 +13,15 @@ export default function Event(props) {
     events_id: props.article.events_id,
     open: false
   });
-
+  const defaultImage = ""
   const checkAttendees = () => {
+    console.log("ATTENDEEE", props.article.attendees, props.currentUser)
     for (let attendee of props.article.attendees) {
-      if (attendee.id === props.currentUser.id) {
+      if (attendee.id === props.currentUser) {
         return false;
       }
-      return true;
     }
+    return true;
   };
 
   const expandArrow = () => {
@@ -100,17 +101,17 @@ export default function Event(props) {
             <div>
               <div className="icon-box">
                 <div className="attendees--icon">
-                  <img src={props.article.attendees[0].profile_pic} />
+                  <img src={props.article.attendees[0].profile_pic ? props.article.attendees[0].profile_pic : "/images/user-circle-regular.svg"} alt={"profile-pic"} />
                 </div>
 
                 {props.article.attendees[1] && (
                   <div className="attendees--icon">
-                    <img src={props.article.attendees[1].profile_pic} />
+                    <img src={props.article.attendees[1].profile_pic ? props.article.attendees[1].profile_pic : "/images/user-circle-regular.svg"} alt={"profile-pic"} />
                   </div>
                 )}
                 {props.article.attendees[2] && (
                   <div className="attendees--icon">
-                    <img src={props.article.attendees[2].profile_pic} />
+                    <img src={props.article.attendees[2].profile_pic ? props.article.attendees[2].profile_pic : "/images/user-circle-regular.svg"} alt={"profile-pic"} />
                   </div>
                 )}
               </div>
