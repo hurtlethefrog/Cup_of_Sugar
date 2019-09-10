@@ -37,10 +37,10 @@ export default function Event(props) {
       <div className="comment--box box">
         <img
           src={comment.profile_pic}
-          alt={/images/user-circle-regular}
+          alt={"x"}
         />
         <div className="article--userinfo">
-          {comment.first_name}{" "}
+          {comment.first_name}
           {comment.last_name ? comment.last_name[0].toUpperCase() + "." : ""}
         </div>
         <div className="comment--content">
