@@ -20,6 +20,7 @@ class Api::EventsController < ApplicationController
   } 
 
   render json:
+# @eventsWithCommentsAndAttendees.with_attached_image
 @eventsWithCommentsAndAttendees
 
   end
