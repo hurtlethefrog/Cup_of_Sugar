@@ -9,6 +9,8 @@ export default function UserEntry(props) {
   console.log("OBJECT###################:", user);
   const [redirect, setRedirect] = useState(false);
 
+  const [error, setError] = useState(false);
+
   let userEntry = {
     ...user,
     first_name: "",
@@ -47,13 +49,14 @@ export default function UserEntry(props) {
       })
       .catch(function(err) {
         console.log(err);
+        setError(true);
       });
   };
 
   return (redirect? <Redirect to='/' /> :
     <main>
       <section className="">
-        <h1>UserEntry</h1>
+        <p>Please enter your credentials.</p>
 
         <form className="registration_fields" onSubmit={handleSubmission}>
           <input
@@ -101,6 +104,11 @@ export default function UserEntry(props) {
             required
             type="password"
           />
+          {error && (
+            <sub>
+              The email already exists. Please try again.
+            </sub>
+          )}
           <footer>
             <button type="submit" className="next-btn">
               Next

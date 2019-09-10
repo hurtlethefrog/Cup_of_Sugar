@@ -40,6 +40,8 @@ export default function Login(props) {
   return (redirect? <Redirect to='/' /> :
     <main>
       <section className="">
+      <p>Please enter your email and password.</p>
+
         <form className="registration_fields" onSubmit={handleSubmission}>
           <input
             placeholder="Email"
@@ -59,9 +61,9 @@ export default function Login(props) {
             type="password"
           />
           {error && (
-            <div>
+            <sub>
               Invalid email address or password.
-            </div>
+            </sub>
           )}
           <footer>
             <button type="submit" className="next-btn">

@@ -10,6 +10,17 @@ let REACT_APP_G_API_KEY = process.env.REACT_APP_G_API_KEY;
 
 
 export default function AutoAddress(props) {
+  const dispatch = useDispatch();
+
+  let reduxAutoAddressEntry = {
+    address: "",
+    postal_code: "",
+    city: "",
+    province: ""
+  };
+
+  const [reduxAutoAddress, updateAutoAddress] = useState(reduxAutoAddressEntry);
+
 
   const [autoAddress, setAutoAddress] = useState("");
 
@@ -34,10 +45,10 @@ export default function AutoAddress(props) {
     axios
       .get(
         // Only for temporary use
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=KEY`
+        // `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=KEY`
 
         // Enable the following and comment out the one above if you want to make request from Google API (results are displayed in the console):
-        // `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${REACT_APP_G_API_KEY}`
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${REACT_APP_G_API_KEY}`
       )
       .then(res => {
         // // This formatted address isn't always ideal data. Perhaps it's better to concatenate pieces of data below (Street Number, Address, etc.)
@@ -46,16 +57,24 @@ export default function AutoAddress(props) {
         // console.log("Latitude:", res.data.results[0].geometry.location.lat);
         // console.log("Longitude:", res.data.results[0].geometry.location.lng);
         // // Pieces of data for various fields
-        // let streetNumber = res.data.results[0].address_components[0].long_name;
-        // let address = res.data.results[0].address_components[1].long_name;
-        // let city = res.data.results[0].address_components[2].long_name;
-        // let provinceState = res.data.results[0].address_components[3].long_name;
-        // let country = res.data.results[0].address_components[4].long_name;
-        // let postalCode = res.data.results[0].address_components[5].long_name;
+        let address = `${res.data.results[0].address_components[0].long_name} ${res.data.results[0].address_components[1].long_name}`;
+        let city = res.data.results[0].address_components[2].long_name;
+        let province = res.data.results[0].address_components[3].long_name;
+        let country = res.data.results[0].address_components[4].long_name;
+        let postal_code = res.data.results[0].address_components[5].long_name;
 
 
-        // autoAddressField = `${streetNumber} ${address} ${city} ${provinceState} ${country} ${postalCode}`;
-        // setAutoAddress(autoAddressField)
+        autoAddressField = `${address} ${city} ${province} ${country} ${postal_code}`;
+        setAutoAddress(autoAddressField)
+
+        // reduxAutoAddressEntry = {
+        //   address: address,
+        //   postal_code: postal_code,
+        //   city: city,
+        //   province: province
+        // };
+      
+        // updateAutoAddress(reduxAutoAddressEntry)
       });
   })
   .catch(err => {
@@ -68,13 +87,21 @@ export default function AutoAddress(props) {
   return (
     <main>
       <section className="">
-        <h1>AutoAddress</h1>
-        <input placeholder="Address" value={autoAddress} disabled="disabled" />
-        <button onClick={props.onEdit}>Edit</button>
+        <p>One moment, here you go!</p>
+        <ul>
+          <li>
+          <input className="disabled-input" placeholder="Address" value={autoAddress} disabled="disabled" />
+          </li>
+          <li>
+          <button className="btn-edit" onClick={props.onEdit}>Edit</button>
+
+          </li>
+        </ul>
+
       </section>
 
       <footer>
-        <button onClick={props.onBack} className="back-btn">
+        <button onClick={props.onBack} value="" className="back-btn">
           Back
         </button>
         <button onClick={props.onNext} className="next-btn">

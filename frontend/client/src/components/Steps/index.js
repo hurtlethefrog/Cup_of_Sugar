@@ -27,7 +27,9 @@ export default function UserProcedure(props) {
 
   return (
     <div className="UserProcedure">
-      <header>Header</header>
+      <header>
+      </header>
+
       {mode === LOGINREGOPTION && (
         <LoginRegOption
           onLogin={() => transition(LOGIN)}

@@ -14,26 +14,22 @@ export default function ManualAddress(props) {
   };
 
   const [addressForm, updateAddressForm] = useState(manualAddressEntry);
+  const [error, setError] = useState(false);
 
-  // const handleSubmission = function(event) {
-  //   // event.preventDefault();
-  //   console.log(addressForm);
-  //   dispatch(setUser(addressForm));
+  const validate = function() {
+    if (addressForm.address === "" || addressForm.postal_code === "" || addressForm.city === "" || addressForm.province === "") {
+      setError(true);
+      return;
+    }
 
-  //   // axios
-  //   //   .post("/api/households", { addressForm })
-  //   //   .then(function(res) {
-  //   //     console.log(res);
-  //   //   })
-  //   //   .catch(function(err) {
-  //   //     console.log(err);
-  //   //   });
-  // };
+    setError("");
+    props.onNext();
+  }
 
   return (
     <main>
       <section className="">
-        <h1>ManualAddress</h1>
+        <p>Please provide your address.</p>
 
         <form className="registration_fields">
           <input
@@ -75,7 +71,7 @@ export default function ManualAddress(props) {
             required
           />
           <footer>
-            <button type="submit" onClick={props.onNext} value={dispatch(setUser(addressForm))} className="next-btn">
+            <button type="submit" onClick={validate} value={dispatch(setUser(addressForm))} className="next-btn">
               Next
             </button>
             <button onClick={props.onBack} className="back-btn">
