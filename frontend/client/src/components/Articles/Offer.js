@@ -53,7 +53,7 @@ export default function Offer(props) {
           alt="offer"
         />
       ) : (
-        <div>No image available</div>
+        <div className="hidden">No image available</div>
       )}
       <div className="article--date">
         {dateFormatter(props.article.created_at)}

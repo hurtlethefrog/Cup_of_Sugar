@@ -30,11 +30,14 @@ $font-color: #707070;
     right: 0%;
     top: 0%;
     border-radius: 5px 5px 0px 0px;
+    display: flex;
+    align-items: center;
       img {
       width: 35px;
       margin-right: 5px;
       margin-left: 5px;
-      margin-top: 5px;
+      padding-bottom: 2px;
+      padding-top: 2px;
       border-radius: 25%
       }
   }
@@ -49,6 +52,7 @@ $font-color: #707070;
   .article--description {
     text-align: left;
     margin-top: 13px;
+    margin-bottom: 13px;
   }
 
   .article-icon {
@@ -63,7 +67,9 @@ $font-color: #707070;
 
   .event--dates {
     display: none;
-
+    padding-left: 15px;
+    // padding-top: 5px;
+    // padding-bottom: 5px;
   }
 
   &:hover .event--dates {
@@ -92,13 +98,14 @@ $font-color: #707070;
     margin-bottom: 2px;
     align-items: center;
     font-size: 0.8rem;
-    margin-top: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     position: relative;
     width: 90%;
     float: left;
 
     .comment--content {
-      margin-top: auto;
+      margin-top: 10px;
       margin-left: 5px;
     }
 
@@ -116,10 +123,12 @@ $font-color: #707070;
     .hideable--date {
       position: absolute;
       right: 0;
-      top: -15px;
+      top: -5px;
     }
     img {
-      width: 35px;
+      width: 40px;
+      padding-right: 5px;
+      padding-bottom: 5px;
     }
   }
 }
@@ -137,6 +146,9 @@ $font-color: #707070;
 
   .attendees--icon {
     width: 35px;
+    img {
+      border-radius: 25%
+      }
   }
 }
 
@@ -178,16 +190,17 @@ $font-color: #707070;
 .add--attendee {
   width: 20px;
   cursor: pointer;
+  display: flex;
+  flex-direction: row-reverse; 
+  align-self: flex-end; 
 }
 
 .expand-comments {
-  position: relative;
+  position: left;
   width: 0;
   width: 20px;
   cursor: pointer;
 }
-
-
 
 .event {
   background-color: rgb(240, 202, 191);
@@ -201,11 +214,17 @@ $font-color: #707070;
 .offer {
   background-color: rgb(242, 204, 170);
   input {border-bottom: 4px solid #CAAC8D;}
+    .hidden {
+      color: rgba(0,0,0,0);
+    }
 }
 
 .request {
   background-color: rgb(226, 227, 161);
   input {border-bottom: 4px solid #BDBF7F;}
+  .hidden {
+    color: rgba(0,0,0,0);
+  }
 }
 .new {
   width: 75%;
@@ -218,14 +237,14 @@ $font-color: #707070;
   border-bottom: 1px solid black;
   width: 90%;
   float: left;
-  margin-top: 13px;
+  margin-top: 20px;
 }
 
 .comment--input:hover, .comment--input:active, .comment--input:focus {
   border-color: #7AA0DC;
 }
 
-.household {
-  display: flex;
-  flex-direction: column;
-}
+// .household {
+//   display: flex;
+//   flex-direction: column;
+// }

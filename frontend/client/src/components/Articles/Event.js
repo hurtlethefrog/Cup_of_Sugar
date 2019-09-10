@@ -144,17 +144,15 @@ export default function Event(props) {
           )}
         </div>
       ) : (
-        <div>No one is attending yet, be the first.</div>
+       null
       )}
       {props.article.comments.length > 0 && (
-        <div>
           <img
             className="expand-comments"
             onClick={event => setState(!state)}
             src={expandArrow()}
             alt="arrow"
           ></img>
-        </div>
       )}
       {props.article.attendees.length === 0 && (
         <img
