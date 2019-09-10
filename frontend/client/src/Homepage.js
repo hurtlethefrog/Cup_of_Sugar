@@ -7,58 +7,64 @@ import Articles from "./components/Articles/Articles";
 import New from "./components/Articles/New";
 import Nav from "./components/Nav";
 import { defaultProps } from "@lls/react-light-calendar";
+import decode from "jwt-decode"
 
-const dummyAcc = {
-  community: {
-    id: 1,
-    name: "coolest beehive",
-    location: "h3h"
-  },
-  household: [
-    {
-      id: 1,
-      community_id: 1,
-      address: "1489 Norton crt",
-      city: "Vancouver",
-      province: "BC",
-      postal_code: "h3h 1p2"
-    }
-  ],
-  user: [
-    {
-      id: 1,
-      household_id: 1,
-      first_name: "Nelly",
-      last_name: "Main",
-      password: "Password",
-      password_confirmation: "Password",
-      profile_pic: "url to a pic",
-      phone_number: "1234567890",
-      bio: "short description of who I am",
-      private: true
-    },
-    {
-      id: 3,
-      household_id: 1,
-      first_name: "Jess",
-      last_name: "N-L",
-      password: "Password",
-      password_confirmation: "Password",
-      profile_pic: "url to a pic",
-      phone_number: "1234567890",
-      bio: "short description of who I am",
-      private: true
-    }
-  ]
-};
+// const dummyAcc = {
+//   community: {
+//     id: 1,
+//     name: "coolest beehive",
+//     location: "h3h"
+//   },
+//   household: [
+//     {
+//       id: 1,
+//       community_id: 1,
+//       address: "1489 Norton crt",
+//       city: "Vancouver",
+//       province: "BC",
+//       postal_code: "h3h 1p2"
+//     }
+//   ],
+//   user: [
+//     {
+//       id: 1,
+//       household_id: 1,
+//       first_name: "Nelly",
+//       last_name: "Main",
+//       password: "Password",
+//       password_confirmation: "Password",
+//       profile_pic: "url to a pic",
+//       phone_number: "1234567890",
+//       bio: "short description of who I am",
+//       private: true
+//     },
+//     {
+//       id: 3,
+//       household_id: 1,
+//       first_name: "Jess",
+//       last_name: "N-L",
+//       password: "Password",
+//       password_confirmation: "Password",
+//       profile_pic: "url to a pic",
+//       phone_number: "1234567890",
+//       bio: "short description of who I am",
+//       private: true
+//     }
+//   ]
+// };
 
 export default function Homepage() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.app.user);
-
+  const jwt = localStorage.getItem("jwt")
+  const decoded_jwt = decode(jwt)
+  const jwt_user = decoded_jwt ? decoded_jwt : {user_id : -1}
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("articles");
-  const [account, setUser] = useState(user);
+  // const safeUser = user ? user : {user_id: -1}
+
+  const safeUser = user ? user : jwt_user
+  const [account, setUser] = useState(safeUser);
   const [newArticle, setNewArticle] = useState();
   const [household, setHousehold] = useState();
   // toggles to trigger articles refresh after sucessful post
@@ -95,7 +101,7 @@ export default function Homepage() {
       return `${type}s_id`;
     }
   };
-
+  
   useEffect(() => {
     axios
       .get(`/api/households/${account.user_id}`)
@@ -274,7 +280,7 @@ export default function Homepage() {
           {/* onSubmit function will need to ensure title description, everything else is optional */}
           <New onSubmit={setNewArticle} />
         </div>
-        {articles && (
+        {(articles && account.user_id !== -1) ?  (
         <Articles
           makeComment={appendComment}
           articles={articles}
@@ -282,7 +288,10 @@ export default function Homepage() {
           // current user will need ot be set with user from useSelector
           currentUser={account.user_id}
         />
-         )} 
+         ) :
+         (
+          <h1>Not logged in</h1>
+           )} 
       </div>
     </div>
   );
