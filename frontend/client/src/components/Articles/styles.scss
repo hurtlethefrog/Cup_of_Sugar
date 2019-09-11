@@ -24,6 +24,9 @@ $font-color: #707070;
 
   .rlc-calendar {
     margin-bottom: 1rem;
+    .rlc-detail-day {
+      display: none;
+    }
   }
 
   &.offer img.image-add {

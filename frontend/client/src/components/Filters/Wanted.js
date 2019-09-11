@@ -24,7 +24,7 @@ export default function Wanted(props) {
   return (
     <section className={buttonClass}>
       <button className="btn-wanted" onClick={toggleButton} wanted>
-        Wanted
+        Requests
       </button>
     </section>
   );
