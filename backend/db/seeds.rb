@@ -37,7 +37,7 @@ neighbour = User.create(
     last_name: 'Smith',
     profile_pic: 'https://i.imgur.com/LpaY82x.png',
     email: 'Louise@email.com',
-    phone_number:Faker::PhoneNumber.cell_phone, 
+    phone_number:'1111111111', 
     households_id: household2.id, 
     is_admin: true,
     password: '11111111', 
@@ -139,7 +139,7 @@ event1 = Event.create(
   location: 'TBC',
   description: 'The days are getting cooler, lets meet up in the park for lunch. BYO drinks and a plate to share', 
   start:Faker::Time.forward(days: 23, period: :morning), 
-  end:Faker::Time.forward(days: 23, period: :morning) 
+  end:Faker::Time.forward(days: 23, period: :evening) 
   )
 
 event2 = Event.create(
@@ -148,9 +148,9 @@ event2 = Event.create(
   title: 'Barbeque at My Place', 
   location: 'My house!',
   description:'We have a new BBQ! Let\'s fire it up!', 
-  start:Faker::Time.forward(days: 5, period: :evening), 
-  end:Faker::Time.forward(days: 5, period: :evening 
-))
+  start:Faker::Time.forward(days: 5, period: :afternoon), 
+  end:Faker::Time.forward(days: 5, period: :evening)
+  )
 
 event3 = Event.create(
   owner_id: user2.id,
@@ -158,7 +158,7 @@ event3 = Event.create(
   title: 'Gaming Night and Pizza', 
   location: 'TBC',
   description:'Let\'s play some games and get to know each other.',
-  start:Faker::Time.forward(days: 10, period: :evening), 
+  start:Faker::Time.forward(days: 10, period: :afternoon), 
   end:Faker::Time.forward(days: 10, period: :evening) 
 )
 
@@ -169,8 +169,8 @@ event4 = Event.create(
   location: 'TBC, depending on the weather',
   description:'A morning catch up for the babies to play and the parents to chat!', 
   start:Faker::Time.forward(days: 2, period: :morning), 
-  end:Faker::Time.forward(days: 2, period: :morning 
-))
+  end:Faker::Time.forward(days: 2, period: :afternoon)
+  )
 
 EventUser.create(
   events_id: event1.id, 
@@ -247,11 +247,9 @@ request2 = OffersRequest.create(
   offer: false
 )
 
-# Notice.destroy_all
-
 notice1 = Notice.create(
   owner_id: admin.id,
-  created_at: 10.days.ago,
+  created_at: 5.days.ago,
   title: 'Raccoons spotted in the neighbourhood!', 
   description: 'Don\'t forget to lock your bins'
 )
@@ -265,14 +263,14 @@ notice2 = Notice.create(
 
 notice3 = Notice.create( 
   owner_id: user3.id,
-  created_at: 5.days.ago,
+  created_at: 3.days.ago,
   title: 'Just moved to the neighbourhood', 
   description: 'Looking forward to being a part of the community'
 )
 
 notice4 = Notice.create(
   owner_id: user1.id,
-  created_at: 20.days.ago,
+  created_at: 15.days.ago,
   title: 'Half price coffee', 
   description: 'Tim\'s coffee bar has half priced coffee on Wednesday afternoon'
 )
@@ -324,7 +322,7 @@ Comment.create([
   users_id: admin.id},
 
   { comment: 'Welcome!', 
-  created_at: 6.days.ago,
+  created_at: 1.days.ago,
   notices_id: notice3.id,
   users_id: user5.id },
 
