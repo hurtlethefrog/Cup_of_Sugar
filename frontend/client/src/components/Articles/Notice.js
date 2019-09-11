@@ -25,7 +25,7 @@ export default function Notice(props) {
       <div className="comment--box box">
         <img
           src={comment.profile_pic ? comment.profile_pic : "/images/user-circle-regular.svg"} 
-          alt={"profile-pic"}
+          alt="profile"
         />
         <div className="article--userinfo">
           {comment.first_name} {comment.last_name[0].toUpperCase() + "."}
@@ -41,7 +41,7 @@ export default function Notice(props) {
       <div className="comment--box box">
         <img
           src={comment.profile_pic ? comment.profile_pic : "/images/user-circle-regular.svg"}
-          alt={"profile-pic"}
+          alt="profile"
         />
         <div className="article--userinfo">
           {comment.first_name} {comment.last_name[0].toUpperCase() + "."}
@@ -54,11 +54,11 @@ export default function Notice(props) {
 
   return (
     <article className="box notice">
-      <img className="article-icon" src="images/sticky-note-regular.svg"/>
+      <img className="article-icon" src="images/sticky-note-regular.svg" alt="notice"/>
       <div className="article--userinfo">
         <img
           src={props.article.owner[0].profile_pic ? props.article.owner[0].profile_pic : "/images/user-circle-regular.svg"} 
-          alt={"profile-pic"}
+          alt="profile"
         />
         {props.article.owner[0].first_name +
           " " +
@@ -75,7 +75,8 @@ export default function Notice(props) {
           className="expand-comments"
           onClick={event => setState(!state)}
           src={expandArrow()}
-        ></img>
+          alt="arrow"
+        />
       )}
       {props.article.comments.length <= 0 && (
         <form

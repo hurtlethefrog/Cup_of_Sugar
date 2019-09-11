@@ -13,9 +13,7 @@ export default function Event(props) {
     events_id: props.article.events_id,
     open: false
   });
-  const defaultImage = ""
   const checkAttendees = () => {
-    console.log("ATTENDEEE", props.article.attendees, props.currentUser)
     for (let attendee of props.article.attendees) {
       if (attendee.id === props.currentUser) {
         return false;
@@ -30,14 +28,15 @@ export default function Event(props) {
         return "images/arrow-circle-down-solid.svg";
       case true:
         return "images/arrow-circle-up-solid.svg";
+      default:
+        return "";
     }
   };
 
   const parsedComments = props.article.comments.map(comment => {
     return (
       <div className="comment--box box">
-         <img src={comment.profile_pic ? comment.profile_pic : "/images/user-circle-regular.svg"} alt={"profile-pic"}
-          alt={"profile-pic"}/>
+         <img src={comment.profile_pic ? comment.profile_pic : "/images/user-circle-regular.svg"} alt="profile"/>
         <div className="article--userinfo">
           {comment.first_name}
           {comment.last_name ? comment.last_name[0].toUpperCase() + "." : ""}
@@ -55,13 +54,10 @@ export default function Event(props) {
       <div onClick={event => setAttendees(!attendees)}>
         <div className="comment--box box">
           <img src={attendee.profile_pic ? attendee.profile_pic : "/images/user-circle-regular.svg"} 
-            alt={"profile-pic"}
+            alt="profile"
           />
           <div className="article--userinfo">
-            {attendee.first_name}{" "}
-            {attendee.last_name
-              ? attendee.last_name[0].toUpperCase() + "."
-              : ""}
+            {attendee.first_name ? attendee.first_name : ""}
           </div>
         </div>
       </div>
@@ -70,10 +66,10 @@ export default function Event(props) {
 
   return (
     <article className="box event">
-      <img className="article-icon" src="images/calendar-alt-regular.svg" />
+      <img className="article-icon" src="images/calendar-alt-regular.svg" alt="calendar"/>
       <div className="article--userinfo">
         <img src={props.article.owner[0].profile_pic ? props.article.owner[0].profile_pic : "/images/user-circle-regular.svg"} 
-          alt={"profile-pic"} />
+          alt="profile" />
         {props.article.owner[0].first_name +
           " " +
           props.article.owner[0].last_name[0].toUpperCase() +
@@ -101,23 +97,24 @@ export default function Event(props) {
             <div>
               <div className="icon-box">
                 <div className="attendees--icon">
-                  <img src={props.article.attendees[0].profile_pic ? props.article.attendees[0].profile_pic : "/images/user-circle-regular.svg"} alt={"profile-pic"} />
+                  <img src={props.article.attendees[0].profile_pic ? props.article.attendees[0].profile_pic : "/images/user-circle-regular.svg"} alt="profile" />
                 </div>
 
                 {props.article.attendees[1] && (
                   <div className="attendees--icon">
-                    <img src={props.article.attendees[1].profile_pic ? props.article.attendees[1].profile_pic : "/images/user-circle-regular.svg"} alt={"profile-pic"} />
+                    <img src={props.article.attendees[1].profile_pic ? props.article.attendees[1].profile_pic : "/images/user-circle-regular.svg"} alt="profile"/>
                   </div>
                 )}
                 {props.article.attendees[2] && (
                   <div className="attendees--icon">
-                    <img src={props.article.attendees[2].profile_pic ? props.article.attendees[2].profile_pic : "/images/user-circle-regular.svg"} alt={"profile-pic"} />
+                    <img src={props.article.attendees[2].profile_pic ? props.article.attendees[2].profile_pic : "/images/user-circle-regular.svg"} alt="profile" />
                   </div>
                 )}
               </div>
               {checkAttendees() && <img
                 className="add--attendee"
                 src="images/user-plus-solid.svg"
+                alt="user-icon"
                 onClick={event =>
                   props.addAttendee({
                     going: true,
@@ -132,6 +129,7 @@ export default function Event(props) {
               {checkAttendees() && <img
                 className="add--attendee"
                 src="images/user-plus-solid.svg"
+                alt="user-plus-icon"
                 onClick={event =>
                   props.addAttendee({
                     going: true,
@@ -143,21 +141,21 @@ export default function Event(props) {
           )}
         </div>
       ) : (
-        <div>No one is attending yet, be the first.</div>
+       null
       )}
       {props.article.comments.length > 0 && (
-        <div>
           <img
             className="expand-comments"
             onClick={event => setState(!state)}
             src={expandArrow()}
+            alt="arrow"
           ></img>
-        </div>
       )}
       {props.article.attendees.length === 0 && (
         <img
           className="add--attendee"
           src="images/user-plus-solid.svg"
+          alt="add-attendee-icon"
           onClick={event =>
             props.addAttendee({
               going: true,

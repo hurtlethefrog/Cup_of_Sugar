@@ -16,6 +16,8 @@ export default function Offer(props) {
         return "images/arrow-circle-down-solid.svg";
       case true:
         return "images/arrow-circle-up-solid.svg";
+      default:
+        return "";
     }
   };
 
@@ -48,10 +50,10 @@ export default function Offer(props) {
         <img
           className="item--image"
           src={props.article.image}
-          alt={"image"}
+          alt="offer"
         />
       ) : (
-        <div>No image available</div>
+        <div className="hidden">No image available</div>
       )}
       <div className="article--date">
         {dateFormatter(props.article.created_at)}
@@ -61,6 +63,7 @@ export default function Offer(props) {
           className="expand-comments"
           onClick={event => setState(!state)}
           src={expandArrow()}
+          alt="arrow"
         ></img>
       )}
       {props.article.comments.length <= 0 && (
