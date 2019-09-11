@@ -129,6 +129,7 @@ $font-color: #707070;
       width: 40px;
       padding-right: 5px;
       padding-bottom: 5px;
+      border-radius: 25%;
     }
   }
 }
@@ -137,7 +138,7 @@ $font-color: #707070;
   cursor: pointer;
   display: flex;
   flex-direction: row-reverse;
-
+  border-bottom: none;
 
   .icon-box {
     display: flex;
@@ -149,6 +150,10 @@ $font-color: #707070;
     img {
       border-radius: 25%
       }
+  }
+  .comment--box{
+    border-bottom: none;
+    margin: 5px;
   }
 }
 

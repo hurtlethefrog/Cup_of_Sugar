@@ -57,10 +57,7 @@ export default function Event(props) {
             alt="profile"
           />
           <div className="article--userinfo">
-            {attendee.first_name}{" "}
-            {attendee.last_name
-              ? attendee.last_name[0].toUpperCase() + "."
-              : ""}
+            {attendee.first_name ? attendee.first_name : ""}
           </div>
         </div>
       </div>
