@@ -29,7 +29,7 @@ export default function UserEntry(props) {
 
   const handleSubmission = function(event) {
     event.preventDefault();
-    // console.log(userForm);
+    console.log(userForm);
     dispatch(setUser(userForm));
 
     axios

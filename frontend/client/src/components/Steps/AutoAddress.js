@@ -17,11 +17,15 @@ export default function AutoAddress(props) {
     province: ""
   };
 
-  // string
+  // String passed to input
   const [autoAddress, setAutoAddress] = useState("");
 
-  // object for backend
+  // Object to send to traverse through components and send to database during user entry
   const [reduxAutoAddress, updateAutoAddress] = useState(reduxAutoAddressEntry);
+
+  // to avoid Google API looping
+  const [loading, setLoading] = useState(true);
+
 
 
   // Verifies the geolocation (user's current location)
@@ -34,6 +38,16 @@ export default function AutoAddress(props) {
   };
 
   let autoAddressField = null;
+
+  useEffect(() => {
+
+    if(!loading) {
+
+      dispatch(setUser(reduxAutoAddress));
+   
+    }
+
+  }, [loading])
 
   // Provide address (reverse geocoding) based on geolocation (user's current coordinates)
   useEffect(() => {
@@ -67,16 +81,18 @@ export default function AutoAddress(props) {
               province: province
             });
 
-            console.log("SEEE!")            
+            console.log("SEEE!")   
+                     
           })
           .then(() => {
-            dispatch(setUser(reduxAutoAddress));
+            setLoading(false);
+            // dispatch(setUser(reduxAutoAddress));
           })
       })
       .catch(err => {
         console.log(err.message);
       });
-  }, [autoAddressField, reduxAutoAddress]);
+  }, []);
 
   return (
     <main>
