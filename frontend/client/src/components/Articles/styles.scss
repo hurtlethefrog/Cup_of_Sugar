@@ -22,6 +22,86 @@ $font-color: #707070;
   //   padding: 1.3rem;
   // }
 
+  .rlc-calendar {
+    margin-bottom: 1rem;
+  }
+
+  &.offer img.image-add {
+    margin-left: 0.5rem;
+  }
+
+  &.box.notice section.box {
+    border: 2px dashed #7aa0dc;
+  }
+  &.box.event section.box {
+    border: 2px dashed #caaaa0;
+  }
+  &.box.offer section.box {
+    border: 2px dashed #ccab8f;
+  }
+
+  &.box.notice section.box,
+  &.box.event section.box,
+  &.box.offer section.box {
+    background-color: rgba(0, 0, 0, 0);
+    margin-bottom: 1rem;
+  }
+
+  .is-warning.textarea:active {
+    box-shadow: none;
+  }
+
+  &.box.notice .is-warning.textarea:focus,
+  &.box.notice .is-warning.textarea:hover {
+    box-shadow: 0 4px 0 0 #7aa0dc;
+  }
+
+  &.box.event .is-warning.textarea:focus,
+  &.box.event .is-warning.textarea:hover {
+    box-shadow: 0 4px 0 0 #caaaa0;
+  }
+
+  &.box.offer .is-warning.textarea:focus,
+  &.box.offer .is-warning.textarea:hover {
+    box-shadow: 0 4px 0 0 #ccab8f;
+  }
+
+  &.box.request .is-warning.textarea:focus,
+  &.box.request .is-warning.textarea:hover {
+    box-shadow: 0 4px 0 0 #bebf88;
+  }
+
+  // .is-warning.textarea:focus, .is-warning.textarea:hover {
+  //   box-shadow: 0 4px 0 0 #7AA0DC;
+  // }
+
+  .is-warning.input,
+  .is-warning.textarea {
+    border: none;
+  }
+  .select select,
+  .select.is-primary select:active,
+  .select.is-primary select:focus {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .input,
+  .select select,
+  .textarea {
+    border-radius: 0;
+  }
+
+  .input,
+  .textarea {
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  textarea {
+    margin-bottom: 1rem;
+  }
+
   .article--userinfo {
     text-align: left;
     background: rgba(0, 0, 0, 0.16);
@@ -30,13 +110,17 @@ $font-color: #707070;
     right: 0%;
     top: 0%;
     border-radius: 5px 5px 0px 0px;
-      img {
+    img {
       width: 35px;
       margin-right: 5px;
       margin-left: 5px;
       margin-top: 5px;
-      border-radius: 25%
-      }
+      border-radius: 25%;
+    }
+  }
+  img.check,
+  img.image-add {
+    height: 1rem;
   }
 
   .article--title {
@@ -63,7 +147,6 @@ $font-color: #707070;
 
   .event--dates {
     display: none;
-
   }
 
   &:hover .event--dates {
@@ -129,7 +212,6 @@ $font-color: #707070;
   display: flex;
   flex-direction: row-reverse;
 
-
   .icon-box {
     display: flex;
     flex-direction: row;
@@ -149,10 +231,6 @@ $font-color: #707070;
   align-items: center;
   margin: 2% 25%;
 
-  .calendar {
-    margin-left: -350%;
-  }
-
   .new--choose {
     display: contents;
   }
@@ -162,14 +240,18 @@ $font-color: #707070;
   }
   .button-bar {
     display: flex;
-    width: 35px;
-    flex-direction: row;
+    justify-content: center;
+    // .bottom-icons {
+    //   position: absolute;
+    //   bottom: 15px;
+    // }
   }
   .backspace {
     position: relative;
     width: 35px;
-    margin-left: -6%;
-    margin-right: 5%;
+    height: 1rem;
+    // margin-left: -6%;
+    // margin-right: 5%;
   }
   .check {
   }
@@ -187,25 +269,31 @@ $font-color: #707070;
   cursor: pointer;
 }
 
-
-
 .event {
   background-color: rgb(240, 202, 191);
-  input {border-bottom: 4px solid #CAA8A0;}
+  input {
+    border-bottom: 4px solid #caa8a0;
+  }
 }
 .notice {
   background-color: rgb(208, 213, 216);
-  input {border-bottom: 4px solid #AEB2B5;}
+  input {
+    border-bottom: 4px solid #aeb2b5;
+  }
 }
 
 .offer {
   background-color: rgb(242, 204, 170);
-  input {border-bottom: 4px solid #CAAC8D;}
+  input {
+    border-bottom: 4px solid #caac8d;
+  }
 }
 
 .request {
   background-color: rgb(226, 227, 161);
-  input {border-bottom: 4px solid #BDBF7F;}
+  input {
+    border-bottom: 4px solid #bdbf7f;
+  }
 }
 .new {
   width: 75%;
@@ -221,11 +309,29 @@ $font-color: #707070;
   margin-top: 13px;
 }
 
-.comment--input:hover, .comment--input:active, .comment--input:focus {
-  border-color: #7AA0DC;
+.comment--input:hover,
+.comment--input:active,
+.comment--input:focus {
+  border-color: #7aa0dc;
 }
 
 .household {
   display: flex;
   flex-direction: column;
+}
+
+@media only screen and (max-width: 900px) {
+  .new--article--box {
+    margin: 0 auto;
+    width: 80%;
+    padding-bottom: 2rem;
+  }
+  .box.new {width: 100%;}
+
+}
+
+@media only screen and (max-width: 600px) {
+  .filter--bar.container {
+    display: block;
+  }
 }

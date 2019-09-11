@@ -11,10 +11,15 @@ $filterbar-color: gray;
   padding: 10px;
   margin-top: 0.5rem;
 
-  .filter--selected button.btn-events {color: #BB322C;}
-  .filter--selected button.btn-notices {color: #47708F;}
-  .filter--selected button.btn-offers {color: #9B672E;}
-  .filter--selected button.btn-wanted {color: #929514;}
+  .filter--selected button.btn-events {color: #7A140E;}
+  .filter--selected button.btn-notices {color: #173F5D;}
+  .filter--selected button.btn-offers {color: #653C0F;}
+  .filter--selected button.btn-wanted {color: #5F6107;}
+
+  button.btn-events {color: #BB322C;}
+  button.btn-notices {color: #47708F;}
+  button.btn-offers {color: #9B672E;}
+  button.btn-wanted {color: #929514;}
   
   .button {
     background: rgba(0,0,0,0);
@@ -32,19 +37,19 @@ $filterbar-color: gray;
       border: none;
       cursor: pointer;
       &.btn-events::after {
-        background-image: url('images/calendar-alt-regular.svg');
+        background-image: url('images/events-red.svg');
       }
       &.btn-mine:after {
-        background-image: url('images/neighbours.svg');
+        background-image: url('images/user.svg');
       }
       &.btn-notices::after {
-        background-image: url('images/sticky-note-regular.svg');
+        background-image: url('images/notices-blue.svg');
       }
       &.btn-offers::after {
-        background-image: url('images/hand-point-right-regular.svg');
+        background-image: url('images/offers-brown.svg');
       }
       &.btn-wanted:after {
-        background-image: url('images/hand-point-left-regular.svg');
+        background-image: url('images/wanted-green.svg');
       }
       &::after {
         content: "";

@@ -184,26 +184,29 @@ export default function New(props) {
                   onClick={event => sendArticle()}
                 ></img>
               )}
-              {!imagebox && (
-                <img
-                  src="images/images-regular.svg"
-                  className="add backspace"
-                  onClick={event => setImagebox(!imagebox)}
-                ></img>
-              )}
-              {calender ? (
-                <img
-                  src="images/backspace-solid.svg"
-                  className="add backspace"
-                  onClick={event => setCalender(false)}
-                ></img>
-              ) : (
-                <img
-                  src="images/backspace-solid.svg"
-                  className="add backspace"
-                  onClick={event => backButton()}
-                ></img>
-              )}
+              <div className="bottom-icons">
+                {!imagebox && (
+                  <img
+                    src="images/images-regular.svg"
+                    className="add backspace"
+                    onClick={event => setImagebox(!imagebox)}
+                  ></img>
+                )}
+                {calender ? (
+                  <img
+                    src="images/backspace-solid.svg"
+                    className="add backspace"
+                    onClick={event => setCalender(false)}
+                  ></img>
+                ) : (
+                  <img
+                    src="images/backspace-solid.svg"
+                    className="add backspace"
+                    onClick={event => backButton()}
+                  ></img>
+                )}
+              </div>  
+
             </div>
           </div>
         );

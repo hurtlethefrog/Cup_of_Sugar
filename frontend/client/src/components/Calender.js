@@ -15,22 +15,26 @@ export default function Calendar(props) {
     setState({ ...state, startDate, endDate });
 
   return (
-    <div className="calendar">
-      <ReactLightCalendar
-        startDate={state.startDate}
-        endDate={state.endDate}
-        onChange={onChange}
-        range
-        displayTime
-      />
-      <img
-        src="images/check-square-solid.svg"
-        className="add backspace"
-        onClick={event => props.setDates(
-          convertTime(state.startDate),
-          convertTime(state.endDate)
-        )}
-      ></img>
-    </div>
+    <section>
+      <div className="calendar">
+        <ReactLightCalendar
+          startDate={state.startDate}
+          endDate={state.endDate}
+          onChange={onChange}
+          range
+          displayTime
+        />
+        <img
+          src="images/check-square-solid.svg"
+          className="add backspace"
+          onClick={event =>
+            props.setDates(
+              convertTime(state.startDate),
+              convertTime(state.endDate)
+            )
+          }
+        ></img>
+      </div>
+    </section>
   );
 }

@@ -12,7 +12,7 @@ nav {
     display: flex;
     align-items: center;
     img.logo {
-      height: 15rem;
+      height: 6.5rem;
     }
     h1 {font-size: 2em; padding-left: 1rem;}
   }
@@ -57,3 +57,14 @@ nav {
     } 
 }
 
+
+@media only screen and (max-width: 600px) {
+  nav.nav {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+  }
+  nav.nav div.brand img.logo {
+    height: 6rem;
+  }
+}

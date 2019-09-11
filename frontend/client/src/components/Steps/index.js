@@ -28,6 +28,7 @@ export default function UserProcedure(props) {
   return (
     <div className="UserProcedure">
       <header>
+        <img src={"/images/CupOfSugar_Logo_Registration.svg"} />
       </header>
 
       {mode === LOGINREGOPTION && (

@@ -4,10 +4,14 @@
   background-color: #E2E3A1;
   color: #44718C;
 
-  // header {
-  //   height: 15vh;
-  //   background-color: #BDBE87;
-  // }
+  header {
+    position:fixed;
+    height: 180px;
+    padding: 1.5rem;
+    img {
+      height: 100%;
+    }
+  }
   strong {
     color: #44718C;
   }
