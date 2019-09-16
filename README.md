@@ -13,15 +13,15 @@ The project was built by Duncan Haran, Jess Noriega-Lessard and Nelly Main over 
 ## Screenshots
 1. Main page with all unfiltered articles
 
-![main page]()
+![main page](https://github.com/hurtlethefrog/Cup_of_Sugar/blob/master/project_planning/Screenshot%20-%20Main%20Full%20Page.png)
 
 2. Filtered notices page in responsive mobile size
 
-![responsive]()
+![responsive notices](https://github.com/hurtlethefrog/Cup_of_Sugar/blob/master/project_planning/Screenshot%20-%20Notices%20Responsive.png)
 
 3. Registration page
 
-![registration page]()
+![registration page](https://github.com/hurtlethefrog/Cup_of_Sugar/blob/master/project_planning/Screenshot%20-%20Registration.png)
 
 ## Tech/Framework
 The backend was built was Ruby on Rails and the Front End predominately with React as well as Javascript, HTML, and SASS. 
