@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_203308) do
+ActiveRecord::Schema.define(version: 2021_09_16_195711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,13 @@ ActiveRecord::Schema.define(version: 2019_09_09_203308) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["communities_id"], name: "index_households_on_communities_id"
+  end
+
+  create_table "invites", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.boolean "aknowledged"
+    t.datetime "created_at", null: false
   end
 
   create_table "notices", force: :cascade do |t|
