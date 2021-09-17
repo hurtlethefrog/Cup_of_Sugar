@@ -33,10 +33,23 @@ class Api::UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
-  # def set_community
-  #   @community = Community.find_by_sql("SELECT id FROM communities WHERE postal_code LIKE '#{@postal_code_3_digits}'")[0]
-  #   @community_id = @community[:id]
-  # end
+  def get_community_users
+    @community = Community.find_by_sql("
+      SELECT users.id, first_name, last_name 
+      FROM users 
+      LEFT JOIN households ON users.households_id = households.id
+      LEFT JOIN communities ON communities.id = households.communities_id
+      WHERE communities.id = (
+        SELECT communities.id 
+        FROM communities
+        LEFT JOIN households ON communities.id = households.communities_id
+        LEFT JOIN users ON users.households_id = households.id
+        WHERE users.id = " + params[:id] + "
+      ) 
+      "
+    @community_id = @community[:id]
+    render json: @community
+  end
 
   def user_params
     params.require(:userForm).permit(:first_name, :last_name, :email, :password, :password_confirmation)
