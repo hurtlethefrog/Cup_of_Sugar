@@ -34,7 +34,7 @@ class Api::UsersController < ApplicationController
   end
 
   def get_community_users
-    @community = Community.find_by_sql("
+    render json: User.find_by_sql("
       SELECT users.id, first_name, last_name 
       FROM users 
       LEFT JOIN households ON users.households_id = households.id
@@ -45,10 +45,7 @@ class Api::UsersController < ApplicationController
         LEFT JOIN households ON communities.id = households.communities_id
         LEFT JOIN users ON users.households_id = households.id
         WHERE users.id = " + params[:id] + "
-      ) 
-      "
-    @community_id = @community[:id]
-    render json: @community
+      );")
   end
 
   def user_params
