@@ -23,7 +23,7 @@ export default function Wanted(props) {
 
   return (
     <section className={buttonClass}>
-      <button className="btn-wanted" onClick={toggleButton} wanted>
+      <button className="btn-wanted" onClick={toggleButton} wanted='true'>
         Requests
       </button>
     </section>

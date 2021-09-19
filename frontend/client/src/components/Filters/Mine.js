@@ -16,7 +16,7 @@ export default function Mine(props) {
       props.onSelect("mine");
     }
   };
-
+  
   const buttonClass = classnames("button", {
     "filter--selected": props.selected
   });
@@ -26,7 +26,7 @@ export default function Mine(props) {
         <button 
           className="btn-mine"
           onClick={toggleButton}
-          notices >
+          notices='true' >
           Mine
         </button>
       </section>

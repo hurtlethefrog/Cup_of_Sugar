@@ -23,7 +23,7 @@ export default function Events(props) {
 
   return (
     <section className={buttonClass}>
-      <button className="btn-events" onClick={toggleButton} events>
+      <button className="btn-events" onClick={toggleButton} events='true'>
         Events
       </button>
     </section>

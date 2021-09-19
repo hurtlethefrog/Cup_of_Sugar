@@ -23,7 +23,7 @@ export default function Offers(props) {
 
   return (
     <section className={buttonClass}>
-      <button className="btn-offers" onClick={toggleButton} offers>
+      <button className="btn-offers" onClick={toggleButton} offers='true'>
         Offers
       </button>
     </section>

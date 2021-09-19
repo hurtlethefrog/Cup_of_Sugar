@@ -23,7 +23,7 @@ export default function Notices(props) {
 
   return (
     <section className={buttonClass}>
-      <button className="btn-notices" onClick={toggleButton} notices>
+      <button className="btn-notices" onClick={toggleButton} notices='true'>
         Notices
       </button>
     </section>
