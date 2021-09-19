@@ -3,6 +3,7 @@ import Dropzone from "react-dropzone";
 import { useVisualMode } from "../../hooks/useVisualMode";
 import { validateNewEvent, validateNewArticle } from "../../helpers/validateNewArticle";
 import Calendar from "../Calender";
+import InvitesModal from "./InvitesModal";
 import "./styles.scss";
 
 export default function New(props) {
@@ -14,11 +15,13 @@ export default function New(props) {
     end: null,
     location: null,
     image: null,
+    invitees: [],
     type: null
   });
   const [error, setError] = useState();
   const [imagebox, setImagebox] = useState(false);
   const [calender, setCalender] = useState(false);
+  const [invitesModal, toggleInvitesModal] = useState(false);
 
   // resetting text after backing out of entries
   const defaultState = () => {
@@ -29,6 +32,7 @@ export default function New(props) {
       end: null,
       location: null,
       image: null,
+      invitees: [],
       type: null
     };
   };
@@ -112,7 +116,7 @@ export default function New(props) {
                   className="textarea is-warning"
                   rows="1"
                   name="title"
-                  value={text.title}
+                  value={text.title ? text.title : undefined}
                   placeholder="enter your event title"
                   onChange={event => {
                     setText({ ...text, title: event.target.value });
@@ -123,7 +127,7 @@ export default function New(props) {
                   className="textarea is-warning"
                   rows="4"
                   name="description"
-                  value={text.description}
+                  value={text.description ?text.description : undefined}
                   placeholder="enter your event description"
                   onChange={event => {
                     setText({ ...text, description: event.target.value });
@@ -192,6 +196,11 @@ export default function New(props) {
                     onClick={event => setImagebox(!imagebox)}
                   ></img>
                 )}
+                <img
+                  src="images/user-plus-solid.svg"
+                  className="add backspace"
+                  onClick={event => toggleInvitesModal(!invitesModal)}
+                ></img>
                 {calender ? (
                   <img
                     src="images/backspace-solid.svg"
@@ -208,6 +217,7 @@ export default function New(props) {
               </div>  
 
             </div>
+            <InvitesModal account={props.account}/>
           </div>
         );
       case "notice":
