@@ -23,29 +23,27 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  def show
-    render json: @user
+  def show 
+    # couldn't get named route to work, using show temporarily
+    @users = User.find_by_sql("
+    SELECT users.id, first_name, last_name 
+    FROM users 
+    LEFT JOIN households ON users.households_id = households.id
+    LEFT JOIN communities ON communities.id = households.communities_id
+    WHERE communities.id = (
+      SELECT communities.id 
+      FROM communities
+      LEFT JOIN households ON communities.id = households.communities_id
+      LEFT JOIN users ON users.households_id = households.id
+      WHERE users.id = " << params[:id] << "
+    );")
+    render json: @users
   end
     
   private 
 
   def set_user
     @user = User.find_by(id: params[:id])
-  end
-
-  def get_community_users
-    render json: User.find_by_sql("
-      SELECT users.id, first_name, last_name 
-      FROM users 
-      LEFT JOIN households ON users.households_id = households.id
-      LEFT JOIN communities ON communities.id = households.communities_id
-      WHERE communities.id = (
-        SELECT communities.id 
-        FROM communities
-        LEFT JOIN households ON communities.id = households.communities_id
-        LEFT JOIN users ON users.households_id = households.id
-        WHERE users.id = " + params[:id] + "
-      );")
   end
 
   def user_params
