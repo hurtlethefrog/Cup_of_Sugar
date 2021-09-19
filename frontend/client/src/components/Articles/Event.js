@@ -1,10 +1,13 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { dateFormatter, timeAgo, eventDate } from "../../helper";
+import InvitesModal from "./InvitesModal";
 import "./styles.scss";
 
 export default function Event(props) {
   // if this state is true comments will be shown
   const [state, setState] = useState(false);
+  const [modal, toggleModal] = useState(false);
   // if this state is true all attendee info will be shown
   const [attendees, setAttendees] = useState(false);
   const [comment, setComment] = useState({
@@ -13,6 +16,15 @@ export default function Event(props) {
     events_id: props.article.events_id,
     open: false
   });
+  console.log(props.article.id)
+  const createInvitesAxios = (invitees)=>{
+    axios
+      .post(`/api/invites`, {invitees:invitees.toLocaleString(), event_id:props.article.id})
+      .then(({data}) => {
+        toggleModal(false)
+      })
+      .catch(err => console.log(err));
+  }
   const checkAttendees = () => {
     for (let attendee of props.article.attendees) {
       if (attendee.id === props.currentUser) {
@@ -91,7 +103,7 @@ export default function Event(props) {
       {props.article.attendees.length > 0 ? (
         <div
           className="attendees--summary"
-          onClick={event => setAttendees(!attendees)}
+          onClick={event => {if(props.article.owner[0].id != props.currentUser){setAttendees(!attendees)} else {toggleModal(true)}}}
         >
           {!attendees ? (
             <div>
@@ -203,6 +215,7 @@ export default function Event(props) {
           ></input>
         </form>
       )}
+      {modal && <InvitesModal toggleInvitesModal={()=>toggleModal(!modal)} handleSubmit={(invitees)=>createInvitesAxios(invitees)} account={props.currentUser}/>}
     </article>
   );
 }
