@@ -22,7 +22,6 @@ export default function New(props) {
   const [imagebox, setImagebox] = useState(false);
   const [calender, setCalender] = useState(false);
   const [invitesModal, toggleInvitesModal] = useState(false);
-
   // resetting text after backing out of entries
   const defaultState = () => {
     return {
@@ -217,7 +216,7 @@ export default function New(props) {
               </div>  
 
             </div>
-            <InvitesModal account={props.account}/>
+            {invitesModal && <InvitesModal toggleInvitesModal={toggleInvitesModal} handleSubmit={(invitees)=>setText({ ...text, invitees })} account={props.account}/>}
           </div>
         );
       case "notice":
