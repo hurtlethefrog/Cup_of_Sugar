@@ -22,10 +22,14 @@ Rails.application.routes.draw do
 
     resources :households 
 
+    resources :invites, only: [:show, :create, :update]
+
     resources :users do 
+      resources except: :show
+      resources 'get_community_users', :controller => 'users', :action => 'get_community_users'
       resources :articles
     end
 
   end
-  
+
 end

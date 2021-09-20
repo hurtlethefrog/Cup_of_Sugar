@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_195711) do
     t.bigint "event_id", null: false
     t.boolean "aknowledged"
     t.datetime "created_at", null: false
+    t.index ["user_id"], name: "index_invites_on_user_id"
   end
 
   create_table "notices", force: :cascade do |t|
@@ -161,6 +162,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_195711) do
   add_foreign_key "event_users", "events", column: "events_id"
   add_foreign_key "event_users", "users", column: "users_id"
   add_foreign_key "events", "users", column: "owner_id", name: "owner_id"
+  add_foreign_key "invites", "users", column: "user_id", name: "user_id"
   add_foreign_key "flaggeds", "events", column: "events_id"
   add_foreign_key "flaggeds", "offers_requests", column: "offers_requests_id"
   add_foreign_key "flaggeds", "users", column: "users_id"

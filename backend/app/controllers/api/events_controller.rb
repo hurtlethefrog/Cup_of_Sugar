@@ -36,7 +36,9 @@ class Api::EventsController < ApplicationController
     @new_event = Event.new(event_params)
 
       if @new_event.save
-        render json: @new_event, status: :created
+        Rails.cache.write('event', @new_event.id)
+        create_invites
+        # render json: @new_event, status: :created
       else
         render json: @new_event.errors, status: :unprocessable_entity
       end
@@ -48,13 +50,34 @@ class Api::EventsController < ApplicationController
     def set_event
       @event = Event.find_by(id: params[:id])
     end
+
+    def create_invites
+      # render json: params and return
+      params[:invitees].split(',').each do |uid| 
+        # render json: Rails.cache.read("event") and return
+        # @user = User.find_by(id: uid)
+        # @event = Event.find_by(id: Rails.cache.read("event"))
+        @inv = Invite.create(user_id: uid, event_id: Rails.cache.read("event"), aknowledged: false)
+        # ActiveRecord::Base.connection.execute(
+        #   "
+        #   INSERT INTO invites 
+        #     (aknowledged, user_id, event_id, created_at) 
+        #   VALUES 
+        #     (false, "<<@event.id.to_s<<", "<<uid<<", "<<Time.now.to_s<< " );
+        #   "
+        # )
+        if @inv.errors
+          render json: @inv.errors, status: :unprocessable_entity and return
+        end
+      end
+    end
   
     # def set_user
     #   @user = User.find_by(id: params[:owner_id])
     # end
 
     def event_params 
-      params.permit(:title, :description, :owner_id, :start, :end, :location, :image)
+      params.permit(:title, :description, :owner_id, :start, :end, :location, :image, :invitees)
     end
 
 end
