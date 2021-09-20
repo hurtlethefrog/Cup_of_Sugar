@@ -16,7 +16,6 @@ export default function Event(props) {
     events_id: props.article.events_id,
     open: false
   });
-  console.log(props.article.id)
   const createInvitesAxios = (invitees)=>{
     axios
       .post(`/api/invites`, {invitees:invitees.toLocaleString(), event_id:props.article.id})

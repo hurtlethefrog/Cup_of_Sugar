@@ -91,7 +91,8 @@ export default function Homepage() {
           const eventArticle = {
             ...newArticle,
             article_type: newArticle.type,
-            owner_id: account.user_id
+            owner_id: account.user_id,
+            invitees: newArticle.invitees.toLocaleString()
           };
           delete eventArticle.type;
           axios
@@ -218,7 +219,7 @@ export default function Homepage() {
       <div className="article-container">
         <div>
           {/* onSubmit function will need to ensure title description, everything else is optional */}
-          <New onSubmit={setNewArticle} />
+          <New onSubmit={setNewArticle} account={account} />
         </div>
         {(articles && account.user_id !== -1) ?  (
         <Articles
