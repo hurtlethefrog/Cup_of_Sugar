@@ -17,19 +17,15 @@ export default function InvitesModal(props) {
 
     const renderDropdown = users.filter((ele)=> {return !invitees.includes(String(ele.id))}).map((user)=>{
         return (
-            <option value={user.id}>{user.first_name + " " + user.last_name}</option>
+            <option key={user.id} value={user.id}>{user.first_name + " " + user.last_name}</option>
         );
     })
     const renderInvitees = invitees.map((user)=>{
         return (
-            <div className="list-row">
+            <div key={user} className="list-row">
                 <img onClick={() => setInvitees(invitees.filter((ele)=>{return ele != user}))} src="images/user-times-solid.svg">
                 </img>
-                <p>{users.map((ele)=> {
-                    if (ele.id == user) {
-                        return ele.first_name + " " + ele.last_name;
-                    }
-                })}</p>
+                <p>{users.map((ele)=> {if (ele.id == user) {return ele.first_name + " " + ele.last_name}})}</p>
             </div>
         )
     })
