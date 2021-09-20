@@ -1,25 +1,36 @@
-import React, { state, useState } from "react";
+import axios from "axios";
+import React, { state, useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import './Nav.scss';
-import Household from './Users/Household';
+import Notifications from "./Users/Notifications";
+// import Household from './Users/Household';
 
 const handleSubmission = () => {
   localStorage.removeItem('jwt');
 }
 
 export default function Nav(props) {
-  const [state, setState] = useState(false);
-  
+  const [dropdown, toggleDropdown] = useState(false);
+  const [invites, setInvites] = useState([]);
+  useEffect(()=>{
+    axios
+      .get(`/api/invites/${props.account.user_id}`)
+      .then((res) => {
+        setInvites([res.data])
+        console.log(invites)
+      })
+      .catch(err => console.log(err));
+  }, [])
   return (
   <nav className="nav">
     <div className="brand">
       <img className="logo" src="images/CupOfSugar_Logo_V2.svg"/>  
     </div>
-
     <div>
-    <Link to="/" onClick={handleSubmission}>Logout</Link> 
+      <a onClick={e=>toggleDropdown(!dropdown)}>Notifications</a>
+      <Link to="/" onClick={handleSubmission}>Logout</Link> 
     </div>
-
+    <Notifications notifications={invites}/>
     {/* <ul>
       <li>
 
